@@ -1,0 +1,31 @@
+{
+  "taskList": [
+    {
+      "taskName": "Create HTML",
+      "taskCompletion": true,
+      "taskAssignee": "Shreyas",
+      "taskPriority": "medium",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-06",
+      "id": 0
+    },
+    {
+      "taskName": "Create CSS",
+      "taskCompletion": false,
+      "taskAssignee": "SPK",
+      "taskPriority": "medium",
+      "taskStatus": "off-track",
+      "taskDeadline": "2022-10-08",
+      "id": 1
+    },
+    {
+      "taskName": "Create JS",
+      "taskCompletion": true,
+      "taskAssignee": "SPK2",
+      "taskPriority": "medium",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-08-07",
+      "id": 2
+    }
+  ]
+}
