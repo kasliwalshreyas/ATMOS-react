@@ -2,25 +2,39 @@ import React, { useState } from 'react';
 import TaskModal from './TaskModal';
 import TaskCard from './TaskCard';
 import { useEffect } from 'react';
+import { createContext, useContext } from 'react';
+import SectionCard from './SectionCard';
 
+// export const TaskNameContext = createContext();
 
 const SectionArena = () => {
     const [show, setShow] = useState(false);
-    const [selectedTask, setSelectedTask] = useState(null);
 
-    const expandModal = (taskInfo) => {
+    const [selectedTask, setSelectedTask] = useState(null);
+    const [selectedSection, setSelectedSection] = useState(null);    
+
+    const [taskList, setTaskList] = useState(null);
+    const [sectionList, setSectionList] = useState(null);
+    
+    const [error, setError] = useState(null);
+    
+    const [rerender, setRerender] = useState(false);
+    // const [taskName, setTaskName] = useState("")
+    
+
+
+
+    const expandModal = (taskInfo, sectionInfo) => {
         setSelectedTask(taskInfo);
+        setSelectedSection(sectionInfo);
         setShow(true);
     }
 
     const closeModal = () => {
         setSelectedTask(null);
+        setSelectedSection(null);
         setShow(false); 
     }
-
-    const [taskList, setTaskList] = useState(null)
-    const [error, setError] = useState(null)
-    const [rerender, setRerender] = useState(false);
 
     useEffect(()=> {
         fetch("http://localhost:8000/taskList")
@@ -41,6 +55,31 @@ const SectionArena = () => {
                 setTaskList(null);
             });
     }, [rerender]);
+
+
+    useEffect(()=>{
+        fetch('http://localhost:8000/sectionList')
+        .then(res => {
+            // console.log(res);
+            if(!res.ok){
+                throw Error('Not able to fetch the SectionList');
+            }
+            return res.json();
+
+        })
+        .then(data => {
+            setSectionList(data);
+            setError(null);
+        })
+        .catch(err => {
+            setError(err.message);
+            setSectionList(null);
+        });
+    },[]);
+
+    // console.log(sectionList)
+
+
 
     
     function getDate(strFormatDate){
@@ -65,40 +104,36 @@ const SectionArena = () => {
 
     }
 
-    const createTask = () => {
+    const createTask = (sectionInfo) => {
         expandModal(
             {
                 "taskName": null, 
                 "taskCompletion": false, 
                 "taskAssignee": null, 
-                "taskPriority": null, 
-                "taskStatus": null, 
+                "taskPriority": "Choose Priority", 
+                "taskStatus": "Choose Status", 
                 "taskDeadline": null, 
-            }
+            },
+            sectionInfo
         )
 
         
     }
+    // {sectionList && console.log(sectionList[0].taskList.length)}
 
-
+    
     return (
         <>
         <div className = "section-arena">
-            <div className = "section section-0">           
-                <div className="section-head">
-                    <input className="section-name" placeholder="Section Name"></input>
-                    <h3 className="add-task" onClick={createTask}>+</h3>
-                    <sup><h3 className="more-options">...</h3></sup>    
-                </div>
-                <div className="task-arena">
-                    {error && <p>{error}</p>}
-                    {taskList && taskList.map((task) => (
-                        <TaskCard task={task} expandModal={expandModal} key ={task.id} />                        
-                    ))}
-                </div>
-            </div>            
+            {sectionList && sectionList.map((section) => (
+                <SectionCard createTask = {createTask} error = {error} taskList={taskList} expandModal = {expandModal} section={section} rerender={rerender} setRerender={setRerender} key = {section.id}/>          
+            ))} 
         </div>
-        {selectedTask != null && <TaskModal taskInfo = {selectedTask} show = {show} closeModal = {closeModal} refreshTaskList={setTaskList} rerender={rerender} setRerender={setRerender} />}
+        {/* {selectedTask != null && 
+        <TaskNameContext.Provider value =  {{selectedTask,setTaskName}}>
+        </TaskNameContext.Provider>
+        } */}
+            {selectedTask != null && <TaskModal taskInfo = {selectedTask} sectionInfo={selectedSection} show = {show} closeModal = {closeModal} rerender={rerender} setRerender={setRerender} />}
         </>
     );
 }

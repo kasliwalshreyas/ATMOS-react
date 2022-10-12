@@ -1,10 +1,11 @@
 *{
   margin: 0;
   padding: 0;
+  /* background-color: crimson; */
 }
 a{
-  text-decoration: none;
-  color: black;
+  text-decoration: none !important;
+  color: black !important;
 }
 p{
   margin-bottom: 0 !important;
@@ -90,6 +91,32 @@ p{
   border-radius: 45%;
   height: 55%;
 }
+.user-profile-dropdown-btn{
+  background-color: inherit !important;
+}
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+  position: absolute;
+  top: 80px;
+  /* bottom: 0; */
+  right: 40px;
+  /* left: auto; */
+  border: 1px solid black;
+  border-radius: 5%;
+  padding: 3px;
+}
+.user-profile-dropdown-option{
+  display: block;
+  padding: 3px;
+}
+.user-profile-dropdown-option:hover{
+  background-color: rgb(234, 234, 241);
+  border-radius: 5%;
+}
+
 
 .nav-bar{
   display: flex;
@@ -116,8 +143,8 @@ p{
   display: flex;
   flex-direction: row;
   padding: 20px;
-  border: 1px solid;
-  border-radius: 1px;
+  /* border: 1px solid; */
+  /* border-radius: 1px; */
 
 }
 .section{
@@ -129,6 +156,7 @@ p{
   margin: 0 15px;
 
   height: 500px;
+  /* background-color: rgb(0, 136, 255); */
 }
 .section-head{
   display: flex;
@@ -145,11 +173,13 @@ p{
 }
 .add-task{
   display: flex;
-  margin: 0 2px 0 50px;
+  margin: 0 2px 0 45px;
+  width: 30px;
 }
 .more-options{
   display: flex;
-  margin: 0 2px 0 10px;
+  margin: 0 2px 0 0;
+  width: 30px;
 
 }
 
@@ -158,6 +188,10 @@ p{
   flex-direction: column;
   /* border: 2px solid; */
   padding: 5px;
+  max-height: 500px;
+  overflow-y: scroll;
+  /* background-color: cornflowerblue; */
+
 }
 .task {
   display: flex;
@@ -167,12 +201,14 @@ p{
   border-radius: 5px;
   padding: 10px 5px 10px 5px;
   margin: 5px 0;
+  /* background-color: cornflowerblue; */
   /* box-shadow: 0 5px 10px rgba(0,0,0,.1); */
 }
 .task-head {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  /* background-color: cornflowerblue; */
 }
 .task-checker-input{
   margin-right: 10px;
@@ -228,7 +264,18 @@ p{
   color: #858a8e;
   margin-bottom: 0 !important;
 }
-
+.delete-btn-div{
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-left: auto;
+  z-index: 2;
+}
+.delete-btn-div img{
+  width: 20px;
+  height: 20px;
+}
 
 .task-path-text{
   font-size: 11px !important;
@@ -289,4 +336,22 @@ p{
   border: 2px solid #9e9f9f;
   border-radius: 4px;
 }
-
+.add-task-img-2{
+  width: 20px;
+}
+.add-task-div{
+  display: flex;
+  justify-content: center;
+  border: 2px solid;
+  border-color: rgba(111,111,111,0.2);
+  border-radius: 5px;
+  padding: 10px 5px 10px 5px;
+  margin: 5px 0;
+  background-color: rgba(248,248,249,255);
+  /* box-shadow: 0 5px 10px rgba(0,0,0,.1); */
+}
+.add-task-div p{
+  align-self: center;
+  font-size: 10px;
+  font-weight: 700;
+}

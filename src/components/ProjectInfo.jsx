@@ -1,6 +1,21 @@
 import Nav from 'react-bootstrap/Nav';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
+import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
+import { useState } from 'react';
 
-const ProjectInfo = () => {
+
+
+
+const ProjectInfo = ({isProfileClicked,setIsProfileClicked}) => {
+
+    const handleProfileClickedInside= (event) => {
+        event.stopPropagation();
+        setIsProfileClicked(true);
+    };
+
+    
 
 
     return (
@@ -23,8 +38,18 @@ const ProjectInfo = () => {
                         </div>
                     </div>                    
                 </div>
-                <div className = "user-profiles">
-                    <img className = "user-profile" src="https://img.icons8.com/color/48/000000/name--v1.png"/>
+                <div className = "user-profiles" >
+                    <img id='user-profile' className = "user-profile" onClick={handleProfileClickedInside}  src="https://img.icons8.com/color/48/000000/name--v1.png"/>
+                    <div id='dropdownMenu-user-profile' className={isProfileClicked ? 'show':'hide'}> 
+                        <a href='#/user-profile' className='user-profile-dropdown-option'>Profile</a>
+                        <a href='#/admin-portal'className='user-profile-dropdown-option'>Admin Portal</a>
+                    </div>
+                    
+                    {/* <Dropdown className='user-profile-dropdown-btn dropdown' title={<img className = "user-profile" src="https://img.icons8.com/color/48/000000/name--v1.png"/>}>      
+                        <Dropdown.Item href='#/user-profile' className='user-profile-dropdown-option' >User Profile</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item href='#/admin-portal'className='user-profile-dropdown-option' >Admin Portal</Dropdown.Item>
+                    </Dropdown> */}
                 </div>
             </div>
             {/* <div className="nav-bar">
@@ -42,6 +67,7 @@ const ProjectInfo = () => {
                     <Nav.Link href="/charts" className="nav-option option-2">Charts</Nav.Link>
                 </Nav.Item>
             </Nav>
+            <hr></hr>
 
         </div>
     )

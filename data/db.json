@@ -1,31 +1,124 @@
 {
-  "taskList": [
+  "userList": [
     {
-      "taskName": "Create HTML",
-      "taskCompletion": true,
-      "taskAssignee": "Shreyas",
-      "taskPriority": "medium",
-      "taskStatus": "on-track",
-      "taskDeadline": "2022-10-06",
+      "userName": "Shreyas Kasliwal",
+      "emailId": "kasliwalshreyas@gmail.com",
+      "projectIDList": [1,2],
+      "taskAssignedIDList": [],
+      "id": 1
+    },
+    {
+      "userName": "Dushyant Yadav",
+      "emailId": "kasliwalshreyas@gmail.com",
+      "projectIDList": [1,2],
+      "taskAssignedIDList": [],
+      "id": 2
+    },
+    {
+      "userName": "Akash Yadav",
+      "emailId": "kasliwalshreyas@gmail.com",
+      "projectIDList": [1,2],
+      "taskAssignedIDList": [],
+      "id": 3
+    },
+    {
+      "userName": "Naman Bhatia",
+      "emailId": "kasliwalshreyas@gmail.com",
+      "projectIDList": [1,2],
+      "taskAssignedIDList": [],
+      "id": 4
+    },
+    {
+      "userName": "Avinash Saroj",
+      "emailId": "kasliwalshreyas@gmail.com",
+      "projectIDList": [1,2],
+      "taskAssignedIDList": [],
+      "id": 5
+    }
+  ],
+  "projectList":[
+    {
+      "projectName": "ATMOS",
+      "ProjectMembers": [1,2,3,4,5],
+      "high": [1],
+      "medium": [2,3,4],
+      "low": [5],
+      "id": 1
+    },
+    {
+      "projectName": "FSD",
+      "ProjectMembers": [3,4,5],
+      "id": 2
+    }
+  ],
+  "sectionList": [
+    {
+      "sectionName": "Basic",
+      "projectId": 0,
+      "taskIDList": [
+        2,
+        5,
+        5
+      ],
       "id": 0
     },
     {
-      "taskName": "Create CSS",
+      "sectionName": "Intermediate",
+      "projectId": 0,
+      "taskIDList": [
+        4,
+        3,
+        4,
+        6
+      ],
+      "id": 1
+    }
+  ],
+  "taskList": [
+    {
+      "taskName": "Make Description In Task Modal",
       "taskCompletion": false,
       "taskAssignee": "SPK",
       "taskPriority": "medium",
       "taskStatus": "off-track",
-      "taskDeadline": "2022-10-08",
-      "id": 1
+      "taskDeadline": "2022-10-16",
+      "id": 2
     },
     {
-      "taskName": "Create JS",
-      "taskCompletion": true,
-      "taskAssignee": "SPK2",
-      "taskPriority": "medium",
+      "taskName": "Add Section btn",
+      "taskCompletion": false,
+      "taskAssignee": "SPK",
+      "taskPriority": "high",
       "taskStatus": "on-track",
-      "taskDeadline": "2022-08-07",
-      "id": 2
+      "taskDeadline": "2022-10-13",
+      "id": 3
+    },
+    {
+      "taskName": "Create Overview Page",
+      "taskCompletion": false,
+      "taskAssignee": "SPK",
+      "taskPriority": "high",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-13",
+      "id": 4
+    },
+    {
+      "taskName": "Make Comment Part Working",
+      "taskCompletion": false,
+      "taskAssignee": "SPK",
+      "taskPriority": "medium",
+      "taskStatus": "off-track",
+      "taskDeadline": "2022-10-16",
+      "id": 5
+    },
+    {
+      "taskName": "Delete Section",
+      "taskCompletion": false,
+      "taskAssignee": "SPK",
+      "taskPriority": "medium",
+      "taskStatus": "off-track",
+      "taskDeadline": "2022-10-14",
+      "id": 6
     }
   ]
 }
