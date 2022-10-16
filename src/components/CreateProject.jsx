@@ -8,13 +8,13 @@ const CreateProject = () => {
     const [isPending, setIsPending] = useState(false)
     const history = useNavigate()
 
-    const handleSubmit = (e) =>  {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        const project = {projectName, MaxMember, type}
+        const project = { projectName, MaxMember, type }
         setIsPending(true)
         fetch('http://localhost:8000/projectList', {
             method: 'POST',
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(project)
         }).then(() => {
             setIsPending(false)
@@ -29,14 +29,14 @@ const CreateProject = () => {
                     <h1 className="new-project-head">New Project</h1>
                     <form onSubmit={handleSubmit}>
                         <label className="project-heading">Project name</label>
-                        <input 
+                        <input
                             type="text"
                             required
                             value={projectName}
                             onChange={(e) => setProjectName(e.target.value)}
                         />
                         <label className="max-mem">Max Members</label>
-                        <input 
+                        <input
                             type="text"
                             required
                             value={MaxMember}
@@ -58,7 +58,7 @@ const CreateProject = () => {
             </div>
 
             <div className="create-project-right">
-                <Rightdiv/>
+                <Rightdiv />
             </div>
         </div>
     )
