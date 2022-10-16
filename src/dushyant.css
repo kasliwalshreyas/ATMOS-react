@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Quicksand";
+    color: #333;
+  }
+  .navbar {
+    padding: 20px;
+    display: flex;
+    border-bottom: 1px solid #f2f2f2;
+    height: 15vh !important;
+  }
+
+  .navbar .head-atmos {
+    width: 100%;
+    text-align: center;
+    text-transform: lowercase;
+  }
+
+
+  .navbar .links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar .link {
+    position: relative;
+    text-decoration: none;
+    font-family: 'Poppins',sans-serif ;
+    padding: 0px 40px 0px 40px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+
+  .link:after {
+    content: "";
+    position: absolute;
+    background-color: black;
+    height: 3px;
+    width: 0;
+    left: 25px;
+    right: 0px;
+    bottom: -10px;
+    transition: 0.2s;
+  }
+
+  .link:hover:after {
+    width: 63%;
+  }
+
+  .plus-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    border:#B2B1B9 solid;
+    border-style: dashed;
+    margin: 30px;
+  }
+
+  .plus {
+    font-size: 100px;
+    font-weight: bold;
+    color: #7F8487;
+    position: absolute;
+  }
+
+  .plus-container:hover {
+    border-color: black;
+  }
+
+  .project-real {
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 30px;
+    overflow: hidden;
+  }
+  .project-container {
+    width: 150px;
+    height: 120px;
+    border-radius: 15px;
+  }
+
+  .project-container:hover {
+    border: 3px solid black;
+    transition: 0.1s;
+  }
+
+ .project-img {
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bolder;
+    text-decoration: none;
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  .create-project {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .create-project-left {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    float: left;
+  }
+
+  .create-project-right {
+    width: 60%;
+    height: 100%;
+    float: right;
+    padding: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    margin: 25px;
+    height: 75vh;
+    align-self: center;
+    /* max-width: 350px; */
+    /* margin: 0 auto; */
+    text-align: center;
+  }
+
+  .create label {
+    text-align: left;
+    display: block;
+    font-family: 'Poppins',sans-serif ;
+    color: #5F6F94;
+    font-size: 15px;
+  }
+  .create h1 {
+    font-size: 40px;
+    font-family: 'Poppins',sans-serif ;
+    color: #3C4048;
+    margin: 50px 0px 40px 0px;
+  }
+  .create input, .create select {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0 30px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+    border-radius: 7px;
+    color: #3C4048;
+  }
+  .create button {
+    background: #A460ED;
+    color: #fff;
+    border: 0;
+    padding: 5px 40px 5px 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 25px;
+  }
+
+.right{
+  width: 58vw;
+ 
+  height: 78vh;
+}
+.content{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 85vh;
+}
+.create-project{
+  display: flex;
+  flex-direction: row;
+
+}
+
