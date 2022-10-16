@@ -7,22 +7,22 @@ const MainView = () => {
 
     const [isProfileClicked, setIsProfileClicked] = useState(false);
 
-    const handleProfileCLickedOutside = (event) => {
+
+    const handleClickOutside = (event) => {
         event.stopPropagation();
         setIsProfileClicked(false);
-        
     };
 
-    return ( 
-        <div className ="normal-div"  onClick={handleProfileCLickedOutside}>
-            <ProjectInfo 
-            isProfileClicked={isProfileClicked} 
-            setIsProfileClicked={setIsProfileClicked} 
+    return (
+        <div className="normal-div" onClick={handleClickOutside}>
+            <ProjectInfo
+                isProfileClicked={isProfileClicked}
+                setIsProfileClicked={setIsProfileClicked}
             ></ProjectInfo>
             <FilterFunc></FilterFunc>
             <SectionArena></SectionArena>
         </div>
-     );
+    );
 }
- 
+
 export default MainView;
