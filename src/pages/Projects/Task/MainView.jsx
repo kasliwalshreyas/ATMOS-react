@@ -3,6 +3,8 @@ import FilterFunc from "./FilterFunc";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 
+
+
 const MainView = () => {
 
     const [isProfileClicked, setIsProfileClicked] = useState(false);

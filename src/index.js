@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import './index.css';
-import './dushyant.css'
+import './project-task.css';
+import './project.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

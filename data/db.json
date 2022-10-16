@@ -310,6 +310,24 @@
       "MaxMember": "5",
       "type": "Business",
       "id": 32
+    },
+    {
+      "projectName": "ATMOS NEW 2",
+      "MaxMember": "5",
+      "type": "Business",
+      "id": 33
+    },
+    {
+      "projectName": "dssdvdsf ",
+      "MaxMember": "5",
+      "type": "Education",
+      "id": 34
+    },
+    {
+      "projectName": "ATMOSsfbsa dkjb",
+      "MaxMember": "5",
+      "type": "Education",
+      "id": 35
     }
   ],
   "sectionList": [
@@ -329,9 +347,15 @@
       "projectId": 0,
       "taskIDList": [
         3,
-        6
+        11
       ],
       "id": 1
+    },
+    {
+      "sectionName": "",
+      "projectId": 0,
+      "taskIDList": [],
+      "id": 2
     }
   ],
   "taskList": [
@@ -361,15 +385,6 @@
       "taskStatus": "off-track",
       "taskDeadline": "2022-10-16",
       "id": 5
-    },
-    {
-      "taskName": "Delete Section",
-      "taskCompletion": false,
-      "taskAssignee": "SPK",
-      "taskPriority": "medium",
-      "taskStatus": "off-track",
-      "taskDeadline": "2022-10-14",
-      "id": 6
     },
     {
       "taskName": "Assignee Part",
@@ -406,6 +421,15 @@
       "taskStatus": "at-risk",
       "taskDeadline": "2022-10-14",
       "id": 10
+    },
+    {
+      "taskName": "Delete Section",
+      "taskCompletion": false,
+      "taskAssignee": "S",
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": null,
+      "id": 11
     }
   ]
 }
