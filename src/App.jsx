@@ -8,6 +8,8 @@ import Notes from "./pages/Notes/Notes";
 import MainView from "./pages/Projects/Task/MainView";
 import CreateProject from "./pages/Projects/CreateProject";
 
+
+
 const App = () => {
   return (
     <div>
