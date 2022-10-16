@@ -1,4 +1,4 @@
-# Guildelines
+# Guidelines
 
 Please read and follow these guidelines carefully
 
