@@ -82,6 +82,12 @@
         5
       ],
       "id": 2
+    },
+    {
+      "projectName": "S",
+      "MaxMember": "5",
+      "type": "",
+      "id": 3
     }
   ],
   "sectionList": [
@@ -101,7 +107,8 @@
       "projectId": 0,
       "taskIDList": [
         2,
-        6
+        6,
+        15
       ],
       "id": 1
     },
@@ -208,7 +215,7 @@
     },
     {
       "taskName": "B",
-      "taskCompletion": false,
+      "taskCompletion": true,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
@@ -217,14 +224,6 @@
       "id": 10
     },
     {
-<<<<<<< HEAD
-      "taskName": "task of the system",
-      "taskCompletion": false,
-      "taskAssignee": "dush@",
-      "taskPriority": "high",
-      "taskStatus": "on-track",
-      "taskDeadline": "2022-09-25",
-=======
       "taskName": "Y",
       "taskCompletion": false,
       "taskAssignee": null,
@@ -232,7 +231,6 @@
       "taskStatus": "Choose Status",
       "taskDeadline": null,
       "taskDescription": null,
->>>>>>> f1de64907bde57ae6ea88dec6af63adcaee3e129
       "id": 11
     },
     {
@@ -264,6 +262,16 @@
       "taskDeadline": null,
       "taskDescription": null,
       "id": 14
+    },
+    {
+      "taskName": "Section Name Issue",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": null,
+      "taskDescription": "When we update section name it will create issue in drag and drop. Check It Out.",
+      "id": 15
     }
   ]
 }

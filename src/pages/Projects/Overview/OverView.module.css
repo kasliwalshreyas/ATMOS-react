@@ -1,14 +1,128 @@
 .overviewMainView {
     display: flex;
     flex-direction: row;
+    /* background-color: rgb(234, 234, 241); */
+    min-height: 75vh;
+    max-height: max-content;
+    width: 100vw;
+    padding: 20px;
+    /* margin-bottom: 10px; */
 }
 
-.projectDescription {
+.descriptionArena {
     display: flex;
     flex-direction: column;
+    height: max-content;
+    width: 75vw;
+    border: 1px solid black;
+    padding: 10px;
+    border: 2px solid;
+    border-color: rgba(111, 111, 111, 0.2);
+    border-radius: 5px;
+    /* padding: 10px 5px 10px 5px; */
+    margin: 5px 0 5px 0;
 }
 
-.teamMembers {
+/* .descriptionArena:hover {
+
+    border: 0.1px solid rgba(206, 201, 201, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0);
+    transition: box-shadow 10s ease-in-out;
+} */
+
+
+.descriptionArenaHeading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    /* background-color: rgba(215, 208, 208, 0.2); */
+    border-radius: 5px 5px 5px 5px;
+
+}
+
+.descriptionArenaDescription {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.projectNameLabel {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    opacity: 0.7;
+}
+
+.projectNameInput {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    /* font-weight: bold; */
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    margin-bottom: 25px;
+
+}
+
+/* 
+.projectDescriptionLabel {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    opacity: 0.7;
+}
+
+.projectDescriptionTextArea {
+
+    border: none;
+    resize: none;
+    font-size: 15px;
+    padding: 10px;
+    min-width: fit-content;
+    max-width: 100vw;
+    min-height: fit-content;
+    max-height: 75vh;
+    margin-bottom: 25px;
+
+} */
+
+
+.teamMembersArena {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black;
+    padding: 10px; */
+    width: 20vw;
+    height: max-content;
+    border: 2px solid;
+    border-color: rgba(111, 111, 111, 0.2);
+    border-radius: 5px;
+    padding: 10px 5px 10px 5px;
+    margin: 5px 0 5px 5px;
+    /* background-color: whitesmoke; */
+}
+
+/* .teamMembersArena:hover {
+    border: 1px solid rgba(206, 201, 201, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0);
+    transition: box-shadow 10s ease-in-out;
+} */
+
+
+.teamMembersHeading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    /* background-color: rgba(215, 208, 208, 0.2); */
+    border-radius: 5px 5px 5px 5px;
+}
+
+.teamMembersList {
     display: flex;
     flex-direction: column;
 }

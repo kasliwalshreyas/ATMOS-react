@@ -8,17 +8,20 @@ const ProjectList = ({ projects }) => {
                 <Link className="plus" to="/createproject">+</Link>
             </div>
             {projects.map((project) => (
-                <div className="project-real">
-                    <div className="project-container">
-                        <img className="project-img" src={`./images/img/img${project.id % 10}.PNG`} />
+                <a href="/task" className="projects">
+                    <div className="project-real">
+                        <div className="project-container">
+                            <img className="project-img" src={`./images/img/img${project.id % 10}.PNG`} />
+                        </div>
+                        <div className="project-name">
+                            <p>{project.projectName}</p>
+                        </div>
                     </div>
-                    <div className="project-name">
-                        <p>{project.projectName}</p>
-                    </div>
-                </div>
+                </a>
 
-            )).reverse()}
-        </div>
+            )).reverse()
+            }
+        </div >
     )
 }
 

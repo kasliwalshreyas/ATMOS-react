@@ -19,7 +19,7 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
                 <div className="project-name-plus-extra-info">
                     <div className="name-and-track-log">
                         <div className="project-name-div">
-                            <h3 className="project-name-heading">Customer Stories - Q4</h3>
+                            <h3 className="project-name-heading">ATMOS</h3>
                             <div className="info-favorite-logo">
                                 <img className="info-logo-img" src="https://img.icons8.com/material-outlined/24/000000/info--v1.png" />
                                 <img className="favorite-logo-img" src="https://img.icons8.com/ios-filled/50/000000/star--v1.png" />
@@ -50,13 +50,13 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
                     <Nav.Link href="/task/charts" className="nav-option option-2">Charts</Nav.Link>
                 </Nav.Item>
             </Nav>
+            <hr></hr>
             {/* <Routes>
                     <Route path="/task/overview" element={<SectionArena />} />
                     <Route path="/task" element={<SectionArena />} />
                     <Route path="/task/charts" element={<SectionArena />} />
                 </Routes> */}
             {/* </Router> */}
-            <hr></hr>
 
         </div>
     )

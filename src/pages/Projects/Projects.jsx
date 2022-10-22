@@ -10,16 +10,16 @@ const Projects = () => {
     isPending,
     error,
   } = useFetch("http://localhost:8000/projectList");
-  const createProject = () => {};
+  // const createProject = () => { };
 
   return (
     <>
       <Navbar />
-      <a href="/task" onClick={createProject} className="projects">
-        {error && <div>{error}</div>}
-        {isPending && <div>Loading...</div>}
-        {projects && <ProjectList projects={projects} />}
-      </a>
+
+      {error && <div>{error}</div>}
+      {isPending && <div>Loading...</div>}
+      {projects && <ProjectList projects={projects} />}
+
     </>
   );
 };
