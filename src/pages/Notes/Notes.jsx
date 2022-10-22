@@ -1,7 +1,11 @@
+import Navbar from "../../UI/Navbar";
 import React from "react"
 const Notes = () => {
     return (
-        <div className="notes"></div>
+        <>
+            <Navbar />
+            <div className="notes"></div>
+        </>
     )
 }
 
