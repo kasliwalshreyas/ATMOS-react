@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TaskCard from "./TaskCard";
 import React from "react"
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 
 
 
@@ -14,19 +14,6 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
     const [sectionName, setSectionName] = useState(sectionInfo.sectionName);
     const [isSectionOptionClicked, setIsSectionOptionClicked] = useState(false);
 
-
-    // const filterTaskList = (task) => {
-    //     // console.log(task,sectionInfo.taskList)
-    //     let flag = false;
-    //     for (let i = 0; i < sectionInfo.taskIDList.length; i++) {
-    //         if (task.id === sectionInfo.taskIDList[i]) {
-    //             flag = true;
-    //         }
-    //     }
-    //     return flag;
-    // }
-
-    // const taskList2 = taskList.filter(filterTaskList);
 
     const saveSectionName = (event) => {
         const sectionID = sectionInfo.id;
