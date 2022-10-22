@@ -10,7 +10,6 @@ import CreateProject from "./pages/Projects/CreateProject";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
-  
   return (
     <div>
       <Router>
@@ -21,10 +20,14 @@ const App = () => {
             <Route path="/messages" element={<Messages />} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
-            <Route path="/task" element={<MainView />} />
+            {/* <Route path="/task" element={<MainView />} /> */}
             <Route exact path="/task" element={<MainView board />} />
             <Route path="/createproject" element={<CreateProject />} />
-            <Route exact path="/task/overview" element={<MainView overview />} />
+            <Route
+              exact
+              path="/task/overview"
+              element={<MainView overview />}
+            />
             <Route exact path="/task/charts" element={<MainView charts />} />
           </Routes>
         </div>
