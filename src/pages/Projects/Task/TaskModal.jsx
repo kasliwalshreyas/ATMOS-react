@@ -7,15 +7,16 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
 
     const [taskName, setTaskName] = useState(taskInfo.taskName);
     const [taskCompletion, setTaskCompletion] = useState(taskInfo.taskCompletion);
-    const [taskAssignee, settaskAssignee] = useState(taskInfo.taskAssignee);
+    const [taskAssignee, setTaskAssignee] = useState(taskInfo.taskAssignee);
     const [taskPriority, setTaskPriority] = useState(taskInfo.taskPriority);
     const [taskStatus, setTaskStatus] = useState(taskInfo.taskStatus);
     const [taskDeadline, setTaskDeadline] = useState(taskInfo.taskDeadline);
+    const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
 
 
     const handleSubmit = (taskId, sectionId, sectionInfo) => {
         // let taskName = selectedTask.taskName;
-        let taskData = { taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline }
+        let taskData = { taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription }
         // console.log(data)
 
         if (taskId == null) {
@@ -40,8 +41,15 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                     const projectId = sectionInfo.projectId;
                     const taskIDList = sectionInfo.taskIDList;
                     // console.log(newTaskID);
-                    taskIDList.push(newTaskID);
-                    const sectionData = { sectionName, projectId, taskIDList }
+                    let newTaskIDList = []
+                    for (let i = 0; i < taskIDList.length; i++) {
+                        newTaskIDList.push(taskIDList[i].id);
+                    }
+                    newTaskIDList.push(newTaskID);
+
+                    // taskIDList.push({ ...taskData, id: newTaskID });
+                    // console.log(taskIDList, "new Task");
+                    const sectionData = { sectionName, projectId, taskIDList: newTaskIDList }
 
                     fetch(`http://localhost:8000/sectionList/${sectionId}`, {
                         method: 'PUT',
@@ -113,7 +121,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Assignee</td>
                                 <td className='task-modal-table-data'>
-                                    <input type="text" placeholder='Enter Assignee' value={taskAssignee == null ? "" : taskAssignee} onChange={(e) => settaskAssignee(e.target.value)}></input>
+                                    <input type="text" placeholder='Enter Assignee' value={taskAssignee == null ? "" : taskAssignee} onChange={(e) => setTaskAssignee(e.target.value)}></input>
                                 </td>
                             </tr>
                             <tr className='task-modal-table-row'>
@@ -157,7 +165,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                     </Nav>
                     <hr className='task-modal-line-below-nav'></hr>
                     <div>
-                        <textarea className='task-modal-description' rows={5} placeholder="describe your task for your team members" ></textarea>
+                        <textarea className='task-modal-description' value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} rows={5} placeholder="describe your task for your team members" ></textarea>
                     </div>
 
 

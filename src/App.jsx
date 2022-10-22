@@ -7,6 +7,7 @@ import Messages from "./pages/Messages/Messages";
 import Notes from "./pages/Notes/Notes";
 import MainView from "./pages/Projects/Task/MainView";
 import CreateProject from "./pages/Projects/CreateProject";
+import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
   
@@ -21,6 +22,10 @@ const App = () => {
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
             <Route path="/task" element={<MainView />} />
+            <Route exact path="/task" element={<MainView board />} />
+            <Route path="/createproject" element={<CreateProject />} />
+            <Route exact path="/task/overview" element={<MainView overview />} />
+            <Route exact path="/task/charts" element={<MainView charts />} />
           </Routes>
         </div>
       </Router>
