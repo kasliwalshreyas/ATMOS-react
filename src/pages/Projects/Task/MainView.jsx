@@ -2,11 +2,13 @@ import ProjectInfo from "./ProjectInfo";
 import FilterFunc from "./FilterFunc";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
+import OverView from "../Overview/OverView";
+import Charts from "../Charts/Charts";
+import React from "react"
 
 
-
-const MainView = () => {
-
+const MainView = ({ overview, board, charts }) => {
+    // console.log(props)
     const [isProfileClicked, setIsProfileClicked] = useState(false);
 
 
@@ -22,7 +24,9 @@ const MainView = () => {
                 setIsProfileClicked={setIsProfileClicked}
             ></ProjectInfo>
             <FilterFunc></FilterFunc>
-            <SectionArena></SectionArena>
+            {overview && <OverView></OverView>}
+            {board && <SectionArena></SectionArena>}
+            {charts && <Charts></Charts>}
         </div>
     );
 }

@@ -1,0 +1,14 @@
+.overviewMainView {
+    display: flex;
+    flex-direction: row;
+}
+
+.projectDescription {
+    display: flex;
+    flex-direction: column;
+}
+
+.teamMembers {
+    display: flex;
+    flex-direction: column;
+}

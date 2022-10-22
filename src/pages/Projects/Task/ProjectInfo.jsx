@@ -1,4 +1,7 @@
+import React from "react"
 import Nav from 'react-bootstrap/Nav';
+import { Route, Router, Routes } from 'react-router-dom';
+import SectionArena from './SectionArena';
 
 const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
 
@@ -15,7 +18,7 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
                 </div>
                 <div className="project-name-plus-extra-info">
                     <div className="name-and-track-log">
-                        <div className="project-name">
+                        <div className="project-name-div">
                             <h3 className="project-name-heading">Customer Stories - Q4</h3>
                             <div className="info-favorite-logo">
                                 <img className="info-logo-img" src="https://img.icons8.com/material-outlined/24/000000/info--v1.png" />
@@ -35,17 +38,24 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
                     </div>
                 </div>
             </div>
+            {/* <Router> */}
             <Nav className="nav-bar" as="ul">
                 <Nav.Item as="li">
-                    <Nav.Link href="/overview" className="nav-option option-1" >Overview</Nav.Link>
+                    <Nav.Link href="/task/overview" className="nav-option option-1" >Overview</Nav.Link>
                 </Nav.Item>
                 <Nav.Item as="li">
-                    <Nav.Link href="/" className="nav-option option-2">Board</Nav.Link>
+                    <Nav.Link href="/task" className="nav-option option-2">Board</Nav.Link>
                 </Nav.Item>
                 <Nav.Item as="li">
-                    <Nav.Link href="/charts" className="nav-option option-2">Charts</Nav.Link>
+                    <Nav.Link href="/task/charts" className="nav-option option-2">Charts</Nav.Link>
                 </Nav.Item>
             </Nav>
+            {/* <Routes>
+                    <Route path="/task/overview" element={<SectionArena />} />
+                    <Route path="/task" element={<SectionArena />} />
+                    <Route path="/task/charts" element={<SectionArena />} />
+                </Routes> */}
+            {/* </Router> */}
             <hr></hr>
 
         </div>
