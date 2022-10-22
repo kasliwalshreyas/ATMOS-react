@@ -1,7 +1,11 @@
+import Navbar from "../../UI/Navbar";
 const Messages = () => {
-    return (
-        <div className="messages"></div>
-    )
-}
+  return (
+    <>
+      <Navbar />
+      <div className="messages"></div>
+    </>
+  );
+};
 
-export default Messages
+export default Messages;

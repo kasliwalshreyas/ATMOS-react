@@ -1,6 +1,10 @@
+import Navbar from "../../UI/Navbar";
 const Notes = () => {
     return (
-        <div className="notes"></div>
+        <>
+            <Navbar />
+            <div className="notes"></div>
+        </>
     )
 }
 
