@@ -54,40 +54,23 @@
   "projectList": [
     {
       "projectName": "ATMOS",
-      "ProjectMembers": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "high": [
-        1
-      ],
-      "medium": [
-        2,
-        3,
-        4
-      ],
-      "low": [
-        5
-      ],
+      "MaxMember": "5",
+      "type": "Business",
+      "sectionIDList": [],
       "id": 1
     },
     {
-      "projectName": "FSD",
-      "ProjectMembers": [
-        3,
-        4,
-        5
-      ],
+      "projectName": "B",
+      "MaxMember": "6",
+      "type": "",
+      "sectionContains": "",
       "id": 2
     }
   ],
   "sectionList": [
     {
       "sectionName": "Task",
-      "projectId": 0,
+      "projectId": 1,
       "taskIDList": [
         1,
         3,
@@ -98,7 +81,7 @@
     },
     {
       "sectionName": "Section",
-      "projectId": 0,
+      "projectId": 1,
       "taskIDList": [
         2,
         6
@@ -106,25 +89,21 @@
       "id": 1
     },
     {
-      "sectionName": "AA",
-      "projectId": 0,
+      "sectionName": "To Do",
+      "projectId": 1,
       "taskIDList": [
-        8,
-        10
+        9
       ],
-      "id": 2
+      "id": 4
     },
     {
-      "sectionName": "BB",
-      "projectId": 0,
+      "sectionName": "",
+      "projectId": 2,
       "taskIDList": [
-        9,
-        11,
-        12,
-        13,
-        14
+        10,
+        11
       ],
-      "id": 3
+      "id": 5
     }
   ],
   "taskList": [
@@ -187,7 +166,7 @@
       "id": 7
     },
     {
-      "taskName": "A",
+      "taskName": null,
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
@@ -197,7 +176,7 @@
       "id": 8
     },
     {
-      "taskName": "X",
+      "taskName": "A",
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
@@ -207,7 +186,7 @@
       "id": 9
     },
     {
-      "taskName": "B",
+      "taskName": "A",
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
@@ -217,53 +196,14 @@
       "id": 10
     },
     {
-<<<<<<< HEAD
-      "taskName": "task of the system",
-      "taskCompletion": false,
-      "taskAssignee": "dush@",
-      "taskPriority": "high",
-      "taskStatus": "on-track",
-      "taskDeadline": "2022-09-25",
-=======
-      "taskName": "Y",
+      "taskName": "B",
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
       "taskDeadline": null,
       "taskDescription": null,
->>>>>>> f1de64907bde57ae6ea88dec6af63adcaee3e129
       "id": 11
-    },
-    {
-      "taskName": "Z",
-      "taskCompletion": false,
-      "taskAssignee": null,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": null,
-      "taskDescription": null,
-      "id": 12
-    },
-    {
-      "taskName": "ZZ",
-      "taskCompletion": false,
-      "taskAssignee": null,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": null,
-      "taskDescription": null,
-      "id": 13
-    },
-    {
-      "taskName": "ZZZ",
-      "taskCompletion": false,
-      "taskAssignee": null,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": null,
-      "taskDescription": null,
-      "id": 14
     }
   ]
 }

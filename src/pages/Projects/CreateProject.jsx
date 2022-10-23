@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Rightdiv from "./Rightdiv";
@@ -10,11 +10,12 @@ const CreateProject = () => {
   const [MaxMember, setMaxMember] = useState("");
   const [type, setType] = useState("");
   const [isPending, setIsPending] = useState(false);
+  const [sectionIDList, setsectionIDList] = useState("");
   const history = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const project = { projectName, MaxMember, type };
+    const project = { projectName, MaxMember, type, sectionIDList };
     setIsPending(true);
     fetch("http://localhost:8000/projectList", {
       method: "POST",

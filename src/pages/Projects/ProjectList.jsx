@@ -10,7 +10,9 @@ const ProjectList = ({ projects }) => {
             {projects.map((project) => (
                 <div className="project-real">
                     <div className="project-container">
-                        <img className="project-img" src={`./images/img/img${project.id % 10}.PNG`} />
+                        <Link to="/task" state={{ from: project.id }}>
+                            <img className="project-img" src={`./images/img/img${project.id % 10}.PNG`} />
+                        </Link>
                     </div>
                     <div className="project-name">
                         <p>{project.projectName}</p>

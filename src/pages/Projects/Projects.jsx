@@ -15,11 +15,11 @@ const Projects = () => {
   return (
     <>
       <Navbar />
-      <a href="/task" onClick={createProject} className="projects">
+      {/* <a href="/task" onClick={createProject} className="projects"> */}
         {error && <div>{error}</div>}
         {isPending && <div>Loading...</div>}
         {projects && <ProjectList projects={projects} />}
-      </a>
+      {/* </a> */}
     </>
   );
 };
