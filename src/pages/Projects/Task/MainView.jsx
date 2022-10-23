@@ -17,6 +17,8 @@ const MainView = ({ overview, board, charts }) => {
         setIsProfileClicked(false);
     };
 
+
+
     return (
         <div className="normal-div" onClick={handleClickOutside}>
             <ProjectInfo
@@ -24,7 +26,7 @@ const MainView = ({ overview, board, charts }) => {
                 setIsProfileClicked={setIsProfileClicked}
             ></ProjectInfo>
             <FilterFunc></FilterFunc>
-            {overview && <OverView></OverView>}
+            {overview && <OverView  ></OverView>}
             {board && <SectionArena></SectionArena>}
             {charts && <Charts></Charts>}
         </div>
