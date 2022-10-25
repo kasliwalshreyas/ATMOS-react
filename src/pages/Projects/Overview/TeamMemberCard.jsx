@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './TeamMember.module.css';
+import styles from './TeamMemberCard.module.css';
 import profileImage from "../../../images/logo192.png";
 
 

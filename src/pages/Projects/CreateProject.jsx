@@ -17,7 +17,7 @@ const CreateProject = () => {
   const [projectStatement, setProjectStatement] = useState("");
   const [projectMission, setProjectMission] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
-  const [projectGuidlines, setProjectGuidlines] = useState("");
+  const [projectGuidelines, setProjectGuidelines] = useState("");
 
   function backToHome() {
     setnextPage(1);
@@ -34,7 +34,7 @@ const CreateProject = () => {
       projectStatement,
       projectMission,
       projectDescription,
-      projectGuidlines,
+      projectGuidelines,
     };
     setIsPending(true);
     fetch("http://localhost:8000/projectList", {
@@ -154,8 +154,8 @@ const CreateProject = () => {
                     placeholder=" Write about the guidelines of the project."
                     className={styles.textareaInput}
                     type="text"
-                    value={projectGuidlines}
-                    onChange={(e) => setProjectGuidlines(e.target.value)}
+                    value={projectGuidelines}
+                    onChange={(e) => setProjectGuidelines(e.target.value)}
                   />
                 </form>
               )}

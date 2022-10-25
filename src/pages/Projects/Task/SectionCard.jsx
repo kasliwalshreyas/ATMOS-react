@@ -16,14 +16,24 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
 
 
     const saveSectionName = (event) => {
+        const taskIDList = sectionInfo.taskIDList;
+        let newTaskIDList = []
+        for (let i = 0; i < taskIDList.length; i++) {
+            newTaskIDList.push(taskIDList[i].id);
+        }
+
         const sectionID = sectionInfo.id;
         sectionInfo.sectionName = event.nativeEvent.target.value;
+        const sectionData = { sectionName: event.nativeEvent.target.value, projectId: sectionInfo.projectId, taskIDList: newTaskIDList }
+
+        // console.log(sectionInfo);
         fetch(`http://localhost:8000/sectionList/${sectionID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(sectionInfo)
+            body: JSON.stringify(sectionData)
         })
-            .then(() => { console.log('Section Name Updated') })
+            .then((res) => { return res.json() })
+            .then((res2) => { console.log(res2, 'Section Name Updated') })
             .catch(err => console.log(err.message));
 
     }

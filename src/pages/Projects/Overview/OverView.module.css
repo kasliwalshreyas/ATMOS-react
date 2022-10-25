@@ -1,6 +1,7 @@
 .overviewMainView {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     /* background-color: rgb(234, 234, 241); */
     min-height: 75vh;
     max-height: max-content;
@@ -125,4 +126,106 @@
 .teamMembersList {
     display: flex;
     flex-direction: column;
+}
+
+.addMemberDiv {
+    display: flex;
+    justify-content: center;
+    border: 2px solid;
+    border-color: rgba(111, 111, 111, 0.2);
+    border-radius: 5px;
+    padding: 10px 5px 10px 5px;
+    margin: 5px 0;
+    background-color: rgba(248, 248, 249, 255);
+    /* box-shadow: 0 5px 10px rgba(0,0,0,.1); */
+
+}
+
+.addMemberDiv:hover {
+    border: 2px solid rgba(206, 201, 201, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.addMemberImg {
+    width: 20px;
+}
+
+.para {
+    margin-bottom: 0;
+}
+
+
+
+.projectSettings {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    width: 75vw;
+    border: 1px solid black;
+    padding: 10px;
+    border: 2px solid;
+    border-color: rgb(187, 0, 0);
+    border-radius: 5px;
+    /* padding: 10px 5px 10px 5px; */
+    margin: 5px 0 5px 0;
+}
+
+
+.projectSettingList {}
+
+.settingCard {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    height: fit-content;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(206, 201, 201, 0.7);
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+    align-items: center;
+}
+
+.settingInfoDiv {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    min-width: 75%;
+}
+
+
+
+.projectSettingInfoHead p {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    opacity: 1;
+    color: black;
+    margin-bottom: 0;
+}
+
+.projectSettingInfoBody p {
+    font-size: 14px;
+}
+
+.settingBtnDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 25%;
+    max-width: 25%;
+    width: 100%;
+    margin-right: 0;
+    /* padding: 10px; */
+
+}
+
+.settingBtn {
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    font-size: smaller;
+    cursor: pointer;
+    outline: none;
 }

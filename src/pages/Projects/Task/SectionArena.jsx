@@ -6,7 +6,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useLocation } from "react-router-dom";
 // export const TaskNameContext = createContext();
 
-const SectionArena = () => {
+const SectionArena = ({ projectId, setProjectId }) => {
   const [show, setShow] = useState(false);
 
   const [selectedTask, setSelectedTask] = useState(null);
@@ -21,8 +21,7 @@ const SectionArena = () => {
   const [rerender, setRerender] = useState(false);
   // const [taskName, setTaskName] = useState("")
 
-  const location = useLocation();
-  const { from } = location.state;
+  console.log(projectId);
 
   const expandModal = (taskInfo, sectionInfo) => {
     setSelectedTask(taskInfo);
@@ -36,8 +35,6 @@ const SectionArena = () => {
     setShow(false);
   };
 
-  //fetch request to get taskList (At the moment this gets all the tasks, In node it has to implemented in such a way that only task of this specific section are send)
-  useEffect(() => {}, [rerender]);
 
   const populateTask = (sec, task) => {
     // console.log(data);
@@ -55,8 +52,9 @@ const SectionArena = () => {
     return sec;
   };
   //fetch request to get sectionList (At the moment this gets all the sections, In node it has to implemented in such a way that only sections of this specific section are send)
+
   useEffect(() => {
-    fetch(`http://localhost:8000/sectionList?projectId_like=${from}`)
+    fetch(`http://localhost:8000/sectionList?projectId_like=${projectId}`)
       .then((res) => {
         console.log("sectionList fetched", res);
         if (!res.ok) {
@@ -142,7 +140,7 @@ const SectionArena = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         sectionName: "",
-        projectId: from,
+        projectId: projectId,
         taskIDList: [],
       }),
     }).then((res) => {
@@ -204,57 +202,70 @@ const SectionArena = () => {
   const handleOnDragEnd = (result) => {
     console.log(result);
     const { destination, source, draggableId } = result;
+    let sourceDroppableId = findIndex(
+      sectionList,
+      parseInt(source.droppableId)
+    );
+    let destDroppableId = findIndex(
+      sectionList,
+      parseInt(destination.droppableId)
+    );
+    console.log(sourceDroppableId, destDroppableId);
     if (destination == null) {
       return;
     }
 
     if (
-      destination.droppableId === source.droppableId &&
+      destDroppableId === sourceDroppableId &&
       destination.index === source.index
     ) {
       return;
-    } else if (destination.droppableId === source.droppableId) {
-      // console.log("before swap", sectionList);
+    } else if (destDroppableId === sourceDroppableId) {
+      console.log("before swap", sectionList);
+      // console.log(destDroppableId, sourceDroppableId);
+      // console.log(sectionList[sourceDroppableId]);
+      // console.log(sectionList[destDroppableId]);
       setSectionList((prev) => {
         const temp = prev.slice();
 
         // console.log("before", temp);
         let indexofSource = findIndex(
-          temp[source.droppableId].taskIDList,
+          temp[sourceDroppableId].taskIDList,
           parseInt(source.index)
         );
         let indexofDestination = findIndex(
-          temp[destination.droppableId].taskIDList,
+          temp[destDroppableId].taskIDList,
           parseInt(destination.index)
         );
-        temp[source.droppableId].taskIDList = changePos(
-          temp[source.droppableId].taskIDList,
+        temp[sourceDroppableId].taskIDList = changePos(
+          temp[sourceDroppableId].taskIDList,
           indexofSource,
           indexofDestination
         );
-        // temp[source.droppableId] = temp[source.droppableId];
+        // temp[sourceDroppableId] = temp[sourceDroppableId];
         // console.log("after swap", temp);
         return temp;
       });
-    } else if (destination.droppableId !== source.droppableId) {
+    } else if (destDroppableId !== sourceDroppableId) {
       // console.log("before swap", sectionList);
+      // console.log(destDroppableId, sourceDroppableId);
       setSectionList((prev) => {
         const temp = prev.slice();
         let indexofSource = findIndex(
-          temp[source.droppableId].taskIDList,
+          temp[sourceDroppableId].taskIDList,
           parseInt(source.index)
         );
         let indexofDestination = findIndex(
-          temp[destination.droppableId].taskIDList,
+          temp[destDroppableId].taskIDList,
           parseInt(destination.index)
         );
         changePosInDiffArray(
-          temp[source.droppableId].taskIDList,
-          temp[destination.droppableId].taskIDList,
+          temp[sourceDroppableId].taskIDList,
+          temp[destDroppableId].taskIDList,
           indexofSource,
           indexofDestination
         );
-        // temp[source.droppableId] = temp[source.droppableId];
+        // temp[sourceDroppableId] = temp[sourceDroppableId];
         // console.log("after swap", temp);
         return temp;
       });

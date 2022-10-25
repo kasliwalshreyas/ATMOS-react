@@ -1,6 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
 const ProjectList = ({ projects }) => {
+
+  const navigate = useNavigate();
+
+  const insideProject = (project) => {
+    localStorage.setItem('projectId', project.id);
+    navigate('/task/overview');
+  }
+
   return (
     <div className="projectlist">
       <div className="plus-container">
@@ -12,12 +22,12 @@ const ProjectList = ({ projects }) => {
         .map((project) => (
           <div className="project-real">
             <div className="project-container">
-              <Link to="/task" state={{ from: project.id }}>
+              <a onClick={() => { insideProject(project) }}>
                 <img
                   className="project-img"
                   src={`./images/img/img${project.id % 10}.PNG`}
                 />
-              </Link>
+              </a>
             </div>
             <div className="project-name">
               <p>{project.projectName}</p>
