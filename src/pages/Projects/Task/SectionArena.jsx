@@ -6,7 +6,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useLocation } from "react-router-dom";
 // export const TaskNameContext = createContext();
 
-const SectionArena = ({ projectId, setProjectId }) => {
+const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
   const [show, setShow] = useState(false);
 
   const [selectedTask, setSelectedTask] = useState(null);
@@ -21,7 +21,7 @@ const SectionArena = ({ projectId, setProjectId }) => {
   const [rerender, setRerender] = useState(false);
   // const [taskName, setTaskName] = useState("")
 
-  console.log(projectId);
+  // console.log(projectId);
 
   const expandModal = (taskInfo, sectionInfo) => {
     setSelectedTask(taskInfo);
@@ -56,7 +56,7 @@ const SectionArena = ({ projectId, setProjectId }) => {
   useEffect(() => {
     fetch(`http://localhost:8000/sectionList?projectId_like=${projectId}`)
       .then((res) => {
-        console.log("sectionList fetched", res);
+        // console.log("sectionList fetched", res);
         if (!res.ok) {
           throw Error("Not able to fetch the SectionList");
         }
@@ -274,6 +274,18 @@ const SectionArena = ({ projectId, setProjectId }) => {
 
   // console.log(sectionList);
 
+  const AssigneeList = [];
+  for (let i = 0; i < projectInfo.highAccess.length; i++) {
+    AssigneeList.push({ value: projectInfo.highAccess[i].id, label: projectInfo.highAccess[i].userName });
+  }
+  for (let i = 0; i < projectInfo.mediumAccess.length; i++) {
+    AssigneeList.push({ value: projectInfo.mediumAccess[i].id, label: projectInfo.mediumAccess[i].userName });
+  }
+  for (let i = 0; i < projectInfo.lowAccess.length; i++) {
+    AssigneeList.push({ value: projectInfo.lowAccess[i].id, label: projectInfo.lowAccess[i].userName });
+  }
+  // console.log(AssigneeList, 'assigneeList')
+
   return (
     <>
       <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -314,6 +326,8 @@ const SectionArena = ({ projectId, setProjectId }) => {
           closeModal={closeModal}
           rerender={rerender}
           setRerender={setRerender}
+          projectInfo={projectInfo}
+          AssigneeList={AssigneeList}
         />
       )}
     </>

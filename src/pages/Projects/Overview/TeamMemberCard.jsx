@@ -4,7 +4,8 @@ import profileImage from "../../../images/logo192.png";
 
 
 
-const TeamMemberCard = () => {
+const TeamMemberCard = ({ name, email, role, id }) => {
+    // console.log(name);
     return (
         <div className={styles.Card}>
             <div className={styles.CardImage}>
@@ -12,15 +13,15 @@ const TeamMemberCard = () => {
             </div>
             <div className={styles.CardInfo}>
                 <div className={styles.InfoName}>
-                    <p className={styles.para}>Shreyas Kasliwal</p>
+                    <p className={styles.para}>{name}</p>
                 </div>
-                <div className={styles.InfoRole}>
+                {role && (<div className={styles.InfoRole}>
                     <p className={styles.para}>Project Manager</p>
-                </div>
+                </div>)}
+                {email && (<div className={styles.InfoEmail}>
+                    <p className={styles.para}>{email}</p>
+                </div>)}
             </div>
-
-
-
         </div>
     );
 }

@@ -2,8 +2,17 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
 import React, { useState } from 'react';
+import Select from 'react-select';
 
-const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender }) => {
+const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList }) => {
+
+    let taskAssigneeLabel;
+    for (let i = 0; i < AssigneeList.length; i++) {
+        if (AssigneeList[i].value === taskInfo.taskAssignee) {
+            taskAssigneeLabel = AssigneeList[i].label;
+        }
+    }
+    // console.log(taskAssigneeLabel);
 
     const [taskName, setTaskName] = useState(taskInfo.taskName);
     const [taskCompletion, setTaskCompletion] = useState(taskInfo.taskCompletion);
@@ -12,11 +21,12 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
     const [taskStatus, setTaskStatus] = useState(taskInfo.taskStatus);
     const [taskDeadline, setTaskDeadline] = useState(taskInfo.taskDeadline);
     const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
-
+    const [selectedAssignee, setSelectedAssignee] = useState({ value: taskAssignee, label: taskAssigneeLabel });
 
     const handleSubmit = (taskId, sectionId, sectionInfo) => {
         // let taskName = selectedTask.taskName;
         let taskData = { taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription }
+        console.log(taskAssignee);
         // console.log(data)
 
         if (taskId == null) {
@@ -93,12 +103,25 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
         closeModal()
     }
 
+    // console.log(projectInfo, "from modal")
+
+
+
+
+
+    const handleTaskAssignee = (selectedOption) => {
+        setSelectedAssignee(selectedOption);
+        setTaskAssignee(selectedOption.value);
+    }
+
+
+
     return (
         <div>
             <Modal show={show} onHide={closeModal} >
                 {/* {console.log(props.show)} */}
                 <Modal.Header closeButton>
-                    <Modal.Title className='task-path-text'>ATMOS/{sectionInfo.sectionName}</Modal.Title>
+                    <Modal.Title className='task-path-text'>{projectInfo.projectName}/{sectionInfo.sectionName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <table className='task-model-table'>
@@ -106,28 +129,75 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Task</td>
                                 <td className='task-modal-table-data'>
-                                    <input type="text" placeholder='Enter Task' value={taskName == null ? "" : taskName} onChange={(e) => setTaskName(e.target.value)}></input>
+                                    <input className='modal-task-input modal-input modal-select' type="text" placeholder='Enter Task' value={taskName == null ? "" : taskName} onChange={(e) => setTaskName(e.target.value)}></input>
                                 </td>
                             </tr>
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Completed</td>
                                 <td className='task-modal-table-data'>
-                                    <select value={taskCompletion ? "completed" : "incompleted"} onChange={(e) => { if (e.target.value === "completed") { setTaskCompletion(true) } else { setTaskCompletion(false) } }}>
-                                        <option value="completed">Yes</option>
-                                        <option value="incompleted">No</option>
+                                    <select className='modal-input modal-select' value={taskCompletion ? "completed" : "incompleted"} onChange={(e) => { if (e.target.value === "completed") { setTaskCompletion(true) } else { setTaskCompletion(false) } }}>
+                                        <option className='modal-select-option' value="completed">Yes</option>
+                                        <option className='modal-select-option' value="incompleted">No</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Assignee</td>
                                 <td className='task-modal-table-data'>
-                                    <input type="text" placeholder='Enter Assignee' value={taskAssignee == null ? "" : taskAssignee} onChange={(e) => setTaskAssignee(e.target.value)}></input>
+                                    <Select
+                                        className='modal-input'
+                                        placeholder='Enter Assignee'
+                                        defaultValue={selectedAssignee}
+                                        options={AssigneeList}
+                                        onChange={handleTaskAssignee}
+                                        styles={{
+                                            option: (provided, state) => ({
+                                                ...provided,
+                                                // border: '1px solid #ccc',
+                                                color: 'black',
+                                                backgroundColor: state.isSelected ? 'gray' : 'white',
+                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                ':active': {
+                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    // border: '1px solid #ccc'
+                                                },
+                                                padding: 10
+                                            }),
+                                            control: (provided, state) => ({
+                                                ...provided,
+                                                border: '1px solid #ccc',
+                                                width: 'fit-content',
+                                                minWidth: 'max-content',
+                                                boxShadow: 'none',
+                                                ':hover': {
+                                                    border: '1px solid #ccc'
+                                                }
+                                            }),
+                                            container: (provided, state) => ({
+                                                ...provided,
+                                                // display: 'inline-flex',
+                                                // flexDirection: 'row',
+                                                // marginRight: 20
+                                                // minWidth: '250px'
+                                            }),
+                                            valueContainer: (provided, state) => ({
+                                                ...provided,
+                                                width: '250px'
+                                                // width: 'fit-content',
+                                                // minWidth: 'max-content',
+
+
+                                            })
+
+                                        }}
+
+                                    />
                                 </td>
                             </tr>
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Priority</td>
                                 <td className='task-modal-table-data'>
-                                    <select value={taskPriority} onChange={(e) => { setTaskPriority(e.target.value) }}>
+                                    <select className='modal-input modal-select' value={taskPriority} onChange={(e) => { setTaskPriority(e.target.value) }}>
                                         <option value="Choose Priority">Choose Priority</option>
                                         <option value="high">High</option>
                                         <option value="medium">Medium</option>
@@ -138,7 +208,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Status</td>
                                 <td className='task-modal-table-data'>
-                                    <select value={taskStatus} onChange={(e) => { setTaskStatus(e.target.value) }}>
+                                    <select className='modal-input modal-select' value={taskStatus} onChange={(e) => { setTaskStatus(e.target.value) }}>
                                         <option value="Choose Status">Choose Status</option>
                                         <option value="on-track">On Track</option>
                                         <option value="off-track">Off Track</option>
@@ -149,7 +219,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Deadline</td>
                                 <td className='task-modal-table-data'>
-                                    <input type="date" value={taskDeadline == null ? "" : taskDeadline} onChange={(e) => setTaskDeadline(e.target.value)}></input>
+                                    <input className='modal-input modal-select' type="date" value={taskDeadline == null ? "" : taskDeadline} onChange={(e) => setTaskDeadline(e.target.value)}></input>
                                 </td>
                             </tr>
                         </tbody>

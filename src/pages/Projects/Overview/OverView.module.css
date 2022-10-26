@@ -229,3 +229,19 @@
     cursor: pointer;
     outline: none;
 }
+
+.modalBody {
+    display: flex !important;
+    flex-direction: row !important;
+    min-width: max-content !important;
+}
+
+.modalStyle {
+    min-width: max-content !important;
+    max-width: none !important;
+}
+
+.modalStyle>div>div {
+
+    min-width: 120% !important;
+}

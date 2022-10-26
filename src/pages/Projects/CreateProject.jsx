@@ -18,6 +18,7 @@ const CreateProject = () => {
   const [projectMission, setProjectMission] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectGuidelines, setProjectGuidelines] = useState("");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   function backToHome() {
     setnextPage(1);
@@ -35,6 +36,10 @@ const CreateProject = () => {
       projectMission,
       projectDescription,
       projectGuidelines,
+      userId: user.id,
+      highAccess: [user.id],
+      mediumAccess: [],
+      lowAccess: [],
     };
     setIsPending(true);
     fetch("http://localhost:8000/projectList", {
