@@ -15,7 +15,8 @@ const CreateProject = () => {
   const [projectStatement, setProjectStatement] = useState("");
   const [projectMission, setProjectMission] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
-  const [projectGuidlines, setProjectGuidlines] = useState("");
+  const [projectGuidelines, setProjectGuidelines] = useState("");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   let lastUsed;
 
   function backToHome() {
@@ -33,8 +34,12 @@ const CreateProject = () => {
       projectStatement,
       projectMission,
       projectDescription,
-      projectGuidlines,
       lastUsed,
+      projectGuidelines,
+      userId: user.id,
+      highAccess: [user.id],
+      mediumAccess: [],
+      lowAccess: [],
     };
     setIsPending(true);
     fetch("http://localhost:8000/projectList", {
@@ -147,8 +152,8 @@ const CreateProject = () => {
                     placeholder=" Write about the guidelines of the project."
                     className={styles.textareaInput}
                     type="text"
-                    value={projectGuidlines}
-                    onChange={(e) => setProjectGuidlines(e.target.value)}
+                    value={projectGuidelines}
+                    onChange={(e) => setProjectGuidelines(e.target.value)}
                   />
                 </form>
               )}

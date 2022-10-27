@@ -12,10 +12,10 @@
     },
     {
       "userName": "Dushyant Yadav",
-      "emailId": "kasliwalshreyas@gmail.com",
+      "emailId": "kasliwalshreyas2@gmail.com",
       "projectIDList": [
-        1,
-        2
+        2,
+        1
       ],
       "favoriteProjectList": [
         1,
@@ -27,30 +27,27 @@
     },
     {
       "userName": "Akash Yadav",
-      "emailId": "kasliwalshreyas@gmail.com",
+      "emailId": "kasliwalshreyas3@gmail.com",
       "projectIDList": [
-        1,
-        2
+        1
       ],
       "taskAssignedIDList": [],
       "id": 3
     },
     {
       "userName": "Naman Bhatia",
-      "emailId": "kasliwalshreyas@gmail.com",
+      "emailId": "kasliwalshreyas4@gmail.com",
       "projectIDList": [
-        1,
-        2
+        1
       ],
       "taskAssignedIDList": [],
       "id": 4
     },
     {
       "userName": "Avinash Saroj",
-      "emailId": "kasliwalshreyas@gmail.com",
+      "emailId": "kasliwalshreyas5@gmail.com",
       "projectIDList": [
-        1,
-        2
+        1
       ],
       "taskAssignedIDList": [],
       "id": 5
@@ -58,84 +55,68 @@
   ],
   "projectList": [
     {
-      "projectName": "constellation",
+      "projectName": "ATMOS",
       "MaxMember": "",
       "type": "",
       "sectionIDList": "",
-      "projectStatement": "",
+      "projectStatement": "Sothing",
       "projectMission": "",
-      "projectDescription": "",
-      "projectGuidlines": "",
-      "lastUsed": "2022-10-26T09:50:01.462Z",
+      "projectDescription": "dkjcds csd",
+      "projectGuidelines": "",
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [
+        3,
+        5,
+        2
+      ],
+      "lowAccess": [
+        4
+      ],
       "id": 1
     },
     {
-      "projectName": "Chandrayaan",
+      "projectName": "FSD",
       "MaxMember": "",
       "type": "Education",
       "sectionIDList": "",
-      "projectStatement": "",
-      "projectMission": "",
-      "projectDescription": "",
-      "projectGuidlines": "",
-      "lastUsed": "2022-10-27T07:08:53.964Z",
+      "projectStatement": "Hello",
+      "projectMission": "Hi",
+      "projectDescription": "Hello",
+      "projectGuidelines": "Ahhhhhhhhh!!!!!!",
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [
+        2
+      ],
+      "lowAccess": [],
       "id": 2
-    },
-    {
-      "projectName": "Cosmodrome",
-      "type": "Education",
-      "sectionIDList": "",
-      "projectStatement": "",
-      "projectMission": "",
-      "projectDescription": "",
-      "projectGuidlines": "",
-      "lastUsed": "2022-10-26T16:24:08.197Z",
-      "id": 3
-    },
-    {
-      "projectName": "Prashant_wifi",
-      "type": "Business",
-      "sectionIDList": "",
-      "projectStatement": "",
-      "projectMission": "",
-      "projectDescription": "",
-      "projectGuidlines": "",
-      "lastUsed": "2022-10-27T07:05:01.745Z",
-      "id": 4
     }
   ],
   "sectionList": [
     {
-      "sectionName": "Task",
+      "sectionName": "Overview",
       "projectId": 1,
       "taskIDList": [
-        1,
-        3,
-        4,
-        7
+        17,
+        18,
+        19
       ],
       "id": 0
     },
     {
-      "sectionName": "Section",
+      "sectionName": "Board",
       "projectId": 1,
       "taskIDList": [
-        2,
-        6,
-        15
+        20,
+        22
       ],
       "id": 1
     },
     {
-      "sectionName": "To Do",
-      "projectId": 1,
-      "taskIDList": [
-        9
-      ],
-      "id": 4
-    },
-    {
-      "sectionName": "",
+      "sectionName": "Hello 2",
       "projectId": 2,
       "taskIDList": [
         10,
@@ -144,89 +125,24 @@
       "id": 5
     },
     {
-      "sectionName": "task ",
-      "projectId": 6,
+      "sectionName": "Charts",
+      "projectId": 1,
       "taskIDList": [
-        {
-          "taskName": "S",
-          "taskCompletion": false,
-          "taskAssignee": null,
-          "taskPriority": "medium",
-          "taskStatus": "off-track",
-          "taskDeadline": "2022-10-27",
-          "taskDescription": null,
-          "id": 16
-        }
+        21
       ],
       "id": 6
-    },
-    {
-      "sectionName": "",
-      "projectId": 6,
-      "taskIDList": [
-        17
-      ],
-      "id": 7
     }
   ],
   "taskList": [
     {
-      "taskName": "Make Description In Task Modal",
-      "taskCompletion": true,
-      "taskAssignee": "SPK",
-      "taskPriority": "medium",
-      "taskStatus": "off-track",
-      "taskDeadline": "2022-10-16",
-      "taskDescription": "Hello,\nThis is first description.",
-      "id": 1
-    },
-    {
-      "taskName": "Beautify Section btn",
-      "taskCompletion": true,
-      "taskAssignee": "SPK",
-      "taskPriority": "high",
-      "taskStatus": "on-track",
-      "taskDeadline": "2022-10-13",
-      "id": 2
-    },
-    {
       "taskName": "Make Comment Part Working",
       "taskCompletion": false,
-      "taskAssignee": "SPK",
+      "taskAssignee": 1,
       "taskPriority": "medium",
       "taskStatus": "off-track",
       "taskDeadline": "2022-10-16",
       "taskDescription": "",
       "id": 3
-    },
-    {
-      "taskName": "Assignee Part",
-      "taskCompletion": false,
-      "taskAssignee": "",
-      "taskPriority": "medium",
-      "taskStatus": "at-risk",
-      "taskDeadline": "2022-10-16",
-      "taskDescription": "",
-      "id": 4
-    },
-    {
-      "taskName": "Delete Section",
-      "taskCompletion": true,
-      "taskAssignee": "S",
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": null,
-      "id": 6
-    },
-    {
-      "taskName": "Drag and Drop",
-      "taskCompletion": true,
-      "taskAssignee": null,
-      "taskPriority": "high",
-      "taskStatus": "at-risk",
-      "taskDeadline": "2022-10-18",
-      "taskDescription": null,
-      "id": 7
     },
     {
       "taskName": null,
@@ -252,7 +168,7 @@
       "taskName": "B",
       "taskCompletion": true,
       "taskAssignee": null,
-      "taskPriority": "Choose Priority",
+      "taskPriority": "high",
       "taskStatus": "Choose Status",
       "taskDeadline": null,
       "taskDescription": null,
@@ -299,34 +215,74 @@
       "id": 14
     },
     {
-      "taskName": "Section Name Issue",
+      "taskName": "XXYYZZ",
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
       "taskDeadline": null,
-      "taskDescription": "When we update section name it will create issue in drag and drop. Check It Out.",
-      "id": 15
-    },
-    {
-      "taskName": "S",
-      "taskCompletion": false,
-      "taskAssignee": null,
-      "taskPriority": "medium",
-      "taskStatus": "off-track",
-      "taskDeadline": "2022-10-27",
       "taskDescription": null,
       "id": 16
     },
     {
-      "taskName": "F",
+      "taskName": "Profile Modal",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "medium",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-27",
+      "taskDescription": "- Update Role\n- Remove Member",
+      "id": 17
+    },
+    {
+      "taskName": "Setting features",
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
       "taskDeadline": null,
+      "taskDescription": "Think about extra Setting features",
+      "id": 18
+    },
+    {
+      "taskName": "Description",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "medium",
+      "taskStatus": "off-track",
+      "taskDeadline": null,
+      "taskDescription": "- update description\n- remove particular dialog box",
+      "id": 19
+    },
+    {
+      "taskName": "Save drop down states",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "low",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-30",
       "taskDescription": null,
-      "id": 17
+      "id": 20
+    },
+    {
+      "taskName": "Count chart",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-10-27",
+      "taskDescription": null,
+      "id": 21
+    },
+    {
+      "taskName": "CSS of priority and status",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-10-28",
+      "taskDescription": null,
+      "id": 22
     }
   ]
 }

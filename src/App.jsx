@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./UI/Navbar";
 import Home from "./pages/Home/Home";
@@ -10,6 +10,23 @@ import CreateProject from "./pages/Projects/CreateProject";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
+
+
+  useEffect(() => {
+
+    fetch('http://localhost:8000/userList/1')
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        // console.log(data);
+        localStorage.setItem("user", data);
+      });
+  }, []);
+
+
+
+
   return (
     <div>
       <Router>

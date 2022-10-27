@@ -5,7 +5,7 @@ import SectionArena from './SectionArena';
 import { useState } from 'react';
 import useFetch from "../../../useFetch";
 
-const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
+const ProjectInfo = ({ isProfileClicked, setIsProfileClicked, projectInfo, setProjectInfo }) => {
     let id = 2;
     const { data: userWanted, isPendings, errors } = useFetch(
         "http://localhost:8000/userList/" + id
@@ -42,6 +42,8 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
         setIsProfileClicked(true);
     };
 
+
+
     return (
         <div className="project-info">
             <div className="project-name-and-logo">
@@ -51,7 +53,7 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
                 <div className="project-name-plus-extra-info">
                     <div className="name-and-track-log">
                         <div className="project-name-div">
-                            <h3 className="project-name-heading">ATMOS</h3>
+                            <h3 className="project-name-heading">{projectInfo && projectInfo.projectName}</h3>
                             <div className="info-favorite-logo">
                                 <img className="info-logo-img" src="https://img.icons8.com/material-outlined/24/000000/info--v1.png" />
                                 {/* {!starred && <img onClick={handleStarClick} className="favorite-logo-img" src="https://img.icons8.com/ios-filled/50/000000/star--v1.png" />} */}
@@ -85,13 +87,6 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked }) => {
                 </Nav.Item>
             </Nav>
             <hr></hr>
-            {/* <Routes>
-                    <Route path="/task/overview" element={<SectionArena />} />
-                    <Route path="/task" element={<SectionArena />} />
-                    <Route path="/task/charts" element={<SectionArena />} />
-                </Routes> */}
-            {/* </Router> */}
-
         </div>
     )
 }
