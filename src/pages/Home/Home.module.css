@@ -1,0 +1,62 @@
+.home {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.greetingContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.mainAreaGreeting {
+    display: flex;
+    margin: 40px 100px 40px 100px;
+    flex-direction: column;
+    /* border: 1px solid; */
+    border-radius: 8px;
+    padding: 50px;
+}
+
+.projectUsedContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.mainGreetingHead {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 400;
+}
+
+.timeHead {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+.monthHead {
+    margin: 0px;
+}
+
+.timeHead {
+    margin: 0px;
+}
+
+.monthdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.greetdiv {
+    display: flex;
+}
+
+.timediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

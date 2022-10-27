@@ -3,12 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Rightdiv from "./Rightdiv";
 import Navbar from "../../UI/Navbar";
-
 import styles from "./CreateProject.module.css";
 
 const CreateProject = () => {
   const [projectName, setProjectName] = useState("");
-  const [MaxMember, setMaxMember] = useState("");
   const [type, setType] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [sectionIDList, setsectionIDList] = useState("");
@@ -19,6 +17,7 @@ const CreateProject = () => {
   const [projectDescription, setProjectDescription] = useState("");
   const [projectGuidelines, setProjectGuidelines] = useState("");
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  let lastUsed;
 
   function backToHome() {
     setnextPage(1);
@@ -26,15 +25,16 @@ const CreateProject = () => {
   }
 
   const handleSubmit = (e) => {
+    lastUsed = new Date();
     e.preventDefault();
     const project = {
       projectName,
-      MaxMember,
       type,
       sectionIDList,
       projectStatement,
       projectMission,
       projectDescription,
+      lastUsed,
       projectGuidelines,
       userId: user.id,
       highAccess: [user.id],
@@ -94,13 +94,6 @@ const CreateProject = () => {
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
                   />
-                  {/* <label>Max Members</label>
-                <input
-                  type="text"
-                  required
-                  value={MaxMember}
-                  onChange={(e) => setMaxMember(e.target.value)}
-                /> */}
                   <label>Project type</label>
                   <select
                     value={type}
@@ -198,7 +191,7 @@ const CreateProject = () => {
           </div>
         </div>
 
-        <div className="create-project-right">
+        <div className={styles.createProjectRight}>
           <Rightdiv />
         </div>
       </div>

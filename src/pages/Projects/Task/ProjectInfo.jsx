@@ -2,9 +2,41 @@ import React from "react"
 import Nav from 'react-bootstrap/Nav';
 import { Route, Router, Routes } from 'react-router-dom';
 import SectionArena from './SectionArena';
+import { useState } from 'react';
+import useFetch from "../../../useFetch";
 
 const ProjectInfo = ({ isProfileClicked, setIsProfileClicked, projectInfo, setProjectInfo }) => {
+    let id = 2;
+    const { data: userWanted, isPendings, errors } = useFetch(
+        "http://localhost:8000/userList/" + id
+      );
 
+    const [starred, setStarred] = useState(false);  
+    const handleStarClick = () => {
+        if(starred === false) {
+            setStarred(true)
+            userWanted && userWanted.favoriteProjectList.indexOf(id)
+        } 
+        else { 
+            let index;
+            userWanted && userWanted.favoriteProjectList ? index = userWanted.favoriteProjectList.push(id) : index = -1;
+            if(index > -1) {
+                userWanted.favoriteProjectList.splice(index, 1);
+            }
+            setStarred(false)
+        }
+
+            fetch(`http://localhost:8000/userList/${id}`, {
+                method: "PUT",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userWanted),
+              }).then((result) => {
+                return result.json();
+              });       
+    }
     const handleProfileClickedInside = (event) => {
         event.stopPropagation();
         setIsProfileClicked(true);
@@ -24,7 +56,9 @@ const ProjectInfo = ({ isProfileClicked, setIsProfileClicked, projectInfo, setPr
                             <h3 className="project-name-heading">{projectInfo && projectInfo.projectName}</h3>
                             <div className="info-favorite-logo">
                                 <img className="info-logo-img" src="https://img.icons8.com/material-outlined/24/000000/info--v1.png" />
-                                <img className="favorite-logo-img" src="https://img.icons8.com/ios-filled/50/000000/star--v1.png" />
+                                {/* {!starred && <img onClick={handleStarClick} className="favorite-logo-img" src="https://img.icons8.com/ios-filled/50/000000/star--v1.png" />} */}
+                                {starred && <img onClick={handleStarClick} className="favorite-logo-img" src="https://www.linkpicture.com/q/star.png" />}
+                                {!starred && <img onClick={handleStarClick} className="favorite-logo-img" src="https://www.linkpicture.com/q/star-shape.png" />}
                             </div>
                         </div>
                         <div className="track-log">
