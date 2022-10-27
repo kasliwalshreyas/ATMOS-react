@@ -20,10 +20,11 @@ const App = () => {
       })
       .then(data => {
         // console.log(data);
-        localStorage.setItem("user", data);
+        localStorage.setItem('user', JSON.stringify(data));
+
       });
   }, []);
-
+  // console.log(localStorage.getItem('user'));
 
 
 

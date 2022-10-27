@@ -4,27 +4,29 @@ import { Link, useNavigate } from "react-router-dom";
 
 const ProjectList = ({ projects }) => {
 
+  const navigate = useNavigate();
   const handleLinkClick = (project) => {
 
-    
-    const navigate = useNavigate();
-  
-    const insideProject = (project) => {
-      localStorage.setItem('projectId', project.id);
-      navigate('/task/overview');
-    }
+
     project.lastUsed = new Date();
-    
+
     fetch(`http://localhost:8000/projectList/${project.id}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type' : 'application/json'
-            },
-            body:JSON.stringify(project)
-        }).then((result) => {
-            return result.json()
-        })
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(project)
+    }).then((result) => {
+      return result.json()
+    })
+  }
+
+  const insideProject = (project) => {
+    handleLinkClick(project);
+    localStorage.setItem('projectId', project.id);
+    navigate('/task/overview');
+  }
 
   return (
     <div className="projectlist">
@@ -37,14 +39,7 @@ const ProjectList = ({ projects }) => {
         .map((project) => (
           <div className="project-real">
             <div className="project-container">
-<<<<<<< HEAD
-              <Link onClick={() => {
-                handleLinkClick(project)
-                }}
-                to="/task" state={{ from: project.id }}>
-=======
-              <a onClick={() => { insideProject(project) }}>
->>>>>>> 15df0e06cce66f2a8de2aaf3185525f5148656a3
+              <a onClick={() => { insideProject(project) }} >
                 <img
                   className="project-img"
                   src={`./images/img/img${project.id % 10}.PNG`}

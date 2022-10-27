@@ -139,7 +139,7 @@ const RecentProject = () => {
                       onClick={() => {
                         handleLinkClick(project);
                       }}
-                      to="/task"
+                      to="/task/overview"
                       state={{ from: project.id }}
                     >
                       <h6 className={styles.particularProjectName}>
@@ -169,7 +169,7 @@ const RecentProject = () => {
                             onClick={() => {
                               handleLinkClick(project);
                             }}
-                            to="/task"
+                            to="/task/overview"
                             state={{ from: project.id }}
                           >
                             <h6 className={styles.particularProjectName}>

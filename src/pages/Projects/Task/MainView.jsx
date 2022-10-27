@@ -13,6 +13,7 @@ const MainView = ({ overview, board, charts }) => {
   // const [projectName, setProjectName] = useState()
   const [projectInfo, setProjectInfo] = useState(null);
 
+
   const handleClickOutside = (event) => {
     event.stopPropagation();
     setIsProfileClicked(false);
@@ -82,7 +83,7 @@ const MainView = ({ overview, board, charts }) => {
       <FilterFunc></FilterFunc>
       {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></OverView>}
       {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></SectionArena>}
-      {charts && <Charts></Charts>}
+      {charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo}></Charts>}
     </div>
   );
 };

@@ -42,7 +42,8 @@ const options = {
 
 
 
-const Charts = () => {
+const Charts = ({ projectID, projectInfo, setProjectInfo }) => {
+    console.log(projectInfo);
     return (
         <div className={styles.mainView}>
 
