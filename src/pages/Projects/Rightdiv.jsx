@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react";
+import styles from "./Rightdiv.module.css";
 const Rightdiv = () => {
     const [time, setTime] = useState(Date.now());
 
