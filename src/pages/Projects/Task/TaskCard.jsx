@@ -1,6 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
+    // console.log(task, 'task');
 
     const deleteTask = (event, taskID, sectionInfo) => {
         event.stopPropagation();
@@ -14,24 +15,65 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
         const sectionData = { sectionName, projectId, taskIDList };
         // console.log(sectionData);
 
-        fetch(`http://localhost:8000/taskList/${taskID}`, {
-            method: 'DELETE'
-        })
-            .then(() => {
-                console.log('Task Deleted');
-                fetch(`http://localhost:8000/sectionList/${sectionInfo.id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(sectionData)
-                })
-                    .then(() => {
-                        console.log("Section TaskList Updated");
-                        setRerender(!rerender)
-                    });
+        //delete task if task has an Assignee
+        if (task.taskAssignee) {
+            fetch(`http://localhost:8000/taskList/${taskID}`, {
+                method: 'DELETE'
             })
-            .catch((err) => { console.log(err.message); })
-
-
+                .then(() => {
+                    console.log('Task Deleted');
+                    fetch(`http://localhost:8000/sectionList/${sectionInfo.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(sectionData)
+                    })
+                        .then(() => {
+                            console.log("Section TaskList Updated");
+                            // setRerender(!rerender)
+                        });
+                })
+                .then(() => {
+                    fetch(`http://localhost:8000/userList/${task.taskAssignee}`)
+                        .then((res) => { return res.json() })
+                        .then((AssigneeData) => {
+                            // const taskIDList = res2.taskIDList.filter((task) => { return !(task.id === taskID) });
+                            // const userData = { ...res2, taskIDList };
+                            console.log(taskID);
+                            AssigneeData.taskAssignedIDList = AssigneeData.taskAssignedIDList.filter((taskid) => { return !(taskid === taskID) });
+                            console.log(AssigneeData);
+                            fetch(`http://localhost:8000/userList/${task.taskAssignee}`, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(AssigneeData)
+                            })
+                                .then(() => {
+                                    console.log("User TaskList Updated");
+                                    setRerender(!rerender)
+                                });
+                        }
+                        )
+                })
+                .catch((err) => { console.log(err.message); })
+        }
+        //delete task if task has no Assignee
+        else {
+            fetch(`http://localhost:8000/taskList/${taskID}`, {
+                method: 'DELETE'
+            })
+                .then(() => {
+                    console.log('Task Deleted');
+                    fetch(`http://localhost:8000/sectionList/${sectionInfo.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(sectionData)
+                    })
+                        .then(() => {
+                            console.log("Section TaskList Updated");
+                            setRerender(!rerender)
+                        });
+                })
+                .catch((err) => { console.log(err.message); });
+        }
     }
 
     // console.log(task)

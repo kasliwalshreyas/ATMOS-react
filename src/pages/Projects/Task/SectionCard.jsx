@@ -44,7 +44,36 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
         setIsSectionOptionClicked(true);
     }
 
-    async function deleteTask(taskID) {
+    // console.log(sectionInfo);
+
+    async function deleteTaskFromUser(taskID, taskAssignee) {
+        const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`)
+            .then((res) => { return res.json() })
+            .then((AssigneeData) => {
+                // const taskIDList = res2.taskIDList.filter((task) => { return !(task.id === taskID) });
+                // const userData = { ...res2, taskIDList };
+                // console.log(taskID);
+                AssigneeData.taskAssignedIDList = AssigneeData.taskAssignedIDList.filter((taskid) => { return !(taskid === taskID) });
+                console.log(AssigneeData);
+                fetch(`http://localhost:8000/userList/${taskAssignee}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(AssigneeData)
+                })
+                    .then(() => {
+                        console.log("Deleted Task from User");
+                    });
+            }
+            )
+        return res;
+    }
+
+    async function deleteTask(taskID, assigneeID) {
+
+        if (assigneeID) {
+            const res1 = await deleteTaskFromUser(taskID, assigneeID);
+        }
+
         const res = await fetch(`http://localhost:8000/taskList/${taskID}`, {
             method: 'DELETE'
         });
@@ -56,7 +85,7 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
 
         for (let i = 0; i < taskList.length; i++) {
             // console.log("inside delete section", i);
-            let res3 = await deleteTask(taskList[i].id);
+            let res3 = await deleteTask(taskList[i].id, taskList[i].taskAssignee);
         }
 
         const res = await fetch(`http://localhost:8000/sectionList/${sectionID}`, {
