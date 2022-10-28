@@ -498,12 +498,13 @@
   min-width: max-content;
 }
 
-.modal-select:active .modal-select-option {
+/* .modal-select:active .modal-select-option {
   padding: 2px;
   height: 38px;
   min-height: 38px !important;
   min-width: 58px;
-}
+  font-size: larger;
+} */
 
 
 

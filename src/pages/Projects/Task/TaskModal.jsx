@@ -6,12 +6,49 @@ import Select from 'react-select';
 
 const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList }) => {
 
+    const taskCompletionOptions = [
+        { value: true, label: 'Yes' },
+        { value: false, label: 'No' }];
+
+    const taskPriorityOptions = [
+        { value: 'Choose Priority', label: 'Choose Priority' },
+        { value: 'high', label: 'High' },
+        { value: 'medium', label: 'Medium' },
+        { value: 'low', label: 'Low' }];
+
+    const taskStatusOptions = [
+        { value: 'Choose Status', label: 'Choose Status' },
+        { value: 'on-track', label: 'On Track' },
+        { value: 'off-track', label: 'Off Track' },
+        { value: 'at-risk', label: 'At Risk' }];
+
     let taskAssigneeLabel;
     for (let i = 0; i < AssigneeList.length; i++) {
         if (AssigneeList[i].value === taskInfo.taskAssignee) {
             taskAssigneeLabel = AssigneeList[i].label;
         }
     }
+    let taskStatusLabel;
+    for (let i = 0; i < taskStatusOptions.length; i++) {
+        if (taskStatusOptions[i].value === taskInfo.taskStatus) {
+            taskStatusLabel = taskStatusOptions[i].label;
+        }
+    }
+    let taskPriorityLabel;
+    for (let i = 0; i < taskPriorityOptions.length; i++) {
+        if (taskPriorityOptions[i].value === taskInfo.taskPriority) {
+            taskPriorityLabel = taskPriorityOptions[i].label;
+        }
+    }
+    let taskCompletionLabel;
+    for (let i = 0; i < taskCompletionOptions.length; i++) {
+        if (taskCompletionOptions[i].value === taskInfo.taskCompletion) {
+            taskCompletionLabel = taskCompletionOptions[i].label;
+        }
+    }
+
+
+
     // console.log(taskAssigneeLabel);
 
     const [taskName, setTaskName] = useState(taskInfo.taskName);
@@ -22,15 +59,99 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
     const [taskDeadline, setTaskDeadline] = useState(taskInfo.taskDeadline);
     const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
     const [selectedAssignee, setSelectedAssignee] = useState({ value: taskAssignee, label: taskAssigneeLabel });
+    const [selectedCompletion, setSelectedCompletion] = useState({ value: taskCompletion, label: taskCompletionLabel });
+    const [selectedPriority, setSelectedPriority] = useState({ value: taskPriority, label: taskPriorityLabel });
+    const [selectedStatus, setSelectedStatus] = useState({ value: taskStatus, label: taskStatusLabel });
+    const [updateTaskAssignee, setUpdateTaskAssignee] = useState({ do: false, oldAssignee: null });
+    // console.log(selectedAssignee, selectedCompletion, selectedPriority, selectedStatus);
+    // console.log(taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription);
+
 
     const handleSubmit = (taskId, sectionId, sectionInfo) => {
-        // let taskName = selectedTask.taskName;
-        let taskData = { taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription }
-        console.log(taskAssignee);
-        // console.log(data)
 
-        if (taskId == null) {
-            console.log('Need to Add Task');
+        let taskData = { taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription }
+
+        //Add Task with assignee
+        console.log(taskId, taskAssignee)
+        if (taskId == null && taskAssignee != null) {
+            console.log('Need to Add Task with assignee');
+            fetch('http://localhost:8000/taskList', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(taskData)
+            })
+                .then((res) => {
+                    return res.json()
+                })
+                .then((response) => {
+                    // console.log(response);
+                    let newTaskID = response.id;
+                    // console.log(response.id);
+                    // console.log("newTaskID",newTaskID)
+                    // console.log("Task Added");
+                    // console.log(newTaskID);
+                    return newTaskID;
+                })
+                .then((newTaskID) => {
+                    const sectionName = sectionInfo.sectionName;
+                    const projectId = sectionInfo.projectId;
+                    const taskIDList = sectionInfo.taskIDList;
+                    // console.log(newTaskID);
+                    let newTaskIDList = []
+                    for (let i = 0; i < taskIDList.length; i++) {
+                        newTaskIDList.push(taskIDList[i].id);
+                    }
+                    newTaskIDList.push(newTaskID);
+
+                    // taskIDList.push({ ...taskData, id: newTaskID });
+                    // console.log(taskIDList, "new Task");
+                    const sectionData = { sectionName, projectId, taskIDList: newTaskIDList }
+
+                    fetch(`http://localhost:8000/sectionList/${sectionId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(sectionData)
+                    })
+                        .then(async () => {
+                            console.log("Section TaskList Updated");
+                            // props.setRerender(!rerender)
+                            //Add task to userAssignedTaskList
+                            const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`)
+                                .then((res) => { return res.json() })
+                                .then((response) => {
+                                    // console.log(response.taskAssignedIDList, 'assignee Info fetched');
+                                    response.taskAssignedIDList.push(newTaskID);
+                                    // console.log(response.taskAssignedIDList, 'assignee Info updated');
+                                    return response;
+                                })
+                                .then(async (response) => {
+                                    const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`, {
+                                        method: 'PUT',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify(response)
+                                    })
+                                        .then((res) => {
+                                            return res.json();
+                                        })
+                                        .then((response) => {
+                                            // console.log(response.taskAssignedIDList, 'assignee Info updated in DB');
+                                            console.log("Assignee TaskList Updated");
+                                        });
+                                })
+                                .then(() => {
+                                    console.log("Task Added");
+                                    setRerender(!rerender);
+                                });
+                        })
+                })
+                .catch((err) => {
+                    console.log(err);
+                }
+                )
+        }
+        //Add Task with no assignee
+        else if (taskId == null && taskAssignee == null) {
+            console.log('Need to Add Task with no assignee');
             fetch('http://localhost:8000/taskList', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -79,8 +200,75 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                     console.log(err.message);
                 });
         }
-        else {
-            console.log('Need To Update Task');
+        //Update Task with assignee change
+        else if (taskId != null && updateTaskAssignee.do == true) {
+            console.log('Need To Update Task with assignee change');
+            fetch(`http://localhost:8000/taskList/${taskId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(taskData)
+            })
+                .then(res => { return res.json() })
+                .then(async (taskdata) => {
+                    console.log("Task Updated", taskdata);
+                    const newTaskID = taskdata.id;
+                    console.log(newTaskID);
+                    const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`)
+                        .then((res) => { return res.json() })
+                        .then((response) => {
+                            // console.log(response);
+                            response.taskAssignedIDList.push(newTaskID);
+                            console.log(response.taskAssignedIDList, 'assignee Info updated');
+                            return response;
+                        })
+                        .then(async (response) => {
+                            const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(response)
+                            })
+                                .then(() => {
+                                    console.log("New Assignee TaskList Updated");
+                                })
+                        });
+                    // .then(() => {
+                    //     console.log("Task Updated");
+                    //     // setRerender(!rerender);
+                    // });
+                    return newTaskID;
+                })
+                .then(async (newTaskID) => {
+                    console.log(newTaskID);
+                    const res = await fetch(`http://localhost:8000/userList/${updateTaskAssignee.oldAssignee}`)
+                        .then((res) => { return res.json() })
+                        .then((response) => {
+                            // console.log(response);
+                            response.taskAssignedIDList = response.taskAssignedIDList.filter((taskid) => taskid != newTaskID);
+                            console.log(response.taskAssignedIDList, ' assignee Info updated');
+                            return response;
+                        })
+                        .then(async (response) => {
+                            const res = await fetch(`http://localhost:8000/userList/${updateTaskAssignee.oldAssignee}`, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(response)
+                            })
+                                .then(() => {
+                                    console.log("prev Assignee TaskList Updated");
+                                })
+                        })
+                })
+                .then(() => {
+                    console.log("Task Updated");
+                    setRerender(!rerender);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                });
+        }
+        //Update Task with no assignee change
+        else if (taskId != null && updateTaskAssignee.do == false) {
+            console.log('Need To Update Task with no assignee change');
             fetch(`http://localhost:8000/taskList/${taskId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -109,10 +297,33 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
 
 
 
+
     const handleTaskAssignee = (selectedOption) => {
+        if (selectedAssignee.value !== selectedOption.value) {
+            setUpdateTaskAssignee(prev => {
+                prev.do = true;
+                prev.oldAssignee = selectedAssignee.value;
+                return prev;
+            });
+            console.log("Assignee Changed", updateTaskAssignee);
+        }
         setSelectedAssignee(selectedOption);
         setTaskAssignee(selectedOption.value);
+        console.log('newAssignee', selectedOption.value);
     }
+    const handleTaskCompletion = (selectedOption) => {
+        setSelectedCompletion(selectedOption);
+        setTaskCompletion(selectedOption.value);
+    }
+    const handleTaskPriority = (selectedOption) => {
+        setSelectedPriority(selectedOption);
+        setTaskPriority(selectedOption.value);
+    }
+    const handleTaskStatus = (selectedOption) => {
+        setSelectedStatus(selectedOption);
+        setTaskStatus(selectedOption.value);
+    }
+
 
 
 
@@ -135,10 +346,57 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Completed</td>
                                 <td className='task-modal-table-data'>
-                                    <select className='modal-input modal-select' value={taskCompletion ? "completed" : "incompleted"} onChange={(e) => { if (e.target.value === "completed") { setTaskCompletion(true) } else { setTaskCompletion(false) } }}>
+                                    <Select
+                                        className='modal-input'
+                                        // placeholder='Enter Assignee'
+                                        defaultValue={selectedCompletion}
+                                        options={taskCompletionOptions}
+                                        onChange={handleTaskCompletion}
+                                        styles={{
+                                            option: (provided, state) => ({
+                                                ...provided,
+                                                // border: '1px solid #ccc',
+                                                color: 'black',
+                                                backgroundColor: state.isSelected ? 'gray' : 'white',
+                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                ':active': {
+                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    // border: '1px solid #ccc'
+                                                },
+                                                padding: 10
+                                            }),
+                                            control: (provided, state) => ({
+                                                ...provided,
+                                                border: '1px solid #ccc',
+                                                width: 'fit-content',
+                                                minWidth: 'max-content',
+                                                boxShadow: 'none',
+                                                ':hover': {
+                                                    border: '1px solid #ccc'
+                                                }
+                                            }),
+                                            container: (provided, state) => ({
+                                                ...provided,
+                                                // display: 'inline-flex',
+                                                // flexDirection: 'row',
+                                                // marginRight: 20
+                                                // minWidth: '250px'
+                                            }),
+                                            valueContainer: (provided, state) => ({
+                                                ...provided,
+                                                width: '250px'
+                                                // width: 'fit-content',
+                                                // minWidth: 'max-content',
+
+
+                                            })
+
+                                        }}
+                                    />
+                                    {/* <select className='modal-input modal-select' value={taskCompletion ? "completed" : "incompleted"} onChange={(e) => { if (e.target.value === "completed") { setTaskCompletion(true) } else { setTaskCompletion(false) } }}>
                                         <option className='modal-select-option' value="completed">Yes</option>
                                         <option className='modal-select-option' value="incompleted">No</option>
-                                    </select>
+                                    </select> */}
                                 </td>
                             </tr>
                             <tr className='task-modal-table-row'>
@@ -197,23 +455,117 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Priority</td>
                                 <td className='task-modal-table-data'>
-                                    <select className='modal-input modal-select' value={taskPriority} onChange={(e) => { setTaskPriority(e.target.value) }}>
+                                    <Select
+                                        className='modal-input'
+                                        placeholder='Choose Priority'
+                                        defaultValue={selectedPriority}
+                                        options={taskPriorityOptions}
+                                        onChange={handleTaskPriority}
+                                        styles={{
+                                            option: (provided, state) => ({
+                                                ...provided,
+                                                // border: '1px solid #ccc',
+                                                color: 'black',
+                                                backgroundColor: state.isSelected ? 'gray' : 'white',
+                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                ':active': {
+                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    // border: '1px solid #ccc'
+                                                },
+                                                padding: 10
+                                            }),
+                                            control: (provided, state) => ({
+                                                ...provided,
+                                                border: '1px solid #ccc',
+                                                width: 'fit-content',
+                                                minWidth: 'max-content',
+                                                boxShadow: 'none',
+                                                ':hover': {
+                                                    border: '1px solid #ccc'
+                                                }
+                                            }),
+                                            container: (provided, state) => ({
+                                                ...provided,
+                                                // display: 'inline-flex',
+                                                // flexDirection: 'row',
+                                                // marginRight: 20
+                                                // minWidth: '250px'
+                                            }),
+                                            valueContainer: (provided, state) => ({
+                                                ...provided,
+                                                width: '250px'
+                                                // width: 'fit-content',
+                                                // minWidth: 'max-content',
+
+
+                                            })
+
+                                        }}
+                                    />
+                                    {/* <select className='modal-input modal-select' value={taskPriority} onChange={(e) => { setTaskPriority(e.target.value) }}>
                                         <option value="Choose Priority">Choose Priority</option>
                                         <option value="high">High</option>
                                         <option value="medium">Medium</option>
                                         <option value="low">Low</option>
-                                    </select>
+                                    </select> */}
                                 </td>
                             </tr>
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Status</td>
                                 <td className='task-modal-table-data'>
-                                    <select className='modal-input modal-select' value={taskStatus} onChange={(e) => { setTaskStatus(e.target.value) }}>
+                                    <Select
+                                        className='modal-input'
+                                        placeholder='Choose Status'
+                                        defaultValue={selectedStatus}
+                                        options={taskStatusOptions}
+                                        onChange={handleTaskStatus}
+                                        styles={{
+                                            option: (provided, state) => ({
+                                                ...provided,
+                                                // border: '1px solid #ccc',
+                                                color: 'black',
+                                                backgroundColor: state.isSelected ? 'gray' : 'white',
+                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                ':active': {
+                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    // border: '1px solid #ccc'
+                                                },
+                                                padding: 10
+                                            }),
+                                            control: (provided, state) => ({
+                                                ...provided,
+                                                border: '1px solid #ccc',
+                                                width: 'fit-content',
+                                                minWidth: 'max-content',
+                                                boxShadow: 'none',
+                                                ':hover': {
+                                                    border: '1px solid #ccc'
+                                                }
+                                            }),
+                                            container: (provided, state) => ({
+                                                ...provided,
+                                                // display: 'inline-flex',
+                                                // flexDirection: 'row',
+                                                // marginRight: 20
+                                                // minWidth: '250px'
+                                            }),
+                                            valueContainer: (provided, state) => ({
+                                                ...provided,
+                                                width: '250px'
+                                                // width: 'fit-content',
+                                                // minWidth: 'max-content',
+
+
+                                            })
+
+                                        }}
+                                    />
+                                    {/* <select className='modal-input modal-select' value={taskStatus} onChange={(e) => { setTaskStatus(e.target.value) }}>
                                         <option value="Choose Status">Choose Status</option>
                                         <option value="on-track">On Track</option>
                                         <option value="off-track">Off Track</option>
                                         <option value="at-risk">At Risk</option>
-                                    </select>
+                                    </select> */}
                                 </td>
                             </tr>
                             <tr className='task-modal-table-row'>

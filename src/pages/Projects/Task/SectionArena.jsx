@@ -3,8 +3,6 @@ import TaskModal from "./TaskModal";
 import { useEffect } from "react";
 import SectionCard from "./SectionCard";
 import { DragDropContext } from "react-beautiful-dnd";
-import { useLocation } from "react-router-dom";
-// export const TaskNameContext = createContext();
 
 const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
   const [show, setShow] = useState(false);

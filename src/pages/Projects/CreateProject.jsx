@@ -19,6 +19,8 @@ const CreateProject = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   let lastUsed;
 
+  console.log(user);
+
   function backToHome() {
     setnextPage(1);
     history("/Projects");
