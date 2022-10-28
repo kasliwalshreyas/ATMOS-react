@@ -1,31 +1,36 @@
 .mainView {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     /* background-color: rgb(234, 234, 241); */
     min-height: 75vh;
     max-height: max-content;
     width: 100vw;
     padding: 20px;
     /* margin-bottom: 10px; */
+    /* background-color: #5CDB95; */
+    background-color: #f8fafb;
+
 
 }
 
 .chartArena {
     display: flex;
     flex-direction: column;
-    height: max-content;
-    width: 75vw;
+    height: fit-content;
+    min-width: fit-content;
+    width: 40vw;
     border: 1px solid black;
     padding: 10px;
     border: 2px solid;
     border-color: rgba(111, 111, 111, 0.2);
     border-radius: 5px;
-    /* padding: 10px 5px 10px 5px; */
-    margin: 5px 0 5px 0;
+    padding: 10px 5px 10px 5px;
+    margin: 5px 5px 5px 5px;
 
 }
 
-.chartHeading {
+.arenaHeading {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -34,9 +39,13 @@
     border-radius: 5px 5px 5px 5px;
 }
 
-.statusChart {
+.arenaBody {
     display: flex;
-    flex-direction: column;
-    width: 250px;
-    height: 250px;
+    flex-direction: row;
+    /* width: 250px; */
+    /* height: 250px; */
+}
+
+.sectionWiseArena {
+    width: 100%;
 }

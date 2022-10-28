@@ -8,7 +8,16 @@
         2
       ],
       "taskAssignedIDList": [
-        1
+        18,
+        17,
+        19,
+        20,
+        22,
+        10,
+        11,
+        23,
+        24,
+        25
       ],
       "id": 1
     },
@@ -19,11 +28,10 @@
         2,
         1
       ],
-      "taskAssignedIDList": [
-        11
-      ],
+      "taskAssignedIDList": [],
       "favoriteProjectList": [
-        1
+        1,
+        2
       ],
       "id": 2
     },
@@ -34,10 +42,7 @@
         1,
         2
       ],
-      "taskAssignedIDList": [
-        23,
-        25
-      ],
+      "taskAssignedIDList": [],
       "id": 3
     },
     {
@@ -47,9 +52,7 @@
         1,
         2
       ],
-      "taskAssignedIDList": [
-        24
-      ],
+      "taskAssignedIDList": [],
       "id": 4
     },
     {
@@ -68,7 +71,11 @@
       "projectName": "ATMOS",
       "MaxMember": "",
       "type": "",
-      "sectionIDList": "",
+      "sectionIDList": [
+        0,
+        1,
+        6
+      ],
       "projectStatement": "Sothing",
       "projectMission": "",
       "projectDescription": "dkjcds csd",
@@ -85,13 +92,16 @@
         4
       ],
       "id": 1,
-      "lastUsed": "2022-10-27T13:28:12.595Z"
+      "lastUsed": "2022-10-28T19:27:55.940Z"
     },
     {
       "projectName": "FSD",
       "MaxMember": "",
       "type": "Education",
-      "sectionIDList": "",
+      "sectionIDList": [
+        5,
+        7
+      ],
       "projectStatement": "Hello",
       "projectMission": "Hi",
       "projectDescription": "Hello",
@@ -108,16 +118,16 @@
         3
       ],
       "id": 2,
-      "lastUsed": "2022-10-27T13:28:56.884Z"
+      "lastUsed": "2022-10-28T19:18:07.992Z"
     },
     {
       "projectName": "ABCD",
       "type": "Education",
-      "sectionIDList": "",
+      "sectionIDList": [],
       "projectStatement": "To learn",
       "projectMission": "Yes u can do it",
       "projectDescription": "Later babes!!!",
-      "lastUsed": "2022-10-27T13:28:15.771Z",
+      "lastUsed": "2022-10-28T19:30:17.029Z",
       "projectGuidelines": "more details will follow later😜",
       "userId": 1,
       "highAccess": [
@@ -130,7 +140,7 @@
     {
       "projectName": "Hsbc skd",
       "type": "",
-      "sectionIDList": "",
+      "sectionIDList": [],
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
@@ -237,7 +247,7 @@
     {
       "taskName": "Y",
       "taskCompletion": true,
-      "taskAssignee": 2,
+      "taskAssignee": 1,
       "taskPriority": "high",
       "taskStatus": "at-risk",
       "taskDeadline": null,
@@ -297,7 +307,7 @@
     {
       "taskName": "Setting features",
       "taskCompletion": false,
-      "taskAssignee": null,
+      "taskAssignee": 1,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
       "taskDeadline": null,
@@ -327,7 +337,7 @@
     {
       "taskName": "Count chart",
       "taskCompletion": false,
-      "taskAssignee": null,
+      "taskAssignee": 1,
       "taskPriority": "high",
       "taskStatus": "at-risk",
       "taskDeadline": "2022-10-27",
@@ -347,7 +357,7 @@
     {
       "taskName": "asdvdvddvd d dc dcscs s",
       "taskCompletion": false,
-      "taskAssignee": 3,
+      "taskAssignee": 1,
       "taskPriority": "high",
       "taskStatus": "off-track",
       "taskDeadline": "2022-10-28",
@@ -356,8 +366,8 @@
     },
     {
       "taskName": "Hi, It's Me",
-      "taskCompletion": false,
-      "taskAssignee": 4,
+      "taskCompletion": true,
+      "taskAssignee": 1,
       "taskPriority": "medium",
       "taskStatus": "at-risk",
       "taskDeadline": null,
@@ -367,7 +377,7 @@
     {
       "taskName": "Hi",
       "taskCompletion": false,
-      "taskAssignee": 3,
+      "taskAssignee": 1,
       "taskPriority": "high",
       "taskStatus": "on-track",
       "taskDeadline": null,

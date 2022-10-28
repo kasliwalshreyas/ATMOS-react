@@ -132,8 +132,8 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
   };
 
   //func to create Section
-  const createSection = () => {
-    fetch("http://localhost:8000/sectionList", {
+  const createSection = async () => {
+    const sec = await fetch("http://localhost:8000/sectionList", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -143,8 +143,37 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
       }),
     }).then((res) => {
       console.log("New Section Added");
-      setRerender(!rerender);
+      // setRerender(!rerender);
+      return res.json();
     });
+    console.log(sec, 'new section');
+
+    const projectData = JSON.parse(JSON.stringify(projectInfo));
+    for (let i = 0; i < projectData.highAccess.length; i++) {
+      projectData.highAccess[i] = projectInfo.highAccess[i].id;
+    }
+    for (let i = 0; i < projectData.mediumAccess.length; i++) {
+      projectData.mediumAccess[i] = projectInfo.mediumAccess[i].id;
+    }
+    for (let i = 0; i < projectData.lowAccess.length; i++) {
+      projectData.lowAccess[i] = projectInfo.lowAccess[i].id;
+    }
+
+    projectInfo.sectionIDList.push(sec.id);
+    projectData.sectionIDList.push(sec.id);
+    console.log(projectData, 'projectData');
+    console.log(projectInfo, 'projectInfo');
+    const project = await fetch(`http://localhost:8000/projectList/${projectId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(projectData)
+    }).then((res) => {
+      console.log("Project Updated");
+      setRerender(!rerender);
+      return res.json();
+    }
+    );
+    setProjectInfo(projectInfo);
   };
 
   //func to swap the taskIDList of two sections
@@ -301,6 +330,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
                 rerender={rerender}
                 setRerender={setRerender}
                 key={section.id}
+                projectInfo={projectInfo}
               />
             ))}
           <div className="add-section-div" onClick={createSection}>
