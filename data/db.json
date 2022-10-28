@@ -16,8 +16,8 @@
         10,
         11,
         23,
-        24,
-        25
+        25,
+        24
       ],
       "id": 1
     },
@@ -118,7 +118,7 @@
         3
       ],
       "id": 2,
-      "lastUsed": "2022-10-28T19:18:07.992Z"
+      "lastUsed": "2022-10-28T22:10:11.424Z"
     },
     {
       "projectName": "ABCD",
@@ -144,7 +144,7 @@
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-27T13:29:55.254Z",
+      "lastUsed": "2022-10-28T22:10:08.066Z",
       "projectGuidelines": "",
       "userId": 1,
       "highAccess": [
@@ -368,9 +368,9 @@
       "taskName": "Hi, It's Me",
       "taskCompletion": true,
       "taskAssignee": 1,
-      "taskPriority": "medium",
+      "taskPriority": "high",
       "taskStatus": "at-risk",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-30",
       "taskDescription": null,
       "id": 24
     },

@@ -31,23 +31,38 @@
 
 .countContainer:hover .containerHead {
     color: white !important;
+    background-color: #5CDB95 !important;
 }
 
 .countContainer:hover .headText {
     color: white !important;
+    background-color: #5CDB95 !important;
+}
+
+.countContainer:hover .containerBody {
+    color: white !important;
+    background-color: #5CDB95 !important;
 }
 
 .countContainer:hover .containerBody p {
     color: white !important;
+    background-color: #5CDB95 !important;
+}
+
+.countContainer:hover .containerFoot {
+    color: white !important;
+    background-color: #5CDB95 !important;
 }
 
 .countContainer:hover .containerFoot p {
     color: white !important;
+    background-color: #5CDB95 !important;
 }
 
 .countContainer:hover .containerFoot p span {
     font-weight: 900;
     color: white !important;
+    background-color: #5CDB95 !important;
 }
 
 

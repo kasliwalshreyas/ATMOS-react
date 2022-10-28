@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
 import React, { useState } from 'react';
 import Select from 'react-select';
+import CommentArena from './CommentArena';
 
 const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList }) => {
 
@@ -58,11 +59,14 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
     const [taskStatus, setTaskStatus] = useState(taskInfo.taskStatus);
     const [taskDeadline, setTaskDeadline] = useState(taskInfo.taskDeadline);
     const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
+    const [taskComments, setTaskComments] = useState(taskInfo.taskComments);
     const [selectedAssignee, setSelectedAssignee] = useState({ value: taskAssignee, label: taskAssigneeLabel });
     const [selectedCompletion, setSelectedCompletion] = useState({ value: taskCompletion, label: taskCompletionLabel });
     const [selectedPriority, setSelectedPriority] = useState({ value: taskPriority, label: taskPriorityLabel });
     const [selectedStatus, setSelectedStatus] = useState({ value: taskStatus, label: taskStatusLabel });
     const [updateTaskAssignee, setUpdateTaskAssignee] = useState({ do: false, oldAssignee: null });
+    const [description, setDescription] = useState(true);
+    const [comments, setComments] = useState(false);
     // console.log(selectedAssignee, selectedCompletion, selectedPriority, selectedStatus);
     // console.log(taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription);
 
@@ -293,11 +297,6 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
 
     // console.log(projectInfo, "from modal")
 
-
-
-
-
-
     const handleTaskAssignee = (selectedOption) => {
         if (selectedAssignee.value !== selectedOption.value) {
             setUpdateTaskAssignee(prev => {
@@ -325,17 +324,25 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
     }
 
 
+    const handleDescription = (e) => {
+        setDescription(true);
+        setComments(false);
+    }
+    const handleComments = (e) => {
+        setDescription(false);
+        setComments(true);
+    }
 
 
     return (
         <div>
-            <Modal show={show} onHide={closeModal} >
+            <Modal show={show} onHide={closeModal} className='task-modal'>
                 {/* {console.log(props.show)} */}
                 <Modal.Header closeButton>
                     <Modal.Title className='task-path-text'>{projectInfo.projectName}/{sectionInfo.sectionName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <table className='task-model-table'>
+                    <table className='task-modal-table'>
                         <tbody>
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Task</td>
@@ -476,6 +483,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             control: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
                                                 border: '1px solid #ccc',
                                                 width: 'fit-content',
                                                 minWidth: 'max-content',
@@ -486,6 +494,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             container: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
                                                 // display: 'inline-flex',
                                                 // flexDirection: 'row',
                                                 // marginRight: 20
@@ -493,11 +502,16 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             valueContainer: (provided, state) => ({
                                                 ...provided,
-                                                width: '250px'
+                                                width: '250px',
+                                                color: 'black'
                                                 // width: 'fit-content',
                                                 // minWidth: 'max-content',
 
 
+                                            }),
+                                            singleValue: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black'
                                             })
 
                                         }}
@@ -577,18 +591,28 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                         </tbody>
 
                     </table>
-                    <Nav className="task-modal-nav-bar" as="ul" defaultActiveKey="/desc">
+                    <Nav className="task-modal-nav-bar" as="ul">
                         <Nav.Item as="li">
-                            <Nav.Link className="active-nav-option task-modal-nav-option task-modal-option-1" >Description</Nav.Link>
+                            <Nav.Link className="active-nav-option task-modal-nav-option task-modal-option-1" onClick={handleDescription} >Description</Nav.Link>
                         </Nav.Item>
                         <Nav.Item as="li">
-                            <Nav.Link className="task-modal-nav-option task-modal-option-2">Comments</Nav.Link>
+                            <Nav.Link className="task-modal-nav-option task-modal-option-2" onClick={handleComments}>Comments</Nav.Link>
                         </Nav.Item>
                     </Nav>
                     <hr className='task-modal-line-below-nav'></hr>
-                    <div>
-                        <textarea className='task-modal-description' value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} rows={5} placeholder="describe your task for your team members" ></textarea>
-                    </div>
+                    {description &&
+                        <div>
+                            <textarea className='task-modal-description' value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} rows={5} placeholder="describe your task for your team members" ></textarea>
+                        </div>}
+                    {comments &&
+                        <div>
+                            <CommentArena taskInfo={taskInfo} taskComments={taskComments} setTaskComments={setTaskComments} />
+                            {/* <textarea className='task-modal-description' value={taskComments} onChange={(e) => setTaskComments(e.target.value)} rows={5} placeholder="add comments for your team members" ></textarea> */}
+                        </div>}
+                    {/* <div className='task-modal-button-container'>
+                        <button className='task-modal-button' onClick={handleSave}>Save</button>
+                        <button className='task-modal-button' onClick={handleDelete}>Delete</button>
+                    </div> */}
 
 
                     {/* To Do: Make description active */}

@@ -5,7 +5,6 @@ import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
 
-<<<<<<< HEAD
 const ProjectInfo = ({
   isProfileClicked,
   setIsProfileClicked,
@@ -31,42 +30,6 @@ const ProjectInfo = ({
         userWanted.favoriteProjectList.splice(index, 1);
       }
       setStarred(false);
-=======
-const ProjectInfo = ({ isProfileClicked, setIsProfileClicked, projectInfo, setProjectInfo }) => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-
-
-    let id = 2;
-    const { data: userWanted, isPendings, errors } = useFetch(
-        "http://localhost:8000/userList/" + id
-    );
-
-    const [starred, setStarred] = useState(false);
-    const handleStarClick = () => {
-        if (starred === false) {
-            setStarred(true)
-            userWanted && userWanted.favoriteProjectList.indexOf(id)
-        }
-        else {
-            let index;
-            userWanted && userWanted.favoriteProjectList ? index = userWanted.favoriteProjectList.push(id) : index = -1;
-            if (index > -1) {
-                userWanted.favoriteProjectList.splice(index, 1);
-            }
-            setStarred(false)
-        }
-
-        fetch(`http://localhost:8000/userList/${id}`, {
-            method: "PUT",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userWanted),
-        }).then((result) => {
-            return result.json();
-        });
->>>>>>> ecf2ab3c12c04ee78fec9e1d7dc4c7270dd17a8c
     }
 
     fetch(`http://localhost:8000/userList/${id}`, {

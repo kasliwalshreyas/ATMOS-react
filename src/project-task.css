@@ -210,19 +210,6 @@
 }
 
 .show-section-option {
-  /* display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  z-index: 2;
-  background: #fff;
-
-
-  width: max-content;
-  border: 1px solid black;
-  border-radius: 5%;
-  padding: 3px; */
   position: absolute;
   display: flex;
   width: 100vw;
@@ -231,6 +218,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
   /* background-color: rgba(0, 0, 0, 0.5); */
   z-index: 2;
   cursor: pointer;
@@ -338,29 +326,37 @@
   border-radius: 5px;
   padding: 10px 5px 10px 5px;
   margin: 5px 0;
-  /* background-color: cornflowerblue; */
-  /* box-shadow: 0 5px 10px rgba(0,0,0,.1); */
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
 }
 
 .task-head {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
-  /* background-color: cornflowerblue; */
+
+
+  background-color: white;
 }
 
 .task-checker-input {
   margin-right: 10px;
   margin-left: 5px;
+
+  background-color: white;
 }
 
 .task-name-input {
   border: 0;
   /* padding: 10px; */
+
+  background-color: white;
 }
 
 .task-name-input:focus {
   outline: none;
+
+  background-color: white;
 }
 
 .task-info {
@@ -368,6 +364,9 @@
   flex-direction: row;
   padding: 2px;
   margin-bottom: 10px;
+
+
+  background-color: white;
 }
 
 .task-info p {
@@ -398,6 +397,12 @@
   display: flex;
   flex-direction: row;
 
+  background-color: white;
+
+}
+
+.deadine {
+  background-color: white;
 }
 
 .date {
@@ -409,6 +414,9 @@
   font-size: 12px;
   color: #858a8e;
   margin-bottom: 0 !important;
+
+
+  background-color: white;
 }
 
 .delete-btn-div {
@@ -417,7 +425,7 @@
   align-items: center;
   margin-right: 15px;
   margin-left: auto;
-  z-index: 2;
+  /* z-index: 2; */
 }
 
 .delete-btn-div img {
@@ -431,7 +439,12 @@
   color: #9e9f9f !important;
 }
 
-.task-model-table {
+.task-modal {
+  background-color: rgba(0, 0, 0, .1);
+
+}
+
+.task-modal-table {
   font-size: 13px;
   margin-bottom: 45px;
   color: #9e9f9f !important;
@@ -458,6 +471,7 @@
 
 .modal-input {
   padding: 2px;
+  color: green !important;
 }
 
 .modal-select {
