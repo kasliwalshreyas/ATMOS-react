@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    padding: 0px 10px 50px 10px; 
 }
 
 .greetingContainer {
@@ -13,7 +14,7 @@
 
 .mainAreaGreeting {
     display: flex;
-    margin: 40px 100px 40px 100px;
+    margin: 0px 100px 0px 100px;
     flex-direction: column;
     /* border: 1px solid; */
     border-radius: 8px;
@@ -24,6 +25,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
+    justify-content: center;
 }
 
 .mainGreetingHead {

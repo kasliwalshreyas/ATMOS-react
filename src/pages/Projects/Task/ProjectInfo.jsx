@@ -4,82 +4,45 @@ import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
+import { copyFileSync } from "fs";
 
-<<<<<<< HEAD
-const ProjectInfo = ({
-  isProfileClicked,
-  setIsProfileClicked,
-  projectInfo,
-  setProjectInfo,
-}) => {
-  let id = 2;
-  const { data: userWanted, isPendings, errors } = useFetch(
-    "http://localhost:8000/userList/" + id
-  );
-
-  const [starred, setStarred] = useState(false);
-  const handleStarClick = () => {
-    if (starred === false) {
-      setStarred(true);
-      userWanted && userWanted.favoriteProjectList.indexOf(id);
-    } else {
-      let index;
-      userWanted && userWanted.favoriteProjectList
-        ? (index = userWanted.favoriteProjectList.push(id))
-        : (index = -1);
-      if (index > -1) {
-        userWanted.favoriteProjectList.splice(index, 1);
-      }
-      setStarred(false);
-=======
 const ProjectInfo = ({ isProfileClicked, setIsProfileClicked, projectInfo, setProjectInfo }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
+    let initialStateOfFavorite;
+    if(user.favoriteProjectList.indexOf(projectInfo.id) == -1) {
+      initialStateOfFavorite = false
+    }
+    else {
+      initialStateOfFavorite = true
+    }
 
-    let id = 2;
-    const { data: userWanted, isPendings, errors } = useFetch(
-        "http://localhost:8000/userList/" + id
-    );
-
-    const [starred, setStarred] = useState(false);
+    const [starred, setStarred] = useState(initialStateOfFavorite);
     const handleStarClick = () => {
-        if (starred === false) {
-            setStarred(true)
-            userWanted && userWanted.favoriteProjectList.indexOf(id)
+        if (starred === true) {
+            setStarred(false)
+            let index = user.favoriteProjectList.indexOf(projectInfo.id)
+            if (index > -1) {
+              user.favoriteProjectList.splice(index, 1);
+          }
         }
         else {
-            let index;
-            userWanted && userWanted.favoriteProjectList ? index = userWanted.favoriteProjectList.push(id) : index = -1;
-            if (index > -1) {
-                userWanted.favoriteProjectList.splice(index, 1);
-            }
-            setStarred(false)
+            user.favoriteProjectList.push(projectInfo.id);
+            setStarred(true)
         }
 
-        fetch(`http://localhost:8000/userList/${id}`, {
+        fetch(`http://localhost:8000/userList/${user.id}`, {
             method: "PUT",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(userWanted),
+            body: JSON.stringify(user),
         }).then((result) => {
             return result.json();
         });
->>>>>>> ecf2ab3c12c04ee78fec9e1d7dc4c7270dd17a8c
     }
 
-    fetch(`http://localhost:8000/userList/${id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userWanted),
-    }).then((result) => {
-      return result.json();
-    });
-  };
   const handleProfileClickedInside = (event) => {
     event.stopPropagation();
     setIsProfileClicked(true);

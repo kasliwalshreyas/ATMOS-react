@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 40%;
+    height: 350px;
     border-radius: 4px;
     border: 1px solid;
     transition: 0.3s;
-    margin-left: 30px;
+    margin: 15px 35px 15px 35px;
     border: 1px solid rgba(206, 201, 201, 0.7);
 }
 
@@ -16,6 +17,7 @@
 
 .recentHeaddiv {
     display: flex;
+    border-bottom: 1px solid rgba(206, 201, 201, 0.7);
 }
 
 .projectHead {
@@ -28,7 +30,6 @@
 .recentListdiv {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(206, 201, 201, 0.7);
 }
 
 .particularProjectName {
@@ -39,19 +40,25 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
     opacity: 0.8;
     font-size: 14px;
+    display: flex;
 }
 
 .particularProjectName:hover {
     border-bottom: 1px solid rgba(206, 201, 201, 0.9);
-    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
     background-color: #F9F9F9;
 }
 
 .lastUsedTime {
     font-family: 'Hind Siliguri', sans-serif;
-    min-width: 23vw;
-    margin-left: 23vw;
-    width: 100%;
+    /* min-width: 23vw; */
+    width: 25%;
+}
+
+.lastUsedName {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    opacity: 0.8;
+    font-size: 14px;
+    width: 75%;
 }
 
 .projectsCategory {
