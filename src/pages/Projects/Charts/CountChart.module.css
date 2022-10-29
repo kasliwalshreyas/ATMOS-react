@@ -72,6 +72,8 @@
 .containerHead {
     display: flex;
     flex-direction: row;
+
+    background-color: white;
 }
 
 .headIcon {
@@ -94,6 +96,8 @@
     margin-left: 10px;
     font-weight: bolder;
     font-size: 0.8rem;
+
+    background-color: white;
     /* color: white !important; */
 }
 
@@ -105,6 +109,8 @@
     padding: 10px;
     font-weight: bolder;
     font-size: 2rem;
+
+    background-color: white;
 }
 
 .containerFoot {
@@ -114,15 +120,21 @@
     align-items: center;
     /* font-weight: bolder; */
     font-size: 0.8rem;
-    opacity: 0.7;
+    opacity: 1;
     /* font-weight: 10; */
-    color: white !important;
+    /* color: white !important; */
+
+    background-color: white;
 }
 
 .para {
     margin-bottom: 0;
+
+    background-color: white;
 }
 
 .containerFoot p span {
     font-weight: 700;
+
+    background-color: white;
 }
