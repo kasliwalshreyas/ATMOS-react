@@ -4,7 +4,10 @@ import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
+<<<<<<< HEAD
 // import { copyFileSync } from "fs";
+=======
+>>>>>>> 903b834 (fixed validation)
 
 const ProjectInfo = ({
   isProfileClicked,
