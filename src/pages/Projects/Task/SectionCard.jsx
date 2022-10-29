@@ -5,7 +5,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 
 
-const SectionCard = ({ createTask, error, taskList, expandModal, section: sectionInfo, rerender, setRerender }) => {
+const SectionCard = ({ createTask, error, taskList, expandModal, section: sectionInfo, rerender, setRerender, projectInfo }) => {
 
     // console.log("section", sectionInfo);
     // console.log("taskList", taskList);
@@ -83,18 +83,52 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
 
     async function deleteSection(sectionID) {
 
+        //delete task inside section
         for (let i = 0; i < taskList.length; i++) {
             // console.log("inside delete section", i);
             let res3 = await deleteTask(taskList[i].id, taskList[i].taskAssignee);
         }
 
+        //delete section
         const res = await fetch(`http://localhost:8000/sectionList/${sectionID}`, {
             method: 'DELETE'
         })
-            .then(() => {
+            .then((res) => {
                 console.log('Section Deleted');
-                setRerender(!rerender);
+                return res.json();
             })
+
+        console.log(res, 'section...')
+        //update project sectionIDList
+        const projectData = JSON.parse(JSON.stringify(projectInfo));
+        for (let i = 0; i < projectData.highAccess.length; i++) {
+            projectData.highAccess[i] = projectInfo.highAccess[i].id;
+        }
+        for (let i = 0; i < projectData.mediumAccess.length; i++) {
+            projectData.mediumAccess[i] = projectInfo.mediumAccess[i].id;
+        }
+        for (let i = 0; i < projectData.lowAccess.length; i++) {
+            projectData.lowAccess[i] = projectInfo.lowAccess[i].id;
+        }
+
+        projectInfo.sectionIDList = projectInfo.sectionIDList.filter((sectionid) => { return !(sectionid === sectionID) });
+        projectData.sectionIDList = projectData.sectionIDList.filter((sectionid) => { return !(sectionid === sectionID) });
+        const res2 = await fetch(`http://localhost:8000/projectList/${sectionInfo.projectId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(projectData)
+        })
+            .then((response) => {
+                return response.json()
+            }
+            )
+            .then((project) => {
+                console.log(project, 'Project Updated');
+                setRerender(!rerender);
+                return project;
+            }
+            )
+
     }
 
 

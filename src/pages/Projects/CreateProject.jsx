@@ -9,7 +9,7 @@ const CreateProject = () => {
   const [projectName, setProjectName] = useState("");
   const [type, setType] = useState("");
   const [isPending, setIsPending] = useState(false);
-  const [sectionIDList, setsectionIDList] = useState("");
+  const [sectionIDList, setsectionIDList] = useState([]);
   const history = useNavigate();
   const [nextPage, setnextPage] = useState(1);
   const [projectStatement, setProjectStatement] = useState("");

@@ -80,7 +80,7 @@ const MainView = ({ overview, board, charts }) => {
         isProfileClicked={isProfileClicked}
         setIsProfileClicked={setIsProfileClicked}
       ></ProjectInfo>)}
-      <FilterFunc></FilterFunc>
+      {/* <FilterFunc></FilterFunc>s */}
       {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></OverView>}
       {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></SectionArena>}
       {charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo}></Charts>}
