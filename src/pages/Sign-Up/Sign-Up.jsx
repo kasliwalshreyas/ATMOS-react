@@ -59,10 +59,6 @@ function SignUp() {
             setFormValid(false);
             setPasswordError("Passwords do not match");
         }
-        else{
-            setPasswordError("");
-            setFormValid(true);
-        }
         return formIsValid;
     }
     
