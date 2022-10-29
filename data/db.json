@@ -16,8 +16,7 @@
         10,
         11,
         23,
-        25,
-        24
+        25
       ],
       "id": 1
     },
@@ -41,7 +40,9 @@
       "emailId": "kasliwalshreyas3@gmail.com",
       "projectIDList": [
         1,
-        2
+        2,
+        5,
+        4
       ],
       "taskAssignedIDList": [],
       "id": 3
@@ -51,9 +52,13 @@
       "emailId": "kasliwalshreyas4@gmail.com",
       "projectIDList": [
         1,
-        2
+        2,
+        6
       ],
-      "taskAssignedIDList": [],
+      "taskAssignedIDList": [
+        24,
+        26
+      ],
       "id": 4
     },
     {
@@ -119,7 +124,7 @@
         3
       ],
       "id": 2,
-      "lastUsed": "2022-10-29T09:40:22.167Z"
+      "lastUsed": "2022-10-29T20:44:05.287Z"
     },
     {
       "projectName": "ABCD",
@@ -128,7 +133,7 @@
       "projectStatement": "To learn",
       "projectMission": "Yes u can do it",
       "projectDescription": "Later babes!!!",
-      "lastUsed": "2022-10-29T09:39:59.688Z",
+      "lastUsed": "2022-10-29T19:11:45.242Z",
       "projectGuidelines": "more details will follow later😜",
       "userId": 1,
       "highAccess": [
@@ -152,9 +157,71 @@
       "highAccess": [
         1
       ],
-      "mediumAccess": [],
+      "mediumAccess": [
+        3
+      ],
       "lowAccess": [],
       "id": 4
+    },
+    {
+      "projectName": "Shubham",
+      "type": "",
+      "sectionIDList": [
+        8
+      ],
+      "projectStatement": "dbhjasbd sad ska d",
+      "projectMission": "dvds f fvd",
+      "projectDescription": "",
+      "lastUsed": "2022-10-29T19:10:39.268Z",
+      "projectGuidelines": "",
+      "userId": 1,
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [
+        3
+      ],
+      "lowAccess": [],
+      "id": 5
+    },
+    {
+      "projectName": "ABCDE",
+      "type": "",
+      "sectionIDList": [
+        9,
+        10
+      ],
+      "projectStatement": "xbc  d",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-29T20:44:25.987Z",
+      "projectGuidelines": "",
+      "userId": 1,
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [],
+      "lowAccess": [
+        4
+      ],
+      "id": 6
+    },
+    {
+      "projectName": "fsvxvdvx",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-29T20:41:01.873Z",
+      "projectGuidelines": "",
+      "userId": 1,
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 7
     }
   ],
   "sectionList": [
@@ -203,6 +270,28 @@
         25
       ],
       "id": 7
+    },
+    {
+      "sectionName": "Shubham's section",
+      "projectId": 5,
+      "taskIDList": [],
+      "id": 8
+    },
+    {
+      "sectionName": "Frontend",
+      "projectId": 6,
+      "taskIDList": [
+        26
+      ],
+      "id": 9
+    },
+    {
+      "sectionName": "Backend",
+      "projectId": 6,
+      "taskIDList": [
+        27
+      ],
+      "id": 10
     }
   ],
   "taskList": [
@@ -369,7 +458,7 @@
     {
       "taskName": "Hi, It's Me",
       "taskCompletion": true,
-      "taskAssignee": 1,
+      "taskAssignee": 4,
       "taskPriority": "high",
       "taskStatus": "at-risk",
       "taskDeadline": "2022-10-30",
@@ -385,6 +474,26 @@
       "taskDeadline": null,
       "taskDescription": null,
       "id": 25
+    },
+    {
+      "taskName": "CSS",
+      "taskCompletion": false,
+      "taskAssignee": 4,
+      "taskPriority": "medium",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-31",
+      "taskDescription": "fcbc ",
+      "id": 26
+    },
+    {
+      "taskName": "s",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": null,
+      "taskDescription": null,
+      "id": 27
     }
   ]
 }

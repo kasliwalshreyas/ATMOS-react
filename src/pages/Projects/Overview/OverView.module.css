@@ -10,11 +10,15 @@
     width: 100%;
     /* margin-bottom: 10px; */
 
-    background-color: #8ee4af;
     /* background-color: #05386b; */
     /* background-color: #9fedd7; */
     /* background-color: rgb(234, 234, 241); */
     /* background-color: #5CDB95; */
+
+    /* background-color: #8ee4af; */
+    background-color: #efeeef;
+
+
 }
 
 .descriptionArena {
@@ -34,7 +38,11 @@
     /* background-color: white; */
     /* background-color: #f8fafb; */
     /* background-color: inherit; */
-    background-color: #5cdb95;
+
+    /* background-color: #5cdb95; */
+    background-color: #d3d0d3;
+
+
 }
 
 /* .descriptionArena:hover {

@@ -55,8 +55,10 @@
     flex-direction: row;
     /* width: 250px; */
     /* height: 250px; */
+    border-radius: 8px;
+    padding: 10px;
 
-    background-color: inherit;
+    background-color: #edf5e1;
 }
 
 .sectionWiseArena {

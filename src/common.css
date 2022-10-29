@@ -11,10 +11,13 @@
     /* background-color: rgb(38, 36, 36);
     color: white; */
     /* background-color: #f8fafb; */
-    color: #05386b;
+    /* color: #05386b; */
+    /* color: white; */
+    color: black;
 }
 
 a {
     text-decoration: none !important;
-    color: #05386b !important;
+    /* color: #05386b !important; */
+    color: white !important;
 }
