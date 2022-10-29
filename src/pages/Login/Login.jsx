@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Card, Container } from "react-bootstrap";
-import {Button} from "react-bootstrap";
-import {FloatingLabel} from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { FloatingLabel } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import {Row} from "react-bootstrap";
-import {Col} from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 import styles from './Login.module.css';
 // import useFetch from "../../useFetch";
@@ -32,7 +32,7 @@ function Login() {
                     console.log(data);
                     if (bcrypt.compareSync(password, data[0].password)) {
                         localStorage.setItem("user", JSON.stringify(data[0]));
-                        navigate('/projects');
+                        navigate('/');
                     }
                     else {
                         alert("Incorrect password!");
@@ -40,9 +40,9 @@ function Login() {
                 }
             })
     };
-    
-    return(
-        <Container className = {styles.container}>
+
+    return (
+        <Container className={styles.container}>
             <Row className={styles.row}>
                 <Col xs={12} md={5} lg={6} className="d-flex flex-column justify-content-center align-items-center">
                     <h1 className="my-3 ms-1 display-3 fw-bold ls-tight px-3">
@@ -94,7 +94,7 @@ function Login() {
                 </Col>
 
             </Row>
-                
+
         </Container>
     );
 }
