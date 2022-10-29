@@ -338,12 +338,12 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
         <div>
             <Modal show={show} onHide={closeModal} className='task-modal'>
                 {/* {console.log(props.show)} */}
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='task-modal-header'>
                     <Modal.Title className='task-path-text'>{projectInfo.projectName}/{sectionInfo.sectionName}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='task-modal-body'>
                     <table className='task-modal-table'>
-                        <tbody>
+                        <tbody className='task-modal-table-body'>
                             <tr className='task-modal-table-row'>
                                 <td className='task-modal-table-data'>Task</td>
                                 <td className='task-modal-table-data'>
@@ -363,27 +363,33 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             option: (provided, state) => ({
                                                 ...provided,
                                                 // border: '1px solid #ccc',
-                                                color: 'black',
-                                                backgroundColor: state.isSelected ? 'gray' : 'white',
-                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                color: '#05386b',
+                                                backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
+                                                backgroundColor: state.isFocused ? '#d3f4a2' : '#edf5e1',
                                                 ':active': {
-                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
                                                     // border: '1px solid #ccc'
                                                 },
                                                 padding: 10
                                             }),
                                             control: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
                                                 border: '1px solid #ccc',
                                                 width: 'fit-content',
                                                 minWidth: 'max-content',
                                                 boxShadow: 'none',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 ':hover': {
                                                     border: '1px solid #ccc'
                                                 }
                                             }),
                                             container: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#d3f4a2',
                                                 // display: 'inline-flex',
                                                 // flexDirection: 'row',
                                                 // marginRight: 20
@@ -391,12 +397,54 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             valueContainer: (provided, state) => ({
                                                 ...provided,
-                                                width: '250px'
+                                                display: 'flex',
+                                                width: '250px',
+                                                color: 'black',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 // width: 'fit-content',
                                                 // minWidth: 'max-content',
 
 
-                                            })
+                                            }),
+                                            singleValue: (provided, state) => ({
+                                                ...provided,
+                                                color: '#05386b',
+                                                // zIndex: 1,
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            input: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            indicatorsContainer: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            dropdownIndicator: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                                "svg": {
+                                                    backgroundColor: "#edf5e1",
+                                                }
+                                            }),
+                                            menu: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            menuList: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+
+
+
 
                                         }}
                                     />
@@ -419,27 +467,33 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             option: (provided, state) => ({
                                                 ...provided,
                                                 // border: '1px solid #ccc',
-                                                color: 'black',
-                                                backgroundColor: state.isSelected ? 'gray' : 'white',
-                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                color: '#05386b',
+                                                backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
+                                                backgroundColor: state.isFocused ? '#d3f4a2' : '#edf5e1',
                                                 ':active': {
-                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
                                                     // border: '1px solid #ccc'
                                                 },
                                                 padding: 10
                                             }),
                                             control: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
                                                 border: '1px solid #ccc',
                                                 width: 'fit-content',
                                                 minWidth: 'max-content',
                                                 boxShadow: 'none',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 ':hover': {
                                                     border: '1px solid #ccc'
                                                 }
                                             }),
                                             container: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#d3f4a2',
                                                 // display: 'inline-flex',
                                                 // flexDirection: 'row',
                                                 // marginRight: 20
@@ -447,12 +501,55 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             valueContainer: (provided, state) => ({
                                                 ...provided,
-                                                width: '250px'
+                                                display: 'flex',
+                                                width: '250px',
+                                                color: 'black',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 // width: 'fit-content',
                                                 // minWidth: 'max-content',
 
 
-                                            })
+                                            }),
+                                            singleValue: (provided, state) => ({
+                                                ...provided,
+                                                color: '#05386b',
+                                                // zIndex: 1,
+
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            input: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            indicatorsContainer: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            dropdownIndicator: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                                "svg": {
+                                                    backgroundColor: "#edf5e1",
+                                                }
+                                            }),
+                                            menu: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            menuList: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+
+
+
 
                                         }}
 
@@ -472,11 +569,11 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             option: (provided, state) => ({
                                                 ...provided,
                                                 // border: '1px solid #ccc',
-                                                color: 'black',
-                                                backgroundColor: state.isSelected ? 'gray' : 'white',
-                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                color: '#05386b',
+                                                backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
+                                                backgroundColor: state.isFocused ? '#d3f4a2' : '#edf5e1',
                                                 ':active': {
-                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
                                                     // border: '1px solid #ccc'
                                                 },
                                                 padding: 10
@@ -488,6 +585,9 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                                 width: 'fit-content',
                                                 minWidth: 'max-content',
                                                 boxShadow: 'none',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 ':hover': {
                                                     border: '1px solid #ccc'
                                                 }
@@ -495,6 +595,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             container: (provided, state) => ({
                                                 ...provided,
                                                 color: 'black',
+                                                backgroundColor: '#d3f4a2',
                                                 // display: 'inline-flex',
                                                 // flexDirection: 'row',
                                                 // marginRight: 20
@@ -502,8 +603,12 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             valueContainer: (provided, state) => ({
                                                 ...provided,
+                                                display: 'flex',
                                                 width: '250px',
-                                                color: 'black'
+                                                color: 'black',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 // width: 'fit-content',
                                                 // minWidth: 'max-content',
 
@@ -511,8 +616,41 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             singleValue: (provided, state) => ({
                                                 ...provided,
-                                                color: 'black'
-                                            })
+                                                color: '#05386b',
+                                                // zIndex: 1,
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            input: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            indicatorsContainer: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            dropdownIndicator: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                                "svg": {
+                                                    backgroundColor: "#edf5e1",
+                                                }
+                                            }),
+                                            menu: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            menuList: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+
+
+
 
                                         }}
                                     />
@@ -537,27 +675,33 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             option: (provided, state) => ({
                                                 ...provided,
                                                 // border: '1px solid #ccc',
-                                                color: 'black',
-                                                backgroundColor: state.isSelected ? 'gray' : 'white',
-                                                backgroundColor: state.isFocused ? 'lightgray' : 'white',
+                                                color: '#05386b',
+                                                backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
+                                                backgroundColor: state.isFocused ? '#d3f4a2' : '#edf5e1',
                                                 ':active': {
-                                                    backgroundColor: state.isSelected ? 'lightgray' : 'white',
+                                                    backgroundColor: state.isSelected ? '#d3f4a2' : '#edf5e1',
                                                     // border: '1px solid #ccc'
                                                 },
                                                 padding: 10
                                             }),
                                             control: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
                                                 border: '1px solid #ccc',
                                                 width: 'fit-content',
                                                 minWidth: 'max-content',
                                                 boxShadow: 'none',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 ':hover': {
                                                     border: '1px solid #ccc'
                                                 }
                                             }),
                                             container: (provided, state) => ({
                                                 ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#d3f4a2',
                                                 // display: 'inline-flex',
                                                 // flexDirection: 'row',
                                                 // marginRight: 20
@@ -565,12 +709,55 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                                             }),
                                             valueContainer: (provided, state) => ({
                                                 ...provided,
-                                                width: '250px'
+                                                display: 'flex',
+                                                width: '250px',
+                                                color: 'black',
+
+                                                backgroundColor: '#edf5e1',
+
                                                 // width: 'fit-content',
                                                 // minWidth: 'max-content',
 
 
-                                            })
+                                            }),
+                                            singleValue: (provided, state) => ({
+                                                ...provided,
+                                                color: '#05386b',
+                                                // zIndex: 1,
+
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            input: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            indicatorsContainer: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            dropdownIndicator: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                                "svg": {
+                                                    backgroundColor: "#edf5e1",
+                                                }
+                                            }),
+                                            menu: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+                                            menuList: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black',
+                                                backgroundColor: '#edf5e1',
+                                            }),
+
+
+
 
                                         }}
                                     />
@@ -601,7 +788,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                     </Nav>
                     <hr className='task-modal-line-below-nav'></hr>
                     {description &&
-                        <div>
+                        <div className='task-modal-description-div'>
                             <textarea className='task-modal-description' value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} rows={5} placeholder="describe your task for your team members" ></textarea>
                         </div>}
                     {comments &&
@@ -617,7 +804,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
 
                     {/* To Do: Make description active */}
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className='task-modal-footer'>
                     <Button variant="primary" onClick={() => {
                         // console.log(taskInfo) 
                         // console.log(props.taskInfo)

@@ -10,12 +10,11 @@
     /* background-color: #77A6F7; */
     /* background-color: rgb(38, 36, 36);
     color: white; */
-    background-color: #f8fafb;
-
-
+    /* background-color: #f8fafb; */
+    color: #05386b;
 }
 
 a {
     text-decoration: none !important;
-    color: black !important;
+    color: #05386b !important;
 }

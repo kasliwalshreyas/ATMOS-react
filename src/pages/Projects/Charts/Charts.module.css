@@ -2,16 +2,18 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* background-color: rgb(234, 234, 241); */
-    min-height: 75vh;
-    max-height: max-content;
+    padding: 20px 20px 40px 20px;
+    /* border: 1px solid; */
+    /* border-radius: 1px; */
+    overflow-x: auto;
+    min-height: 76vh;
     width: 100%;
     padding: 20px;
-    /* margin-bottom: 10px; */
+
+    background-color: #8ee4af;
+    /* background-color: #05386b; */
     /* background-color: #5CDB95; */
-    background-color: #f8fafb;
-
-
+    /* background-color: #f8fafb; */
 }
 
 .chartArena {
@@ -28,6 +30,8 @@
     padding: 10px 5px 10px 5px;
     margin: 5px 5px 5px 5px;
 
+    background-color: #5cdb95;
+
 }
 
 .arenaHeading {
@@ -37,6 +41,13 @@
     margin-bottom: 10px;
     /* background-color: rgba(215, 208, 208, 0.2); */
     border-radius: 5px 5px 5px 5px;
+
+    background-color: inherit;
+}
+
+.arenaHeading h3 {
+
+    background-color: inherit;
 }
 
 .arenaBody {
@@ -44,6 +55,8 @@
     flex-direction: row;
     /* width: 250px; */
     /* height: 250px; */
+
+    background-color: inherit;
 }
 
 .sectionWiseArena {
