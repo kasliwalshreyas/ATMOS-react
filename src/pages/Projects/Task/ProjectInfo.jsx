@@ -4,44 +4,47 @@ import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
-import { copyFileSync } from "fs";
+// import { copyFileSync } from "fs";
 
-const ProjectInfo = ({ isProfileClicked, setIsProfileClicked, projectInfo, setProjectInfo }) => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+const ProjectInfo = ({
+  isProfileClicked,
+  setIsProfileClicked,
+  projectInfo,
+  setProjectInfo,
+}) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-    let initialStateOfFavorite;
-    if(user.favoriteProjectList.indexOf(projectInfo.id) == -1) {
-      initialStateOfFavorite = false
+  let initialStateOfFavorite;
+  if (user.favoriteProjectList.indexOf(projectInfo.id) == -1) {
+    initialStateOfFavorite = false;
+  } else {
+    initialStateOfFavorite = true;
+  }
+
+  const [starred, setStarred] = useState(initialStateOfFavorite);
+  const handleStarClick = () => {
+    if (starred === true) {
+      setStarred(false);
+      let index = user.favoriteProjectList.indexOf(projectInfo.id);
+      if (index > -1) {
+        user.favoriteProjectList.splice(index, 1);
+      }
+    } else {
+      user.favoriteProjectList.push(projectInfo.id);
+      setStarred(true);
     }
-    else {
-      initialStateOfFavorite = true
-    }
 
-    const [starred, setStarred] = useState(initialStateOfFavorite);
-    const handleStarClick = () => {
-        if (starred === true) {
-            setStarred(false)
-            let index = user.favoriteProjectList.indexOf(projectInfo.id)
-            if (index > -1) {
-              user.favoriteProjectList.splice(index, 1);
-          }
-        }
-        else {
-            user.favoriteProjectList.push(projectInfo.id);
-            setStarred(true)
-        }
-
-        fetch(`http://localhost:8000/userList/${user.id}`, {
-            method: "PUT",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        }).then((result) => {
-            return result.json();
-        });
-    }
+    fetch(`http://localhost:8000/userList/${user.id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then((result) => {
+      return result.json();
+    });
+  };
 
   const handleProfileClickedInside = (event) => {
     event.stopPropagation();

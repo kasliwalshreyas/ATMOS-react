@@ -110,6 +110,15 @@
       "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
       "userName": "Akash",
       "id": 7
+    },
+    {
+      "emailId": "dushyantist@gmail.com",
+      "password": "$2a$10$l9YkjgJiNhh1LNkQjWz5IuzYk6JTwnaphNJNWvvC1bIAsKQ2tCTl.",
+      "userName": "Weirdo",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 8
     }
   ],
   "projectList": [
@@ -208,7 +217,7 @@
       "projectStatement": "Project Statement",
       "projectMission": "Mission",
       "projectDescription": "Description",
-      "lastUsed": "2022-10-29T05:58:02.280Z",
+      "lastUsed": "2022-10-29T18:42:40.199Z",
       "projectGuidelines": "Guidlines",
       "userId": 1,
       "highAccess": [

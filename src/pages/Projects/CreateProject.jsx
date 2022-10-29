@@ -51,7 +51,7 @@ const CreateProject = () => {
     }).then(() => {
       setIsPending(false);
       setnextPage(1);
-      console.log(nextPage);
+      // console.log(nextPage);
       history("/Projects");
     });
   };
