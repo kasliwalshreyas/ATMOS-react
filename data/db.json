@@ -60,7 +60,8 @@
         1,
         2,
         5,
-        4
+        4,
+        8
       ],
       "taskAssignedIDList": [
         1
@@ -78,7 +79,8 @@
       "projectIDList": [
         1,
         2,
-        6
+        6,
+        8
       ],
       "taskAssignedIDList": [
         24,
@@ -103,22 +105,12 @@
       "id": 5
     },
     {
-      "emailId": "akash@gmail.com",
-      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
-      "userName": "Akash",
-      "id": 6
-    },
-    {
-      "emailId": "akash123@gmail.com",
-      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
-      "userName": "Akash",
-      "id": 7
-    },
-    {
       "emailId": "dushyantist@gmail.com",
       "password": "$2a$10$l9YkjgJiNhh1LNkQjWz5IuzYk6JTwnaphNJNWvvC1bIAsKQ2tCTl.",
       "userName": "Weirdo",
-      "projectIDList": [],
+      "projectIDList": [
+        8
+      ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 8
@@ -130,8 +122,14 @@
       "projectIDList": [
         8
       ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [],
+      "favoriteProjectList": [
+        8
+      ],
+      "taskAssignedIDList": [
+        28,
+        29,
+        30
+      ],
       "id": 9
     }
   ],
@@ -289,18 +287,26 @@
     {
       "projectName": "First Project",
       "type": "",
-      "sectionIDList": [],
+      "sectionIDList": [
+        11,
+        12
+      ],
       "projectStatement": "First Project",
       "projectMission": "First Project",
       "projectDescription": "First Project",
-      "lastUsed": "2022-10-29T21:22:29.445Z",
+      "lastUsed": "2022-10-29T22:42:16.750Z",
       "projectGuidelines": "First Project",
       "userId": 9,
       "highAccess": [
-        9
+        9,
+        3
       ],
-      "mediumAccess": [],
-      "lowAccess": [],
+      "mediumAccess": [
+        4
+      ],
+      "lowAccess": [
+        8
+      ],
       "id": 8
     }
   ],
@@ -375,6 +381,23 @@
         27
       ],
       "id": 10
+    },
+    {
+      "sectionName": "First Section",
+      "projectId": 8,
+      "taskIDList": [
+        28,
+        29
+      ],
+      "id": 11
+    },
+    {
+      "sectionName": "Second Section",
+      "projectId": 8,
+      "taskIDList": [
+        30
+      ],
+      "id": 12
     }
   ],
   "taskList": [
@@ -577,6 +600,36 @@
       "taskDeadline": null,
       "taskDescription": null,
       "id": 27
+    },
+    {
+      "taskName": "Task 1",
+      "taskCompletion": false,
+      "taskAssignee": 9,
+      "taskPriority": "high",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-31",
+      "taskDescription": "dv f f fvsdv sdvsd",
+      "id": 28
+    },
+    {
+      "taskName": "Task 2",
+      "taskCompletion": true,
+      "taskAssignee": 9,
+      "taskPriority": "low",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-11-01",
+      "taskDescription": null,
+      "id": 29
+    },
+    {
+      "taskName": "Task 3",
+      "taskCompletion": true,
+      "taskAssignee": 9,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-10-31",
+      "taskDescription": null,
+      "id": 30
     }
   ]
 }

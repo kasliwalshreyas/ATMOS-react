@@ -12,11 +12,11 @@ import Login from "./pages/Login/Login";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
-
+  // const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("userID")));
 
   // useEffect(() => {
 
-  //   fetch('http://localhost:8000/userList/1')
+  //   fetch('http://localhost:8000/userList/' + userId)
   //     .then(res => {
   //       return res.json();
   //     })
