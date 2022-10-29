@@ -1,24 +1,28 @@
 .main-view {
   display: flex;
   height: 100vh;
-  width: 100vw;
+  width: 90vw;
 }
 
 .paraChanges {
   margin-bottom: 0 !important;
+
+  background-color: inherit;
 }
 
 .project-info {
   display: flex;
-  padding: 20px;
-  width: 100vw;
+  padding: 1vw 2vw;
+  /* margin: 20px; */
+  width: 100%;
   height: 24vh;
   flex-direction: column;
   /* margin-bottom: 5px; */
   /* padding-bottom: 5px; */
 
-  background-color: #5CDB95;
-
+  /* background-color: #5CDB95; */
+  /* background-color: #05386b; */
+  background-color: #8ee4af;
 
 
 }
@@ -144,6 +148,14 @@
   background-color: inherit;
 }
 
+/* .user-profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 45%;
+
+  background-color: inherit;
+} */
+
 
 
 .user-profile-dropdown-btn {
@@ -244,13 +256,14 @@
 .section-arena {
   display: flex;
   flex-direction: row;
-  padding: 20px;
+  padding: 20px 20px 40px 20px;
   /* border: 1px solid; */
   /* border-radius: 1px; */
   overflow-x: auto;
 
-
-  background-color: #5CDB95;
+  background-color: #8ee4af;
+  /* background-color: #05386b; */
+  /* background-color: #5CDB95; */
 
 }
 
@@ -265,9 +278,12 @@
   /* height: 500px; */
   min-width: 315px;
   /* background-color: rgb(0, 136, 255); */
+  border-radius: 5px;
 
 
-  background-color: inherit;
+  /* background-color: inherit; */
+  /* background-color: #EDF5E1; */
+  background-color: #5cdb95;
 }
 
 .section-head {
@@ -396,6 +412,9 @@
   background-color: rgba(248, 248, 249, 255);
   height: fit-content;
   min-width: 300px;
+
+
+  background-color: #5cdb95;
 }
 
 .add-section-div p {
@@ -406,6 +425,8 @@
 
 .add-section-img {
   height: 3vh;
+
+  background-color: inherit;
 }
 
 .task-arena {
@@ -429,10 +450,13 @@
   border-radius: 5px;
   padding: 10px 5px 10px 5px;
   margin: 5px 0;
-  background-color: white;
   box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
 
-  background-color: white;
+
+  /* background-color: white; */
+  /* background-color: #8ee4af; */
+  background-color: #edf5e1;
+
 }
 
 .task-head {
@@ -688,6 +712,8 @@
 
 .add-task-img-2 {
   width: 20px;
+
+  background-color: inherit;
 }
 
 .add-task-div {
@@ -698,12 +724,19 @@
   border-radius: 5px;
   padding: 10px 5px 10px 5px;
   margin: 5px 0;
-  background-color: rgba(248, 248, 249, 255);
+  /* background-color: rgba(248, 248, 249, 255); */
   /* box-shadow: 0 5px 10px rgba(0,0,0,.1); */
+
+  /* background-color: inherit; */
+  background-color: #eaf7d6;
+
+
 }
 
 .add-task-div p {
   align-self: center;
   font-size: 10px;
   font-weight: 700;
+
+  background-color: inherit;
 }
