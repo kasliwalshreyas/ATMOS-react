@@ -15,7 +15,7 @@ const Rightdiv = () => {
 
     return (
         <div className="right">
-            <img className="project-img" src={`./images/imgProject/business${time % 16}.jpg`} />
+            <img className="project-img" alt="right-div" src={`./images/imgProject/business${time % 16}.jpg`} />
         </div>
     )
 }

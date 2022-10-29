@@ -5,9 +5,23 @@
       "emailId": "kasliwalshreyas@gmail.com",
       "projectIDList": [
         1,
+        5,
         2
       ],
       "taskAssignedIDList": [
+        3,
+        9,
+        10,
+        8,
+        26,
+        28,
+        29,
+        30
+      ],
+      "favoriteProjectList": [
+        1,
+        5,
+        4,
         18,
         17,
         19,
@@ -25,10 +39,14 @@
       "emailId": "kasliwalshreyas2@gmail.com",
       "projectIDList": [
         2,
+        1
+      ],
+      "taskAssignedIDList": [
+        11,
+        27,
         1,
         3
       ],
-      "taskAssignedIDList": [],
       "favoriteProjectList": [
         1,
         2
@@ -37,14 +55,21 @@
     },
     {
       "userName": "Akash Yadav",
-      "emailId": "kasliwalshreyas3@gmail.com",
+      "emailId": "kasliwalshreyas2@gmail.com",
       "projectIDList": [
         1,
         2,
         5,
         4
       ],
-      "taskAssignedIDList": [],
+      "taskAssignedIDList": [
+        1
+      ],
+      "favoriteProjectList": [
+        3,
+        4,
+        5
+      ],
       "id": 3
     },
     {
@@ -59,6 +84,9 @@
         24,
         26
       ],
+      "favoriteProjectList": [
+        3
+      ],
       "id": 4
     },
     {
@@ -69,7 +97,31 @@
         2
       ],
       "taskAssignedIDList": [],
+      "favoriteProjectList": [
+        4
+      ],
       "id": 5
+    },
+    {
+      "emailId": "akash@gmail.com",
+      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
+      "userName": "Akash",
+      "id": 6
+    },
+    {
+      "emailId": "akash123@gmail.com",
+      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
+      "userName": "Akash",
+      "id": 7
+    },
+    {
+      "emailId": "dushyantist@gmail.com",
+      "password": "$2a$10$l9YkjgJiNhh1LNkQjWz5IuzYk6JTwnaphNJNWvvC1bIAsKQ2tCTl.",
+      "userName": "Weirdo",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 8
     }
   ],
   "projectList": [
@@ -98,7 +150,7 @@
         4
       ],
       "id": 1,
-      "lastUsed": "2022-10-29T08:46:14.336Z"
+      "lastUsed": "2022-10-29T05:54:33.837Z"
     },
     {
       "projectName": "FSD",
@@ -124,7 +176,7 @@
         3
       ],
       "id": 2,
-      "lastUsed": "2022-10-29T20:44:05.287Z"
+      "lastUsed": "2022-10-29T18:55:41.525Z"
     },
     {
       "projectName": "ABCD",
@@ -133,7 +185,7 @@
       "projectStatement": "To learn",
       "projectMission": "Yes u can do it",
       "projectDescription": "Later babes!!!",
-      "lastUsed": "2022-10-29T19:11:45.242Z",
+      "lastUsed": "2022-10-28T03:35:50.971Z",
       "projectGuidelines": "more details will follow later😜",
       "userId": 1,
       "highAccess": [
@@ -151,7 +203,7 @@
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-29T08:46:18.744Z",
+      "lastUsed": "2022-10-28T12:31:39.957Z",
       "projectGuidelines": "",
       "userId": 1,
       "highAccess": [
@@ -249,7 +301,8 @@
       "projectId": 2,
       "taskIDList": [
         10,
-        11
+        11,
+        3
       ],
       "id": 5
     },
@@ -267,7 +320,9 @@
       "taskIDList": [
         23,
         24,
-        25
+        25,
+        8,
+        9
       ],
       "id": 7
     },
@@ -296,7 +351,7 @@
   ],
   "taskList": [
     {
-      "taskName": "Make Comment Part Working",
+      "taskName": "WorkTask",
       "taskCompletion": false,
       "taskAssignee": 1,
       "taskPriority": "medium",
@@ -306,62 +361,62 @@
       "id": 3
     },
     {
-      "taskName": null,
+      "taskName": "AttractiveCSS",
       "taskCompletion": false,
-      "taskAssignee": null,
+      "taskAssignee": 1,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
-      "taskDeadline": null,
+      "taskDeadline": "2021-10-16",
       "taskDescription": null,
       "id": 8
     },
     {
-      "taskName": "A",
+      "taskName": "AndroidFrame",
       "taskCompletion": false,
-      "taskAssignee": null,
+      "taskAssignee": 1,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
-      "taskDeadline": null,
+      "taskDeadline": "2022-11-16",
       "taskDescription": null,
       "id": 9
     },
     {
-      "taskName": "Yup",
+      "taskName": "YouthPro",
       "taskCompletion": false,
       "taskAssignee": 1,
       "taskPriority": "low",
       "taskStatus": "on-track",
-      "taskDeadline": "2022-10-26",
+      "taskDeadline": "2022-10-31",
       "taskDescription": null,
       "id": 10
     },
     {
-      "taskName": "Y",
+      "taskName": "Years",
       "taskCompletion": true,
       "taskAssignee": 1,
       "taskPriority": "high",
       "taskStatus": "at-risk",
-      "taskDeadline": null,
+      "taskDeadline": "2022-09-16",
       "taskDescription": null,
       "id": 11
     },
     {
-      "taskName": "Z",
+      "taskName": "Zebrbok",
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-16",
       "taskDescription": null,
       "id": 12
     },
     {
-      "taskName": "ZZ",
+      "taskName": "Zoyol",
       "taskCompletion": false,
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-16",
       "taskDescription": null,
       "id": 13
     },
@@ -371,7 +426,7 @@
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-16",
       "taskDescription": null,
       "id": 14
     },
@@ -381,7 +436,7 @@
       "taskAssignee": null,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-16",
       "taskDescription": null,
       "id": 16
     },
@@ -401,7 +456,7 @@
       "taskAssignee": 1,
       "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-16",
       "taskDescription": "Think about extra Setting features",
       "id": 18
     },
@@ -411,7 +466,7 @@
       "taskAssignee": 1,
       "taskPriority": "medium",
       "taskStatus": "off-track",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-16",
       "taskDescription": "- update description\n- remove particular dialog box",
       "id": 19
     },
@@ -461,17 +516,17 @@
       "taskAssignee": 4,
       "taskPriority": "high",
       "taskStatus": "at-risk",
-      "taskDeadline": "2022-10-30",
+      "taskDeadline": "2022-10-16",
       "taskDescription": null,
       "id": 24
     },
     {
-      "taskName": "Hi",
+      "taskName": "ZeroCent",
       "taskCompletion": false,
       "taskAssignee": 1,
       "taskPriority": "high",
       "taskStatus": "on-track",
-      "taskDeadline": null,
+      "taskDeadline": "2022-10-16",
       "taskDescription": null,
       "id": 25
     },

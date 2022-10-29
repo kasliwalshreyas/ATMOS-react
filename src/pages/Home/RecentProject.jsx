@@ -4,13 +4,10 @@ import useFetch from "../../useFetch";
 import { Link } from "react-router-dom";
 
 const RecentProject = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [showFavorite, setShowFavorite] = useState(false);
   const { data: projects, isPending, error } = useFetch(
     "http://localhost:8000/projectList"
-  );
-  let id = 2;
-  const { data: userWanted, isPendings, errors } = useFetch(
-    "http://localhost:8000/userList/" + id
   );
 
   const handleChange = () => {
@@ -92,6 +89,7 @@ const RecentProject = () => {
 
   const handleLinkClick = (project) => {
     project.lastUsed = new Date();
+    localStorage.setItem("projectId", project.id);
     fetch(`http://localhost:8000/projectList/${project.id}`, {
       method: "PUT",
       headers: {
@@ -132,35 +130,50 @@ const RecentProject = () => {
         {!showFavorite && (
           <div className={styles.recentListdiv}>
             {projects &&
-              projects.map((project) => (
-                <div className={styles.recentParticularProject}>
-                  {late[project.id - 1] !== -1 && (
-                    <Link
-                      onClick={() => {
-                        handleLinkClick(project);
-                      }}
-                      to="/task/overview"
-                      state={{ from: project.id }}
-                    >
-                      <h6 className={styles.particularProjectName}>
-                        {project.projectName}
-                        <span className={styles.lastUsedTime}>
-                          last used: {late[project.id - 1]}
-                        </span>
-                      </h6>
-                    </Link>
-                  )}
+              user.projectIDList.length !== 0 &&
+              projects.map((project) =>
+                user.projectIDList.map(
+                  (projectid) =>
+                    projectid === project.id && (
+                      <div className={styles.recentParticularProject}>
+                        {late[project.id - 1] !== -1 && (
+                          <Link
+                            onClick={() => {
+                              handleLinkClick(project);
+                            }}
+                            to="/task/overview"
+                          >
+                            <h6 className={styles.particularProjectName}>
+                              <div className={styles.lastUsedName}>
+                                {project.projectName}
+                              </div>
+                              <div className={styles.lastUsedTime}>
+                                last used: {late[project.id - 1]}
+                              </div>
+                            </h6>
+                          </Link>
+                        )}
+                      </div>
+                    )
+                )
+              )}
+
+            {user.projectIDList.length === 0 && (
+              <div>
+                <div className={styles.noFavorite}>
+                  You haven't started any Project yet.
                 </div>
-              ))}
+              </div>
+            )}
           </div>
         )}
+
         {showFavorite && (
           <div className={styles.recentListdiv}>
             {projects &&
-              userWanted.favoriteProjectList.length !== 0 &&
-              userWanted.favoriteProjectList &&
+              user.favoriteProjectList &&
               projects.map((project) =>
-                userWanted.favoriteProjectList.map(
+                user.favoriteProjectList.map(
                   (favorite) =>
                     project.id === favorite && (
                       <div className={styles.recentParticularProject}>
@@ -170,13 +183,14 @@ const RecentProject = () => {
                               handleLinkClick(project);
                             }}
                             to="/task/overview"
-                            state={{ from: project.id }}
                           >
                             <h6 className={styles.particularProjectName}>
-                              {project.projectName}
-                              <span className={styles.lastUsedTime}>
+                              <div className={styles.lastUsedName}>
+                                {project.projectName}
+                              </div>
+                              <div className={styles.lastUsedTime}>
                                 last used: {late[project.id - 1]}
-                              </span>
+                              </div>
                             </h6>
                           </Link>
                         }
@@ -184,7 +198,7 @@ const RecentProject = () => {
                     )
                 )
               )}
-            {userWanted.favoriteProjectList.length === 0 && (
+            {user.favoriteProjectList.length === 0 && (
               <div>
                 <div className={styles.noFavorite}>
                   You don't have any favorite project

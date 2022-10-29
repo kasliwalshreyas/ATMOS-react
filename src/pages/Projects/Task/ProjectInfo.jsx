@@ -4,6 +4,10 @@ import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
+<<<<<<< HEAD
+// import { copyFileSync } from "fs";
+=======
+>>>>>>> 903b834 (fixed validation)
 
 const ProjectInfo = ({
   isProfileClicked,
@@ -11,38 +15,40 @@ const ProjectInfo = ({
   projectInfo,
   setProjectInfo,
 }) => {
-  let id = 2;
-  const { data: userWanted, isPendings, errors } = useFetch(
-    "http://localhost:8000/userList/" + id
-  );
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-  const [starred, setStarred] = useState(false);
+  let initialStateOfFavorite;
+  if (user.favoriteProjectList.indexOf(projectInfo.id) == -1) {
+    initialStateOfFavorite = false;
+  } else {
+    initialStateOfFavorite = true;
+  }
+
+  const [starred, setStarred] = useState(initialStateOfFavorite);
   const handleStarClick = () => {
-    if (starred === false) {
-      setStarred(true);
-      userWanted && userWanted.favoriteProjectList.indexOf(id);
-    } else {
-      let index;
-      userWanted && userWanted.favoriteProjectList
-        ? (index = userWanted.favoriteProjectList.push(id))
-        : (index = -1);
-      if (index > -1) {
-        userWanted.favoriteProjectList.splice(index, 1);
-      }
+    if (starred === true) {
       setStarred(false);
+      let index = user.favoriteProjectList.indexOf(projectInfo.id);
+      if (index > -1) {
+        user.favoriteProjectList.splice(index, 1);
+      }
+    } else {
+      user.favoriteProjectList.push(projectInfo.id);
+      setStarred(true);
     }
 
-    fetch(`http://localhost:8000/userList/${id}`, {
+    fetch(`http://localhost:8000/userList/${user.id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userWanted),
+      body: JSON.stringify(user),
     }).then((result) => {
       return result.json();
     });
   };
+
   const handleProfileClickedInside = (event) => {
     event.stopPropagation();
     setIsProfileClicked(true);

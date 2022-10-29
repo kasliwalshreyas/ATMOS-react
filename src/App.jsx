@@ -7,6 +7,8 @@ import Messages from "./pages/Messages/Messages";
 import Notes from "./pages/Notes/Notes";
 import MainView from "./pages/Projects/Task/MainView";
 import CreateProject from "./pages/Projects/CreateProject";
+import SignUp from "./pages/Sign-Up/Sign-Up";
+import Login from "./pages/Login/Login";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
@@ -47,6 +49,8 @@ const App = () => {
               element={<MainView overview />}
             />
             <Route exact path="/task/charts" element={<MainView charts />} />
+            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/login" element={<Login />} />
           </Routes>
         </div>
       </Router>

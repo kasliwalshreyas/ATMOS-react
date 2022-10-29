@@ -3,6 +3,7 @@ import React from "react"
 import styles from "./Home.module.css";
 import Greeting from "./Greeting"
 import RecentProject from "./RecentProject"
+import Priority from "./Priority"
 const Home = () => {
 
   return (
@@ -14,6 +15,7 @@ const Home = () => {
         </div>
         <div className={styles.projectUsedContainer}>
           <RecentProject />
+          <Priority/>
         </div>
       </div>
     </>
