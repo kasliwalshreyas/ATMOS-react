@@ -18,6 +18,9 @@ const Priority = () => {
           <h4 className={styles.TaskHead}>My Priorities</h4>
           <div className={styles.checkTaskStatus}>
             <div
+              style={
+                taskType === 1 ? { borderBottom: "3px solid black" } : {}
+              }
               onClick={() => {
                 handletaskType(1);
               }}
@@ -26,6 +29,9 @@ const Priority = () => {
               Upcoming
             </div>
             <div
+              style={
+                taskType === 2 ? { borderBottom: "3px solid black" } : {}
+              }
               onClick={() => {
                 handletaskType(2);
               }}
@@ -34,6 +40,9 @@ const Priority = () => {
               Overdue
             </div>
             <div
+              style={
+                taskType === 3 ? { borderBottom: "3px solid black" } : {}
+              }
               onClick={() => {
                 handletaskType(3);
               }}

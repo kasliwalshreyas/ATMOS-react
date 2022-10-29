@@ -54,9 +54,9 @@
     content: "";
     position: absolute;
     background-color: black;
-    height: 2px;
+    height: 3px;
     width: 0px;
-    bottom: -2px;
+    bottom: -0.1px;
     transition: 0.2s;
 }
 
