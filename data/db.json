@@ -80,7 +80,8 @@
         1,
         2,
         6,
-        8
+        8,
+        10
       ],
       "taskAssignedIDList": [
         24,
@@ -108,7 +109,9 @@
       "emailId": "akash@gmail.com",
       "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
       "userName": "Akash",
-      "projectIDList": [7],
+      "projectIDList": [
+        9
+      ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 6
@@ -149,6 +152,15 @@
         30
       ],
       "id": 9
+    },
+    {
+      "emailId": "naman@gmail.com",
+      "password": "$2a$10$C3HWma9OJltXsowTMG.eA.vbmX6.sPtoTVHXnD3K5fFiA69T0OKF6",
+      "userName": "Naman Bhatia ",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 10
     }
   ],
   "projectList": [
@@ -343,6 +355,25 @@
       "mediumAccess": [],
       "lowAccess": [],
       "id": 9
+    },
+    {
+      "projectName": "Something",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T05:38:50.822Z",
+      "projectGuidelines": "",
+      "userId": 6,
+      "highAccess": [
+        6
+      ],
+      "mediumAccess": [
+        4
+      ],
+      "lowAccess": [],
+      "id": 10
     }
   ],
   "sectionList": [

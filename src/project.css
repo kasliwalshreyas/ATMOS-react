@@ -2,7 +2,14 @@
   padding: 20px;
   display: flex;
   border-bottom: 1px solid #f2f2f2;
-  height: 14vh !important;
+  height: fit-content !important;
+}
+
+.navbar .head-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .navbar .head-atmos {
