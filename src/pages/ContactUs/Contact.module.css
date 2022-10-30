@@ -1,0 +1,98 @@
+body {
+    background-color: #86d8ed;
+}
+
+.contactMainView {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    border-radius: 50px;
+    background-color: rgb(23, 23, 78);
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 50%;
+
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 200px;
+}
+
+.contactInfoHead {
+    display: flex;
+    flex-direction: column;
+    text-decoration: aliceblue;
+
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.contactInfoBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 50px;
+}
+
+
+
+.contactInfoFoot {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.contactNumberDiv input:hover {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    border: 2px solid #631ebc;
+
+    border: 2px solid #ff8080;
+
+
+    width: 200px;
+
+    border: 2px solid #631ebc;
+    margin: 10px;
+    padding: 5px 20px 5px 20px;
+
+}
+
+.contactSocialMediaImage {
+    width: 10%;
+    height: 70%
+}
+
+.para {
+    padding-left: 10px;
+    color: white;
+    text-size-adjust: 100px;
+    font-size: large;
+}
+
+.locationicon {
+    width: 40%;
+    height: 60%;
+}
+
+.mailicon {
+    width: 30%;
+    height: 50%;
+}
+
+.phoneicon {
+    width: 30%;
+    height: 50%;
+}

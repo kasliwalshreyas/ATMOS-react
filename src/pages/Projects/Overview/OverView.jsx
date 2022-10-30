@@ -201,6 +201,9 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
             )
           })}
           <div className={styles.addMemberDiv} variant="primary" onClick={handleShow}>
+            {/* <img className={styles.addMemberImg} src="https://img.icons8.com/sf-black-filled/64/000000/plus-math.png" /> */}
+            {/* <img className={styles.addMemberImg} src="https://img.icons8.com/carbon-copy/100/000000/plus-2-math.png" /> */}
+            {/* <img className={styles.addMemberImg} src="https://img.icons8.com/carbon-copy/100/000000/plus-2-math.png" /> */}
             <img className={styles.addMemberImg} src="https://img.icons8.com/sf-regular/48/000000/add.png" />
             <p className={styles.para}>Add Member</p>
           </div>

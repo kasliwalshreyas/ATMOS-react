@@ -3,11 +3,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     /* background-color: rgb(234, 234, 241); */
-    min-height: 75vh;
-    max-height: max-content;
-    padding: 20px;
+    /* max-height: max-content; */
+    /* max-height: max-content; */
+    padding: 20px 20px;
+    width: 100vw;
+    /* width: 98.5vw; */
     /* margin: 20px; */
-    width: 100%;
+    /* width: 100%; */
     /* margin-bottom: 10px; */
 
     /* background-color: #05386b; */
@@ -18,22 +20,23 @@
     /* background-color: #8ee4af; */
     /* background-color: #efeeef; */
     background-color: #f5f5f5;
-
-
 }
 
 .descriptionArena {
+
     display: flex;
     flex-direction: column;
-    height: max-content;
-    width: 75vw;
     border: 1px solid black;
-    padding: 10px;
     border: 2px solid;
     border-color: rgba(111, 111, 111, 0.2);
     border-radius: 5px;
-    /* padding: 10px 5px 10px 5px; */
+
+
+
+    padding: 10px;
     margin: 5px 0 5px 0;
+    height: max-content;
+    width: 72vw;
 
     /* background-color: #9fedd7; */
     /* background-color: white; */
@@ -101,28 +104,6 @@
 
 }
 
-/* 
-.projectDescriptionLabel {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    opacity: 0.7;
-}
-
-.projectDescriptionTextArea {
-
-    border: none;
-    resize: none;
-    font-size: 15px;
-    padding: 10px;
-    min-width: fit-content;
-    max-width: 100vw;
-    min-height: fit-content;
-    max-height: 75vh;
-    margin-bottom: 25px;
-
-} */
-
 
 .teamMembersArena {
     display: flex;
@@ -165,6 +146,7 @@
 }
 
 .teamMembersHeading h3 {
+    color: #05386b;
     background-color: inherit;
 }
 
@@ -205,6 +187,7 @@
 }
 
 .para {
+    color: white;
     margin-bottom: 0;
     font-size: 15px;
     background-color: inherit;
@@ -235,7 +218,7 @@
 }
 
 .projectSettingHeading h3 {
-
+    color: #05386b;
     background-color: inherit;
 }
 
@@ -273,7 +256,7 @@
 
 .settingInfoDiv p {
     margin-bottom: 0;
-
+    color: #05386b;
     background-color: inherit;
 }
 
@@ -291,7 +274,7 @@
     opacity: 1;
     color: black;
     margin-bottom: 0;
-
+    color: #05386b;
     background-color: inherit;
 }
 
@@ -327,7 +310,7 @@
     font-size: smaller;
     cursor: pointer;
     outline: none;
-
+    color: white;
     /* background-color: #eaf7d6; */
     background-color: rgb(65, 129, 217);
 }

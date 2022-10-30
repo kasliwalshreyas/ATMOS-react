@@ -134,8 +134,8 @@ const RecentProject = ({ user }) => {
               userInfo.projectIDList.length !== 0 &&
               projects.map((project) =>
                 userInfo.projectIDList.map(
-                  (projectid) =>
-                    projectid === project.id && (
+                  (projectid, index) =>
+                    projectid === project.id && index < 8 && (
                       <div className={styles.recentParticularProject}>
                         {late[project.id - 1] !== -1 && (
                           <Link
@@ -144,14 +144,24 @@ const RecentProject = ({ user }) => {
                             }}
                             to="/task/overview"
                           >
-                            <h6 className={styles.particularProjectName}>
+                            <div className={styles.projectDiv}>
+                              <div className={styles.projectInfoName}>
+                                <h4 className={styles.projectName}>
+                                  {project.projectName}
+                                </h4>
+                              </div>
+                              <div className={styles.projectInfoLastUsed}>
+                                <p className={styles.lastUsed}>last used: {late[project.id - 1]}</p>
+                              </div>
+                            </div>
+                            {/* <h6 className={styles.particularProjectName}>
                               <div className={styles.lastUsedName}>
                                 {project.projectName}
                               </div>
                               <div className={styles.lastUsedTime}>
                                 last used: {late[project.id - 1]}
                               </div>
-                            </h6>
+                            </h6> */}
                           </Link>
                         )}
                       </div>
@@ -185,14 +195,16 @@ const RecentProject = ({ user }) => {
                             }}
                             to="/task/overview"
                           >
-                            <h6 className={styles.particularProjectName}>
-                              <div className={styles.lastUsedName}>
-                                {project.projectName}
+                            <div className={styles.projectDiv}>
+                              <div className={styles.projectInfoName}>
+                                <h4 className={styles.projectName}>
+                                  {project.projectName}
+                                </h4>
                               </div>
-                              <div className={styles.lastUsedTime}>
-                                last used: {late[project.id - 1]}
+                              <div className={styles.projectInfoLastUsed}>
+                                <p className={styles.lastUsed}>last used: {late[project.id - 1]}</p>
                               </div>
-                            </h6>
+                            </div>
                           </Link>
                         }
                       </div>
