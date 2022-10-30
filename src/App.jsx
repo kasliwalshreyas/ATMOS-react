@@ -9,6 +9,7 @@ import MainView from "./pages/Projects/Task/MainView";
 import CreateProject from "./pages/Projects/CreateProject";
 import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
+import UserProfile from "./pages/UserProfile/UserProfile";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
             <Route exact path="/task/charts" element={<MainView charts />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/login" element={<Login />} />
+            <Route exact path="/profile" element={<UserProfile />} />
           </Routes>
         </div>
       </Router>
