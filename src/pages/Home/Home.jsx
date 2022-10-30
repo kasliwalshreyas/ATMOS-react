@@ -1,21 +1,38 @@
 import Navbar from "../../UI/Navbar";
-import React from "react"
+import React, { useState } from "react"
 import styles from "./Home.module.css";
 import Greeting from "./Greeting"
 import RecentProject from "./RecentProject"
 import Priority from "./Priority"
+import { useEffect } from "react";
 const Home = () => {
+  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+
+    async function getUser() {
+      const res = await fetch("http://localhost:8000/userList/" + userID);
+      const data = await res.json();
+      setUser(data);
+    }
+    getUser();
+  }, [userID]);
+
+
+
+
 
   return (
     <>
       <Navbar />
       <div className={styles.home}>
         <div className={styles.greetingContainer}>
-            <Greeting />
+          {user && <Greeting user={user} />}
         </div>
         <div className={styles.projectUsedContainer}>
-          <RecentProject />
-          <Priority/>
+          {user && <RecentProject user={user} />}
+          {user && <Priority user={user} />}
         </div>
       </div>
     </>

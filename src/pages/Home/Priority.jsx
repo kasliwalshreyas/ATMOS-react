@@ -4,7 +4,7 @@ import { useState } from "react";
 import OverdueTask from "./OverdueTask";
 import UpcomingTask from "./UpcomingTask";
 import CompletedTask from "./CompletedTask";
-const Priority = () => {
+const Priority = ({ user }) => {
   const [taskType, setTaskType] = useState(1);
 
   const handletaskType = (value) => {
@@ -53,8 +53,8 @@ const Priority = () => {
           </div>
         </div>
         <div className={styles.taskContent}>
-          {taskType === 1 && <UpcomingTask />}
-          {taskType === 2 && <OverdueTask />}
+          {taskType === 1 && <UpcomingTask user={user} />}
+          {taskType === 2 && <OverdueTask user={user} />}
           {taskType === 3 && <CompletedTask />}
         </div>
       </div>

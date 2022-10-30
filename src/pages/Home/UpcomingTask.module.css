@@ -5,13 +5,18 @@
 
 .particularTaskName {
     margin: 0px;
-    margin: 0px 10px 0px 10px;
+    margin: 5px 10px 0px 10px;
     padding: 10px;
     border-bottom: 1px solid rgba(206, 201, 201, 0.7);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
     opacity: 0.8;
     font-size: 14px;
     display: flex;
+
+
+    padding: 10px;
+    border-radius: 8px;
+    background-color: white;
 }
 
 .particularTaskName:hover {

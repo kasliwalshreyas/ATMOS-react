@@ -31,7 +31,7 @@ function Login() {
                 else {
                     console.log(data);
                     if (bcrypt.compareSync(password, data[0].password)) {
-                        localStorage.setItem("user", JSON.stringify(data[0]));
+                        localStorage.setItem("user", JSON.stringify(data[0].id));
                         navigate('/');
                     }
                     else {

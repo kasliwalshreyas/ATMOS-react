@@ -7,12 +7,21 @@ import Charts from "../Charts/Charts";
 import React from "react";
 
 const MainView = ({ overview, board, charts }) => {
-  //   console.log(from);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [projectId, setProjectId] = useState(parseInt(localStorage.getItem("projectId")));
-  // const [projectName, setProjectName] = useState()
   const [projectInfo, setProjectInfo] = useState(null);
+  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+
+    async function getUser() {
+      const res = await fetch("http://localhost:8000/userList/" + userID);
+      const data = await res.json();
+      setUser(data);
+    }
+    getUser();
+  }, [userID]);
 
   const handleClickOutside = (event) => {
     event.stopPropagation();
@@ -74,16 +83,17 @@ const MainView = ({ overview, board, charts }) => {
 
   return (
     <div className="normal-div" onClick={handleClickOutside}>
-      {projectInfo && (<ProjectInfo
+      {user && projectInfo && (<ProjectInfo
         projectInfo={projectInfo}
         setProjectInfo={setProjectInfo}
         isProfileClicked={isProfileClicked}
         setIsProfileClicked={setIsProfileClicked}
+        userInfo={user}
       ></ProjectInfo>)}
       {/* <FilterFunc></FilterFunc>s */}
       {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></OverView>}
       {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></SectionArena>}
-      {charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo}></Charts>}
+      {user && charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Charts>}
     </div>
   );
 };

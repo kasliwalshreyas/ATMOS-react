@@ -3,8 +3,8 @@ import styles from "./RecentProject.module.css";
 import useFetch from "../../useFetch";
 import { Link } from "react-router-dom";
 
-const RecentProject = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+const RecentProject = ({ user }) => {
+  const [userInfo, setUserInfo] = useState(user);
   const [showFavorite, setShowFavorite] = useState(false);
   const { data: projects, isPending, error } = useFetch(
     "http://localhost:8000/projectList"
@@ -129,10 +129,11 @@ const RecentProject = () => {
 
         {!showFavorite && (
           <div className={styles.recentListdiv}>
+            {projects && console.log(projects, 'from recent')}
             {projects &&
-              user.projectIDList.length !== 0 &&
+              userInfo.projectIDList.length !== 0 &&
               projects.map((project) =>
-                user.projectIDList.map(
+                userInfo.projectIDList.map(
                   (projectid) =>
                     projectid === project.id && (
                       <div className={styles.recentParticularProject}>
@@ -158,7 +159,7 @@ const RecentProject = () => {
                 )
               )}
 
-            {user.projectIDList.length === 0 && (
+            {userInfo.projectIDList.length === 0 && (
               <div>
                 <div className={styles.noFavorite}>
                   You haven't started any Project yet.
@@ -171,9 +172,9 @@ const RecentProject = () => {
         {showFavorite && (
           <div className={styles.recentListdiv}>
             {projects &&
-              user.favoriteProjectList &&
+              userInfo.favoriteProjectList &&
               projects.map((project) =>
-                user.favoriteProjectList.map(
+                userInfo.favoriteProjectList.map(
                   (favorite) =>
                     project.id === favorite && (
                       <div className={styles.recentParticularProject}>
@@ -198,7 +199,7 @@ const RecentProject = () => {
                     )
                 )
               )}
-            {user.favoriteProjectList.length === 0 && (
+            {userInfo.favoriteProjectList.length === 0 && (
               <div>
                 <div className={styles.noFavorite}>
                   You don't have any favorite project
