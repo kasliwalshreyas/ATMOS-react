@@ -3,8 +3,8 @@ import { useState } from "react";
 import useFetch from "../../useFetch";
 import styles from "./UpcomingTask.module.css";
 import { Link } from "react-router-dom";
-const UpcomingTask = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+const UpcomingTask = ({ user }) => {
+  const [userInfo, setUserInfo] = useState(user);
   const { data: tasksList, isPending, error } = useFetch(
     "http://localhost:8000/taskList"
   );
@@ -13,10 +13,10 @@ const UpcomingTask = () => {
   const compareDate = (a, b) => {
     var c = new Date(a.taskDeadline);
     var d = new Date(b.taskDeadline);
-    if(c >= d) 
+    if (c >= d)
       return 1;
-    else 
-      return -1;  
+    else
+      return -1;
   };
 
   const sortTaskList = () => {
@@ -36,7 +36,7 @@ const UpcomingTask = () => {
       <div className={styles.upcomingTaskList}>
         {tasksList &&
           sortedTaskList.map((taskList) =>
-            user.taskAssignedIDList.map(
+            userInfo.taskAssignedIDList.map(
               (task) =>
                 taskList.id === task &&
                 handledeadline(taskList.taskDeadline) === 1 && !taskList.taskCompletion && (

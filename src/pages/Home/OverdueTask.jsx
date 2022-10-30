@@ -3,8 +3,8 @@ import { useState } from "react";
 import useFetch from "../../useFetch";
 import styles from "./OverdueTask.module.css";
 import { Link } from "react-router-dom";
-const OverdueTask = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+const OverdueTask = ({ user }) => {
+  const [userInfo, setUserInfo] = useState(user);
   const { data: tasksList, isPending, error } = useFetch(
     "http://localhost:8000/taskList"
   );
@@ -33,7 +33,7 @@ const OverdueTask = () => {
       <div className={styles.completedTaskList}>
         {tasksList &&
           tasksList.map((taskList) =>
-            user.taskAssignedIDList.map(
+            userInfo.taskAssignedIDList.map(
               (task) =>
                 taskList.id === task &&
                 handledeadline(taskList.taskDeadline) === 1 && !taskList.taskCompletion && (

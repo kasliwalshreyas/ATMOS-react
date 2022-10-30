@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css"
 
-const Greeting = () => {
+const Greeting = ({ user }) => {
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday"]
     const [hourState, setHourState] = useState()
@@ -12,7 +12,7 @@ const Greeting = () => {
     const [dateState, setDateState] = useState();
     const [dayState, setDayState] = useState();
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+    const [userInfo, setUserInfo] = useState(user);
 
     useEffect(() => {
         setInterval(() => {
@@ -43,7 +43,7 @@ const Greeting = () => {
                     <h6 className={styles.monthHead}>{dayNames[dayState]}, {monthNames[monState]} {dateState}</h6>
                 </div>
                 <div className={styles.greetdiv}>
-                    <h1 className={styles.mainGreetingHead}>{greet}, {user.userName}</h1>
+                    <h1 className={styles.mainGreetingHead}>{greet}, {userInfo.userName}</h1>
                 </div>
                 <div className={styles.timediv}>
                     <h4 className={styles.timeHead}>{hourState < 10 ? "0" + hourState : hourState}:{minState < 10 ? "0" + minState : minState}:{secState < 10 ? "0" + secState : secState}

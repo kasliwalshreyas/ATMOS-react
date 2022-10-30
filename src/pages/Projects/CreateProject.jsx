@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Rightdiv from "./Rightdiv";
@@ -6,6 +6,21 @@ import Navbar from "../../UI/Navbar";
 import styles from "./CreateProject.module.css";
 
 const CreateProject = () => {
+
+  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+
+    async function getUser() {
+      const res = await fetch("http://localhost:8000/userList/" + userID);
+      const data = await res.json();
+      setUser(data);
+    }
+    getUser();
+  }, [userID]);
+
+
   const [projectName, setProjectName] = useState("");
   const [type, setType] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -16,7 +31,7 @@ const CreateProject = () => {
   const [projectMission, setProjectMission] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectGuidelines, setProjectGuidelines] = useState("");
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   let lastUsed;
 
   console.log(user, 'user from create project');
@@ -65,7 +80,7 @@ const CreateProject = () => {
     });
     console.log(userInfo, 'userInfo');
 
-    localStorage.setItem("user", JSON.stringify(userInfo));
+    // localStorage.setItem("user", JSON.stringify(userInfo));
 
   };
 

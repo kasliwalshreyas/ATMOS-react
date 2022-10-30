@@ -38,7 +38,8 @@
       "emailId": "kasliwalshreyas2@gmail.com",
       "projectIDList": [
         2,
-        1
+        1,
+        10
       ],
       "taskAssignedIDList": [
         11,
@@ -108,11 +109,12 @@
       "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
       "userName": "Akash",
       "projectIDList": [
-        7,
         7
       ],
       "favoriteProjectList": [],
-      "taskAssignedIDList": [],
+      "taskAssignedIDList": [
+        33
+      ],
       "id": 6
     },
     {
@@ -145,7 +147,8 @@
         8,
         10,
         11,
-        12
+        12,
+        13
       ],
       "favoriteProjectList": [
         8,
@@ -155,7 +158,6 @@
         28,
         29,
         30,
-        31,
         32
       ],
       "id": 9
@@ -298,7 +300,9 @@
     {
       "projectName": "fsvxvdvx",
       "type": "",
-      "sectionIDList": [],
+      "sectionIDList": [
+        15
+      ],
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
@@ -323,7 +327,7 @@
       "projectStatement": "First Project",
       "projectMission": "First Project",
       "projectDescription": "First Project",
-      "lastUsed": "2022-10-30T09:36:35.911Z",
+      "lastUsed": "2022-10-30T10:55:27.484Z",
       "projectGuidelines": "First Project",
       "userId": 9,
       "highAccess": [
@@ -365,13 +369,15 @@
       "projectStatement": "wdd ",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T09:36:11.776Z",
+      "lastUsed": "2022-10-30T10:45:26.340Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
         9
       ],
-      "mediumAccess": [],
+      "mediumAccess": [
+        2
+      ],
       "lowAccess": [],
       "id": 10
     },
@@ -382,7 +388,7 @@
       "projectStatement": "dsv",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T09:55:53.520Z",
+      "lastUsed": "2022-10-30T10:45:05.006Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
@@ -399,7 +405,7 @@
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T09:57:19.464Z",
+      "lastUsed": "2022-10-30T10:45:17.749Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
@@ -410,6 +416,23 @@
       ],
       "lowAccess": [],
       "id": 12
+    },
+    {
+      "projectName": "Fifth project",
+      "type": "Education",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T10:55:16.793Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 13
     }
   ],
   "sectionList": [
@@ -504,9 +527,7 @@
     {
       "sectionName": "Section first",
       "projectId": 10,
-      "taskIDList": [
-        31
-      ],
+      "taskIDList": [],
       "id": 13
     },
     {
@@ -516,6 +537,14 @@
         32
       ],
       "id": 14
+    },
+    {
+      "sectionName": "Section new",
+      "projectId": 7,
+      "taskIDList": [
+        33
+      ],
+      "id": 15
     }
   ],
   "taskList": [
@@ -750,16 +779,6 @@
       "id": 30
     },
     {
-      "taskName": "new task",
-      "taskCompletion": false,
-      "taskAssignee": 9,
-      "taskPriority": "medium",
-      "taskStatus": "Choose Status",
-      "taskDeadline": "2022-10-28",
-      "taskDescription": null,
-      "id": 31
-    },
-    {
       "taskName": "hello",
       "taskCompletion": false,
       "taskAssignee": 9,
@@ -768,6 +787,16 @@
       "taskDeadline": "2022-10-27",
       "taskDescription": null,
       "id": 32
+    },
+    {
+      "taskName": "Add task with assignee",
+      "taskCompletion": false,
+      "taskAssignee": 6,
+      "taskPriority": "medium",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-11-03",
+      "taskDescription": null,
+      "id": 33
     }
   ]
 }
