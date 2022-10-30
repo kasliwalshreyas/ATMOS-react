@@ -459,13 +459,11 @@
     {
       "projectName": "DEMO",
       "type": "Education",
-      "sectionIDList": [
-        16
-      ],
+      "sectionIDList": [],
       "projectStatement": "fcv cbf",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T18:33:55.749Z",
+      "lastUsed": "2022-10-30T21:02:27.865Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
@@ -588,12 +586,6 @@
         33
       ],
       "id": 15
-    },
-    {
-      "sectionName": "sec 1",
-      "projectId": 15,
-      "taskIDList": [],
-      "id": 16
     }
   ],
   "taskList": [
