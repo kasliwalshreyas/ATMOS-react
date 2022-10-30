@@ -69,14 +69,14 @@ const App = () => {
             <Route exact path='/aboutUs' element={<AboutUS />} />
             <Route exact path='/contactUs' element={<Contact />} />
             <Route exact path="/logout" element={<Logout />} />
-            <Route exact path="/admin/home" element={<AdminHome />} />
-            <Route exact path="/admin/login" element={<AdminLogin />} />
-            <Route exact path="/admin/user/list" element={<AdminList />} />
-            <Route exact path="/admin/user/list/:id" element={<AdminSingle />} />
-            <Route exact path="/admin/user/new" element={<AdminNew />} />
-            <Route exact path="/admin/project/list" element={<AdminList />} />
-            <Route exact path="/admin/project/list/:id" element={<AdminSingle />} />
-            <Route exact path="/admin/project/new" element={<AdminNew />} />
+            <Route exact path="/admin-portal" element={<AdminHome />} />
+            <Route exact path="/admin-portal/login" element={<AdminLogin />} />
+            <Route exact path="/admin-portal/user/list" element={<AdminList />} />
+            <Route exact path="/admin-portal/user/list/:id" element={<AdminSingle />} />
+            <Route exact path="/admin-portal/user/new" element={<AdminNew />} />
+            <Route exact path="/admin-portal/project/list" element={<AdminList />} />
+            <Route exact path="/admin-portal/project/list/:id" element={<AdminSingle />} />
+            <Route exact path="/admin-portal/project/new" element={<AdminNew />} />
           </Routes>
         </div>
       </Router>
