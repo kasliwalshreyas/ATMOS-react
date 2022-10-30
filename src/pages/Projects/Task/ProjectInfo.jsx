@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Router, Routes, Link } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
@@ -104,12 +104,15 @@ const ProjectInfo = ({
             id="dropdownMenu-user-profile"
             className={isProfileClicked ? "show-profile-options" : "hide-profile-options"}
           >
-            <a href="/user-profile" className="user-profile-dropdown-option">
+            <Link to="/profile" className="user-profile-dropdown-option">
               Profile
-            </a>
-            <a href="/admin-portal" className="user-profile-dropdown-option">
+            </Link>
+            <Link to="/admin-portal" className="user-profile-dropdown-option">
               Admin Portal
-            </a>
+            </Link>
+            <Link to="/logout" className="user-profile-dropdown-option">
+              Log Out
+            </Link>
           </div>
         </div>
       </div>

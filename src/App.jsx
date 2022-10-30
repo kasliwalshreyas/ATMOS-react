@@ -10,6 +10,7 @@ import CreateProject from "./pages/Projects/CreateProject";
 import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import Logout from "./pages/Logout/Logout";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/profile" element={<UserProfile />} />
+            <Route exact path="/logout" element={<Logout />} />
           </Routes>
         </div>
       </Router>

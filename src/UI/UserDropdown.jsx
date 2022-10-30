@@ -6,11 +6,12 @@ const UserDropdown = () => {
     return (
         <Dropdown>
         <Dropdown.Toggle variant="white" id="dropdown-basic">
-            <img className="user-img" alt="user" src="./images/User/user-48.png" />
+            <img className="user-img rounded-circle" style={{width: "40px"}} alt="user" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" />
         </Dropdown.Toggle>
         <Dropdown.Menu>
-            <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-            <Dropdown.Item href="/admin-portal">Admin Portal</Dropdown.Item> 
+            <Dropdown.Item><Link to="/profile">Profile</Link></Dropdown.Item>
+            <Dropdown.Item><Link to="/admin-portal">Admin Portal</Link></Dropdown.Item>
+            <Dropdown.Item><Link to="/logout">Log Out</Link></Dropdown.Item>
         </Dropdown.Menu>
         </Dropdown>
     );
