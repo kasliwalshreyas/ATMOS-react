@@ -109,7 +109,8 @@
       ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [
-        33
+        33,
+        34
       ],
       "id": 6
     },
@@ -317,7 +318,7 @@
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T13:47:17.863Z",
+      "lastUsed": "2022-10-30T21:45:50.198Z",
       "projectGuidelines": "",
       "userId": 1,
       "highAccess": [
@@ -471,7 +472,7 @@
       "projectStatement": "fcv cbf",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T18:33:55.749Z",
+      "lastUsed": "2022-10-30T21:45:34.241Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
@@ -486,11 +487,14 @@
     {
       "projectName": "First",
       "type": "Education",
-      "sectionIDList": [],
+      "sectionIDList": [
+        17,
+        18
+      ],
       "projectStatement": "jkwbrjf",
       "projectMission": "sj fj asfasf",
       "projectDescription": "ans fn s",
-      "lastUsed": "2022-10-30T21:09:25.932Z",
+      "lastUsed": "2022-10-30T21:50:21.080Z",
       "projectGuidelines": "kansfknak",
       "userId": 7,
       "highAccess": [
@@ -619,6 +623,22 @@
       "projectId": 15,
       "taskIDList": [],
       "id": 16
+    },
+    {
+      "sectionName": "Something",
+      "projectId": 16,
+      "taskIDList": [
+        34
+      ],
+      "id": 17
+    },
+    {
+      "sectionName": "Done",
+      "projectId": 16,
+      "taskIDList": [
+        34
+      ],
+      "id": 18
     }
   ],
   "taskList": [
@@ -871,6 +891,16 @@
       "taskDeadline": "2022-11-03",
       "taskDescription": null,
       "id": 33
+    },
+    {
+      "taskName": "Do something",
+      "taskCompletion": false,
+      "taskAssignee": 6,
+      "taskPriority": "high",
+      "taskStatus": "on-track",
+      "taskDeadline": null,
+      "taskDescription": null,
+      "id": 34
     }
   ]
 }

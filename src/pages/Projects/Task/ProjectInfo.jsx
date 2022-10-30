@@ -5,6 +5,8 @@ import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
 
+import UserDropdown from "../../../UI/UserDropdown";
+
 const ProjectInfo = ({
   isProfileClicked,
   setIsProfileClicked,
@@ -53,7 +55,7 @@ const ProjectInfo = ({
 
   return (
     <div className="project-info">
-      <div className="project-name-and-logo">
+      <div className="project-name-and-logo ">
         <div className="project-logo">
           <img
             className="project-logo-img"
@@ -93,7 +95,7 @@ const ProjectInfo = ({
             </div>
           </div>
         </div>
-        <div className="user-profiles">
+        {/* <div className="user-profiles">
           <img
             id="user-profile"
             className="user-profile"
@@ -114,6 +116,9 @@ const ProjectInfo = ({
               Log Out
             </Link>
           </div>
+        </div> */}
+        <div className="user-profiles">
+          <UserDropdown  />
         </div>
       </div>
       {/* <Router> */}
