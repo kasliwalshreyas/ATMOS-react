@@ -63,7 +63,7 @@ function Login() {
                             <div className="mt-4 d-flex flex-row align-items-center">
                                 <i class="fa-solid fs-4 me-2 fa-envelope"></i>
                                 <FloatingLabel controlId="floatingInput" label="Email" className="w-100">
-                                    <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                    <Form.Control type="email" className="fs-5" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 </FloatingLabel>
                             </div>
                             <div className="mt-4 d-flex flex-row align-items-center">

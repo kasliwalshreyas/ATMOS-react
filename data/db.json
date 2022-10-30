@@ -105,6 +105,24 @@
       "id": 5
     },
     {
+      "emailId": "akash@gmail.com",
+      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
+      "userName": "Akash",
+      "projectIDList": [7],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 6
+    },
+    {
+      "emailId": "akash123@gmail.com",
+      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
+      "userName": "Akash",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 7
+    },
+    {
       "emailId": "dushyantist@gmail.com",
       "password": "$2a$10$l9YkjgJiNhh1LNkQjWz5IuzYk6JTwnaphNJNWvvC1bIAsKQ2tCTl.",
       "userName": "Weirdo",
@@ -308,6 +326,23 @@
         8
       ],
       "id": 8
+    },
+    {
+      "projectName": "Complete",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "jhsadbf",
+      "projectMission": "akjdsbfh",
+      "projectDescription": "djahf",
+      "lastUsed": "2022-10-29T19:59:29.439Z",
+      "projectGuidelines": "",
+      "userId": 6,
+      "highAccess": [
+        6
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 9
     }
   ],
   "sectionList": [
