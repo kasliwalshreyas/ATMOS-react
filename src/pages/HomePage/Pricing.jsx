@@ -14,13 +14,14 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
+import { NavLink } from 'react-router-dom';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        ATMOS
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -174,9 +175,11 @@ function PricingContent() {
                   </ul>
                 </CardContent>
                 <CardActions>
+                    <NavLink to="/signup">
                   <Button fullWidth variant={tier.buttonVariant}>
                     {tier.buttonText}
                   </Button>
+                    </NavLink>
                 </CardActions>
               </Card>
             </Grid>

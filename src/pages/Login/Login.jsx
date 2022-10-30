@@ -32,7 +32,7 @@ function Login() {
                     console.log(data);
                     if (bcrypt.compareSync(password, data[0].password)) {
                         localStorage.setItem("user", JSON.stringify(data[0].id));
-                        navigate('/');
+                        navigate('/home');
                     }
                     else {
                         alert("Incorrect password!");

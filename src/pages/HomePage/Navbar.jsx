@@ -5,6 +5,7 @@ import Link from '@mui/material/Link';
 // import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { NavLink } from 'react-router-dom';
 export default function Navbar() {
     return (
         <>
@@ -36,9 +37,11 @@ export default function Navbar() {
               Support
             </Link>
           </nav>
-          <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          <NavLink to="/login">
+          <Button variant="outlined" sx={{ my: 1, mx: 1.5 }}>
             Login
           </Button>
+        </NavLink>
         </Toolbar>
       </AppBar>
         </>
