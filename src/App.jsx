@@ -12,20 +12,20 @@ import Login from "./pages/Login/Login";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 
 const App = () => {
+  // const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("userID")));
 
+  // useEffect(() => {
 
-  useEffect(() => {
+  //   fetch('http://localhost:8000/userList/' + userId)
+  //     .then(res => {
+  //       return res.json();
+  //     })
+  //     .then(data => {
+  //       // console.log(data);
+  //       localStorage.setItem('user', JSON.stringify(data));
 
-    fetch('http://localhost:8000/userList/1')
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        // console.log(data);
-        localStorage.setItem('user', JSON.stringify(data));
-
-      });
-  }, []);
+  //     });
+  // }, []);
   // console.log(localStorage.getItem('user'));
 
 

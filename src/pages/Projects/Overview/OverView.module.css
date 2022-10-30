@@ -10,11 +10,16 @@
     width: 100%;
     /* margin-bottom: 10px; */
 
-    background-color: #8ee4af;
     /* background-color: #05386b; */
     /* background-color: #9fedd7; */
     /* background-color: rgb(234, 234, 241); */
     /* background-color: #5CDB95; */
+
+    /* background-color: #8ee4af; */
+    /* background-color: #efeeef; */
+    background-color: #f5f5f5;
+
+
 }
 
 .descriptionArena {
@@ -34,17 +39,13 @@
     /* background-color: white; */
     /* background-color: #f8fafb; */
     /* background-color: inherit; */
-    background-color: #5cdb95;
+
+    /* background-color: #5cdb95; */
+    /* background-color: #d3d0d3; */
+    background-color: #ebeff3;
+
+
 }
-
-/* .descriptionArena:hover {
-
-    border: 0.1px solid rgba(206, 201, 201, 0.9);
-    border-radius: 5px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0);
-    transition: box-shadow 10s ease-in-out;
-} */
-
 
 .descriptionArenaHeading {
     display: flex;
@@ -139,7 +140,8 @@
     /* background-color: whitesmoke; */
 
 
-    background-color: #5cdb95;
+    /* background-color: #5cdb95; */
+    background-color: #ebeff3;
 
 }
 
@@ -185,7 +187,8 @@
     /* box-shadow: 0 5px 10px rgba(0,0,0,.1); */
 
     /* background-color: #eaf7d6; */
-    background-color: #d3f4a2;
+    /* background-color: #d3f4a2; */
+    background-color: rgb(65, 129, 217);
 
 }
 
@@ -203,7 +206,7 @@
 
 .para {
     margin-bottom: 0;
-
+    font-size: 15px;
     background-color: inherit;
 }
 
@@ -222,7 +225,8 @@
     /* padding: 10px 5px 10px 5px; */
     margin: 5px 0 5px 0;
 
-    background-color: #5cdb95;
+    background-color: #ebeff3;
+    /* background-color: #5cdb95; */
 }
 
 .projectSettingHeading {
@@ -253,7 +257,8 @@
     align-items: center;
 
     /* background-color: #edf5e1; */
-    background-color: #d3f4a2;
+    /* background-color: #d3f4a2; */
+    background-color: white;
 
 }
 
@@ -318,12 +323,13 @@
 .settingBtn {
     border-radius: 5px;
     padding: 5px 10px 5px 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: smaller;
     cursor: pointer;
     outline: none;
 
-    background-color: #eaf7d6;
+    /* background-color: #eaf7d6; */
+    background-color: rgb(65, 129, 217);
 }
 
 .modalBody {

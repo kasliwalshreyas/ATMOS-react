@@ -29,8 +29,7 @@
         10,
         11,
         23,
-        25,
-        24
+        25
       ],
       "id": 1
     },
@@ -58,7 +57,10 @@
       "emailId": "kasliwalshreyas2@gmail.com",
       "projectIDList": [
         1,
-        2
+        2,
+        5,
+        4,
+        8
       ],
       "taskAssignedIDList": [
         1
@@ -75,10 +77,13 @@
       "emailId": "kasliwalshreyas4@gmail.com",
       "projectIDList": [
         1,
-        2
+        2,
+        6,
+        8
       ],
       "taskAssignedIDList": [
-        24
+        24,
+        26
       ],
       "favoriteProjectList": [
         3
@@ -102,22 +107,47 @@
       "emailId": "akash@gmail.com",
       "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
       "userName": "Akash",
+      "projectIDList": [7],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
       "id": 6
     },
     {
       "emailId": "akash123@gmail.com",
       "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
       "userName": "Akash",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
       "id": 7
     },
     {
       "emailId": "dushyantist@gmail.com",
       "password": "$2a$10$l9YkjgJiNhh1LNkQjWz5IuzYk6JTwnaphNJNWvvC1bIAsKQ2tCTl.",
       "userName": "Weirdo",
-      "projectIDList": [],
+      "projectIDList": [
+        8
+      ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 8
+    },
+    {
+      "emailId": "spk@atmos.in",
+      "password": "$2a$10$z6AaeL6LUIi9nFGk6p/lVOvE/p6xxfnqe0Lc9BsIt9nijLusb5AMS",
+      "userName": "SPK",
+      "projectIDList": [
+        8
+      ],
+      "favoriteProjectList": [
+        8
+      ],
+      "taskAssignedIDList": [
+        28,
+        29,
+        30
+      ],
+      "id": 9
     }
   ],
   "projectList": [
@@ -172,7 +202,7 @@
         3
       ],
       "id": 2,
-      "lastUsed": "2022-10-29T18:55:41.525Z"
+      "lastUsed": "2022-10-29T21:16:04.558Z"
     },
     {
       "projectName": "ABCD",
@@ -205,37 +235,63 @@
       "highAccess": [
         1
       ],
-      "mediumAccess": [],
+      "mediumAccess": [
+        3
+      ],
       "lowAccess": [],
       "id": 4
     },
     {
-      "projectName": "Characterised",
-      "type": "Education",
-      "sectionIDList": "",
-      "projectStatement": "Project Statement",
-      "projectMission": "Mission",
-      "projectDescription": "Description",
-      "lastUsed": "2022-10-30T08:42:46.555Z",
-      "projectGuidelines": "Guidlines",
+      "projectName": "Shubham",
+      "type": "",
+      "sectionIDList": [
+        8
+      ],
+      "projectStatement": "dbhjasbd sad ska d",
+      "projectMission": "dvds f fvd",
+      "projectDescription": "",
+      "lastUsed": "2022-10-29T19:10:39.268Z",
+      "projectGuidelines": "",
       "userId": 1,
       "highAccess": [
         1
       ],
       "mediumAccess": [
-        2
+        3
       ],
       "lowAccess": [],
       "id": 5
     },
     {
-      "projectName": "fgxvb bncgg",
+      "projectName": "ABCDE",
+      "type": "",
+      "sectionIDList": [
+        9,
+        10
+      ],
+      "projectStatement": "xbc  d",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-29T20:44:25.987Z",
+      "projectGuidelines": "",
+      "userId": 1,
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [],
+      "lowAccess": [
+        4
+      ],
+      "id": 6
+    },
+    {
+      "projectName": "fsvxvdvx",
       "type": "",
       "sectionIDList": [],
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-29T19:03:26.615Z",
+      "lastUsed": "2022-10-29T20:41:01.873Z",
       "projectGuidelines": "",
       "userId": 1,
       "highAccess": [
@@ -243,7 +299,49 @@
       ],
       "mediumAccess": [],
       "lowAccess": [],
-      "id": 6
+      "id": 7
+    },
+    {
+      "projectName": "First Project",
+      "type": "",
+      "sectionIDList": [
+        11,
+        12
+      ],
+      "projectStatement": "First Project",
+      "projectMission": "First Project",
+      "projectDescription": "First Project",
+      "lastUsed": "2022-10-29T22:42:16.750Z",
+      "projectGuidelines": "First Project",
+      "userId": 9,
+      "highAccess": [
+        9,
+        3
+      ],
+      "mediumAccess": [
+        4
+      ],
+      "lowAccess": [
+        8
+      ],
+      "id": 8
+    },
+    {
+      "projectName": "Complete",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "jhsadbf",
+      "projectMission": "akjdsbfh",
+      "projectDescription": "djahf",
+      "lastUsed": "2022-10-29T19:59:29.439Z",
+      "projectGuidelines": "",
+      "userId": 6,
+      "highAccess": [
+        6
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 9
     }
   ],
   "sectionList": [
@@ -297,29 +395,43 @@
       "id": 7
     },
     {
-      "sectionName": "",
-      "projectId": 4,
+      "sectionName": "Shubham's section",
+      "projectId": 5,
       "taskIDList": [],
       "id": 8
     },
     {
-      "sectionName": "frontend",
-      "projectId": 5,
+      "sectionName": "Frontend",
+      "projectId": 6,
       "taskIDList": [
-        26,
-        28,
-        29
+        26
       ],
       "id": 9
     },
     {
       "sectionName": "Backend",
-      "projectId": 5,
+      "projectId": 6,
       "taskIDList": [
-        27,
-        30
+        27
       ],
       "id": 10
+    },
+    {
+      "sectionName": "First Section",
+      "projectId": 8,
+      "taskIDList": [
+        28,
+        29
+      ],
+      "id": 11
+    },
+    {
+      "sectionName": "Second Section",
+      "projectId": 8,
+      "taskIDList": [
+        30
+      ],
+      "id": 12
     }
   ],
   "taskList": [
@@ -486,7 +598,7 @@
     {
       "taskName": "Hi, It's Me",
       "taskCompletion": true,
-      "taskAssignee": 1,
+      "taskAssignee": 4,
       "taskPriority": "high",
       "taskStatus": "at-risk",
       "taskDeadline": "2022-10-16",
@@ -504,52 +616,52 @@
       "id": 25
     },
     {
-      "taskName": "Add CSS",
+      "taskName": "CSS",
       "taskCompletion": false,
-      "taskAssignee": 1,
-      "taskPriority": "high",
-      "taskStatus": "off-track",
-      "taskDeadline": "2022-10-30",
-      "taskDescription": null,
+      "taskAssignee": 4,
+      "taskPriority": "medium",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-31",
+      "taskDescription": "fcbc ",
       "id": 26
     },
     {
-      "taskName": "Add DB",
+      "taskName": "s",
       "taskCompletion": false,
-      "taskAssignee": 2,
-      "taskPriority": "medium",
-      "taskStatus": "off-track",
-      "taskDeadline": "2022-11-01",
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": null,
       "taskDescription": null,
       "id": 27
     },
     {
-      "taskName": "Add HTML",
+      "taskName": "Task 1",
       "taskCompletion": false,
-      "taskAssignee": 1,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": "2022-10-27",
-      "taskDescription": null,
+      "taskAssignee": 9,
+      "taskPriority": "high",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-31",
+      "taskDescription": "dv f f fvsdv sdvsd",
       "id": 28
     },
     {
-      "taskName": "Add JS",
+      "taskName": "Task 2",
       "taskCompletion": true,
-      "taskAssignee": 1,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": "2022-10-28",
+      "taskAssignee": 9,
+      "taskPriority": "low",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-11-01",
       "taskDescription": null,
       "id": 29
     },
     {
-      "taskName": "Add node",
+      "taskName": "Task 3",
       "taskCompletion": true,
-      "taskAssignee": 1,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": "2022-11-02",
+      "taskAssignee": 9,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-10-31",
       "taskDescription": null,
       "id": 30
     }

@@ -50,6 +50,8 @@ const options = {
 
 const Charts = ({ projectID, projectInfo, setProjectInfo }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+    console.log(user);
+
     const [userInfo, setUserInfo] = useState(null);
     const [statsData, setStatsData] = useState({
         completed: 0,
@@ -354,7 +356,7 @@ const Charts = ({ projectID, projectInfo, setProjectInfo }) => {
                 <div className={styles.arenaHeading}>
                     <h3>Status</h3>
                 </div>
-                <div className={styles.arenaBody} >
+                <div className={`${styles.arenaBody}, ${styles.statusArenaBody}`} >
                     {/* {console.log(userInfo)} */}
                     {userInfo && <CountChart
                         statsData={statsData}
