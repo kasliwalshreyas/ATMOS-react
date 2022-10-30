@@ -1,4 +1,4 @@
-import './AboutUs.css';
+// import './AboutUs.css';
 
 import React, { useState, useEffect } from 'react';
 import { BsLinkedin, BsGithub } from "react-icons/bs";
