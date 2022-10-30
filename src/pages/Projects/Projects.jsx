@@ -9,7 +9,7 @@ const Projects = () => {
     "http://localhost:8000/projectList"
   );
   // const createProject = () => { };
-
+    
   return (
     <>
       <Navbar />

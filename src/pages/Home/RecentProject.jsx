@@ -129,6 +129,7 @@ const RecentProject = () => {
 
         {!showFavorite && (
           <div className={styles.recentListdiv}>
+            {projects && console.log(projects, 'from recent')}
             {projects &&
               user.projectIDList.length !== 0 &&
               projects.map((project) =>

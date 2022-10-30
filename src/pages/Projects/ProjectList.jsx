@@ -4,6 +4,10 @@ import { useState } from "react";
 
 const ProjectList = ({ projects }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  console.log(user, 'from projectList');
+
+
   const navigate = useNavigate();
   const handleLinkClick = (project) => {
     project.lastUsed = new Date();
