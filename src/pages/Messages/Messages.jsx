@@ -4,7 +4,9 @@ const Messages = () => {
   return (
     <>
       <Navbar />
-      <div className="messages"></div>
+      <div className="messages">
+        <h1>Hi </h1>
+      </div>
     </>
   );
 };
