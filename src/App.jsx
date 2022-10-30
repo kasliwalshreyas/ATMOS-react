@@ -11,6 +11,8 @@ import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import SectionArena from "./pages/Projects/Task/SectionArena";
+import AboutUS from "./pages/AboutUs/AboutUs";
+import Contact from './pages/ContactUs/Contact';
 
 const App = () => {
   // const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("userID")));
@@ -53,6 +55,9 @@ const App = () => {
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/profile" element={<UserProfile />} />
+
+            <Route exact path='/aboutUs' element={<AboutUS />} />
+            <Route exact path='/contactUs' element={<Contact />} />
           </Routes>
         </div>
       </Router>
