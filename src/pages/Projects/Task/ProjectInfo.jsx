@@ -12,9 +12,9 @@ const ProjectInfo = ({
   setProjectInfo,
 }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-
+  user && console.log(user.userName)
   let initialStateOfFavorite;
-  if (user.favoriteProjectList.indexOf(projectInfo.id) == -1) {
+  if (user.favoriteProjectList.indexOf(projectInfo.id) === -1) {
     initialStateOfFavorite = false;
   } else {
     initialStateOfFavorite = true;
