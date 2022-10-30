@@ -7,14 +7,14 @@ import UserDropdown from "./UserDropdown";
 const Navbar = () => {
   return (
     <nav className="navbar">
-    <div className="head-container">
-      <div className="head-atmos">
-        <h1 className="ms-5">ATMOS</h1>
+      <div className="head-container">
+        <div className="head-atmos">
+          <h1 className="ms-5">ATMOS</h1>
+        </div>
+        <div className="user">
+          <UserDropdown />
+        </div>
       </div>
-      <div className="user">
-        <UserDropdown />
-      </div>
-    </div>
       <div className="links ">
         <Link className="link" to="/">
           Home
@@ -33,7 +33,7 @@ const Navbar = () => {
           Notes
         </Link> */}
       </div>
-      
+
     </nav>
   );
 };
