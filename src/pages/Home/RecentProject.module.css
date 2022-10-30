@@ -10,7 +10,7 @@
     border: 1px solid rgba(206, 201, 201, 0.7);
     border-color: #7DE5ED;
 
-
+    color: #05386b;
     background-color: #ebeff3;
 }
 
@@ -22,6 +22,8 @@
 .recentHeaddiv {
     display: flex;
     border-bottom: 1px solid rgba(206, 201, 201, 0.7);
+
+    color: #05386b;
 }
 
 .projectHead {
@@ -29,6 +31,9 @@
     font-family: 'Mukta', sans-serif;
     font-weight: 700;
     font-size: 18px;
+
+
+    color: #05386b;
 }
 
 .recentListdiv {
@@ -61,6 +66,8 @@
     font-family: 'Hind Siliguri', sans-serif;
     /* min-width: 23vw; */
     width: 25%;
+
+    color: #05386b;
 }
 
 .lastUsedName {
@@ -68,6 +75,8 @@
     opacity: 0.8;
     font-size: 14px;
     width: 75%;
+
+    color: #05386b;
 }
 
 .projectsCategory {
@@ -80,7 +89,7 @@
     margin-left: 20px;
     padding: 1px;
 
-
+    color: #05386b;
     background-color: #ebeff3;
 }
 
@@ -101,6 +110,8 @@
     border: none;
     /* border-radius: 4px; */
     font-weight: 500;
+
+    color: #05386b;
 }
 
 .projectsCategoryOption:hover {

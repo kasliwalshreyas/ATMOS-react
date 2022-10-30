@@ -29,10 +29,14 @@
     opacity: 0.8;
     font-size: 14px;
     width: 75%;
+
+    color: #05386b;
 }
 
 .taskTime {
     font-family: 'Hind Siliguri', sans-serif;
     /* min-width: 23vw; */
     width: 25%;
+
+    color: #05386b;
 }
