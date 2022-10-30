@@ -1,8 +1,17 @@
+.normal-div {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* 
 .main-view {
   display: flex;
   height: 100vh;
   width: 90vw;
-}
+} */
 
 .paraChanges {
   margin-bottom: 0 !important;
@@ -12,11 +21,16 @@
 
 .project-info {
   display: flex;
-  padding: 1vw 2vw;
-  /* margin: 20px; */
-  width: 100%;
-  min-height: 24vh;
   flex-direction: column;
+  padding: 1vw 2vw;
+  /* margin: 10px; */
+  /* width: 98.5vw; */
+  width: 100vw;
+
+  /* padding: 1vw 2vw; */
+  /* margin: 20px; */
+  /* width: 100%; */
+  /* min-height: 24vh; */
   /* margin-bottom: 5px; */
   /* padding-bottom: 5px; */
 
@@ -95,6 +109,7 @@
   text-align: left;
   padding-right: 12px;
 
+  color: #05386b;
   background-color: inherit;
   /* background-color: #5CDB95; */
 }
@@ -108,6 +123,8 @@
 }
 
 .track-log p {
+
+  color: #05386b;
   background-color: inherit;
 }
 
@@ -198,6 +215,7 @@
 }
 
 .user-profile-dropdown-option {
+  color: #05386b !important;
   display: flex;
   padding: 3px;
   /* padding-left: 0; */
@@ -229,7 +247,7 @@
 }
 
 .nav-bar li a {
-
+  color: #05386b !important;
   background-color: inherit;
 
 }
@@ -251,8 +269,7 @@
 
 .nav-option:hover {
   /* color: rgb(53, 0, 197) !important; */
-  border-bottom: 3px solid rgb(53, 0, 197);
-
+  border-bottom: 3px solid #05386b;
 
   background-color: inherit;
 }
@@ -450,6 +467,7 @@
   align-self: center;
   font-size: 10px;
   font-weight: 700;
+  color: white;
 }
 
 .add-section-img {
@@ -857,5 +875,6 @@
   font-size: 10px;
   font-weight: 700;
 
+  color: white;
   background-color: inherit;
 }

@@ -1,9 +1,11 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Router, Routes, Link } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
+
+import UserDropdown from "../../../UI/UserDropdown";
 
 const ProjectInfo = ({
   isProfileClicked,
@@ -15,7 +17,7 @@ const ProjectInfo = ({
   const [user, setUser] = useState(userInfo);
 
   let initialStateOfFavorite;
-  if (user.favoriteProjectList.indexOf(projectInfo.id) == -1) {
+  if (user.favoriteProjectList.indexOf(projectInfo.id) === -1) {
     initialStateOfFavorite = false;
   } else {
     initialStateOfFavorite = true;
@@ -53,7 +55,7 @@ const ProjectInfo = ({
 
   return (
     <div className="project-info">
-      <div className="project-name-and-logo">
+      <div className="project-name-and-logo ">
         <div className="project-logo">
           <img
             className="project-logo-img"
@@ -93,7 +95,7 @@ const ProjectInfo = ({
             </div>
           </div>
         </div>
-        <div className="user-profiles">
+        {/* <div className="user-profiles">
           <img
             id="user-profile"
             className="user-profile"
@@ -104,13 +106,19 @@ const ProjectInfo = ({
             id="dropdownMenu-user-profile"
             className={isProfileClicked ? "show-profile-options" : "hide-profile-options"}
           >
-            <a href="/user-profile" className="user-profile-dropdown-option">
+            <Link to="/profile" className="user-profile-dropdown-option">
               Profile
-            </a>
-            <a href="/admin-portal" className="user-profile-dropdown-option">
+            </Link>
+            <Link to="/admin-portal" className="user-profile-dropdown-option">
               Admin Portal
-            </a>
+            </Link>
+            <Link to="/logout" className="user-profile-dropdown-option">
+              Log Out
+            </Link>
           </div>
+        </div> */}
+        <div className="user-profiles">
+          <UserDropdown  />
         </div>
       </div>
       {/* <Router> */}
