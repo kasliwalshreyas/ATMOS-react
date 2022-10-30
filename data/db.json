@@ -108,6 +108,7 @@
       "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
       "userName": "Akash",
       "projectIDList": [
+        7,
         7
       ],
       "favoriteProjectList": [],
@@ -129,7 +130,8 @@
       "userName": "Weirdo",
       "projectIDList": [
         8,
-        10
+        10,
+        12
       ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
@@ -141,10 +143,13 @@
       "userName": "SPK",
       "projectIDList": [
         8,
-        10
+        10,
+        11,
+        12
       ],
       "favoriteProjectList": [
-        8
+        8,
+        12
       ],
       "taskAssignedIDList": [
         28,
@@ -297,11 +302,12 @@
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-29T20:41:01.873Z",
+      "lastUsed": "2022-10-30T10:04:18.046Z",
       "projectGuidelines": "",
       "userId": 1,
       "highAccess": [
-        1
+        1,
+        6
       ],
       "mediumAccess": [],
       "lowAccess": [],
@@ -368,6 +374,42 @@
       "mediumAccess": [],
       "lowAccess": [],
       "id": 10
+    },
+    {
+      "projectName": "third project",
+      "type": "Business",
+      "sectionIDList": [],
+      "projectStatement": "dsv",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T09:55:53.520Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 11
+    },
+    {
+      "projectName": "Fourth project",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T09:57:19.464Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [
+        8
+      ],
+      "lowAccess": [],
+      "id": 12
     }
   ],
   "sectionList": [
