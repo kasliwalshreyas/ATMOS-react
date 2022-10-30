@@ -10,6 +10,7 @@ import CreateProject from "./pages/Projects/CreateProject";
 import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import Logout from "./pages/Logout/Logout";
 import SectionArena from "./pages/Projects/Task/SectionArena";
 import AboutUS from "./pages/AboutUs/AboutUs";
 import Contact from './pages/ContactUs/Contact';
@@ -58,6 +59,7 @@ const App = () => {
 
             <Route exact path='/aboutUs' element={<AboutUS />} />
             <Route exact path='/contactUs' element={<Contact />} />
+            <Route exact path="/logout" element={<Logout />} />
           </Routes>
         </div>
       </Router>
