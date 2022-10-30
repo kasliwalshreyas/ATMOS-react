@@ -466,13 +466,11 @@
     {
       "projectName": "DEMO",
       "type": "Education",
-      "sectionIDList": [
-        16
-      ],
+      "sectionIDList": [],
       "projectStatement": "fcv cbf",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T21:45:34.241Z",
+      "lastUsed": "2022-10-30T21:02:27.865Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
