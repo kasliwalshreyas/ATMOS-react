@@ -24,14 +24,14 @@ const Navbar = () => {
         </Link>
         <Link
           className="link"
-          style={{ padding: "0px 40px 0px 35px" }}
+          style={{ padding: "0px 40px 0px 30px" }}
           to="/messages"
         >
           Messages
         </Link>
-        <Link className="link" to="/notes">
+        {/* <Link className="link" to="/notes">
           Notes
-        </Link>
+        </Link> */}
       </div>
       
     </nav>

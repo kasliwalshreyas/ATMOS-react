@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Rightdiv from "./Rightdiv";
@@ -6,6 +6,21 @@ import Navbar from "../../UI/Navbar";
 import styles from "./CreateProject.module.css";
 
 const CreateProject = () => {
+
+  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+
+    async function getUser() {
+      const res = await fetch("http://localhost:8000/userList/" + userID);
+      const data = await res.json();
+      setUser(data);
+    }
+    getUser();
+  }, [userID]);
+
+
   const [projectName, setProjectName] = useState("");
   const [type, setType] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -16,17 +31,17 @@ const CreateProject = () => {
   const [projectMission, setProjectMission] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectGuidelines, setProjectGuidelines] = useState("");
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   let lastUsed;
 
-  console.log(user);
+  console.log(user, 'user from create project');
 
   function backToHome() {
     setnextPage(1);
     history("/Projects");
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     lastUsed = new Date();
     e.preventDefault();
     const project = {
@@ -44,17 +59,46 @@ const CreateProject = () => {
       lowAccess: [],
     };
     setIsPending(true);
-    fetch("http://localhost:8000/projectList", {
+    const newProjectInfo = await fetch("http://localhost:8000/projectList", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(project),
-    }).then(() => {
+    }).then(res => res.json());
+    console.log(newProjectInfo, 'newProjectInfo');
+
+    user.projectIDList.push(newProjectInfo.id);
+
+    const userInfo = await fetch(`http://localhost:8000/userList/${newProjectInfo.userId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    }).then((res) => {
       setIsPending(false);
       setnextPage(1);
-      // console.log(nextPage);
-      history("/Projects");
+      history("/projects");
+      return res.json();
     });
+    console.log(userInfo, 'userInfo');
+
+    // localStorage.setItem("user", JSON.stringify(userInfo));
+
   };
+
+
+
+
+
+  // fetch("http://localhost:8000/projectList", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify(project),
+  // }).then(() => {
+  //   setIsPending(false);
+  //   setnextPage(1);
+  //   // console.log(nextPage);
+  //   history("/Projects");
+  // });
+
 
   const checkProjectName = () => {
     // console.log(e.target.value);

@@ -2,8 +2,12 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const ProjectList = ({ projects }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+const ProjectList = ({ projects, userInfo }) => {
+  const [user, setUser] = useState(userInfo);
+
+  console.log(user, 'from projectList');
+
+
   const navigate = useNavigate();
   const handleLinkClick = (project) => {
     project.lastUsed = new Date();
