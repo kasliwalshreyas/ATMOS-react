@@ -105,6 +105,8 @@ const CreateProject = () => {
     let projectNameInput = document.getElementById("projectNameInput");
     if (projectNameInput.value === "") {
       projectNameInput.placeholder = "This field is required";
+      projectNameInput.style.border = "1px solid red";
+      projectNameInput.style.backgroundColor = "#FFCCCB";
     }
   };
 
