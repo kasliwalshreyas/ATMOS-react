@@ -50,7 +50,7 @@ const App = () => {
             <Route exact path="/home" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             {/* <Route path="/messages" element={<Messages />} /> */}
-            <Route path="/messages" element={<ChatEngine height = "100vh"  projectID="5451affd-20e6-4d49-a60b-c93bb9fcba13" userName="dersabce" userSecret="D@123456"  />} />
+            <Route path="/messages" element={<Messages/>} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
             {/* <Route path="/task" element={<MainView />} /> */}

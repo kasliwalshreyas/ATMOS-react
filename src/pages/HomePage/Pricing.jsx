@@ -72,7 +72,7 @@ const tiers = [
 const footers = [
   {
     title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
+    description: ['Team', 'About Us', 'Contact us', 'Locations'],
   },
   {
     title: 'Features',
@@ -112,9 +112,7 @@ function PricingContent() {
           Pricing
         </Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
-          Quickly build an effective pricing table for your potential customers with
-          this layout. It&apos;s built with default MUI components with little
-          customization.
+          Quickly compare the benifits of the our differt plans from our pricing table. It&apos;s a general pricing plan, there is a scope of negosiation and customization.
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -174,13 +172,13 @@ function PricingContent() {
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions>
                     <NavLink to="/signup">
+                <CardActions>
                   <Button fullWidth variant={tier.buttonVariant}>
                     {tier.buttonText}
                   </Button>
-                    </NavLink>
                 </CardActions>
+                    </NavLink>
               </Card>
             </Grid>
           ))}

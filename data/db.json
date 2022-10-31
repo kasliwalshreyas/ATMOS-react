@@ -175,6 +175,15 @@
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 10
+    },
+    {
+      "emailId": "naman3@gmail.com",
+      "password": "$2a$10$l0vN6sYNGZ583VE4DgP46uISGQ5/3p3RhMBIG/NqArMpbY3LVXDrS",
+      "userName": "Naman",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 11
     }
   ],
   "projectList": [
@@ -472,7 +481,7 @@
       "projectStatement": "fcv cbf",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-10-30T21:02:27.865Z",
+      "lastUsed": "2022-10-30T23:44:31.255Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
