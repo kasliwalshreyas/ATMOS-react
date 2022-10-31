@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 const RecentProject = ({ user }) => {
   const [userInfo, setUserInfo] = useState(user);
   const [showFavorite, setShowFavorite] = useState(false);
-  const { data: projects, isPending, error } = useFetch(
-    "http://localhost:8000/projectList"
-  );
+  const {
+    data: projects,
+    isPending,
+    error,
+  } = useFetch("http://localhost:8000/projectList");
 
   const handleChange = () => {
     if (showFavorite === false) setShowFavorite(true);
@@ -126,16 +128,16 @@ const RecentProject = ({ user }) => {
             </select>
           </h4>
         </div>
-
         {!showFavorite && (
           <div className={styles.recentListdiv}>
-            {projects && console.log(projects, 'from recent')}
+            {projects && console.log(projects, "from recent")}
             {projects &&
               userInfo.projectIDList.length !== 0 &&
               projects.map((project) =>
                 userInfo.projectIDList.map(
                   (projectid, index) =>
-                    projectid === project.id && index < 8 && (
+                    projectid === project.id &&
+                    index < 8 && (
                       <div className={styles.recentParticularProject}>
                         {late[project.id - 1] !== -1 && (
                           <Link
@@ -151,7 +153,9 @@ const RecentProject = ({ user }) => {
                                 </h4>
                               </div>
                               <div className={styles.projectInfoLastUsed}>
-                                <p className={styles.lastUsed}>last used: {late[project.id - 1]}</p>
+                                <p className={styles.lastUsed}>
+                                  last used: {late[project.id - 1]}
+                                </p>
                               </div>
                             </div>
                             {/* <h6 className={styles.particularProjectName}>
@@ -170,9 +174,16 @@ const RecentProject = ({ user }) => {
               )}
 
             {userInfo.projectIDList.length === 0 && (
-              <div>
+              <div className={styles.mainFavorite}>
                 <div className={styles.noFavorite}>
-                  You haven't started any Project yet.
+                  <img
+                    className={styles.noFavoriteImgRecent}
+                    src="https://www.linkpicture.com/q/project-management.png"
+                  ></img>
+                </div>
+                <div ClassName={styles.noFavoriteTxt}>
+                  <p className={styles.upperFavoriteTxt}>You haven't started</p>
+                  <p className={styles.lowerFavoriteTxt}> any Project yet</p>
                 </div>
               </div>
             )}
@@ -202,7 +213,9 @@ const RecentProject = ({ user }) => {
                                 </h4>
                               </div>
                               <div className={styles.projectInfoLastUsed}>
-                                <p className={styles.lastUsed}>last used: {late[project.id - 1]}</p>
+                                <p className={styles.lastUsed}>
+                                  last used: {late[project.id - 1]}
+                                </p>
                               </div>
                             </div>
                           </Link>
@@ -212,9 +225,16 @@ const RecentProject = ({ user }) => {
                 )
               )}
             {userInfo.favoriteProjectList.length === 0 && (
-              <div>
+              <div className={styles.mainFavorite}>
                 <div className={styles.noFavorite}>
-                  You don't have any favorite project
+                  <img
+                    className={styles.noFavoriteImg}
+                    src="https://www.linkpicture.com/q/favorites.png"
+                  ></img>
+                </div>
+                <div ClassName={styles.noFavoriteTxt}>
+                  <p className={styles.upperFavoriteTxt}>You don't have any</p>
+                  <p className={styles.lowerFavoriteTxt}>favorite project</p>
                 </div>
               </div>
             )}

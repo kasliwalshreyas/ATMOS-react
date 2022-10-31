@@ -1,11 +1,9 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
-import { Route, Router, Routes, Link } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
-
-import UserDropdown from "../../../UI/UserDropdown";
 
 const ProjectInfo = ({
   isProfileClicked,
@@ -55,7 +53,7 @@ const ProjectInfo = ({
 
   return (
     <div className="project-info">
-      <div className="project-name-and-logo ">
+      <div className="project-name-and-logo">
         <div className="project-logo">
           <img
             className="project-logo-img"
@@ -95,7 +93,7 @@ const ProjectInfo = ({
             </div>
           </div>
         </div>
-        {/* <div className="user-profiles">
+        <div className="user-profiles">
           <img
             id="user-profile"
             className="user-profile"
@@ -106,19 +104,13 @@ const ProjectInfo = ({
             id="dropdownMenu-user-profile"
             className={isProfileClicked ? "show-profile-options" : "hide-profile-options"}
           >
-            <Link to="/profile" className="user-profile-dropdown-option">
+            <a href="/user-profile" className="user-profile-dropdown-option">
               Profile
-            </Link>
-            <Link to="/admin-portal" className="user-profile-dropdown-option">
+            </a>
+            <a href="/admin-portal" className="user-profile-dropdown-option">
               Admin Portal
-            </Link>
-            <Link to="/logout" className="user-profile-dropdown-option">
-              Log Out
-            </Link>
+            </a>
           </div>
-        </div> */}
-        <div className="user-profiles">
-          <UserDropdown  />
         </div>
       </div>
       {/* <Router> */}

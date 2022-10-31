@@ -22,7 +22,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-bootstrap": "^2.5.0",
     "react-chartjs-2": "^4.3.1",
-    "react-chat-engine": "^1.8.13",
+    "react-chat-engine": "^1.11.23",
     "react-circular-progressbar": "^2.1.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
