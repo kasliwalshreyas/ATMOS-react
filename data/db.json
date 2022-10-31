@@ -173,6 +173,15 @@
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 10
+    },
+    {
+      "emailId": "naman3@gmail.com",
+      "password": "$2a$10$l0vN6sYNGZ583VE4DgP46uISGQ5/3p3RhMBIG/NqArMpbY3LVXDrS",
+      "userName": "Naman",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 11
     }
   ],
   "projectList": [
