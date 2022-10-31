@@ -1,5 +1,5 @@
 import React from "react";
-import OuterNavBar from "../../UI/OuterNavBar";
+import OuterNavBar from "./Navbar";
 import styles from './Contact.module.css';
 
 

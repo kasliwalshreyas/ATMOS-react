@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { BsLinkedin, BsGithub } from "react-icons/bs";
-import OuterNavBar from '../../UI/OuterNavBar';
+import OuterNavBar from './Navbar.jsx';
 import ProfileCard from './ProfileCard';
 import img4 from '../../images/developer-team.svg';
 import img5 from '../../images/business-deal.svg';
