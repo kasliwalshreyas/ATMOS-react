@@ -39,8 +39,7 @@ const ProjectList = ({ projects, userInfo }) => {
       </div>
       {projects
         .map((project) =>
-          user.projectIDList.map((userProjectId) => (
-            userProjectId === project.id && <div className="project-real">
+            user.id === project.userId && <div className="project-real">
               <div className="project-container">
                 <a
                   onClick={() => {
@@ -57,8 +56,7 @@ const ProjectList = ({ projects, userInfo }) => {
                 <p>{project.projectName}</p>
               </div>
             </div>
-          ))
-        )
+          )
         .reverse()}
     </div>
   );

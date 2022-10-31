@@ -42,14 +42,24 @@ const UpcomingTask = ({ user }) => {
                 handledeadline(taskList.taskDeadline) === 1 && !taskList.taskCompletion && (
                   <div className={styles.particularTask}>
                     <Link to="/task">
-                      <h6 className={styles.particularTaskName}>
+                      <div className={styles.projectDiv}>
+                        <div className={styles.projectInfoName}>
+                          <h4 className={styles.projectName}>
+                            {taskList.taskName}
+                          </h4>
+                        </div>
+                        <div className={styles.projectInfoLastUsed}>
+                          <p className={styles.lastUsed}>due: {taskList.taskDeadline}</p>
+                        </div>
+                      </div>
+                      {/* <h6 className={styles.particularTaskName}>
                         <div className={styles.taskName}>
-                          {taskList.taskName}
+
                         </div>
                         <div className={styles.taskTime}>
-                          due: {taskList.taskDeadline}
+
                         </div>
-                      </h6>
+                      </h6> */}
                     </Link>
                   </div>
                 )

@@ -41,7 +41,9 @@
     border-radius: 50%;
     object-fit: cover;
 
-    background-color: inherit;
+    /* background-color: inherit; */
+    background-color: #05386b;
+
 }
 
 .Card:hover Image {
@@ -59,7 +61,7 @@
 
 .para {
     margin-bottom: 0;
-
+    color: #05386b;
     background-color: inherit;
 }
 
