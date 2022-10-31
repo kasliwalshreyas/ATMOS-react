@@ -209,12 +209,52 @@ color: #05386b;
     border-radius: 0;
 }
 
+.mainFavorite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 320px;
+}
+
 .noFavorite {
+    width: 150px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
+}
+
+.noFavoriteImg {
+    width: 60%;
+    height: 100%;
+}
+
+.noFavoriteImgRecent {
+    width: 50%;
+    height: 100%;
+}
+
+.noFavoriteTxt {
+    width: 200px;
     color: #5C5C5C;
     font-family: 'Mukta', sans-serif;
     font-weight: 500;
     font-size: 16px;
-    margin: 50px;
     display: flex;
     justify-content: center;
 }
+
+.upperFavoriteTxt {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+.lowerFavoriteTxt {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+}
+
