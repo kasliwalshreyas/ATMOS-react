@@ -69,7 +69,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
     <TeamMemberCard
       name={userName}
       email={emailId}
-      size={'small'}
+    // size={'small'}
     />
   );
 
@@ -173,29 +173,32 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
         </div>
         <div className={styles.teamMembersList}>
           {console.log(projectInfo)}
-          {projectInfo.highAccess.map((member) => {
+          {projectInfo.highAccess.map((member, index) => {
             return (
               <TeamMemberCard
                 name={member.userName}
                 email={member.emailId}
+                key={index}
               // size={'large'}
               />
             )
           })}
-          {projectInfo.mediumAccess.map((member) => {
+          {projectInfo.mediumAccess.map((member, index) => {
             return (
               <TeamMemberCard
                 name={member.userName}
                 email={member.emailId}
+                key={index}
               // size={'large'}
               />
             )
           })}
-          {projectInfo.lowAccess.map((member) => {
+          {projectInfo.lowAccess.map((member, index) => {
             return (
               <TeamMemberCard
                 name={member.userName}
                 email={member.emailId}
+                key={index}
               // size={'large'}
               />
             )

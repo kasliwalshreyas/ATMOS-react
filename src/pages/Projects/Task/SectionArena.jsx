@@ -317,7 +317,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
     <>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <div className="section-arena">
-          {/* {console.log(sectionList)} */}
+          {console.log(sectionList)}
 
           {sectionList &&
             sectionList.map((section) => (

@@ -12,9 +12,7 @@ const DescriptionComponent = ({ heading, description }) => {
             </div>
 
             <label className={styles.projectDescriptionLabel}>{heading}</label>
-            <textarea className={styles.projectDescriptionTextArea}>
-                {description}
-            </textarea>
+            <textarea className={styles.projectDescriptionTextArea} value={description} readOnly></textarea>
         </div>
     );
 }

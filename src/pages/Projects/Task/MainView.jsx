@@ -79,7 +79,7 @@ const MainView = ({ overview, board, charts }) => {
   }, [projectId]);
 
 
-  // console.log(projectInfo);
+  console.log(projectInfo);
 
   return (
     <div className="normal-div" onClick={handleClickOutside}>

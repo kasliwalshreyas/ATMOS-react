@@ -4,7 +4,7 @@ import profileImage from "../../../images/logo192.png";
 
 
 
-const TeamMemberCard = ({ name, email, role, id }) => {
+const TeamMemberCard = ({ name, email, role }) => {
     // console.log(name);
     return (
         <div className={styles.Card}>
