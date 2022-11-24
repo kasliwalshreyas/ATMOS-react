@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import CommentArena from './CommentArena';
 
-const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList }) => {
+const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList, userInfo }) => {
 
     const taskCompletionOptions = [
         { value: true, label: 'Yes' },
@@ -73,7 +73,7 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
 
     const handleSubmit = (taskId, sectionId, sectionInfo) => {
 
-        let taskData = { taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription }
+        let taskData = { taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription, taskComments }
 
         //Add Task with assignee
         console.log(taskId, taskAssignee)
@@ -791,7 +791,8 @@ const TaskModal = ({ taskInfo, sectionInfo, show, closeModal, rerender, setReren
                         </div>}
                     {comments &&
                         <div>
-                            <CommentArena taskInfo={taskInfo} taskComments={taskComments} setTaskComments={setTaskComments} />
+                            
+                            <CommentArena taskInfo={taskInfo} taskComments={taskComments} setTaskComments={setTaskComments} userInfo={userInfo} />
                             {/* <textarea className='task-modal-description' value={taskComments} onChange={(e) => setTaskComments(e.target.value)} rows={5} placeholder="add comments for your team members" ></textarea> */}
                         </div>}
                     {/* <div className='task-modal-button-container'>

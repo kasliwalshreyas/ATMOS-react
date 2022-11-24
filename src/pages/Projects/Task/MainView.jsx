@@ -92,7 +92,7 @@ const MainView = ({ overview, board, charts }) => {
       ></ProjectInfo>)}
       {/* <FilterFunc></FilterFunc>s */}
       {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></OverView>}
-      {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></SectionArena>}
+      {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfo={user} ></SectionArena>}
       {user && charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Charts>}
     </div>
   );

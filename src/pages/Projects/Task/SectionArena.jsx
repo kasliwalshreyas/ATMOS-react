@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import SectionCard from "./SectionCard";
 import { DragDropContext } from "react-beautiful-dnd";
 
-const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
+const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   const [show, setShow] = useState(false);
 
   const [selectedTask, setSelectedTask] = useState(null);
@@ -125,7 +125,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
         taskStatus: "Choose Status",
         taskDeadline: null,
         taskDescription: null,
-        taskComments: null,
+        taskComments: [],
       },
       sectionInfo
     );
@@ -356,6 +356,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo }) => {
           setRerender={setRerender}
           projectInfo={projectInfo}
           AssigneeList={AssigneeList}
+          userInfo={userInfo}
         />
       )}
     </>

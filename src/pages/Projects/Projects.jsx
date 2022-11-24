@@ -9,29 +9,25 @@ const Projects = () => {
   const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
 
+  useEffect(() => {
     async function getUser() {
       const res = await fetch("http://localhost:8000/userList/" + userID);
       const data = await res.json();
       setUser(data);
     }
     getUser();
-  }, [userID]);
+    console.log(user, 'from projects');
 
-
+  }, []);
 
   const { data: projects, isPending, error } = useFetch(
     "http://localhost:8000/projectList"
   );
-  // const createProject = () => { };
 
   return (
     <>
       <Navbar />
-
-      {error && <div>{error}</div>}
-      {isPending && <div>Loading...</div>}
       {user && projects && <ProjectList projects={projects} userInfo={user} />}
     </>
   );

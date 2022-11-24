@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./CommentArena.module.css";
 import profilePic from '../../../images/profilepic.png';
 
-const CommentCard = ({ }) => {
+const CommentCard = ({ comment }) => {
     return (
         <div className={styles.commentCard}>
             <div className={styles.commentHeader}>
@@ -11,7 +11,7 @@ const CommentCard = ({ }) => {
                 </div>
                 <div className={styles.commentInfo}>
                     <div className={styles.commenterName}>
-                        <p>John Doe</p>
+                        <p>{comment.commenter}</p>
                     </div>
                     <div className={styles.commentDate}>
                         <p>6 hour</p>
@@ -19,7 +19,7 @@ const CommentCard = ({ }) => {
                 </div>
             </div>
             <div className={styles.commentBody}>
-                <p>Actually, now that I try out the links on my message, above, none of them take me to the secure site. Only my shortcut on my desktop, which I created years ago.</p>
+                <p>{comment.comment}</p>
             </div>
             <div className={styles.commentFooter}>
                 {/* button for later purposes */}
