@@ -153,6 +153,30 @@
       "highAccess": [
         1
       ],
+      "mediumAccess": [
+        2,
+        5
+      ],
+      "lowAccess": [
+        4,
+        3
+      ],
+      "id": 2,
+      "lastUsed": "2022-10-29T21:16:04.558Z"
+    },
+    {
+      "projectName": "ABCD",
+      "type": "Education",
+      "sectionIDList": [],
+      "projectStatement": "To learn",
+      "projectMission": "Yes u can do it",
+      "projectDescription": "Later babes!!!",
+      "projectGuidelines": "more details will follow later😜",
+      "userId": 1,
+      "highAccess": [
+        1,
+        2
+      ],
       "mediumAccess": [],
       "lowAccess": [],
       "id": 2,
@@ -257,6 +281,163 @@
       ],
       "lowAccess": [],
       "id": 7
+      "mediumAccess": [
+        4
+      ],
+      "lowAccess": [
+        8
+      ],
+      "id": 8
+    },
+    {
+      "projectName": "Complete",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "jhsadbf",
+      "projectMission": "akjdsbfh",
+      "projectDescription": "djahf",
+      "lastUsed": "2022-10-30T18:27:22.145Z",
+      "projectGuidelines": "",
+      "userId": 6,
+      "highAccess": [
+        6
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 9
+    },
+    {
+      "projectName": "Second Project",
+      "type": "Education",
+      "sectionIDList": [
+        13,
+        14
+      ],
+      "projectStatement": "wdd ",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T10:45:26.340Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [
+        2
+      ],
+      "lowAccess": [],
+      "id": 10
+    },
+    {
+      "projectName": "third project",
+      "type": "Business",
+      "sectionIDList": [],
+      "projectStatement": "dsv",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T16:31:36.969Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 11
+    },
+    {
+      "projectName": "Fourth project",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T18:23:38.498Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [
+        8
+      ],
+      "lowAccess": [],
+      "id": 12
+    },
+    {
+      "projectName": "Fifth project",
+      "type": "Education",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T15:03:26.141Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 13
+    },
+    {
+      "projectName": "duisa dsa dsa dhjsa dsa dkja dkjas dkjas dkja dkw",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T18:23:14.306Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 14
+    },
+    {
+      "projectName": "DEMO",
+      "type": "Education",
+      "sectionIDList": [],
+      "projectStatement": "fcv cbf",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-31T04:57:33.231Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [
+        1
+      ],
+      "lowAccess": [],
+      "id": 15
+    },
+    {
+      "projectName": "First",
+      "type": "Education",
+      "sectionIDList": [
+        17,
+        18
+      ],
+      "projectStatement": "jkwbrjf",
+      "projectMission": "sj fj asfasf",
+      "projectDescription": "ans fn s",
+      "lastUsed": "2022-10-31T00:11:39.460Z",
+      "projectGuidelines": "kansfknak",
+      "userId": 7,
+      "highAccess": [
+        7
+      ],
+      "mediumAccess": [
+        6
+      ],
+      "lowAccess": [],
+      "id": 16
     }
   ],
   "sectionList": [
@@ -278,8 +459,75 @@
       "id": 7
     },
     {
-      "sectionName": "dush sec 1",
-      "projectId": 3,
+      "sectionName": "Shubham's section",
+      "projectId": 5,
+      "taskIDList": [],
+      "id": 8
+    },
+    {
+      "sectionName": "Frontend",
+      "projectId": 6,
+      "taskIDList": [
+        26
+      ],
+      "id": 9
+    },
+    {
+      "sectionName": "Backend",
+      "projectId": 6,
+      "taskIDList": [
+        27
+      ],
+      "id": 10
+    },
+    {
+      "sectionName": "First Section",
+      "projectId": 8,
+      "taskIDList": [
+        28,
+        29
+      ],
+      "id": 11
+    },
+    {
+      "sectionName": "Second Section",
+      "projectId": 8,
+      "taskIDList": [
+        30
+      ],
+      "id": 12
+    },
+    {
+      "sectionName": "Section first",
+      "projectId": 10,
+      "taskIDList": [],
+      "id": 13
+    },
+    {
+      "sectionName": "Section second",
+      "projectId": 10,
+      "taskIDList": [
+        32
+      ],
+      "id": 14
+    },
+    {
+      "sectionName": "Section new",
+      "projectId": 7,
+      "taskIDList": [
+        33
+      ],
+      "id": 15
+    },
+    {
+      "sectionName": "sec 1",
+      "projectId": 15,
+      "taskIDList": [],
+      "id": 16
+    },
+    {
+      "sectionName": "Something",
+      "projectId": 16,
       "taskIDList": [
         11
       ],
@@ -366,10 +614,160 @@
       "id": 10
     },
     {
-      "taskName": "dush t1",
+      "taskName": "Years",
+      "taskCompletion": true,
+      "taskAssignee": 1,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-09-16",
+      "taskDescription": null,
+      "id": 11
+    },
+    {
+      "taskName": "Zebrbok",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": null,
+      "id": 12
+    },
+    {
+      "taskName": "Zoyol",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": null,
+      "id": 13
+    },
+    {
+      "taskName": "ZZZ",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": null,
+      "id": 14
+    },
+    {
+      "taskName": "XXYYZZ",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": null,
+      "id": 16
+    },
+    {
+      "taskName": "Profile Modal",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "medium",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-27",
+      "taskDescription": "- Update Role\n- Remove Member",
+      "id": 17
+    },
+    {
+      "taskName": "Setting features",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": "Think about extra Setting features",
+      "id": 18
+    },
+    {
+      "taskName": "Description",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "medium",
+      "taskStatus": "off-track",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": "- update description\n- remove particular dialog box",
+      "id": 19
+    },
+    {
+      "taskName": "Save drop down states",
       "taskCompletion": false,
       "taskAssignee": 5,
       "taskPriority": "low",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-30",
+      "taskDescription": null,
+      "id": 20
+    },
+    {
+      "taskName": "Count chart",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-10-27",
+      "taskDescription": null,
+      "id": 21
+    },
+    {
+      "taskName": "CSS of priority and status",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-10-28",
+      "taskDescription": null,
+      "id": 22
+    },
+    {
+      "taskName": "asdvdvddvd d dc dcscs s",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "high",
+      "taskStatus": "off-track",
+      "taskDeadline": "2022-10-28",
+      "taskDescription": null,
+      "id": 23
+    },
+    {
+      "taskName": "Hi, It's Me",
+      "taskCompletion": true,
+      "taskAssignee": 4,
+      "taskPriority": "high",
+      "taskStatus": "at-risk",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": null,
+      "id": 24
+    },
+    {
+      "taskName": "ZeroCent",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "high",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-16",
+      "taskDescription": null,
+      "id": 25
+    },
+    {
+      "taskName": "CSS",
+      "taskCompletion": false,
+      "taskAssignee": 4,
+      "taskPriority": "medium",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-10-31",
+      "taskDescription": "fcbc ",
+      "id": 26
+    },
+    {
+      "taskName": "s",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
       "taskStatus": "Choose Status",
       "taskDeadline": "2022-11-01",
       "taskDescription": null,
