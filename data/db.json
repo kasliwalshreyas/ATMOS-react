@@ -5,23 +5,17 @@
       "password": "$2a$10$O6mu964IqflABMD5Q60jNOdrKK2GKpM6oXzmY5f3YZYQhaJ/6UG26",
       "userName": "Shreyas Kasliwal",
       "projectIDList": [
-        1,
-        2
-      ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [
-        1,
         1
       ],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
       "id": 9
     },
     {
       "emailId": "spk3@atmos.in",
       "password": "$2a$10$/pmkG2/TEombGMvzxe6mxe0AqRodJRV/5pIjOiszQMqcDqMzBMwzS",
       "userName": "THE SPK",
-      "projectIDList": [
-        1
-      ],
+      "projectIDList": [],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 10
@@ -29,35 +23,13 @@
   ],
   "projectList": [
     {
-      "projectName": "Hello",
-      "type": "",
-      "sectionIDList": [
-        1,
-        2
-      ],
-      "projectStatement": "",
-      "projectMission": "",
-      "projectDescription": "",
-      "lastUsed": "2022-11-24T15:03:58.595Z",
-      "projectGuidelines": "",
-      "userId": 9,
-      "highAccess": [
-        9
-      ],
-      "mediumAccess": [
-        10
-      ],
-      "lowAccess": [],
-      "id": 1
-    },
-    {
-      "projectName": "Hello 2",
+      "projectName": "First Project",
       "type": "",
       "sectionIDList": [],
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-11-24T14:45:47.965Z",
+      "lastUsed": "2022-11-25T14:10:17.303Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
@@ -65,61 +37,9 @@
       ],
       "mediumAccess": [],
       "lowAccess": [],
-      "id": 2
-    }
-  ],
-  "sectionList": [
-    {
-      "sectionName": "Frontend",
-      "projectId": 1,
-      "taskIDList": [
-        1
-      ],
-      "id": 1
-    },
-    {
-      "sectionName": "Backend",
-      "projectId": 1,
-      "taskIDList": [],
-      "id": 2
-    }
-  ],
-  "taskList": [
-    {
-      "taskName": "Comments",
-      "taskCompletion": false,
-      "taskAssignee": 9,
-      "taskPriority": "medium",
-      "taskStatus": "at-risk",
-      "taskDeadline": "2022-11-24",
-      "taskDescription": null,
-      "taskComments": [
-        {
-          "comment": "hi",
-          "commenter": "Shreyas Kasliwal",
-          "commentTime": "11/24/2022, 9:34:28 PM",
-          "id": 1
-        },
-        {
-          "comment": "Its ME",
-          "commenter": "THE SPK",
-          "commentTime": "11/24/2022, 9:35:04 PM",
-          "id": 2
-        },
-        {
-          "comment": "I am the Problem",
-          "commenter": "Shreyas Kasliwal",
-          "commentTime": "11/24/2022, 9:35:52 PM",
-          "id": 3
-        },
-        {
-          "comment": "TS",
-          "commenter": "Shreyas Kasliwal",
-          "commentTime": "11/24/2022, 9:37:10 PM",
-          "id": 4
-        }
-      ],
       "id": 1
     }
-  ]
+  ],
+  "sectionList": [],
+  "taskList": []
 }

@@ -38,7 +38,7 @@ const CommentArena = ({ taskInfo, taskComments, setTaskComments, userInfo }) => 
             <div className={styles.commentList}>
                 {taskComments.length === 0 && <h1 className={styles.noCommentHeading}>No Comment Yet</h1>}
                 {taskComments && taskComments.map((comment) => {
-                    return <CommentCard comment={comment} />
+                    return <CommentCard comment={comment} key={comment.id} />
                 })
                 }
             </div>

@@ -124,7 +124,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
         taskPriority: "Choose Priority",
         taskStatus: "Choose Status",
         taskDeadline: null,
-        taskDescription: null,
+        taskDescription: "",
         taskComments: [],
       },
       sectionInfo

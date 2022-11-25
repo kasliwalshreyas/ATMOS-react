@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
+import { useNavigate } from "react-router-dom";
 
 const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
   // console.log(projectId);
@@ -17,6 +18,13 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
   const [projectGuidelines, setProjectGuidelines] = useState(projectInfo.projectGuidelines);
   const [selectedTeamMember, setSelectedTeamMember] = useState(null);
   const [selectedRole, setSelectedRole] = useState(null);
+
+  // const [taskList, setTaskList] = useState(null);
+  // const [sectionList, setSectionList] = useState(null);
+
+
+
+
   // const [projectTeam, setProjectTeam] = useState(projectInfo.projectTeam);
 
   const [userList, setUserList] = useState([]);
@@ -34,6 +42,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
 
 
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -141,6 +150,209 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
     setSelectedRole(option);
   }
 
+  async function deleteProjectFromUser(projectID, projectAssignee) {
+    const res = await fetch(`http://localhost:8000/userList/${projectAssignee}`).then((response) => { return response.json() })
+      .then((user) => {
+        const projectList = user.projectIDList.filter((project) => {
+          return project !== projectID;
+        })
+        user.projectIDList = projectList;
+        const favProjectList = user.favoriteProjectList.filter((project) => {
+          return project !== projectID;
+        })
+        user.favoriteProjectList = favProjectList;
+        return user;
+      })
+      .then((user) => {
+        return fetch(`http://localhost:8000/userList/${projectAssignee}`, {
+          method: 'PUT',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user)
+        })
+      })
+      .then((res) => {
+        return res.json();
+      }
+      )
+      .then((user) => {
+        return user;
+      }
+      )
+    console.log(res, 'deleted user data from DELETEPROJECTFROMUSER');
+    return res;
+  }
+
+  async function deleteTaskFromUser(taskID, taskAssignee) {
+    const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`)
+      .then((res) => { return res.json() })
+      .then((AssigneeData) => {
+        // const taskIDList = res2.taskIDList.filter((task) => { return !(task.id === taskID) });
+        // const userData = { ...res2, taskIDList };
+        // console.log(taskID);
+        AssigneeData.taskAssignedIDList = AssigneeData.taskAssignedIDList.filter((taskid) => { return !(taskid === taskID) });
+        console.log(AssigneeData);
+        return fetch(`http://localhost:8000/userList/${taskAssignee}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(AssigneeData)
+        })
+          .then((user) => {
+            console.log("Deleted Task from User");
+            return user;
+          });
+      }
+      )
+    console.log(res, 'deleted user data from DELETETASKFROMUSER');
+    return res;
+  }
+
+  async function deleteTask(taskID, assigneeID) {
+
+    if (assigneeID) {
+      const res1 = await deleteTaskFromUser(taskID, assigneeID);
+    }
+
+    const res = await fetch(`http://localhost:8000/taskList/${taskID}`, {
+      method: 'DELETE'
+    });
+    console.log("deleted task", taskID);
+    return res;
+  }
+
+  async function deleteSection(sectionID, sectionInfo) {
+
+    //delete task inside section
+    for (let i = 0; i < sectionInfo.taskIDList.length; i++) {
+      // console.log("inside delete section", i);
+      let res3 = await deleteTask(sectionInfo.taskIDList[i].id, sectionInfo.taskIDList[i].taskAssignee);
+    }
+
+    //delete section
+    const res = await fetch(`http://localhost:8000/sectionList/${sectionID}`, {
+      method: 'DELETE'
+    })
+      .then((res) => {
+        console.log('Section Deleted');
+        return res.json();
+      });
+    return res;
+  }
+
+  const populateTask = (sec, task) => {
+    // console.log(data);
+
+    if (sec) {
+      for (let i = 0; i < sec.length; i++) {
+        for (let j = 0; j < sec[i].taskIDList.length; j++) {
+          sec[i].taskIDList[j] = task.find(
+            (element) => element.id === sec[i].taskIDList[j]
+          );
+        }
+      }
+    }
+    // console.log("populated", sec);
+    return sec;
+  };
+
+  async function populateProjectInfo() {
+    return fetch(`http://localhost:8000/sectionList?projectId_like=${projectId}`)
+      .then((res) => {
+        // console.log("sectionList fetched", res);
+        if (!res.ok) {
+          throw Error("Not able to fetch the SectionList");
+        }
+        return res.json();
+      })
+      .then(async (sec) => {
+        // console.log(sec);
+        const task = await fetch("http://localhost:8000/taskList").then(
+          (res) => {
+            // console.log(res);
+            if (!res.ok) {
+              throw Error("Not able to fetch the TaskList");
+            }
+            return res.json();
+          }
+        );
+        return [sec, task];
+      })
+      .then(([sec, task]) => {
+        // console.log(sec, task);
+        // setTaskList(task);
+        // setError(null);
+        return [sec, task];
+      })
+      .then(([sec, task]) => {
+        // console.log(sec, task);
+        sec = populateTask(sec, task);
+        // setSectionList(sec);
+        // setError(null);
+        return sec;
+      })
+      .catch((err) => {
+        // setError(err.message);
+        // setSectionList(null);
+      });
+
+  }
+
+
+  const handleDeleteProject = async () => {
+
+    console.log(projectInfo);
+
+    const sec = await populateProjectInfo();
+    console.log(sec, "sec");
+    // console.log(taskList, 'tasklist');
+    // console.log(sectionList, 'sec');
+
+
+    // delete the task from of that project from task list
+
+    // delete the section of that project from section list
+    for (let i = 0; i < sec.length; i++) {
+      // console.log("inside delete section", i);
+      let res = await deleteSection(sec[i].id, sec[i]);
+    }
+    console.log("deleted all section");
+
+    // delete the project from user's projectIDList
+    for (let i = 0; i < projectInfo.highAccess.length; i++) {
+      const res2 = await deleteProjectFromUser(projectInfo.id, projectInfo.highAccess[i].id);
+    }
+    for (let i = 0; i < projectInfo.mediumAccess.length; i++) {
+      const res2 = await deleteProjectFromUser(projectInfo.id, projectInfo.mediumAccess[i].id);
+    }
+    for (let i = 0; i < projectInfo.lowAccess.length; i++) {
+      const res2 = await deleteProjectFromUser(projectInfo.id, projectInfo.lowAccess[i].id);
+    }
+
+    console.log("deleted project from userList");
+
+    // delete the project from project list
+    const res = await fetch(`http://localhost:8000/projectList/${projectId}`, {
+      method: 'DELETE'
+    })
+      .then((res) => {
+        console.log('Project Deleted');
+        return res.json();
+      }
+      )
+      .then((data) => {
+        console.log(data);
+        navigate('/projects');
+      }
+      )
+      .catch((err) => {
+        console.log(err.message);
+      }
+      );
+  }
+
+  const handleTransfer = () => {
+  }
+
+
 
   return (
     <div className={styles.overviewMainView}>
@@ -228,7 +440,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
               </div>
             </div>
             <div className={styles.settingBtnDiv}>
-              <button className={styles.settingBtn}>
+              <button className={styles.settingBtn} onClick={handleDeleteProject}>
                 Delete this project
               </button>
             </div>
@@ -243,7 +455,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
               </div>
             </div>
             <div className={styles.settingBtnDiv}>
-              <button className={styles.settingBtn}>
+              <button className={styles.settingBtn} onClick={handleTransfer}>
                 Transfer
               </button>
             </div>
