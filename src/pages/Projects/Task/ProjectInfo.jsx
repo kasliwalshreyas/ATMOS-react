@@ -130,6 +130,11 @@ const ProjectInfo = ({
             Charts
           </Nav.Link>
         </Nav.Item>
+        <Nav.Item as="li">
+          <Nav.Link href="/task/timeline" className="nav-option option-2">
+            Timeline
+          </Nav.Link>
+        </Nav.Item>
       </Nav>
       <hr></hr>
     </div>

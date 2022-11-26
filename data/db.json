@@ -19,6 +19,25 @@
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 10
+    },
+    {
+      "emailId": "dushyantist@gmail.com",
+      "password": "$2a$10$B556zU77lwln4wZELbX6deluMHFrwSlAx0cvlE6mnDJ03LhkWquMC",
+      "userName": "Dushyant Yadav",
+      "projectIDList": [
+        2,
+        3
+      ],
+      "favoriteProjectList": [
+        2
+      ],
+      "taskAssignedIDList": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "id": 11
     }
   ],
   "projectList": [
@@ -38,8 +57,141 @@
       "mediumAccess": [],
       "lowAccess": [],
       "id": 1
+    },
+    {
+      "projectName": "first_project",
+      "type": "Education",
+      "sectionIDList": [
+        1,
+        2
+      ],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-11-26T01:31:24.334Z",
+      "projectGuidelines": "",
+      "userId": 11,
+      "highAccess": [
+        11
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 2
+    },
+    {
+      "projectName": "second_project",
+      "type": "Education",
+      "sectionIDList": [
+        3
+      ],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-11-26T01:27:30.469Z",
+      "projectGuidelines": "",
+      "userId": 11,
+      "highAccess": [
+        11
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 3
     }
   ],
-  "sectionList": [],
-  "taskList": []
+  "sectionList": [
+    {
+      "sectionName": "first_section",
+      "projectId": 2,
+      "taskIDList": [
+        1,
+        2
+      ],
+      "id": 1
+    },
+    {
+      "sectionName": "section2",
+      "projectId": 2,
+      "taskIDList": [
+        3
+      ],
+      "id": 2
+    },
+    {
+      "sectionName": "sectuob2",
+      "projectId": 3,
+      "taskIDList": [
+        4
+      ],
+      "id": 3
+    }
+  ],
+  "taskList": [
+    {
+      "taskName": "Task 1 sdhjvchjs cjhas cjhsa jhas xjhxa ",
+      "taskCompletion": true,
+      "taskAssignee": 11,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2023-02-10",
+      "taskStartDate": "2022-11-26T00:28:33.119Z",
+      "taskDescription": "",
+      "taskComments": [
+        {
+          "comment": "hi",
+          "commenter": "Dushyant Yadav",
+          "commentTime": "11/26/2022, 6:28:12 AM",
+          "id": 1
+        },
+        {
+          "comment": "hello",
+          "commenter": "Dushyant Yadav",
+          "commentTime": "11/26/2022, 6:28:17 AM",
+          "id": 2
+        },
+        {
+          "comment": "Whatsup\n",
+          "commenter": "Dushyant Yadav",
+          "commentTime": "11/26/2022, 6:28:28 AM",
+          "id": 3
+        }
+      ],
+      "id": 1
+    },
+    {
+      "taskName": "section1task2",
+      "taskCompletion": false,
+      "taskAssignee": 11,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-22",
+      "taskStartDate": "2022-11-26T01:26:25.157Z",
+      "taskDescription": "",
+      "taskComments": [],
+      "id": 2
+    },
+    {
+      "taskName": "section2task1",
+      "taskCompletion": false,
+      "taskAssignee": 11,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-11-30",
+      "taskStartDate": "2022-11-26T01:26:52.593Z",
+      "taskDescription": "",
+      "taskComments": [],
+      "id": 3
+    },
+    {
+      "taskName": "tasj 1",
+      "taskCompletion": false,
+      "taskAssignee": 11,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-08",
+      "taskStartDate": "2022-11-26T01:27:46.172Z",
+      "taskDescription": "",
+      "taskComments": [],
+      "id": 4
+    }
+  ]
 }
