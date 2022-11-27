@@ -5,7 +5,8 @@ import { ChatEngine } from 'react-chat-engine';
 import Home from "./pages/Home/Home";
 import HomePage from "./pages/HomePage/Home";
 import Projects from "./pages/Projects/Projects";
-import Messages from "./pages/Messages/Messages";
+// import Messages from "./pages/Messages/Messages";
+import Chats from "./pages/Messages/Chats";
 import Notes from "./pages/Notes/Notes";
 import MainView from "./pages/Projects/Task/MainView";
 import CreateProject from "./pages/Projects/CreateProject";
@@ -50,7 +51,7 @@ const App = () => {
             <Route exact path="/home" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             {/* <Route path="/messages" element={<Messages />} /> */}
-            <Route path="/messages" element={<Messages/>} />
+            <Route path="/messages" element={<Chats/>} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
             {/* <Route path="/task" element={<MainView />} /> */}

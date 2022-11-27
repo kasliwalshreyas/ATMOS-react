@@ -5,7 +5,8 @@
       "password": "$2a$10$O6mu964IqflABMD5Q60jNOdrKK2GKpM6oXzmY5f3YZYQhaJ/6UG26",
       "userName": "Shreyas Kasliwal",
       "projectIDList": [
-        1
+        1,
+        2
       ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
@@ -15,10 +16,39 @@
       "emailId": "spk3@atmos.in",
       "password": "$2a$10$/pmkG2/TEombGMvzxe6mxe0AqRodJRV/5pIjOiszQMqcDqMzBMwzS",
       "userName": "THE SPK",
-      "projectIDList": [],
+      "projectIDList": [
+        2,
+        4
+      ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 10
+    },
+    {
+      "emailId": "naman@gmail.com",
+      "password": "$2a$10$sqQ/Z.3RE0hZ.o/gjFqJq./SizG77Z2.wCq0Ici/2bZ.HH.QHLOda",
+      "userName": "naman",
+      "projectIDList": [
+        2,
+        3
+      ],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 11
+    },
+    {
+      "emailId": "naman2@gmail.com",
+      "password": "$2a$10$7J271Q9kipmxKO2mnGyH2.GOG1NVXmKutNsE89/MigbG5Ibgdxey6",
+      "userName": "naman2",
+      "projectIDList": [
+        4,
+        2
+      ],
+      "favoriteProjectList": [
+        4
+      ],
+      "taskAssignedIDList": [],
+      "id": 12
     }
   ],
   "projectList": [
@@ -38,8 +68,134 @@
       "mediumAccess": [],
       "lowAccess": [],
       "id": 1
+    },
+    {
+      "projectName": "new",
+      "type": "Business",
+      "sectionIDList": [],
+      "projectStatement": "gfdfs",
+      "projectMission": "sdgg",
+      "projectDescription": "ggfdgd\n",
+      "lastUsed": "2022-11-27T11:42:07.419Z",
+      "projectGuidelines": "gfdgdg",
+      "userId": 11,
+      "highAccess": [
+        11,
+        9,
+        10,
+        12
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 2
+    },
+    {
+      "projectName": "ccsck",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "cvdfbfdbf",
+      "projectMission": "fbfb",
+      "projectDescription": "fbfdbfd",
+      "lastUsed": "2022-11-26T13:39:32.698Z",
+      "projectGuidelines": "bfdbdffd",
+      "userId": 11,
+      "highAccess": [
+        11
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 3
+    },
+    {
+      "projectName": "fdfw",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "gfdgd",
+      "projectMission": "gsgdfg",
+      "projectDescription": "gdsgdg",
+      "lastUsed": "2022-11-27T11:35:46.253Z",
+      "projectGuidelines": "sfgdsfgf",
+      "userId": 12,
+      "highAccess": [
+        12
+      ],
+      "mediumAccess": [
+        10
+      ],
+      "lowAccess": [],
+      "id": 4
     }
   ],
   "sectionList": [],
-  "taskList": []
+  "taskList": [],
+  "conversationList": [
+    {
+      "messages": [
+        {
+          "text": "hi",
+          "senderName": "naman2",
+          "senderId": 12,
+          "date": "27/11/2022, 16:50:11"
+        }
+      ],
+      "id": "1211"
+    },
+    {
+      "id": "1210",
+      "messages": []
+    }
+  ],
+  "userChat": [
+    {
+      "id": 9,
+      "cid": []
+    },
+    {
+      "cid": [
+        {
+          "id": "1210",
+          "userInfo": {
+            "id": 12,
+            "userName": "naman2",
+            "date": "17:03"
+          }
+        }
+      ],
+      "id": 10
+    },
+    {
+      "cid": [
+        {
+          "id": "1211",
+          "userInfo": {
+            "id": 12,
+            "userName": "naman2",
+            "date": "16:50"
+          }
+        }
+      ],
+      "id": 11
+    },
+    {
+      "cid": [
+        {
+          "id": "1211",
+          "userInfo": {
+            "id": 11,
+            "userName": "naman",
+            "date": "16:50"
+          }
+        },
+        {
+          "id": "1210",
+          "userInfo": {
+            "id": 10,
+            "userName": "THE SPK",
+            "date": "17:03"
+          }
+        }
+      ],
+      "id": 12
+    }
+  ]
 }

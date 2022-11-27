@@ -68,13 +68,33 @@ function SignUp() {
         console.log(handleValidation());
         if(handleValidation()) {    
             console.log("Form submitted");
-            fetch("http://localhost:8000/userList", {
+            const res = fetch("http://localhost:8000/userList", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({emailId: email, password: bcrypt.hashSync(password, salt), userName: name, projectIDList: projectIDList, favoriteProjectList: favoriteProjectList, taskAssignedIDList: taskAssignedIDList}),
-            }).then(() => {
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                fetch("http://localhost:8000/userChat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id : data.id, cid: []}),
+                })
                 navigate("/login");
-            });
+            })
+            // .then(() => {
+            //     console.log("New user added");
+            //     const data = res.json()
+            //     console.log("data",data)
+                // fetch("http://localhost:8000/userChat", {
+                // method: "POST",
+                // headers: { "Content-Type": "application/json" },
+                // body: JSON.stringify({ id : data.id}),
+                // })}).then(() => {
+            //         console.log(res);
+            //     // navigate("/login")
+            // });
         }
     };
 

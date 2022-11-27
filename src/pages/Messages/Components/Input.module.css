@@ -1,0 +1,43 @@
+.inputBox{
+    height: 50px;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inputBox img{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    padding: 1px;
+    margin: 1px;
+}
+.inputBox input{
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: large;
+    padding: 10px;
+    width: 100%;
+    color: #000;
+}
+.inputBox input::placeholder{
+    color: gray;
+} 
+.inputBox button{
+    background-color: #2e81f4;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-size: large;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.send{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 10px;
+}
