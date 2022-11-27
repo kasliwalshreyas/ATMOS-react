@@ -63,6 +63,8 @@ const App = () => {
               element={<MainView overview />}
             />
             <Route exact path="/task/charts" element={<MainView charts />} />
+            <Route exact path="/task/timeline" element={<MainView timeline />} />
+
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/profile" element={<UserProfile />} />

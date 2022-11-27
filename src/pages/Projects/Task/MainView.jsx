@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import OverView from "../Overview/OverView";
 import Charts from "../Charts/Charts";
 import React from "react";
+import Timeline from "../Timeline/Timeline";
 
-const MainView = ({ overview, board, charts }) => {
+const MainView = ({ overview, board, charts, timeline }) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [projectId, setProjectId] = useState(parseInt(localStorage.getItem("projectId")));
   const [projectInfo, setProjectInfo] = useState(null);
@@ -94,6 +95,7 @@ const MainView = ({ overview, board, charts }) => {
       {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></OverView>}
       {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfo={user} ></SectionArena>}
       {user && charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Charts>}
+      {user && timeline && projectInfo && <Timeline projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Timeline>}
     </div>
   );
 };

@@ -23,3 +23,25 @@ a {
     /* color: #05386b !important; */
     /* color: white !important; */
 }
+
+
+
+.e-gantt .e-gantt-chart .e-chart-root-container {
+    background-color: blue;
+}
+
+.e-content::-webkit-scrollbar {
+    display: none;
+}
+
+.e-gantt::-webkit-scrollbar {
+    display: none;
+}
+
+.e-gantt-chart::-webkit-scrollbar {
+    display: none;
+}
+
+.e-chart-root-container::-webkit-scrollbar {
+    display: none;
+}
