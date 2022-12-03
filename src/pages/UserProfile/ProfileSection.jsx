@@ -10,10 +10,11 @@ import bcrypt from "bcryptjs";   // For hashing the password before saving it to
 
 import styles from "./ProfileSection.module.css";
 
-const ProfileSection = ({user} ) => {
+const ProfileSection = ({ user }) => {
     const [userName, setUserName] = useState(user.userName);
     const [emailId, setemailId] = useState(user.emailId);
     const [password, setPassword] = useState(user.password);
+    console.log(user, 'from profile section');
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -26,9 +27,9 @@ const ProfileSection = ({user} ) => {
     const handleClick = () => {
         console.log(isEdit);
         let hashedPassword = password;
-        if(isEdit) {
-            if(password!==user.password) {
-             hashedPassword = bcrypt.hashSync(password, salt);
+        if (isEdit) {
+            if (password !== user.password) {
+                hashedPassword = bcrypt.hashSync(password, salt);
             }
             const updatedUser = { ...user, userName, emailId, password: hashedPassword };
             fetch("http://localhost:8000/userList/" + user.id, {
@@ -45,11 +46,11 @@ const ProfileSection = ({user} ) => {
     return (
         <>
             <Container className="profile-container mt-3" >
-                <Card className="profile-card" style={{backgroundColor:"#f5f5f5"}}>
+                <Card className="profile-card" style={{ backgroundColor: "#f5f5f5" }}>
                     <Card.Body className="d-flex align-items-center justify-content-between">
-                        <h1 className="profile-heading fw-semibold" style={{color:"#05386B"}}>Profile</h1>
+                        <h1 className="profile-heading fw-semibold" style={{ color: "#05386B" }}>Profile</h1>
                         <div>
-                            <Button variant="info" className="edit-button" onClick={!isEdit?()=> setIsEdit(!isEdit):handleClick}>{isEdit ? <i class="fa-solid fa-floppy-disk"></i> : <i class="fa-solid fa-pen"></i>}</Button>
+                            <Button variant="info" className="edit-button" onClick={!isEdit ? () => setIsEdit(!isEdit) : handleClick}>{isEdit ? <i className="fa-solid fa-floppy-disk"></i> : <i className="fa-solid fa-pen"></i>}</Button>
                         </div>
                     </Card.Body>
                 </Card>
@@ -59,125 +60,125 @@ const ProfileSection = ({user} ) => {
                     <Col md={4} sm={12}>
                         <Card className="profile-card shadow">
                             <Card.Body className="text-center">
-                                <CardImg src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" 
-                                className="rounded-circle fluid"
-                                style={{ width: '150px' }}
-                                 />
+                                <CardImg src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                    className="rounded-circle fluid"
+                                    style={{ width: '150px' }}
+                                />
 
-                                <h1 className="profile-heading fw-semibold mt-3" style={{color:"#05386B"}}>{userName}</h1>
+                                <h1 className="profile-heading fw-semibold mt-3" style={{ color: "#05386B" }}>{userName}</h1>
                                 <p className="profile-para text-secondary">{emailId}</p>
                             </Card.Body>
                         </Card>
                     </Col>
                     <Col md={8} sm={12}>
                         <Card className="profile-card shadow">
-                        <Card.Body className="profile-card-body">
-                                    <Row className="mb-3">
-                                        <Form.Label column className="fw-semibold" lg={2}>
-                                                Username
-                                            </Form.Label>
-                                            <Col className="text-center">
-                                                {isEdit && 
-                                                    <Form.Control type="text" placeholder="Username" value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!isEdit} />
-                                                }
-                                                {!isEdit &&
-                                                    <div className="text-dark border-bottom border-dark border-opacity-50 fs-5">{userName}</div>
-                                                }
-                                            </Col>
-                                    </Row>
+                            <Card.Body className="profile-card-body">
+                                <Row className="mb-3">
+                                    <Form.Label column className="fw-semibold" lg={2}>
+                                        Username
+                                    </Form.Label>
+                                    <Col className="text-center">
+                                        {isEdit &&
+                                            <Form.Control type="text" placeholder="Username" value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!isEdit} />
+                                        }
+                                        {!isEdit &&
+                                            <div className="text-dark border-bottom border-dark border-opacity-50 fs-5">{userName}</div>
+                                        }
+                                    </Col>
+                                </Row>
 
-                                    <Row className="mb-3">
-                                        <Form.Label column className="fw-semibold" lg={2}>
-                                            Email
-                                        </Form.Label>
-                                        <Col className="text-center">
-                                            {isEdit &&
-                                                <Form.Control type="email" placeholder="Email" value={emailId} onChange={(e) => setemailId(e.target.value)} disabled={!isEdit} />
-                                            }
-                                            {!isEdit &&
-                                                <div className="text-dark border-bottom border-dark border-opacity-50 fs-5">{emailId}</div>
-                                            }
-                                        </Col>
-                                    </Row>
+                                <Row className="mb-3">
+                                    <Form.Label column className="fw-semibold" lg={2}>
+                                        Email
+                                    </Form.Label>
+                                    <Col className="text-center">
+                                        {isEdit &&
+                                            <Form.Control type="email" placeholder="Email" value={emailId} onChange={(e) => setemailId(e.target.value)} disabled={!isEdit} />
+                                        }
+                                        {!isEdit &&
+                                            <div className="text-dark border-bottom border-dark border-opacity-50 fs-5">{emailId}</div>
+                                        }
+                                    </Col>
+                                </Row>
 
-                                    <Row className="mb-3">
-                                        <Form.Label column className="fw-semibold" lg={2}>
-                                            Password
-                                        </Form.Label>
-                                        <Col className="text-center">
-                                            {isEdit &&
-                                                <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={!isEdit} />
-                                            }
-                                            {!isEdit &&
-                                                <div className="text-dark border-bottom border-dark border-opacity-50 fs-4">....................</div>
-                                            }
-                                        </Col>
-                                    </Row>
+                                <Row className="mb-3">
+                                    <Form.Label column className="fw-semibold" lg={2}>
+                                        Password
+                                    </Form.Label>
+                                    <Col className="text-center">
+                                        {isEdit &&
+                                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={!isEdit} />
+                                        }
+                                        {!isEdit &&
+                                            <div className="text-dark border-bottom border-dark border-opacity-50 fs-4">....................</div>
+                                        }
+                                    </Col>
+                                </Row>
                             </Card.Body>
                         </Card>
                         <Row className=" mt-3 mb-3">
-                        <Col md={4}>
-                            <div className={styles.countContainer}>
-                                <div className={styles.containerHead}>
-                                    <div className={styles.headIcon}><img src="https://img.icons8.com/ios-glyphs/30/000000/to-do.png" /></div>
+                            <Col md={4}>
+                                <div className={styles.countContainer}>
+                                    <div className={styles.containerHead}>
+                                        <div className={styles.headIcon}><img src="https://img.icons8.com/ios-glyphs/30/000000/to-do.png" /></div>
 
-                                    <div className={styles.headText}>Projects</div>
+                                        <div className={styles.headText}>Projects</div>
+                                    </div>
+                                    <div className={styles.containerBody}>
+                                        <p className={styles.para}>
+                                            {user.projectIDList ? user.projectIDList.length : "0"}
+                                        </p>
+                                    </div>
+                                    <div className={styles.containerFoot}>
+                                        <p className={styles.para}>
+                                            TOTAL PROJECTS
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className={styles.containerBody}>
-                                    <p className={styles.para}>
-                                    {user.projectIDList? user.projectIDList.length:"0"}
-                                    </p>
-                                </div>
-                                <div className={styles.containerFoot}>
-                                    <p className={styles.para}>
-                                    TOTAL PROJECTS
-                                    </p>
-                                </div>
-                            </div>
-                            
-                        </Col>
-                        <Col md={4}>
-                        <div className={styles.countContainer}>
-                                <div className={styles.containerHead}>
-                                    <div className={styles.headIcon}><i class="fa-solid fa-star"></i></div>
 
-                                    <div className={styles.headText}>Favourites</div>
-                                </div>
-                                <div className={styles.containerBody}>
-                                    <p className={styles.para}>
-                                    {user.favoriteProjectList? user.favoriteProjectList.length:"0"}
-                                    </p>
-                                </div>
-                                <div className={styles.containerFoot}>
-                                    <p className={styles.para}>
-                                    TOTAL FAVOURITES
-                                    </p>
-                                </div>
-                            </div>
-                            
-                        </Col>
-                        <Col md={4}>
-                        <div className={styles.countContainer}>
-                                <div className={styles.containerHead}>
-                                    <div className={styles.headIcon}><i class="fa-solid fa-bars-progress"></i></div>
+                            </Col>
+                            <Col md={4}>
+                                <div className={styles.countContainer}>
+                                    <div className={styles.containerHead}>
+                                        <div className={styles.headIcon}><i className="fa-solid fa-star"></i></div>
 
-                                    <div className={styles.headText}>Tasks</div>
+                                        <div className={styles.headText}>Favourites</div>
+                                    </div>
+                                    <div className={styles.containerBody}>
+                                        <p className={styles.para}>
+                                            {user.favoriteProjectList ? user.favoriteProjectList.length : "0"}
+                                        </p>
+                                    </div>
+                                    <div className={styles.containerFoot}>
+                                        <p className={styles.para}>
+                                            TOTAL FAVOURITES
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className={styles.containerBody}>
-                                    <p className={styles.para}>
-                                    {user.taskAssignedIDList? user.taskAssignedIDList.length:"0"}
-                                    </p>
+
+                            </Col>
+                            <Col md={4}>
+                                <div className={styles.countContainer}>
+                                    <div className={styles.containerHead}>
+                                        <div className={styles.headIcon}><i className="fa-solid fa-bars-progress"></i></div>
+
+                                        <div className={styles.headText}>Tasks</div>
+                                    </div>
+                                    <div className={styles.containerBody}>
+                                        <p className={styles.para}>
+                                            {user.taskAssignedIDList ? user.taskAssignedIDList.length : "0"}
+                                        </p>
+                                    </div>
+                                    <div className={styles.containerFoot}>
+                                        <p className={styles.para}>
+                                            TOTAL TASKS
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className={styles.containerFoot}>
-                                    <p className={styles.para}>
-                                    TOTAL TASKS
-                                    </p>
-                                </div>
-                            </div>
-                        </Col>
-                        
+                            </Col>
+
                         </Row>
-                        
+
                     </Col>
                 </Row>
             </Container>

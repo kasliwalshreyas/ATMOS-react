@@ -4,6 +4,8 @@ const initialState = {
     user: null,
 };
 
+
+
 // export const fetchUser = createAsyncThunk('user/fetchUser', async (email) => {
 //     const response = await fetch('http://localhost:8000/userList?emailId=' + email);
 //     const data = await response.json();
@@ -16,10 +18,12 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         login: (state, action) => {
-            state.user = action.payload;
+            console.log("login action", action.payload[0]);
+            state.user = action.payload[0];
+
         },
-        logout: (state) => {
-            state.user = null;
+        logout: (state, action) => {
+            state.user = action.payload[0];
         },
     }
 });
