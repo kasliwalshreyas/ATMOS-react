@@ -7,15 +7,17 @@ import { FloatingLabel } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
 
 import styles from './Login.module.css';
-// import useFetch from "../../useFetch";
 import bcrypt from "bcryptjs";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,6 +34,7 @@ function Login() {
                     console.log(data);
                     if (bcrypt.compareSync(password, data[0].password)) {
                         localStorage.setItem("user", JSON.stringify(data[0].id));
+                        dispatch(login(data))
                         navigate('/home');
                     }
                     else {

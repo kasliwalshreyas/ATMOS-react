@@ -6,13 +6,10 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   const [show, setShow] = useState(false);
-
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
-
   const [taskList, setTaskList] = useState(null);
   const [sectionList, setSectionList] = useState(null);
-
   const [error, setError] = useState(null);
 
   //state variable to re-render the Section Arena when a task or a section is added, deleted or updated
@@ -90,29 +87,6 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
         setSectionList(null);
       });
   }, [rerender]);
-
-  //func to standarized date format
-  // function getDate(strFormatDate) {
-  //     // const strFormatDate = "08-10-2022";
-  //     const dateFormatDate = new Date(strFormatDate)
-  //     let day, month, date
-  //     if (dateFormatDate.getMonth() < 9) {
-  //         month = "0" + (dateFormatDate.getMonth() + 1)
-  //     }
-  //     else {
-  //         month = dateFormatDate.getMonth() + 1
-  //     }
-  //     if (dateFormatDate.getDate() < 9) {
-  //         day = "0" + (dateFormatDate.getDate() + 1)
-  //     }
-  //     else {
-  //         day = dateFormatDate.getDate() + 1
-  //     }
-  //     date = dateFormatDate.getFullYear() + "-" + month + "-" + day
-  //     // console.log(date)
-  //     return date
-
-  // }
 
   //func to create Task
   const createTask = (sectionInfo) => {

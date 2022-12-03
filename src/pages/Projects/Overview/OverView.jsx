@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
   // console.log(projectId);
+  
   // console.log(projectInfo);
   const [projectName, setProjectName] = useState(projectInfo.projectName);
   const [projectStatement, setProjectStatement] = useState(projectInfo.projectStatement);

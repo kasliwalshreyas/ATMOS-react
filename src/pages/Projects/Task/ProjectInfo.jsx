@@ -12,6 +12,7 @@ const ProjectInfo = ({
   setProjectInfo,
   userInfo
 }) => {
+  
   const [user, setUser] = useState(userInfo);
 
   let initialStateOfFavorite;

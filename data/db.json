@@ -9,7 +9,10 @@
         2
       ],
       "favoriteProjectList": [],
-      "taskAssignedIDList": [],
+      "taskAssignedIDList": [
+        1,
+        2
+      ],
       "id": 9
     },
     {
@@ -55,11 +58,14 @@
     {
       "projectName": "First Project",
       "type": "",
-      "sectionIDList": [],
+      "sectionIDList": [
+        1,
+        2
+      ],
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "2022-11-25T14:10:17.303Z",
+      "lastUsed": "2022-12-03T04:01:30.237Z",
       "projectGuidelines": "",
       "userId": 9,
       "highAccess": [
@@ -76,7 +82,7 @@
       "projectStatement": "gfdfs",
       "projectMission": "sdgg",
       "projectDescription": "ggfdgd\n",
-      "lastUsed": "2022-11-27T11:42:07.419Z",
+      "lastUsed": "2022-12-03T04:01:10.383Z",
       "projectGuidelines": "gfdgdg",
       "userId": 11,
       "highAccess": [
@@ -126,8 +132,57 @@
       "id": 4
     }
   ],
-  "sectionList": [],
-  "taskList": [],
+  "sectionList": [
+    {
+      "sectionName": "Frontend",
+      "projectId": 1,
+      "taskIDList": [
+        1
+      ],
+      "id": 1
+    },
+    {
+      "sectionName": "Backend",
+      "projectId": 1,
+      "taskIDList": [
+        2
+      ],
+      "id": 2
+    }
+  ],
+  "taskList": [
+    {
+      "taskName": "Add Redux",
+      "taskCompletion": false,
+      "taskAssignee": 9,
+      "taskPriority": "high",
+      "taskStatus": "off-track",
+      "taskDeadline": "2022-12-07",
+      "taskStartDate": "2022-12-03T04:01:50.827Z",
+      "taskDescription": "",
+      "taskComments": [
+        {
+          "comment": "hi",
+          "commenter": "Shreyas Kasliwal",
+          "commentTime": "12/3/2022, 9:32:09 AM",
+          "id": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "taskName": "Transfer Ownership",
+      "taskCompletion": false,
+      "taskAssignee": 9,
+      "taskPriority": "low",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-12-16",
+      "taskStartDate": "2022-12-03T04:02:14.334Z",
+      "taskDescription": "",
+      "taskComments": [],
+      "id": 2
+    }
+  ],
   "conversationList": [
     {
       "messages": [

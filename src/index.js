@@ -6,11 +6,19 @@ import './common.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ChatProvider } from './pages/Messages/Components/context/ChatContext';
+import { store } from './store';
+import { Provider } from 'react-redux';
+
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-  <ChatProvider>
-    <App />
-  </ChatProvider>
+  <Provider store={store}>
+    <ChatProvider>
+      <App />
+    </ChatProvider>
+  </Provider>
   // </React.StrictMode>
 );
