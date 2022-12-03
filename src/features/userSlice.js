@@ -1,7 +1,21 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    user: null,
+    user: {
+        "emailId": "spk@atmos.in",
+        "password": "$2a$10$O6mu964IqflABMD5Q60jNOdrKK2GKpM6oXzmY5f3YZYQhaJ/6UG26",
+        "userName": "Shreyas Kasliwal",
+        "projectIDList": [
+            1,
+            2
+        ],
+        "favoriteProjectList": [],
+        "taskAssignedIDList": [
+            1,
+            2
+        ],
+        "id": 9
+    }
 };
 
 
@@ -25,8 +39,12 @@ export const userSlice = createSlice({
         logout: (state, action) => {
             state.user = action.payload[0];
         },
+        addProjectToUser: (state, action) => {
+            state.user.projectIDList.push(action.payload);
+        },
     }
 });
 
-export const { login, logout } = userSlice.actions;
+export const userInfo = (state) => state.user.user;
+export const { login, logout, addProjectToUser } = userSlice.actions;
 export default userSlice.reducer;

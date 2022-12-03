@@ -6,23 +6,24 @@ import OverView from "../Overview/OverView";
 import Charts from "../Charts/Charts";
 import React from "react";
 import Timeline from "../Timeline/Timeline";
+import { useSelector } from 'react-redux';
 
 const MainView = ({ overview, board, charts, timeline }) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [projectId, setProjectId] = useState(parseInt(localStorage.getItem("projectId")));
   const [projectInfo, setProjectInfo] = useState(null);
-  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
-  const [user, setUser] = useState(null);
+  // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
+  // const [user, setUser] = useState(null);
+  const user = useSelector((state) => state.user.user);
 
-  useEffect(() => {
-
-    async function getUser() {
-      const res = await fetch("http://localhost:8000/userList/" + userID);
-      const data = await res.json();
-      setUser(data);
-    }
-    getUser();
-  }, [userID]);
+  // useEffect(() => {
+  //   async function getUser() {
+  //     const res = await fetch("http://localhost:8000/userList/" + userID);
+  //     const data = await res.json();
+  //     setUser(data);
+  //   }
+  //   getUser();
+  // }, [userID]);
 
   const handleClickOutside = (event) => {
     event.stopPropagation();

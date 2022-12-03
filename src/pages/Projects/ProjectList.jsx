@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { setProjectList } from "../../features/projectListSlice";
+import { useSelector, useDispatch } from 'react-redux';
 
 const ProjectList = ({ projects, userInfo }) => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState(userInfo);
+  console.log(projects, 'inside projectList');
 
-  // console.log(user, 'from projectList');
-  const [projectList, setProjectList] = useState([])
 
   useEffect(() => {
 
@@ -25,13 +27,13 @@ const ProjectList = ({ projects, userInfo }) => {
         console.log(data);
         projectInfoList.push(data);
       }
-      setProjectList(projectInfoList);
+      dispatch(setProjectList(projectInfoList));
     }
     getProjectList();
-    // console.log(projectList, 'from projectList');
 
-  }, []);
+  }, [dispatch]);
 
+  const projectList = useSelector((state) => state.projectList.projectList)
 
   const navigate = useNavigate();
   const handleLinkClick = (project) => {
@@ -63,7 +65,7 @@ const ProjectList = ({ projects, userInfo }) => {
         </Link>
       </div>
       {/* {console.log(projectList)} */}
-      {projectList
+      {projectList && projectList
         .map((project) =>
           <div className="project-real" key={project.id}>
             <div className="project-container">
