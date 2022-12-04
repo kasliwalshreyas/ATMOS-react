@@ -7,7 +7,9 @@ const initialState = {
         "userName": "Shreyas Kasliwal",
         "projectIDList": [
             1,
-            2
+            2,
+            5,
+            6
         ],
         "favoriteProjectList": [],
         "taskAssignedIDList": [

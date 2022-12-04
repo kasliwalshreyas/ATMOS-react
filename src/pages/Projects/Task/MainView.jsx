@@ -6,15 +6,18 @@ import OverView from "../Overview/OverView";
 import Charts from "../Charts/Charts";
 import React from "react";
 import Timeline from "../Timeline/Timeline";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setProject } from "../../../features/projectSlice";
 
 const MainView = ({ overview, board, charts, timeline }) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [projectId, setProjectId] = useState(parseInt(localStorage.getItem("projectId")));
-  const [projectInfo, setProjectInfo] = useState(null);
+  // const [projectInfo, setProjectInfo] = useState(null);
   // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
   // const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const projectInfo = useSelector((state) => state.projectInfo.projectInfo);
 
   // useEffect(() => {
   //   async function getUser() {
@@ -72,7 +75,8 @@ const MainView = ({ overview, board, charts, timeline }) => {
         // console.log(userInfoList, project);
         project = populateProject(project, userInfoList);
         // console.log(project);
-        setProjectInfo(project);
+        // setProjectInfo(project);
+        dispatch(setProject(project));
       })
       .catch((err) => {
         console.log(err.message);
@@ -87,16 +91,14 @@ const MainView = ({ overview, board, charts, timeline }) => {
     <div className="normal-div" onClick={handleClickOutside}>
       {user && projectInfo && (<ProjectInfo
         projectInfo={projectInfo}
-        setProjectInfo={setProjectInfo}
         isProfileClicked={isProfileClicked}
         setIsProfileClicked={setIsProfileClicked}
         userInfo={user}
       ></ProjectInfo>)}
-      {/* <FilterFunc></FilterFunc>s */}
-      {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></OverView>}
-      {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfo={user} ></SectionArena>}
-      {user && charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Charts>}
-      {user && timeline && projectInfo && <Timeline projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Timeline>}
+      {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo}  ></OverView>}
+      {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} userInfo={user} ></SectionArena>}
+      {user && charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} userInfoOfUser={user}></Charts>}
+      {user && timeline && projectInfo && <Timeline projectId={projectId} projectInfo={projectInfo} userInfoOfUser={user}></Timeline>}
     </div>
   );
 };
