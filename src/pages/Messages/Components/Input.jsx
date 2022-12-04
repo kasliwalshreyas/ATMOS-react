@@ -2,9 +2,11 @@ import React from "react";
 import styles from "./Input.module.css";
 import { useEffect, useContext , useState } from "react";
 import {ChatContext} from "./context/ChatContext"
+import {ChatsContext} from "./context/ChatsContext"
 const Input = (user)=>{
     const { data } = useContext(ChatContext) ;
     const [text, setText] = useState("");
+    const { dispatch } = useContext(ChatsContext);
     const handleSend = async ()=>{
         const res = await fetch("http://localhost:8000/conversationList/" + data.chatId, {
             method: "GET",
@@ -13,7 +15,6 @@ const Input = (user)=>{
             }
         });
         const da = await res.json();
-        console.log(da);
         const res1 = await fetch("http://localhost:8000/conversationList/" + data.chatId, {
             method: "PUT",
             headers: {
@@ -23,6 +24,9 @@ const Input = (user)=>{
                 messages: [...da.messages, {text: text, senderName: user.user.user.userName, senderId:  user.user.user.id , date: new Date().toLocaleString()}]
             })
         });
+        const da1 = await res1.json();
+        console.log(da1);
+        dispatch({type: "CHANGE_CHAT", payload: {text: text, senderName: user.user.user.userName, senderId:  user.user.user.id , date: new Date().toLocaleString()}});
         setText("");
 
         // const res = await fetch("http://localhost:8000/conversationList",{

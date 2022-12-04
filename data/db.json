@@ -10,6 +10,31 @@
         5,
         6
       ],
+      "id": 1
+    },
+    {
+      "userName": "Naman Bhatia",
+      "emailId": "kasliwalshreyas4@gmail.com",
+      "projectIDList": [],
+      "taskAssignedIDList": [],
+      "favoriteProjectList": [],
+      "id": 2
+    },
+    {
+      "userName": "Avinash Saroj",
+      "emailId": "kasliwalshreyas5@gmail.com",
+      "projectIDList": [
+        3
+      ],
+      "taskAssignedIDList": [],
+      "favoriteProjectList": [],
+      "id": 3
+    },
+    {
+      "emailId": "akash123@gmail.com",
+      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
+      "userName": "Akash ",
+      "projectIDList": [],
       "favoriteProjectList": [],
       "taskAssignedIDList": [
         1,
@@ -59,11 +84,75 @@
   ],
   "projectList": [
     {
-      "projectName": "First Project",
+      "projectName": "ATMOS",
+      "MaxMember": "",
       "type": "",
       "sectionIDList": [
+        3,
+        8,
+        9
+      ],
+      "projectStatement": "Sothing",
+      "projectMission": "",
+      "projectDescription": "dkjcds csd",
+      "projectGuidelines": "",
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 1,
+      "lastUsed": "2022-10-30T08:46:52.729Z"
+    },
+    {
+      "projectName": "FSD",
+      "MaxMember": "",
+      "type": "Education",
+      "sectionIDList": [
+        10
+      ],
+      "projectStatement": "Hello",
+      "projectMission": "Hi",
+      "projectDescription": "Hello",
+      "projectGuidelines": "Ahhhhhhhhh!!!!!!",
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [
+        2,
+        5
+      ],
+      "lowAccess": [
+        4,
+        3
+      ],
+      "id": 2,
+      "lastUsed": "2022-10-29T21:16:04.558Z"
+    },
+    {
+      "projectName": "ABCD",
+      "type": "Education",
+      "sectionIDList": [],
+      "projectStatement": "To learn",
+      "projectMission": "Yes u can do it",
+      "projectDescription": "Later babes!!!",
+      "projectGuidelines": "more details will follow later😜",
+      "userId": 1,
+      "highAccess": [
         1,
         2
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 2,
+      "lastUsed": "2022-10-29T21:16:04.558Z"
+    },
+    {
+      "projectName": "A",
+      "type": "",
+      "sectionIDList": [
+        8,
+        9
       ],
       "projectStatement": "",
       "projectMission": "",
@@ -74,19 +163,27 @@
       "highAccess": [
         9,
         10
+        5
+      ],
+      "mediumAccess": [
+        4
+      ],
+      "lowAccess": [
+        8
       ],
       "mediumAccess": [],
       "lowAccess": [],
-      "id": 1
+      "id": 11
     },
     {
-      "projectName": "new",
-      "type": "Business",
+      "projectName": "Complete",
+      "type": "",
       "sectionIDList": [],
       "projectStatement": "gfdfs",
       "projectMission": "sdgg",
       "projectDescription": "ggfdgd\n",
       "lastUsed": "Sun, 04 Dec 2022 03:30:09 GMT",
+      "lastUsed": "2022-12-04T08:28:22.333Z",
       "projectGuidelines": "gfdgdg",
       "userId": 11,
       "highAccess": [
@@ -97,11 +194,33 @@
       ],
       "mediumAccess": [],
       "lowAccess": [],
-      "id": 2
+      "id": 9
     },
     {
-      "projectName": "ccsck",
-      "type": "",
+      "projectName": "Second Project",
+      "type": "Education",
+      "sectionIDList": [
+        13,
+        14
+      ],
+      "projectStatement": "wdd ",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-10-30T10:45:26.340Z",
+      "projectGuidelines": "",
+      "userId": 9,
+      "highAccess": [
+        9
+      ],
+      "mediumAccess": [
+        2
+      ],
+      "lowAccess": [],
+      "id": 10
+    },
+    {
+      "projectName": "third project",
+      "type": "Business",
       "sectionIDList": [],
       "projectStatement": "cvdfbfdbf",
       "projectMission": "fbfb",
@@ -123,23 +242,23 @@
       "projectStatement": "gfdgd",
       "projectMission": "gsgdfg",
       "projectDescription": "gdsgdg",
-      "lastUsed": "2022-11-27T11:35:46.253Z",
+      "lastUsed": "2022-12-04T06:37:50.522Z",
       "projectGuidelines": "sfgdsfgf",
       "userId": 12,
       "highAccess": [
-        12
+        9
       ],
       "mediumAccess": [
-        10
+        8
       ],
       "lowAccess": [],
-      "id": 4
+      "id": 12
     },
     {
-      "projectName": "Second Project",
-      "type": "",
+      "projectName": "Fifth project",
+      "type": "Education",
       "sectionIDList": [],
-      "projectStatement": "vd",
+      "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
       "lastUsed": "Sun, 04 Dec 2022 03:31:17 GMT",
@@ -150,10 +269,10 @@
       ],
       "mediumAccess": [],
       "lowAccess": [],
-      "id": 5
+      "id": 13
     },
     {
-      "projectName": "Hello",
+      "projectName": "duisa dsa dsa dhjsa dsa dkja dkjas dkjas dkja dkw",
       "type": "",
       "sectionIDList": [],
       "projectStatement": "",
@@ -229,19 +348,221 @@
           "senderName": "naman2",
           "senderId": 12,
           "date": "27/11/2022, 16:50:11"
+        },
+        {
+          "text": "ga",
+          "senderName": "naman2",
+          "senderId": 12,
+          "date": "04/12/2022, 14:49:14"
+        },
+        {
+          "text": "hl",
+          "senderName": "naman",
+          "senderId": 11,
+          "date": "04/12/2022, 14:49:21"
+        },
+        {
+          "text": "hl",
+          "senderName": "naman2",
+          "senderId": 12,
+          "date": "04/12/2022, 14:50:46"
+        },
+        {
+          "text": "gddd",
+          "senderName": "naman",
+          "senderId": 11,
+          "date": "04/12/2022, 14:50:58"
+        },
+        {
+          "text": "hss",
+          "senderName": "naman",
+          "senderId": 11,
+          "date": "04/12/2022, 14:56:21"
+        },
+        {
+          "text": "hgfgh",
+          "senderName": "naman2",
+          "senderId": 12,
+          "date": "04/12/2022, 14:56:36"
+        },
+        {
+          "text": "dsfsdgs",
+          "senderName": "naman",
+          "senderId": 11,
+          "date": "04/12/2022, 14:56:55"
+        },
+        {
+          "text": "gand marta",
+          "senderName": "naman",
+          "senderId": 11,
+          "date": "04/12/2022, 15:46:40"
+        },
+        {
+          "text": "this hai",
+          "senderName": "naman2",
+          "senderId": 12,
+          "date": "04/12/2022, 15:47:05"
         }
       ],
       "id": "1211"
     },
     {
-      "id": "1210",
+      "messages": [
+        {
+          "text": "hi",
+          "senderName": "naman2",
+          "senderId": 12,
+          "date": "04/12/2022, 15:00:30"
+        }
+      ],
+      "id": "1210"
+    },
+    {
+      "messages": [
+        {
+          "text": "hi",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:07:29"
+        },
+        {
+          "text": "hi",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:12:30"
+        },
+        {
+          "text": "bye",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:12:49"
+        },
+        {
+          "text": "go",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:14:14"
+        },
+        {
+          "text": "hl",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:20:23"
+        },
+        {
+          "text": "jjd",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:51:11"
+        },
+        {
+          "text": "na",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:52:27"
+        },
+        {
+          "text": "nn",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:54:09"
+        },
+        {
+          "text": "hi",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:58:10"
+        },
+        {
+          "text": "bye",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 12:58:40"
+        },
+        {
+          "text": "bhi",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 14:37:01"
+        },
+        {
+          "text": "b b",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 14:40:00"
+        },
+        {
+          "text": "ld",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 14:42:32"
+        },
+        {
+          "text": "d",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 14:43:36"
+        }
+      ],
+      "id": "910"
+    },
+    {
+      "messages": [
+        {
+          "text": "hi",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 13:00:53"
+        },
+        {
+          "text": "do",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 14:43:48"
+        },
+        {
+          "text": "how are you?",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 9,
+          "date": "04/12/2022, 14:45:18"
+        }
+      ],
+      "id": "911"
+    },
+    {
+      "id": "912",
       "messages": []
     }
   ],
   "userChat": [
     {
-      "id": 9,
-      "cid": []
+      "cid": [
+        {
+          "id": "910",
+          "userInfo": {
+            "id": 10,
+            "userName": "THE SPK",
+            "date": "12:07"
+          }
+        },
+        {
+          "id": "911",
+          "userInfo": {
+            "id": 11,
+            "userName": "naman",
+            "date": "12:09"
+          }
+        },
+        {
+          "id": "912",
+          "userInfo": {
+            "id": 12,
+            "userName": "naman2",
+            "date": "12:09"
+          }
+        }
+      ],
+      "id": 9
     },
     {
       "cid": [
@@ -251,6 +572,14 @@
             "id": 12,
             "userName": "naman2",
             "date": "17:03"
+          }
+        },
+        {
+          "id": "910",
+          "userInfo": {
+            "id": 9,
+            "userName": "Shreyas Kasliwal",
+            "date": "12:07"
           }
         }
       ],
@@ -264,6 +593,14 @@
             "id": 12,
             "userName": "naman2",
             "date": "16:50"
+          }
+        },
+        {
+          "id": "911",
+          "userInfo": {
+            "id": 9,
+            "userName": "Shreyas Kasliwal",
+            "date": "12:09"
           }
         }
       ],

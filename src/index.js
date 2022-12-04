@@ -6,6 +6,7 @@ import './common.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ChatProvider } from './pages/Messages/Components/context/ChatContext';
+import { ChatsProvider } from './pages/Messages/Components/context/ChatsContext';
 import { store } from './store';
 import { Provider } from 'react-redux';
 
@@ -17,7 +18,9 @@ root.render(
   // <React.StrictMode>
   <Provider store={store}>
     <ChatProvider>
+      <ChatsProvider>
       <App />
+      </ChatsProvider>
     </ChatProvider>
   </Provider>
   // </React.StrictMode>

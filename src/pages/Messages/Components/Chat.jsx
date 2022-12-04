@@ -6,6 +6,11 @@ import { useEffect, useContext , useState } from "react";
 import {ChatContext} from "./context/ChatContext"
 const Chat = (user)=>{
     const { data } = useContext(ChatContext) ;
+    useEffect(()=>{
+        console.log("go",user);
+    },[])
+
+    
     return(
         <div className={styles.chat}>
             <div className={styles.chatInfo}>
