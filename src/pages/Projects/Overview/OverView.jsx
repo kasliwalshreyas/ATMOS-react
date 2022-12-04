@@ -7,11 +7,14 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
+import { setProject, addMediumTeamMember, addHightTeamMember, addLowTeamMember } from "../../../features/projectSlice";
+import { useDispatch } from 'react-redux';
 
-const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
+const OverView = ({ projectId, projectInfo }) => {
   // console.log(projectId);
-  
+
   // console.log(projectInfo);
+  const dispatch = useDispatch();
   const [projectName, setProjectName] = useState(projectInfo.projectName);
   const [projectStatement, setProjectStatement] = useState(projectInfo.projectStatement);
   const [projectMission, setProjectMission] = useState(projectInfo.projectMission);
@@ -102,18 +105,21 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
       selectedTeamMember.projectIDList.push(projectId);
 
       if (selectedRole.value === 'highAccess') {
-        projectInfo.highAccess.push(selectedTeamMember);
+        dispatch(addHightTeamMember(selectedTeamMember));
+        // projectInfo.highAccess.push(selectedTeamMember);
         projectInfoID.highAccess.push(selectedTeamMember.id);
       } else if (selectedRole.value === 'mediumAccess') {
-        projectInfo.mediumAccess.push(selectedTeamMember);
+        dispatch(addMediumTeamMember(selectedTeamMember));
+        // projectInfo.mediumAccess.push(selectedTeamMember);
         projectInfoID.mediumAccess.push(selectedTeamMember.id);
       } else if (selectedRole.value === 'lowAccess') {
-        projectInfo.lowAccess.push(selectedTeamMember);
+        dispatch(addLowTeamMember(selectedTeamMember));
+        // projectInfo.lowAccess.push(selectedTeamMember);
         projectInfoID.lowAccess.push(selectedTeamMember.id);
       }
       // console.log(projectInfo, projectInfoID);
 
-      setProjectInfo(projectInfo);
+      dispatch(setProject(projectInfo));
       // add user to project
       fetch(`http://localhost:8000/projectList/${projectId}`, {
         method: 'PUT',

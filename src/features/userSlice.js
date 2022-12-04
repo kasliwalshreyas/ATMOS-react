@@ -1,21 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    user: {
-        "emailId": "spk@atmos.in",
-        "password": "$2a$10$O6mu964IqflABMD5Q60jNOdrKK2GKpM6oXzmY5f3YZYQhaJ/6UG26",
-        "userName": "Shreyas Kasliwal",
-        "projectIDList": [
-            1,
-            2
-        ],
-        "favoriteProjectList": [],
-        "taskAssignedIDList": [
-            1,
-            2
-        ],
-        "id": 9
-    }
+    user: null,
 };
 
 

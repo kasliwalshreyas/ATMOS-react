@@ -2,37 +2,8 @@
   "userList": [
     {
       "emailId": "spk@atmos.in",
-      "password": "$2a$10$O6mu964IqflABMD5Q60jNOdrKK2GKpM6oXzmY5f3YZYQhaJ/6UG26",
+      "password": "$2a$10$IBljhtApLD6Ns/oEeA49VOCsKKbTiWI0zdj.Ld8TSyzUfAEeyaLPW",
       "userName": "Shreyas Kasliwal",
-      "projectIDList": [
-        1,
-        2,
-        5
-      ],
-      "id": 1
-    },
-    {
-      "userName": "Naman Bhatia",
-      "emailId": "kasliwalshreyas4@gmail.com",
-      "projectIDList": [],
-      "taskAssignedIDList": [],
-      "favoriteProjectList": [],
-      "id": 2
-    },
-    {
-      "userName": "Avinash Saroj",
-      "emailId": "kasliwalshreyas5@gmail.com",
-      "projectIDList": [
-        3
-      ],
-      "taskAssignedIDList": [],
-      "favoriteProjectList": [],
-      "id": 3
-    },
-    {
-      "emailId": "akash123@gmail.com",
-      "password": "$2a$10$BGE7UBt3sonpnz.6QpRHP.rtJeP7/KX2ALJ2WiUgrJprDyR2zPHpa",
-      "userName": "Akash ",
       "projectIDList": [],
       "favoriteProjectList": [],
       "taskAssignedIDList": [
@@ -280,14 +251,6 @@
         1
       ],
       "id": 1
-    },
-    {
-      "sectionName": "Backend",
-      "projectId": 1,
-      "taskIDList": [
-        2
-      ],
-      "id": 2
     }
   ],
   "taskList": [

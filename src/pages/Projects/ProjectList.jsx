@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { setProjectList } from "../../features/projectListSlice";
+import { setProjectList, setLastUsed, selectedProjectList } from "../../features/projectListSlice";
+import { setProject } from "../../features/projectSlice";
 import { useSelector, useDispatch } from 'react-redux';
 
 const ProjectList = ({ projects, userInfo }) => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(userInfo);
-  console.log(projects, 'inside projectList');
-
 
   useEffect(() => {
 
@@ -33,26 +32,16 @@ const ProjectList = ({ projects, userInfo }) => {
 
   }, [dispatch]);
 
-  const projectList = useSelector((state) => state.projectList.projectList)
+  const projectList = useSelector(selectedProjectList);
 
   const navigate = useNavigate();
-  const handleLinkClick = (project) => {
-    project.lastUsed = new Date();
-
-    fetch(`http://localhost:8000/projectList/${project.id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(project),
-    }).then((result) => {
-      return result.json();
-    });
+  const updateLastUsed = (project) => {
+    dispatch(setLastUsed({ projectId: project.id }));
+    console.log(project.id, projectList, 'from project list');
   };
 
   const insideProject = (project) => {
-    handleLinkClick(project);
+    updateLastUsed(project);
     localStorage.setItem("projectId", project.id);
     navigate("/task/overview");
   };
