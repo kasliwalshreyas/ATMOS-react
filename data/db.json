@@ -1,5 +1,15 @@
 {
-  "userList": [],
+  "userList": [
+    {
+      "emailId": "spk@atmos.in",
+      "password": "$2a$10$IBljhtApLD6Ns/oEeA49VOCsKKbTiWI0zdj.Ld8TSyzUfAEeyaLPW",
+      "userName": "Shreyas Kasliwal",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 1
+    }
+  ],
   "projectList": [],
   "sectionList": [],
   "conversationList": []
