@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { CardImg, Container } from "react-bootstrap";
 import {Button} from "react-bootstrap";
 import {FloatingLabel} from "react-bootstrap";
@@ -9,7 +9,7 @@ import {Row} from "react-bootstrap";
 import {Col} from "react-bootstrap";  
 // import Navbar from "../../UI/Navbar";
 
-import './Sign-Up.css';
+import styles from './Sign-Up.module.css';
 
 // For hashing the password before saving it to the json server
 import bcrypt from "bcryptjs";
@@ -139,11 +139,15 @@ function SignUp() {
                                             <Form.Control type="password" className="fs-5" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
                                         </FloatingLabel>
                                     </div>
-                                    <Button  className="w-100 btn-lg mt-5" type="submit">Sign Up</Button>
+                                    {/* <Button  className="w-100 btn-lg mt-5" type="submit">Sign Up</Button> */}
+                                    <button className={styles.button24 + ` mt-5`} type="submit">Sign Up</button>
+                                    <p className="mt-2 text-secondary text-end">
+                                        Already have an account? <Link to="/login" className='text-decoration-none'><span className={styles.atmosColor}>Login</span></Link>
+                                    </p>
                                 </Form>
                             </Col>
                             <Col md={6} sm={12} className="mt-4 d-flex align-items-center justify-content-center">
-                                <CardImg src="./images/SignIn/SignIn.png" className="w-75 fluid" />
+                                <CardImg src="./images/SignIn/sign.gif" className="w-75 fluid" />
                             </Col>
                         </Row>
             </div>
