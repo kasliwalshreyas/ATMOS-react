@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 contributions.md
-/data/db.json
+
 # testing
 /coverage
 
@@ -22,4 +22,4 @@ contributions.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-data/db.json
+/data
