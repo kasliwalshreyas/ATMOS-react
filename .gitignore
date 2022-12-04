@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 contributions.md
-data\db.json
+/data/db.json
 # testing
 /coverage
 
