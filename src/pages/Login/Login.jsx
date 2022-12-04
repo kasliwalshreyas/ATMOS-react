@@ -50,10 +50,10 @@ function Login() {
                 <Col xs={12} md={5} lg={6} className="d-flex flex-column justify-content-center align-items-center">
                     <h1 className="my-3 ms-1 display-3 fw-bold ls-tight px-3">
                         The best offer <br />
-                        <span className="text-primary">to grow your<br /> business</span>
+                        <span className="" style={{color:"#37517e"}}>to grow your<br /> business</span>
                     </h1>
                     <p className="my-3 mx-5 fs-5 px-5 text-secondary">
-                        Collaborate better with <span className="fw-bold text-primary">ATMOS</span>, the best platform to manage your business.
+                        Collaborate better with <span className="fw-bold" style={{color:"#37517e"}}>ATMOS</span>, the best platform to manage your business.
                         Manage resources, simplify workflows, and plan with confidence no matter your industry.
                         Track your progress and get the most out of your business.
                         So, what are you waiting for? Sign up now!
@@ -75,13 +75,14 @@ function Login() {
                                     <Form.Control type="password" placeholder="Password" className="fs-5" required value={password} onChange={(e) => setPassword(e.target.value)} />
                                 </FloatingLabel>
                             </div>
-                            <div className="mt-4 d-flex flex-row align-items-center">
-                                <Button className="w-100 btn-lg" variant="primary" type="submit">
+                            <div className="mt-4 d-flex flex-column align-items-center">
+                                {/* <Button className="w-100 btn-lg" variant={styles.atmos} type="submit">
                                     Login
-                                </Button>
+                                </Button> */}
+                                <button className={styles.button24} type="submit">Login</button>
                             </div>
                             <p className="mt-2 text-secondary text-end">
-                                Don't have an account? <Link to="/signup" className="text-decoration-none text-primary">Register here</Link>
+                                Don't have an account? <Link to="/signup" className={styles.atmosColor + ` text-decoration-none`}>Register here</Link>
                             </p>
                             <div class="d-flex justify-content-center">
                                 <Link to="#" class="small text-secondary text-decoration-none me-5">Terms of use</Link>

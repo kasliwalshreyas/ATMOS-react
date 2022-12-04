@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./UI/Navbar";
+import { ChatEngine } from 'react-chat-engine';
 import Home from "./pages/Home/Home";
 import HomePage from "./pages/HomePage/Home";
 import Projects from "./pages/Projects/Projects";

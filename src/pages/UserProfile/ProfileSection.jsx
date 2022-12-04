@@ -50,27 +50,37 @@ const ProfileSection = ({ user }) => {
                     <Card.Body className="d-flex align-items-center justify-content-between">
                         <h1 className="profile-heading fw-semibold" style={{ color: "#05386B" }}>Profile</h1>
                         <div>
+<<<<<<< HEAD
                             <Button variant="info" className="edit-button" onClick={!isEdit ? () => setIsEdit(!isEdit) : handleClick}>{isEdit ? <i className="fa-solid fa-floppy-disk"></i> : <i className="fa-solid fa-pen"></i>}</Button>
+=======
+                            <Button variant="info" className="edit-button" onClick={!isEdit?()=> setIsEdit(!isEdit):handleClick}>{isEdit ? <i className="fa-solid fa-floppy-disk"></i> : <i className="fa-solid fa-pen"></i>}</Button>
+>>>>>>> 8708e00 (Login and some changes ui)
                         </div>
                     </Card.Body>
                 </Card>
             </Container>
             <Container className="profile-container mt-3">
                 <Row>
-                    <Col md={4} sm={12}>
-                        <Card className="profile-card shadow">
+                    <Col md={4} sm={12} className="mb-3">
+                        <Card className={styles.profileCard+ ` shadow`}>
                             <Card.Body className="text-center">
                                 <CardImg src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                                     className="rounded-circle fluid"
                                     style={{ width: '150px' }}
                                 />
 
+<<<<<<< HEAD
                                 <h1 className="profile-heading fw-semibold mt-3" style={{ color: "#05386B" }}>{userName}</h1>
                                 <p className="profile-para text-secondary">{emailId}</p>
+=======
+                                <h1 className="profile-heading fw-semibold mt-3" style={{color:"#05386B"}}>{userName}</h1>
+                                <p className="profile-para fw-bold text-secondary">{emailId}</p>
+>>>>>>> 8708e00 (Login and some changes ui)
                             </Card.Body>
                         </Card>
                     </Col>
                     <Col md={8} sm={12}>
+<<<<<<< HEAD
                         <Card className="profile-card shadow">
                             <Card.Body className="profile-card-body">
                                 <Row className="mb-3">
@@ -154,6 +164,105 @@ const ProfileSection = ({ user }) => {
                                             TOTAL FAVOURITES
                                         </p>
                                     </div>
+=======
+                        <Card className={`shadow `+ styles.profileCard}>
+                        <Card.Body className="profile-card-body">
+                                    <Row className="mb-3">
+                                        <Form.Label column className="fw-semibold" lg={2}>
+                                                Username
+                                            </Form.Label>
+                                            <Col className="text-center">
+                                                {isEdit && 
+                                                    <Form.Control type="text" placeholder="Username" value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!isEdit} />
+                                                }
+                                                {!isEdit &&
+                                                    <div className=" fw-bold border-bottom border-dark border-opacity-50 fs-5" style={{color:"#05386B"}}>{userName}</div>
+                                                }
+                                            </Col>
+                                    </Row>
+
+                                    <Row className="mb-3">
+                                        <Form.Label column className="fw-semibold" lg={2}>
+                                            Email
+                                        </Form.Label>
+                                        <Col className="text-center">
+                                            {isEdit &&
+                                                <Form.Control type="email" placeholder="Email" value={emailId} onChange={(e) => setemailId(e.target.value)} disabled={!isEdit} />
+                                            }
+                                            {!isEdit &&
+                                                <div className="fw-bold border-bottom border-dark border-opacity-50 fs-5" style={{color:"#05386B"}}>{emailId}</div>
+                                            }
+                                        </Col>
+                                    </Row>
+
+                                    <Row className="mb-3">
+                                        <Form.Label column className="fw-semibold" lg={2}>
+                                            Password
+                                        </Form.Label>
+                                        <Col className="text-center">
+                                            {isEdit &&
+                                                <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={!isEdit} />
+                                            }
+                                            {!isEdit &&
+                                                <div className="fw-bold border-bottom border-dark border-opacity-50 fs-4" style={{color:"#05386B"}}>....................</div>
+                                            }
+                                        </Col>
+                                    </Row>
+                            </Card.Body>
+                        </Card>
+                        <Row className=" mt-3 mb-3">
+                        <Col md={4}>
+                            <div className={styles.countContainer}>
+                                <div className={styles.containerHead}>
+                                    <div className={styles.headIcon}><img src="https://img.icons8.com/ios-glyphs/30/000000/to-do.png" /></div>
+
+                                    <div className={styles.headText}>Projects</div>
+                                </div>
+                                <div className={styles.containerBody}>
+                                    <p className={styles.para}>
+                                    {user.projectIDList? user.projectIDList.length:"0"}
+                                    </p>
+                                </div>
+                                <div className={styles.containerFoot}>
+                                    <p className={styles.para}>
+                                    TOTAL PROJECTS
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </Col>
+                        <Col md={4}>
+                        <div className={styles.countContainer}>
+                                <div className={styles.containerHead}>
+                                    <div className={styles.headIcon}><i className="fa-solid fa-star"></i></div>
+
+                                    <div className={styles.headText}>Favourites</div>
+                                </div>
+                                <div className={styles.containerBody}>
+                                    <p className={styles.para}>
+                                    {user.favoriteProjectList? user.favoriteProjectList.length:"0"}
+                                    </p>
+                                </div>
+                                <div className={styles.containerFoot}>
+                                    <p className={styles.para}>
+                                    TOTAL FAVOURITES
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </Col>
+                        <Col md={4}>
+                        <div className={styles.countContainer}>
+                                <div className={styles.containerHead}>
+                                    <div className={styles.headIcon}><i className="fa-solid fa-bars-progress"></i></div>
+
+                                    <div className={styles.headText}>Tasks</div>
+                                </div>
+                                <div className={styles.containerBody}>
+                                    <p className={styles.para}>
+                                    {user.taskAssignedIDList? user.taskAssignedIDList.length:"0"}
+                                    </p>
+>>>>>>> 8708e00 (Login and some changes ui)
                                 </div>
 
                             </Col>
