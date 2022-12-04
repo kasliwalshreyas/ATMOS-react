@@ -59,7 +59,7 @@
       "userName": "naman",
       "projectIDList": [
         2,
-        3
+        1
       ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
@@ -70,7 +70,7 @@
       "password": "$2a$10$7J271Q9kipmxKO2mnGyH2.GOG1NVXmKutNsE89/MigbG5Ibgdxey6",
       "userName": "naman2",
       "projectIDList": [
-        4,
+        1,
         2
       ],
       "favoriteProjectList": [
@@ -94,38 +94,31 @@
       "projectMission": "",
       "projectDescription": "dkjcds csd",
       "projectGuidelines": "",
-      "highAccess": [
-        1
-      ],
+      "highAccess": [],
       "mediumAccess": [],
       "lowAccess": [],
       "id": 1,
       "lastUsed": "2022-10-30T08:46:52.729Z"
     },
     {
-      "projectName": "FSD",
-      "MaxMember": "",
+      "projectName": "ABCD",
       "type": "Education",
-      "sectionIDList": [
-        10
-      ],
-      "projectStatement": "Hello",
-      "projectMission": "Hi",
-      "projectDescription": "Hello",
-      "projectGuidelines": "Ahhhhhhhhh!!!!!!",
+      "sectionIDList": [],
+      "projectStatement": "To learn",
+      "projectMission": "Yes u can do it",
+      "projectDescription": "Later babes!!!",
+      "projectGuidelines": "more details will follow later😜",
+      "userId": 1,
       "highAccess": [
-        1
-      ],
-      "mediumAccess": [
+        1,
         2,
-        5
+        11,
+        12
       ],
-      "lowAccess": [
-        4,
-        3
-      ],
+      "mediumAccess": [],
+      "lowAccess": [],
       "id": 2,
-      "lastUsed": "2022-10-29T21:16:04.558Z"
+      "lastUsed": "2022-12-04T10:45:53.388Z"
     },
     {
       "projectName": "ABCD",
@@ -142,7 +135,7 @@
       ],
       "mediumAccess": [],
       "lowAccess": [],
-      "id": 2,
+      "id": 3,
       "lastUsed": "2022-10-29T21:16:04.558Z"
     },
     {
@@ -334,193 +327,59 @@
     {
       "messages": [
         {
-          "text": "hi",
-          "senderName": "naman2",
-          "senderId": 12,
-          "date": "27/11/2022, 16:50:11"
-        },
-        {
-          "text": "ga",
-          "senderName": "naman2",
-          "senderId": 12,
-          "date": "04/12/2022, 14:49:14"
-        },
-        {
-          "text": "hl",
+          "text": "hkassa",
           "senderName": "naman",
           "senderId": 11,
-          "date": "04/12/2022, 14:49:21"
+          "date": "04/12/2022, 23:53:16"
+        }
+      ],
+      "id": "111"
+    },
+    {
+      "id": "211",
+      "messages": []
+    },
+    {
+      "messages": [
+        {
+          "text": "hi bro",
+          "senderName": "naman",
+          "senderId": 11,
+          "date": "04/12/2022, 23:52:17"
         },
         {
-          "text": "hl",
+          "text": "bhag",
+          "senderName": "naman",
+          "senderId": 11,
+          "date": "04/12/2022, 23:53:31"
+        },
+        {
+          "text": "hi bro",
           "senderName": "naman2",
           "senderId": 12,
-          "date": "04/12/2022, 14:50:46"
+          "date": "04/12/2022, 23:54:49"
         },
         {
-          "text": "gddd",
-          "senderName": "naman",
-          "senderId": 11,
-          "date": "04/12/2022, 14:50:58"
-        },
-        {
-          "text": "hss",
-          "senderName": "naman",
-          "senderId": 11,
-          "date": "04/12/2022, 14:56:21"
-        },
-        {
-          "text": "hgfgh",
+          "text": "bsdk",
           "senderName": "naman2",
           "senderId": 12,
-          "date": "04/12/2022, 14:56:36"
+          "date": "04/12/2022, 23:55:04"
         },
         {
-          "text": "dsfsdgs",
+          "text": "kya bol",
           "senderName": "naman",
           "senderId": 11,
-          "date": "04/12/2022, 14:56:55"
-        },
-        {
-          "text": "gand marta",
-          "senderName": "naman",
-          "senderId": 11,
-          "date": "04/12/2022, 15:46:40"
-        },
-        {
-          "text": "this hai",
-          "senderName": "naman2",
-          "senderId": 12,
-          "date": "04/12/2022, 15:47:05"
+          "date": "04/12/2022, 23:55:10"
         }
       ],
       "id": "1211"
     },
     {
-      "messages": [
-        {
-          "text": "hi",
-          "senderName": "naman2",
-          "senderId": 12,
-          "date": "04/12/2022, 15:00:30"
-        }
-      ],
-      "id": "1210"
+      "id": "121",
+      "messages": []
     },
     {
-      "messages": [
-        {
-          "text": "hi",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:07:29"
-        },
-        {
-          "text": "hi",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:12:30"
-        },
-        {
-          "text": "bye",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:12:49"
-        },
-        {
-          "text": "go",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:14:14"
-        },
-        {
-          "text": "hl",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:20:23"
-        },
-        {
-          "text": "jjd",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:51:11"
-        },
-        {
-          "text": "na",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:52:27"
-        },
-        {
-          "text": "nn",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:54:09"
-        },
-        {
-          "text": "hi",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:58:10"
-        },
-        {
-          "text": "bye",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 12:58:40"
-        },
-        {
-          "text": "bhi",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 14:37:01"
-        },
-        {
-          "text": "b b",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 14:40:00"
-        },
-        {
-          "text": "ld",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 14:42:32"
-        },
-        {
-          "text": "d",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 14:43:36"
-        }
-      ],
-      "id": "910"
-    },
-    {
-      "messages": [
-        {
-          "text": "hi",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 13:00:53"
-        },
-        {
-          "text": "do",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 14:43:48"
-        },
-        {
-          "text": "how are you?",
-          "senderName": "Shreyas Kasliwal",
-          "senderId": 9,
-          "date": "04/12/2022, 14:45:18"
-        }
-      ],
-      "id": "911"
-    },
-    {
-      "id": "912",
+      "id": "212",
       "messages": []
     }
   ],
@@ -528,69 +387,73 @@
     {
       "cid": [
         {
-          "id": "910",
-          "userInfo": {
-            "id": 10,
-            "userName": "THE SPK",
-            "date": "12:07"
-          }
-        },
-        {
-          "id": "911",
+          "id": "111",
           "userInfo": {
             "id": 11,
             "userName": "naman",
-            "date": "12:09"
+            "date": "23:52"
           }
         },
         {
-          "id": "912",
+          "id": "121",
           "userInfo": {
             "id": 12,
             "userName": "naman2",
-            "date": "12:09"
+            "date": "23:54"
           }
         }
       ],
-      "id": 9
+      "id": 1
     },
     {
       "cid": [
         {
-          "id": "1210",
+          "id": "211",
           "userInfo": {
-            "id": 12,
-            "userName": "naman2",
-            "date": "17:03"
+            "id": 11,
+            "userName": "naman",
+            "date": "23:52"
           }
         },
         {
-          "id": "910",
+          "id": "212",
           "userInfo": {
-            "id": 9,
-            "userName": "Shreyas Kasliwal",
-            "date": "12:07"
+            "id": 12,
+            "userName": "naman2",
+            "date": "23:54"
           }
         }
       ],
+      "id": 2
+    },
+    {
+      "cid": [],
+      "id": 3
+    },
+    {
+      "cid": [],
+      "id": 9
+    },
+    {
+      "cid": [],
       "id": 10
     },
     {
       "cid": [
         {
+          "id": "211",
+          "userInfo": {
+            "id": 2,
+            "userName": "Naman Bhatia",
+            "date": "23:52"
+          }
+        },
+        {
           "id": "1211",
           "userInfo": {
             "id": 12,
             "userName": "naman2",
-            "date": "16:50"
-          }
-        },
-        {
-          "id": "911",
-          "userInfo": {
-            "id": 9,
-            "userName": "Shreyas Kasliwal",
-            "date": "12:09"
+            "date": "23:52"
           }
         }
       ],
@@ -603,15 +466,15 @@
           "userInfo": {
             "id": 11,
             "userName": "naman",
-            "date": "16:50"
+            "date": "23:52"
           }
         },
         {
-          "id": "1210",
+          "id": "212",
           "userInfo": {
-            "id": 10,
-            "userName": "THE SPK",
-            "date": "17:03"
+            "id": 2,
+            "userName": "Naman Bhatia",
+            "date": "23:54"
           }
         }
       ],
