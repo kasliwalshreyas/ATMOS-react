@@ -8,7 +8,9 @@ const Sidebar = (user)=>{
         <div>
             <Topbar user={user}/>
             <Search user={user}/>
+            <div style={{height: "70vh",overflow: "scroll"}}>
             <Chats user={user}/>
+            </div>
         </div>
     )
 }

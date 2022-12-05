@@ -4,9 +4,12 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    overflow: scroll;
 }
 .userChat:hover{
     background-color: darkgray;
+    transition: all 0.5s ease;
+    border-radius: 30px;
 }
 .userChat img{
     width: 50px;
@@ -23,4 +26,21 @@
 .userChatInfo p{
     font-size: medium;
     color: gray;
+}
+
+.projectInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 5px;
+    overflow: scroll;
+    font-size: 1.5em;
+    font-weight: 500;
+    /* margin: auto; */
+    /* margin-bottom: 10px; */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: rgb(164, 164, 164);
+
 }
