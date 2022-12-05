@@ -7,10 +7,10 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
-import { setProject, addMediumTeamMember, addHightTeamMember, addLowTeamMember } from "../../../features/projectSlice";
+// import { setProject, addMediumTeamMember, addHightTeamMember, addLowTeamMember } from "../../../features/projectSlice";
 import { useDispatch } from 'react-redux';
 
-const OverView = ({ projectId, projectInfo }) => {
+const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
   // console.log(projectId);
 
   // console.log(projectInfo);
@@ -105,21 +105,22 @@ const OverView = ({ projectId, projectInfo }) => {
       selectedTeamMember.projectIDList.push(projectId);
 
       if (selectedRole.value === 'highAccess') {
-        dispatch(addHightTeamMember(selectedTeamMember));
-        // projectInfo.highAccess.push(selectedTeamMember);
+        // dispatch(addHightTeamMember(selectedTeamMember));
+        projectInfo.highAccess.push(selectedTeamMember);
         projectInfoID.highAccess.push(selectedTeamMember.id);
       } else if (selectedRole.value === 'mediumAccess') {
-        dispatch(addMediumTeamMember(selectedTeamMember));
-        // projectInfo.mediumAccess.push(selectedTeamMember);
+        // dispatch(addMediumTeamMember(selectedTeamMember));
+        projectInfo.mediumAccess.push(selectedTeamMember);
         projectInfoID.mediumAccess.push(selectedTeamMember.id);
       } else if (selectedRole.value === 'lowAccess') {
-        dispatch(addLowTeamMember(selectedTeamMember));
-        // projectInfo.lowAccess.push(selectedTeamMember);
+        // dispatch(addLowTeamMember(selectedTeamMember));
+        projectInfo.lowAccess.push(selectedTeamMember);
         projectInfoID.lowAccess.push(selectedTeamMember.id);
       }
       // console.log(projectInfo, projectInfoID);
 
-      dispatch(setProject(projectInfo));
+      // dispatch(setProject(projectInfo));
+      setProjectInfo(projectInfo);
       // add user to project
       fetch(`http://localhost:8000/projectList/${projectId}`, {
         method: 'PUT',
