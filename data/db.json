@@ -4,13 +4,33 @@
       "emailId": "spk@atmos.in",
       "password": "$2a$10$IBljhtApLD6Ns/oEeA49VOCsKKbTiWI0zdj.Ld8TSyzUfAEeyaLPW",
       "userName": "Shreyas Kasliwal",
-      "projectIDList": [],
+      "projectIDList": [
+        1
+      ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 1
     }
   ],
-  "projectList": [],
+  "projectList": [
+    {
+      "projectName": "First Project",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "Mon Dec 05 2022 19:26:02 GMT+0530 (India Standard Time)",
+      "projectGuidelines": "",
+      "userId": 1,
+      "highAccess": [
+        1
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 1
+    }
+  ],
   "sectionList": [],
   "conversationList": []
 }

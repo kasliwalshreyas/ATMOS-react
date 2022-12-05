@@ -18,15 +18,35 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         login: (state, action) => {
-            console.log("login action", action.payload[0]);
-            state.user = action.payload[0];
+            console.log("login action", action.payload);
+            localStorage.setItem("user", JSON.stringify(action.payload.id));
+            state.user = action.payload;
 
         },
         logout: (state, action) => {
-            state.user = action.payload[0];
+            localStorage.removeItem("user");
+            state.user = null;
         },
         addProjectToUser: (state, action) => {
-            state.user.projectIDList.push(action.payload);
+            // state.user.projectIDList.push(action.payload);
+            const userInfo = state.user;
+            userInfo.projectIDList.push(action.payload);
+
+            console.log("addProjectToUser userInfo", userInfo);
+            console.log("addProjectToUser state", state.user);
+            console.log("addProjectToUser action", action.payload);
+
+            const res2 = fetch(`http://localhost:8000/userList/${state.user.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userInfo),
+            }).then((res) => {
+                // setIsPending(false);
+                // setnextPage(1);
+                // history("/projects");
+                return res.json();
+            });
+            console.log(res2, 'userInfo');
         },
     }
 });
