@@ -4,6 +4,7 @@ import SectionArena from "./SectionArena";
 import { useState, useEffect } from "react";
 import OverView from "../Overview/OverView";
 import Charts from "../Charts/Charts";
+import Navbar from "../../../UI/Navbar";
 import React from "react";
 import Timeline from "../Timeline/Timeline";
 import { useSelector, useDispatch } from 'react-redux';
@@ -88,6 +89,8 @@ const MainView = ({ overview, board, charts, timeline }) => {
   console.log(projectInfo);
 
   return (
+    <>
+    <Navbar />
     <div className="normal-div" onClick={handleClickOutside}>
       {user && projectInfo && (<ProjectInfo
         projectInfo={projectInfo}
@@ -101,6 +104,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
       {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfo={user} ></SectionArena>}
       {user && charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Charts>}
     </div>
+    </>
   );
 };
 

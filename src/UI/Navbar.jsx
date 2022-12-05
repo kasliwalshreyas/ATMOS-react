@@ -9,7 +9,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="head-container">
         <div className="head-atmos">
-          <h1 className="ms-5">ATMOS</h1>
+          <h1 className="ms-5" style={{textTransform: "uppercase"}}>ATMOS</h1>
         </div>
         <div className="user">
           <UserDropdown />

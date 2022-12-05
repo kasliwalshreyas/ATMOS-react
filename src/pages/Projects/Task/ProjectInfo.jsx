@@ -94,7 +94,7 @@ const ProjectInfo = ({
             </div>
           </div>
         </div>
-        <div className="user-profiles">
+        {/* <div className="user-profiles">
           <img
             id="user-profile"
             className="user-profile"
@@ -112,7 +112,7 @@ const ProjectInfo = ({
               Admin Portal
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* <Router> */}
       <Nav className="nav-bar" as="ul">

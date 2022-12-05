@@ -5,6 +5,7 @@ import {ChatContext} from "./context/ChatContext"
 const Chats = (user)=>{
     const [chats, setChats] = React.useState([])
     const { dispatch } = useContext(ChatContext);
+    const { data } = useContext(ChatContext) ;
     const [userName, setUserName] = useState(user.user.user.userName);
     const [projects, setProjects] = useState(null);
     const [cid, setCid] = React.useState(null);
@@ -28,64 +29,64 @@ const Chats = (user)=>{
             body: JSON.stringify({id: combinedId, messages: []})
         })
         const data = await res.json();
-        const res1 = await fetch("http://localhost:8000/userChat/" + currentUser,{
-            method: "GET",
-            headers: {"Content-Type": "application/json"},
-            })
-        const data1 = await res1.json();
-        console.log("data11",data1);
-        setCid(data1)
+        // const res1 = await fetch("http://localhost:8000/userChat/" + currentUser,{
+        //     method: "GET",
+        //     headers: {"Content-Type": "application/json"},
+        //     })
+        // const data1 = await res1.json();
+        // console.log("data11",data1);
+        // setCid(data1)
 
-        c.id = combinedId;
-        c.userInfo.id = us.id;
-        c.userInfo.userName = us.userName;
-        c.userInfo.date = new Date().toTimeString().slice(0,5);
-        console.log("c",c);
-        let u = JSON.parse(JSON.stringify(data1));
-        // console.log("ub",u);
-        u.cid.push(c);
-        // console.log("ua",u);
-        // console.log("data12",data1);
-        console.log("u1",u);
-        const res2 = await fetch(`http://localhost:8000/userChat/${user.user.user.id}`, {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({cid: u.cid})
-            })
-        const data2 = await res2.json();
-        const res4 = await fetch("http://localhost:8000/userChat/" + selectedUser,{
-            method: "GET",
-            headers: {"Content-Type": "application/json"},
-            })
-        const data4 = await res4.json();
+        // c.id = combinedId;
+        // c.userInfo.id = us.id;
+        // c.userInfo.userName = us.userName;
+        // c.userInfo.date = new Date().toTimeString().slice(0,5);
+        // console.log("c",c);
+        // let u = JSON.parse(JSON.stringify(data1));
+        // // console.log("ub",u);
+        // u.cid.push(c);
+        // // console.log("ua",u);
+        // // console.log("data12",data1);
+        // console.log("u1",u);
+        // const res2 = await fetch(`http://localhost:8000/userChat/${user.user.user.id}`, {
+        //     method: "PUT",
+        //     headers: {"Content-Type": "application/json"},
+        //     body: JSON.stringify({cid: u.cid})
+        //     })
+        // const data2 = await res2.json();
+        // const res4 = await fetch("http://localhost:8000/userChat/" + selectedUser,{
+        //     method: "GET",
+        //     headers: {"Content-Type": "application/json"},
+        //     })
+        // const data4 = await res4.json();
         // console.log("data41",data4);
-        setCid(data4)
-        c.id = combinedId;
-        c.userInfo.id = user.user.user.id;
-        c.userInfo.userName = user.user.user.userName;
-        c.userInfo.date = new Date().toTimeString().slice(0,5);
-        u = JSON.parse(JSON.stringify(data4));
-        u.cid.push(c);
-        // console.log("data42",data4);
-        // console.log("u2",u);
-        const res3 = await fetch("http://localhost:8000/userChat/" + selectedUser, {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({cid: u.cid})
-            })
-        const data3 = await res3.json();
-        // console.log("If",data);
+        // setCid(data4)
+        // c.id = combinedId;
+        // c.userInfo.id = user.user.user.id;
+        // c.userInfo.userName = user.user.user.userName;
+        // c.userInfo.date = new Date().toTimeString().slice(0,5);
+        // u = JSON.parse(JSON.stringify(data4));
+        // u.cid.push(c);
+        // // console.log("data42",data4);
+        // // console.log("u2",u);
+        // const res3 = await fetch("http://localhost:8000/userChat/" + selectedUser, {
+        //     method: "PUT",
+        //     headers: {"Content-Type": "application/json"},
+        //     body: JSON.stringify({cid: u.cid})
+        //     })
+        // const data3 = await res3.json();
+        // // console.log("If",data);
 
     }
     useEffect(()=>{
-        async function getChats(){
-            console.log("loged in user id - ",user.user.user.id);
-            const res = await fetch("http://localhost:8000/userChat/" + user.user.user.id); 
-            const data = await res.json();
-            // console.log("dataChat",data);
-            setChats(data.cid);
-        }
-        user.user.user.id && getChats();
+        // async function getChats(){
+        //     console.log("loged in user id - ",user.user.user.id);
+        //     const res = await fetch("http://localhost:8000/userChat/" + user.user.user.id); 
+        //     const data = await res.json();
+        //     console.log("dataChat",data);
+        //     setChats(data.cid);
+        // }
+        // user.user.user.id && getChats();
 
         async function getProjects() {
             let arr = []
@@ -107,6 +108,7 @@ const Chats = (user)=>{
                     const r = await res.json();
                     let k = 0
                     if(r.id !== user.user.user.id && r) {
+                        console.log("r",r);
                         project.high.push({id: r.id, name: r.userName, date: r.date})
                         handleUsers(r);
                     }
