@@ -105,7 +105,7 @@ const ProjectInfo = ({
             id="dropdownMenu-user-profile"
             className={isProfileClicked ? "show-profile-options" : "hide-profile-options"}
           >
-            <a href="/user-profile" className="user-profile-dropdown-option">
+            <a href="/profile" className="user-profile-dropdown-option">
               Profile
             </a>
             <a href="/admin-portal" className="user-profile-dropdown-option">

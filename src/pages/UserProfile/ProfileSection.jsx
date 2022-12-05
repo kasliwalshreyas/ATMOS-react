@@ -157,20 +157,6 @@ const ProfileSection = ({ user }) => {
                             </div>
                             
                         </Col>
-                        <Col md={4}>
-                        <div className={styles.countContainer}>
-                                <div className={styles.containerHead}>
-                                    <div className={styles.headIcon}><i className="fa-solid fa-bars-progress"></i></div>
-
-                                    <div className={styles.headText}>Tasks</div>
-                                </div>
-                                <div className={styles.containerBody}>
-                                    <p className={styles.para}>
-                                    {user.taskAssignedIDList? user.taskAssignedIDList.length:"0"}
-                                    </p>
-                                </div>
-                            </div>
-                            </Col>
                             <Col md={4}>
                                 <div className={styles.countContainer}>
                                     <div className={styles.containerHead}>
