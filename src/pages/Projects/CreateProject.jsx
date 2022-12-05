@@ -68,22 +68,33 @@ const CreateProject = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(project),
-    }).then(res => res.json());
+    }).then(res => {
+      return res.json();
+    }).
+      then(data => {
+        dispatch(addProjectToUser(data.id));
+        setIsPending(false);
+        setnextPage(1);
+        history("/projects");
+        return data;
+      });
     console.log(newProjectInfo, 'newProjectInfo');
 
-    dispatch(addProjectToUser(newProjectInfo.id));
 
-    const userInfo = await fetch(`http://localhost:8000/userList/${newProjectInfo.userId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    }).then((res) => {
-      setIsPending(false);
-      setnextPage(1);
-      history("/projects");
-      return res.json();
-    });
-    console.log(userInfo, 'userInfo');
+
+    // console.log('create project user', userInfo);
+
+    // const res2 = await fetch(`http://localhost:8000/userList/${newProjectInfo.userId}`, {
+    //   method: "PUT",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(user),
+    // }).then((res) => {
+    //   setIsPending(false);
+    //   setnextPage(1);
+    //   history("/projects");
+    //   return res.json();
+    // });
+    // console.log(res2, 'userInfo');
 
     // localStorage.setItem("user", JSON.stringify(userInfo));
 

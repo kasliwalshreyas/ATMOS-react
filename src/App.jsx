@@ -20,8 +20,24 @@ import AdminLogin from "./pages/Admin/Login/Login";
 import AdminList from "./pages/Admin/List/List";
 import AboutUS from "./pages/AboutUs/AboutUs";
 import Contact from './pages/ContactUs/Contact';
+import { login } from "./features/userSlice";
+import { useDispatch } from "react-redux";
 
 const App = () => {
+
+  const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user) {
+    console.log(user);
+    const userInfo = fetch('http://localhost:8000/userList/' + user)
+      .then((res) => {
+        return res.json();
+      }).then((data) => {
+        console.log(data);
+        dispatch(login(data));
+      });
+  }
 
   return (
     <div>
