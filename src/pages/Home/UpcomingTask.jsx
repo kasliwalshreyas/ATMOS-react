@@ -5,10 +5,12 @@ import styles from "./UpcomingTask.module.css";
 import { Link } from "react-router-dom";
 const UpcomingTask = ({ user }) => {
   const [userInfo, setUserInfo] = useState(user);
-  const { data: tasksList, isPending, error } = useFetch(
-    "http://localhost:8000/taskList"
-  );
-    // console.log(tasksList)
+  const {
+    data: tasksList,
+    isPending,
+    error,
+  } = useFetch("http://localhost:8000/taskList");
+  // console.log(tasksList)
   // tasksList && console.log(tasksList)
 
   var sortedTaskList = tasksList;
@@ -17,19 +19,17 @@ const UpcomingTask = ({ user }) => {
     var d = new Date(b.taskDeadline);
     // console.log(c)
     // console.log(d)
-    if (c >= d)
-      return 1;
-    else
-      return -1;
+    if (c >= d) return 1;
+    else return -1;
   };
-  
+
   // console.log("yeah i am here")
   const sortTaskList = () => {
-    sortedTaskList = tasksList.sort(compareDate)
-  }
-  console.log(sortedTaskList)
+    sortedTaskList = tasksList.sort(compareDate);
+  };
+  console.log(sortedTaskList);
 
-  tasksList && sortTaskList()
+  tasksList && sortTaskList();
   const handledeadline = (due) => {
     var now = new Date();
     var due = new Date(due);
@@ -37,15 +37,34 @@ const UpcomingTask = ({ user }) => {
     else return 0;
   };
 
+  // console.log("i am pointing to here",tasksList)
+  // console.log("i am now pointing to here", sortedTaskList)
+  console.log("i am seriously here", userInfo.taskAssignedIDList);
+  const [showImg, setShowImg] = useState(true)
+  // const taskImg = () => {
+  sortedTaskList && sortedTaskList.map((taskList) => {
+    userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
+      if (
+        taskList.id === task &&
+        handledeadline(taskList.taskDeadline) === 1 &&
+        !taskList.taskCompletion
+      ) {
+        setShowImg(false);
+      }
+    });
+  });
+  // }
+
   return (
     <>
       <div className={styles.upcomingTaskList}>
         {tasksList &&
           sortedTaskList.map((taskList) =>
-            userInfo.taskAssignedIDList.map(
+          userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
               (task) =>
                 taskList.id === task &&
-                handledeadline(taskList.taskDeadline) === 1 && !taskList.taskCompletion && (
+                handledeadline(taskList.taskDeadline) === 1 &&
+                !taskList.taskCompletion && (
                   <div className={styles.particularTask}>
                     <Link to="/task">
                       <div className={styles.projectDiv}>
@@ -55,7 +74,9 @@ const UpcomingTask = ({ user }) => {
                           </h4>
                         </div>
                         <div className={styles.projectInfoLastUsed}>
-                          <p className={styles.lastUsed}>due: {taskList.taskDeadline}</p>
+                          <p className={styles.lastUsed}>
+                            due: {taskList.taskDeadline}
+                          </p>
                         </div>
                       </div>
                       {/* <h6 className={styles.particularTaskName}>
@@ -71,6 +92,20 @@ const UpcomingTask = ({ user }) => {
                 )
             )
           )}
+        {showImg && (
+          <div className={styles.mainTask}>
+            <div className={styles.noTask}>
+              <img
+                className={styles.noTaskImg}
+                src="https://www.linkpicture.com/q/list.png"
+              ></img>
+            </div>
+            <div className={styles.noTaskText}>
+              <p className={styles.upperTaskTxt}>You don't have</p>
+              <p className={styles.lowerTaskTxt}> any Upcoming Task </p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
