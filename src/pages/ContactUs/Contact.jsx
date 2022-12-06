@@ -15,13 +15,27 @@ const Contact = () => {
         if (e) e.preventDefault();
         const message = inputs.message;
         const messageEnter = message.replace(/\r\n|\r|\n/g, "%0D%0A").replace(' ', "%20");
-        const request = "mailto:YOUREMAIL?subject=Email%20from%20"
-            + inputs.name + "/"
-            + inputs.email + "&body="
-            + messageEnter;
-        document.location = request;
+        const res = fetch("http://localhost:8000/contactList/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: inputs.name,
+                email: inputs.email,
+                message: messageEnter
+            })
+        });
+        console.log(res);
+        setInputs({ name: '', email: '', message: '' });
+    
+        // const request = "mailto:YOUREMAIL?subject=Email%20from%20"
+        //     + inputs.name + "/"
+        //     + inputs.email + "&body="
+        //     + messageEnter;
+        // document.location = request;
 
-        console.log(request, message);
+        // console.log(request, message);
     }
     return (
         <>
