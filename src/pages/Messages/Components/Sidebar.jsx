@@ -8,9 +8,7 @@ const Sidebar = (user)=>{
         <div>
             <Topbar user={user}/>
             <Search user={user}/>
-            <div className={styles.chat}>
             <Chats user={user}/>
-            </div>
         </div>
     )
 }
