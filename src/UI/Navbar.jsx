@@ -24,7 +24,7 @@ const Navbar = () => {
         </Link>
         <Link
           className="link"
-          style={{ padding: "0px 40px 0px 30px" }}
+          
           to="/messages"
         >
           Messages
