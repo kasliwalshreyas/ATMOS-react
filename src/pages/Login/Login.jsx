@@ -1,12 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Card, Container } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { FloatingLabel } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
+import { Card, Container, FloatingLabel, Form, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
 
