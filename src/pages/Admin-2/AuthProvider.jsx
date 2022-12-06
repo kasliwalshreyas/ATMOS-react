@@ -1,5 +1,3 @@
-// import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
-
 const authProvider = {
     // when a user tries to log in 
     login: ({ username, password }) => {
