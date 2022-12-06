@@ -4,6 +4,8 @@ import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
 import useFetch from "../../../useFetch";
+import { addProjectToFavourite, removeProjectFromFavourite } from "../../../features/userSlice";
+import { useDispatch } from "react-redux";
 
 const ProjectInfo = ({
   isProfileClicked,
@@ -12,7 +14,8 @@ const ProjectInfo = ({
   setProjectInfo,
   userInfo
 }) => {
-  
+
+  const dispatch = useDispatch();
   const [user, setUser] = useState(userInfo);
 
   let initialStateOfFavorite;
@@ -28,23 +31,15 @@ const ProjectInfo = ({
       setStarred(false);
       let index = user.favoriteProjectList.indexOf(projectInfo.id);
       if (index > -1) {
-        user.favoriteProjectList.splice(index, 1);
+        dispatch(removeProjectFromFavourite(index));
       }
     } else {
-      user.favoriteProjectList.push(projectInfo.id);
+      dispatch(addProjectToFavourite(projectInfo.id));
+      // user.favoriteProjectList.push(projectInfo.id);
       setStarred(true);
     }
 
-    fetch(`http://localhost:8000/userList/${user.id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    }).then((result) => {
-      return result.json();
-    });
+
   };
 
   const handleProfileClickedInside = (event) => {
