@@ -6,7 +6,7 @@ import Home from "./pages/Home/Home";
 import HomePage from "./pages/HomePage/Home";
 import Projects from "./pages/Projects/Projects";
 import Chats from "./pages/Messages/Chats";
-import Notes from "./pages/Notes/Notes";
+// import Notes from "./pages/Notes/Notes";
 import MainView from "./pages/Projects/Task/MainView";
 import CreateProject from "./pages/Projects/CreateProject";
 import SignUp from "./pages/Sign-Up/Sign-Up";
@@ -19,21 +19,22 @@ import AdminSingle from "./pages/Admin/Single/Single";
 import AdminLogin from "./pages/Admin/Login/Login";
 import AdminList from "./pages/Admin/List/List";
 import AboutUS from "./pages/AboutUs/AboutUs";
-import Contact from './pages/ContactUs/Contact';
+import Contact from "./pages/ContactUs/Contact";
+import Notes from "./pages/Notes/Notes";
 import { login } from "./features/userSlice";
 import { useDispatch } from "react-redux";
 
 const App = () => {
-
   const dispatch = useDispatch();
 
   const user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     console.log(user);
-    const userInfo = fetch('http://localhost:8000/userList/' + user)
+    const userInfo = fetch("http://localhost:8000/userList/" + user)
       .then((res) => {
         return res.json();
-      }).then((data) => {
+      })
+      .then((data) => {
         console.log(data);
         dispatch(login(data));
       });
@@ -45,6 +46,7 @@ const App = () => {
         <div className="App">
           <Routes>
             <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/notes" element={<Notes />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/profile" element={<UserProfile />} />
@@ -56,19 +58,47 @@ const App = () => {
             <Route path="/createproject" element={<CreateProject />} />
             <Route path="/createproject" element={<CreateProject />} />
             <Route exact path="/task" element={<MainView board />} />
-            <Route exact path="/task/overview" element={<MainView overview />} />
+            <Route
+              exact
+              path="/task/overview"
+              element={<MainView overview />}
+            />
             <Route exact path="/task/charts" element={<MainView charts />} />
-            <Route exact path="/task/timeline" element={<MainView timeline />} />
+            <Route
+              exact
+              path="/task/timeline"
+              element={<MainView timeline />}
+            />
             <Route exact path="/admin-portal" element={<AdminHome />} />
             <Route exact path="/admin-portal/login" element={<AdminLogin />} />
-            <Route exact path="/admin-portal/user/list" element={<AdminList />} />
-            <Route exact path="/admin-portal/user/list/:id" element={<AdminSingle />} />
+            <Route
+              exact
+              path="/admin-portal/user/list"
+              element={<AdminList />}
+            />
+            <Route
+              exact
+              path="/admin-portal/user/list/:id"
+              element={<AdminSingle />}
+            />
             <Route exact path="/admin-portal/user/new" element={<AdminNew />} />
-            <Route exact path="/admin-portal/project/new" element={<AdminNew />} />
-            <Route exact path="/admin-portal/project/list" element={<AdminList />} />
-            <Route exact path="/admin-portal/project/list/:id" element={<AdminSingle />} />
-            <Route exact path='/aboutUs' element={<AboutUS />} />
-            <Route exact path='/contactUs' element={<Contact />} />
+            <Route
+              exact
+              path="/admin-portal/project/new"
+              element={<AdminNew />}
+            />
+            <Route
+              exact
+              path="/admin-portal/project/list"
+              element={<AdminList />}
+            />
+            <Route
+              exact
+              path="/admin-portal/project/list/:id"
+              element={<AdminSingle />}
+            />
+            <Route exact path="/aboutUs" element={<AboutUS />} />
+            <Route exact path="/contactUs" element={<Contact />} />
           </Routes>
         </div>
       </Router>

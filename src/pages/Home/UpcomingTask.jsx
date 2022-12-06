@@ -8,20 +8,26 @@ const UpcomingTask = ({ user }) => {
   const { data: tasksList, isPending, error } = useFetch(
     "http://localhost:8000/taskList"
   );
+    // console.log(tasksList)
+  // tasksList && console.log(tasksList)
 
   var sortedTaskList = tasksList;
   const compareDate = (a, b) => {
     var c = new Date(a.taskDeadline);
     var d = new Date(b.taskDeadline);
+    // console.log(c)
+    // console.log(d)
     if (c >= d)
       return 1;
     else
       return -1;
   };
-
+  
+  // console.log("yeah i am here")
   const sortTaskList = () => {
     sortedTaskList = tasksList.sort(compareDate)
   }
+  console.log(sortedTaskList)
 
   tasksList && sortTaskList()
   const handledeadline = (due) => {
