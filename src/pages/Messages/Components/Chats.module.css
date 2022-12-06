@@ -1,3 +1,10 @@
+.userChat {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.userChat::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
 .userChat{
     padding: 10px;
     display: flex;
@@ -5,6 +12,7 @@
     gap: 10px;
     cursor: pointer;
     overflow: scroll;
+    ;
 }
 .userChat:hover{
     background-color: #79b9f9;

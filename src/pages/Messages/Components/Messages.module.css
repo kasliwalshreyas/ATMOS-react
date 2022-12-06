@@ -1,3 +1,10 @@
+.messages {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.messages::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
 .messages{
     /* background-color: rgb(239, 239, 239); */
     /* background-color: #e7f2fe; */
