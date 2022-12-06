@@ -5,13 +5,15 @@
       "password": "$2a$10$CfJ3E0Hfx0SBhSbNxFTP2uu81zvZbhK3iEIomiTNG51SZJXcAR.CO",
       "userName": "Shreyas",
       "projectIDList": [
-        2
+        2,
+        3
       ],
       "favoriteProjectList": [
         2
       ],
       "taskAssignedIDList": [],
-      "id": 1
+      "id": 1,
+      "date": "02:37"
     },
     {
       "emailId": "spk@atmos.in",
@@ -20,7 +22,8 @@
       "projectIDList": [],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
-      "id": 2
+      "id": 2,
+      "date": "02:37"
     },
     {
       "emailId": "spk2@atmos.in",
@@ -31,16 +34,20 @@
       ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
-      "id": 3
+      "id": 3,
+      "date": "02:37"
     },
     {
       "emailId": "naman@gmail.com",
       "password": "$2a$10$WX4pfR0uPd5wszHXCmHzMeIlvjjFJ6EcHliDRt3elbop6rdfJBMs6",
       "userName": "naman",
-      "projectIDList": [],
+      "projectIDList": [
+        3
+      ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
-      "id": 4
+      "id": 4,
+      "date": "02:38"
     }
   ],
   "projectList": [
@@ -62,6 +69,24 @@
       ],
       "lowAccess": [],
       "id": 2
+    },
+    {
+      "projectName": "new",
+      "type": "",
+      "sectionIDList": [],
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-12-06T21:08:54.374Z",
+      "projectGuidelines": "",
+      "userId": 4,
+      "highAccess": [
+        4,
+        1
+      ],
+      "mediumAccess": [],
+      "lowAccess": [],
+      "id": 3
     }
   ],
   "sectionList": [],

@@ -16,8 +16,20 @@ import bcrypt from "bcryptjs";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const handleLogin = async (user) => {
+        const res = fetch('http://localhost:8000/userList/'+ user.id, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({...user, date: new Date().toTimeString().slice(0,5)})
+        })
+        console.log(res);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,6 +45,7 @@ function Login() {
                 else {
                     console.log(data);
                     if (bcrypt.compareSync(password, data[0].password)) {
+                        handleLogin(data[0]);
                         dispatch(login(data[0]));
                         navigate('/home');
                     }
@@ -41,6 +54,7 @@ function Login() {
                     }
                 }
             })
+        
     };
 
     return (
