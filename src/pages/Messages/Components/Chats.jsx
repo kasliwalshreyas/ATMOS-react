@@ -9,6 +9,7 @@ const Chats = (user)=>{
     const [userName, setUserName] = useState(user.user.user.userName);
     const [projects, setProjects] = useState(null);
     const [cid, setCid] = React.useState(null);
+    const [selected, setSelected] = useState(null);
     const handleUsers = async (us)=>{
         const c = {
             id: "",
@@ -140,6 +141,7 @@ const Chats = (user)=>{
     },[])
     // Date().splice(0,15);
     const handleSelect = (u)=>{
+        setSelected(u);
         dispatch({type: "CHANGE_USER", payload: {currentuser: user.user.user , searchUser: u}});
     }
     return(
@@ -178,7 +180,7 @@ const Chats = (user)=>{
                         
                         {pro.high.map((u)=>{
                             return(
-                            <div className={styles.userChat} key={u.id} onClick={()=>handleSelect(u)}>
+                            <div className={`${styles.userChat} ${(selected && selected.id === u.id)? styles.active : ''}`} key={u.id} onClick={()=>handleSelect(u)}>
                                 <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="profile pic"/>
                                 <div className={styles.userChatInfo}>
                                 <span>{u.name}</span>
@@ -189,7 +191,7 @@ const Chats = (user)=>{
                         )})}
                         {pro.medium.map((u)=>{
                             return(
-                            <div className={styles.userChat} key={u.id} onClick={()=>handleSelect(u)}>
+                            <div className={`${styles.userChat} ${(selected && selected.id === u.id)? styles.active : ''}`} key={u.id} onClick={()=>handleSelect(u)}>
                                 <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="profile pic"/>
                                 <div className={styles.userChatInfo}>
                                 <span>{u.name}</span>
@@ -201,7 +203,7 @@ const Chats = (user)=>{
                         )}
                         {pro.low.map((u)=>{
                             return(
-                            <div className={styles.userChat} key={u.id} onClick={()=>handleSelect(u)}>
+                            <div className={`${styles.userChat} ${(selected && selected.id === u.id)? styles.active : ''}`} key={u.id} onClick={()=>handleSelect(u)}>
                                 <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="profile pic"/>
                                 <div className={styles.userChatInfo}>
                                 <span>{u.name}</span>

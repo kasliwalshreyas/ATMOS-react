@@ -4,3 +4,9 @@
     height: calc(100vh - 210px);
     overflow: scroll;
 }
+.noMessages{
+    text-align: center;
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+    margin-top: 20px;
+}
