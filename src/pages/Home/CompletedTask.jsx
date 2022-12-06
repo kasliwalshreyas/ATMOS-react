@@ -11,13 +11,22 @@ const CompletedTask = ({ user }) => {
     error,
   } = useFetch("http://localhost:8000/taskList");
 
-  console.log("hello i am here", tasksList)
+  const [showImg, setShowImg] = useState(true);
+  tasksList && tasksList.map((taskList) => {
+    userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
+      if (taskList.id === task && taskList.taskCompletion) {
+        setShowImg(false);
+      }
+    });
+  });
+
+  // console.log("hello i am here", tasksList)
   return (
     <>
       <div className={styles.completedTaskList}>
         {tasksList &&
           tasksList.map((taskList) =>
-            userInfo.taskAssignedIDList.map(
+            userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
               (task) =>
                 taskList.id === task &&
                 taskList.taskCompletion && (
@@ -40,6 +49,20 @@ const CompletedTask = ({ user }) => {
                 )
             )
           )}
+        {showImg && (
+          <div className={styles.mainTask}>
+            <div className={styles.noTask}>
+              <img
+                className={styles.noTaskImg}
+                src="https://www.linkpicture.com/q/list.png"
+              ></img>
+            </div>
+            <div className={styles.noTaskText}>
+              <p className={styles.upperTaskTxt}>You don't have</p>
+              <p className={styles.lowerTaskTxt}> any Upcoming Task </p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
