@@ -4,7 +4,9 @@
     align-items: center;
     padding: 20px;
     height: 60px;
-    background-color: rgb(133, 134, 134);
+    /* background-color: rgb(133, 134, 134); */
+    background-color: #05386b;
+    color: azure;
     border-bottom: 1px solid #e6e6e6;
     font-size: large;
 }
@@ -12,5 +14,6 @@
 .topbar span{
     font-weight: 500;
     margin-left: 7px;
+    color: azure;
     text-transform: uppercase;
 }

@@ -1,6 +1,7 @@
 .chatInfo{
     height: 60px;
-    background-color: darkgray;
+    /* background-color: darkgray; */
+    background-color: #0859ab;
     display: flex;
     align-items: center;
     justify-content: space-between;

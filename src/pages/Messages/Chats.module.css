@@ -8,7 +8,8 @@
 }
 .chat_sidebar{
     border-right: 1px solid #ccc;
-    background-color: #ccc;
+    /* background-color: rgb(237, 241, 246); */
+    background-color: #deeefd;
     flex: 1;
 }
 .chat{

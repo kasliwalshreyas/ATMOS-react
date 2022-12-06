@@ -7,12 +7,14 @@
     overflow: scroll;
 }
 .userChat:hover{
-    background-color: darkgray;
+    background-color: #79b9f9;
     transition: all 0.5s ease;
     border-radius: 30px;
+    color: white;
 }
 .userChat.active{
-    background-color: darkgray;
+    background-color:#61acf8;
+    transition: all 0.5s ease;
     color: azure;
 }
 .userChat img{
@@ -29,7 +31,6 @@
 
 .userChatInfo p{
     font-size: medium;
-    color: gray;
 }
 
 .projectInfo{
@@ -45,6 +46,9 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    background-color: rgb(164, 164, 164);
-
+    /* background-color: rgb(164, 164, 164); */
+    /* background-color: #0859ab; */
+    /* background-color: #439cf6; */
+    /* border: #4c9ef0 5px solid; */
+    background-color: #b1d6fb;
 }
