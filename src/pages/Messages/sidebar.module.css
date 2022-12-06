@@ -1,5 +1,15 @@
+/* 
+.sidebar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+.sidebar::-webkit-scrollbar { 
+  display: none;  
+}
 .sidebar {
     background-color: #000;
     height: 100%;
     width: 15%;
-  }
+    overflow: scroll;
+
+  } */
