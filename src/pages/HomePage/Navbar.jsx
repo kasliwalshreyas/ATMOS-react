@@ -32,6 +32,9 @@ export default function Navbar() {
               About Us
             </Link>
             </NavLink>
+              
+            </nav>
+            <nav>
             <NavLink to="/contactUs">
             <Link
               variant="button"
@@ -43,7 +46,7 @@ export default function Navbar() {
             </NavLink>
           </nav>
           <NavLink to="/login">
-          <Button variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          <Button className="getstarted" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
             Login
           </Button>
         </NavLink>
