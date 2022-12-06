@@ -11,8 +11,20 @@ import bcrypt from "bcryptjs";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const handleLogin = async (user) => {
+        const res = fetch('http://localhost:8000/userList/'+ user.id, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({...user, date: new Date().toTimeString().slice(0,5)})
+        })
+        console.log(res);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,8 +40,8 @@ function Login() {
                 else {
                     console.log(data);
                     if (bcrypt.compareSync(password, data[0].password)) {
-                        localStorage.setItem("user", JSON.stringify(data[0].id));
-                        dispatch(login(data))
+                        handleLogin(data[0]);
+                        dispatch(login(data[0]));
                         navigate('/home');
                     }
                     else {
@@ -37,6 +49,7 @@ function Login() {
                     }
                 }
             })
+        
     };
 
     return (
@@ -45,10 +58,10 @@ function Login() {
                 <Col xs={12} md={5} lg={6} className="d-flex flex-column justify-content-center align-items-center">
                     <h1 className="my-3 ms-1 display-3 fw-bold ls-tight px-3">
                         The best offer <br />
-                        <span className="" style={{color:"#37517e"}}>to grow your<br /> business</span>
+                        <span className="" style={{ color: "#37517e" }}>to grow your<br /> business</span>
                     </h1>
                     <p className="my-3 mx-5 fs-5 px-5 text-secondary">
-                        Collaborate better with <span className="fw-bold" style={{color:"#37517e"}}>ATMOS</span>, the best platform to manage your business.
+                        Collaborate better with <span className="fw-bold" style={{ color: "#37517e" }}>ATMOS</span>, the best platform to manage your business.
                         Manage resources, simplify workflows, and plan with confidence no matter your industry.
                         Track your progress and get the most out of your business.
                         So, what are you waiting for? Sign up now!

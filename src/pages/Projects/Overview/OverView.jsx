@@ -7,11 +7,16 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
+// import { setProject, addMediumTeamMember, addHightTeamMember, addLowTeamMember } from "../../../features/projectSlice";
+import { useDispatch } from 'react-redux';
+import { removeProjectFromFavourite, removeProjectFromUser } from "../../../features/userSlice";
+
 
 const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
   // console.log(projectId);
-  
+
   // console.log(projectInfo);
+  const dispatch = useDispatch();
   const [projectName, setProjectName] = useState(projectInfo.projectName);
   const [projectStatement, setProjectStatement] = useState(projectInfo.projectStatement);
   const [projectMission, setProjectMission] = useState(projectInfo.projectMission);
@@ -102,17 +107,21 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
       selectedTeamMember.projectIDList.push(projectId);
 
       if (selectedRole.value === 'highAccess') {
+        // dispatch(addHightTeamMember(selectedTeamMember));
         projectInfo.highAccess.push(selectedTeamMember);
         projectInfoID.highAccess.push(selectedTeamMember.id);
       } else if (selectedRole.value === 'mediumAccess') {
+        // dispatch(addMediumTeamMember(selectedTeamMember));
         projectInfo.mediumAccess.push(selectedTeamMember);
         projectInfoID.mediumAccess.push(selectedTeamMember.id);
       } else if (selectedRole.value === 'lowAccess') {
+        // dispatch(addLowTeamMember(selectedTeamMember));
         projectInfo.lowAccess.push(selectedTeamMember);
         projectInfoID.lowAccess.push(selectedTeamMember.id);
       }
       // console.log(projectInfo, projectInfoID);
 
+      // dispatch(setProject(projectInfo));
       setProjectInfo(projectInfo);
       // add user to project
       fetch(`http://localhost:8000/projectList/${projectId}`, {
@@ -158,10 +167,17 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
           return project !== projectID;
         })
         user.projectIDList = projectList;
+        dispatch(removeProjectFromUser(projectID));
         const favProjectList = user.favoriteProjectList.filter((project) => {
           return project !== projectID;
         })
         user.favoriteProjectList = favProjectList;
+
+        let index = user.favoriteProjectList.indexOf(projectInfo.id);
+        if (index > -1) {
+          dispatch(removeProjectFromFavourite(index));
+
+        }
         return user;
       })
       .then((user) => {

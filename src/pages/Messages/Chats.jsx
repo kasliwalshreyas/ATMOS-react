@@ -5,21 +5,24 @@ import Chat from "./Components/Chat";
 import ProfileSection from "./ProfileSection";
 import Sidebar from "./Components/Sidebar";
 import styles from "./Chats.module.css"
+import { useSelector, useDispatch } from 'react-redux';
 
 const Chats = () => {
   const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const user = useSelector((state) => state.user.user);
+  // const user = useSelector((state) => state.user.user);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    async function getUser() {
-      const res = await fetch("http://localhost:8000/userList/" + userID);
-      const data = await res.json();
-      setUser(data);
-    }
-    getUser();
-    // console.log(user);
-  }, [userID]);
+  //   async function getUser() {
+  //     const res = await fetch("http://localhost:8000/userList/" + userID);
+  //     const data = await res.json();
+  //     setUser(data);
+  //   }
+  //   getUser();
+  //   // console.log(user);
+  // }, [userID]);
 
   return (
     <>

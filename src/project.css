@@ -55,12 +55,17 @@
   padding: 0px 40px 0px 40px;
   font-weight: normal;
   letter-spacing: 0.5px;
-
+  transition: all 0.2s linear;
+  padding: 1rem;
+  border-bottom: 3px solid transparent;
 
   color: #05386b !important;
   background-color: inherit;
 }
-
+.link:hover {
+  border-color: #05386b;
+  color: #05386b !important;
+}
 .link:after {
   content: "";
   position: absolute;
@@ -76,12 +81,12 @@
   /* background-color: inherit; */
 }
 
-.link:hover:after {
-  width: 63%;
+/* .link:hover:after {
+  width: 63%; */
 
   /* color: inherit; */
   /* background-color: inherit; */
-}
+/* } */
 
 
 .projectlist {

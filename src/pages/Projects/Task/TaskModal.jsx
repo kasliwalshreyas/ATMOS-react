@@ -4,6 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import React, { useState } from "react";
 import Select from "react-select";
 import CommentArena from "./CommentArena";
+import { useDispatch } from "react-redux";
+import { assignTaskToUser, removeTaskFromUser } from "../../../features/userSlice";
 
 const TaskModal = ({
   taskInfo,
@@ -16,6 +18,9 @@ const TaskModal = ({
   AssigneeList,
   userInfo,
 }) => {
+
+  const dispatch = useDispatch();
+
   const taskCompletionOptions = [
     { value: true, label: "Yes" },
     { value: false, label: "No" },
@@ -167,6 +172,9 @@ const TaskModal = ({
               })
               .then((response) => {
                 // console.log(response.taskAssignedIDList, 'assignee Info fetched');
+                if (userInfo.id === taskAssignee) {
+                  dispatch(assignTaskToUser(newTaskID));
+                }
                 response.taskAssignedIDList.push(newTaskID);
                 // console.log(response.taskAssignedIDList, 'assignee Info updated');
                 return response;
@@ -278,6 +286,10 @@ const TaskModal = ({
             })
             .then((response) => {
               // console.log(response);
+
+              if (userInfo.id === taskAssignee) {
+                dispatch(assignTaskToUser(newTaskID));
+              }
               response.taskAssignedIDList.push(newTaskID);
               console.log(response.taskAssignedIDList, "assignee Info updated");
               return response;
@@ -310,6 +322,10 @@ const TaskModal = ({
             })
             .then((response) => {
               // console.log(response);
+
+              if (userInfo.id === updateTaskAssignee.oldAssignee) {
+                dispatch(removeTaskFromUser(newTaskID));
+              }
               response.taskAssignedIDList = response.taskAssignedIDList.filter(
                 (taskid) => taskid != newTaskID
               );

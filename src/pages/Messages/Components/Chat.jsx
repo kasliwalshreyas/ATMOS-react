@@ -6,10 +6,13 @@ import { useEffect, useContext , useState } from "react";
 import {ChatContext} from "./context/ChatContext"
 const Chat = (user)=>{
     const { data } = useContext(ChatContext) ;
+    console.log("go",data);
+
+
     return(
         <div className={styles.chat}>
             <div className={styles.chatInfo}>
-                <span>{data.user?.userName}</span>
+                <span>{data.user?.name}</span>
                 <div className={styles.chatIcons}>
                     <img src="../images/camera.png" alt="" />
                     <img src="../images/add-user.png" alt="" />

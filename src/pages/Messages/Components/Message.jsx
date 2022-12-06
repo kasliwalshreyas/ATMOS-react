@@ -4,8 +4,8 @@ import { useEffect, useContext , useState } from "react";
 import {ChatContext} from "./context/ChatContext"
 const Message = (props)=>{
     const { data } = useContext(ChatContext) ;
-    console.log("go",props.messages);
-
+    // console.log("goprops",props.messages);
+    // console.log("goprops",props.user);
     return(
         <div className={`${styles.message} ${props.messages.senderId === props.user.id && styles.owner}`}>
             <div className={styles.messageInfo}>
@@ -17,6 +17,7 @@ const Message = (props)=>{
             </div>
         </div>
     )
+    
 }
 
 export default Message
