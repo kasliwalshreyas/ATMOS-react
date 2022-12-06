@@ -40,7 +40,13 @@
 .userChatInfo p{
     font-size: medium;
 }
-
+.projectInfo {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.projectInfo::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
 .projectInfo{
     display: flex;
     flex-direction: column;
