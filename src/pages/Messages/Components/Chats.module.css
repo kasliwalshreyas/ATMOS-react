@@ -66,3 +66,14 @@
     /* border: #4c9ef0 5px solid; */
     background-color: #b1d6fb;
 }
+.chat {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.chat::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.chat{
+    overflow: scroll;
+    height: 70vh ;
+}

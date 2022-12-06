@@ -5,23 +5,49 @@
       "password": "$2a$10$bc288/FIaRqgNOQYLK9mce3C6mTKLLAmSsYC.kx54EghQI1SNDBLm",
       "userName": "weirdo",
       "projectIDList": [
-        1
+        2
+      ],
+      "favoriteProjectList": [
+        2
+      ],
+      "taskAssignedIDList": [],
+      "id": 1
+    },
+    {
+      "emailId": "spk@atmos.in",
+      "password": "$2a$10$YemXi9EJSwAREdUV7x/uw.OgayzJKqX/1DC00DiQVqpdn/IicJ61S",
+      "userName": "SPK",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 2
+    },
+    {
+      "emailId": "spk2@atmos.in",
+      "password": "$2a$10$YemXi9EJSwAREdUV7x/uw.OgayzJKqX/1DC00DiQVqpdn/IicJ61S",
+      "userName": "THESPK",
+      "projectIDList": [
+        2
       ],
       "favoriteProjectList": [],
-      "taskAssignedIDList": [
-      ],
-      "id": 1
+      "taskAssignedIDList": [],
+      "id": 3
+    },
+    {
+      "emailId": "naman@gmail.com",
+      "password": "$2a$10$WX4pfR0uPd5wszHXCmHzMeIlvjjFJ6EcHliDRt3elbop6rdfJBMs6",
+      "userName": "naman",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 4
     }
   ],
   "projectList": [
     {
-      "projectName": "my_first_project",
+      "projectName": "Hello",
       "type": "",
-      "sectionIDList": [
-        1,
-        2,
-        3
-      ],
+      "sectionIDList": [],
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
@@ -31,61 +57,26 @@
       "highAccess": [
         1
       ],
-      "mediumAccess": [],
-      "lowAccess": [],
-      "id": 1
-    }
-  ],
-  "sectionList": [
-    {
-      "sectionName": "my_first_section",
-      "projectId": 1,
-      "taskIDList": [
-        1
-      ],
-      "id": 1
-    },
-    {
-      "sectionName": "my_second_section",
-      "projectId": 1,
-      "taskIDList": [
-        2
-      ],
-      "id": 2
-    },
-    {
-      "sectionName": "my_oeseciton",
-      "projectId": 1,
-      "taskIDList": [
+      "mediumAccess": [
         3
       ],
-      "id": 3
+      "lowAccess": [],
+      "id": 2
     }
   ],
-  "taskList": [
+  "sectionList": [],
+  "taskList": [],
+  "conversationList": [
     {
-      "taskName": "my_first_task",
-      "taskCompletion": true,
-      "taskAssignee": null,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": "2022-12-25",
-      "taskStartDate": "2022-12-06T20:20:54.713Z",
-      "taskDescription": "",
-      "taskComments": [],
-      "id": 1
-    },
-    {
-      "taskName": "mysecondtask",
-      "taskCompletion": false,
-      "taskAssignee": null,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": "2022-12-31",
-      "taskStartDate": "2022-12-06T20:21:38.597Z",
-      "taskDescription": "",
-      "taskComments": [],
-      "id": 2
+      "messages": [
+        {
+          "text": "hi",
+          "senderName": "Shreyas Kasliwal",
+          "senderId": 1,
+          "date": "12/6/2022, 9:07:21 PM"
+        }
+      ],
+      "id": "21"
     },
     {
       "taskName": "myoverdue task",

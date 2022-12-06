@@ -9,6 +9,8 @@ import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
 // import { setProject, addMediumTeamMember, addHightTeamMember, addLowTeamMember } from "../../../features/projectSlice";
 import { useDispatch } from 'react-redux';
+import { removeProjectFromFavourite, removeProjectFromUser } from "../../../features/userSlice";
+
 
 const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
   // console.log(projectId);
@@ -165,10 +167,17 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
           return project !== projectID;
         })
         user.projectIDList = projectList;
+        dispatch(removeProjectFromUser(projectID));
         const favProjectList = user.favoriteProjectList.filter((project) => {
           return project !== projectID;
         })
         user.favoriteProjectList = favProjectList;
+
+        let index = user.favoriteProjectList.indexOf(projectInfo.id);
+        if (index > -1) {
+          dispatch(removeProjectFromFavourite(index));
+
+        }
         return user;
       })
       .then((user) => {

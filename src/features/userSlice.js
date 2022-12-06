@@ -83,10 +83,16 @@ export const userSlice = createSlice({
             const taskId = action.payload;
             const index = state.user.taskAssignedIDList.indexOf(taskId);
             state.user.taskAssignedIDList.splice(index, 1);
+        },
+        removeProjectFromUser: (state, action) => {
+            const projectId = action.payload;
+            const index = state.user.projectIDList.indexOf(projectId);
+            state.user.projectIDList.splice(index, 1);
         }
+
     }
 });
 
 export const userInfo = (state) => state.user.user;
-export const { login, logout, addProjectToUser, addProjectToFavourite, removeProjectFromFavourite, assignTaskToUser, removeTaskFromUser } = userSlice.actions;
+export const { login, logout, addProjectToUser, addProjectToFavourite, removeProjectFromFavourite, assignTaskToUser, removeTaskFromUser, removeProjectFromUser } = userSlice.actions;
 export default userSlice.reducer;
