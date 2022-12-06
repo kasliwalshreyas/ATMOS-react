@@ -6,7 +6,8 @@ import OuterNavBar from './Navbar.jsx';
 import ProfileCard from './ProfileCard';
 import img4 from '../../images/developer-team.svg';
 import img5 from '../../images/business-deal.svg';
-import styles from './AboutUs.module.css';
+import './AboutUs.module.css';
+import "../HomePage/assets/js/main"
 import img1 from '../../images/profilePicShreyas.png';
 import img2 from '../../images/profilepic.png';
 // import img3 from '../../images/caricature-dimitri.svg';
@@ -21,7 +22,7 @@ const AboutUS = () => {
 
       <div className='aboutUsMainView'>
         <div className='aboutus-section'>
-          <div className='leftPartAboutUS'>
+          <div className='leftPartAboutUS' data-aos="zoom-in" data-aos-duration="1000">
             <div className='aboutUsDiv'>
               <h1 className='aboutus-title'>About Us</h1>
               <p className='aboutus-text'>
@@ -36,7 +37,7 @@ const AboutUS = () => {
             </div>
             <img src={img4} alt="developer-team" className="img4" />
           </div>
-          <div className='rightPartAboutUS'>
+          <div className='rightPartAboutUS' data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
             <img src={img5} alt="developer-team" className="img4" />
             <div className='aboutUsDiv'>
               <h1 className='aboutus-title'>Mission</h1>

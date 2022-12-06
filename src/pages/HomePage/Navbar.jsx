@@ -21,7 +21,7 @@ export default function Navbar() {
             ATMOS
           </NavLink>
           </Typography>
-          <nav>
+          <nav className='homeNav' id='homeNav'>
           <NavLink to="/aboutUs">
             <Link
               variant="button"
@@ -34,7 +34,7 @@ export default function Navbar() {
             </NavLink>
               
             </nav>
-            <nav>
+            <nav className='homeNav' id='homeNav'>
             <NavLink to="/contactUs">
             <Link
               variant="button"
