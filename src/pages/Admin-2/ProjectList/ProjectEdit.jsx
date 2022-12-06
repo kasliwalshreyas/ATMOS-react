@@ -1,8 +1,5 @@
 import React from "react";
-import { Edit, SimpleForm, TextInput, DateInput,
-    ArrayInput,
-    NumberInput,
-    SelectInput,
+import { Edit, SimpleForm, TextInput, DateInput, ArrayInput, NumberInput, SelectInput,
     SimpleFormIterator,
     required,
     minLength,

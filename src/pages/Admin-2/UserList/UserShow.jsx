@@ -13,7 +13,7 @@ const UserShow = (props) => {
             margin: '20px 0px 0px 20px',
             boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
             padding: '20px',
-        },
+        }
         }} >
             <SimpleShowLayout>
                 <TextField source="id" label="ID" sx={{fontSize: '1.1rem', fontWeight: 'bold', color: '#032649'}} />
