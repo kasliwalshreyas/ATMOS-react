@@ -14,7 +14,7 @@ const Features = () => {
         </div>
 
         <div class="row content"  style={{height:"fit-content"}}>
-          <div class="col-lg-6" style={{height:"fit-content", marginTop:"100px", fontSize:"18px"}}>
+          <div class="col-lg-6" style={{height:"fit-content", marginTop:"100px", fontSize:"18px"}}  data-aos="fade-right">
             <p>
               <span style={{fontSize:"30px", fontWeight:"bold"}}>Stay On Schedule</span>
               <br/>
@@ -46,7 +46,7 @@ const Features = () => {
 
             {/* <a href="#" class="btn-learn-more">Learn More</a> */}
           </div>
-          <div class="col-lg-6" style={{height:"fit-content", marginTop:"100px", fontSize:"18px"}}>
+          <div class="col-lg-6" style={{height:"fit-content", marginTop:"100px", fontSize:"18px"}}  data-aos="fade-left">
             <p>
               <span style={{fontSize:"30px", fontWeight:"bold"}}>Get things done</span>
               <br/>
@@ -57,7 +57,7 @@ const Features = () => {
               <li><i class="ri-check-double-line"></i> &#8594;  Track the progeress of the projects</li>
             </ul>
           </div>
-          <div class="col-lg-6" style={{height:"fit-content", marginTop:"100px", fontSize:"18px"}}>
+          <div class="col-lg-6" style={{height:"fit-content", marginTop:"100px", fontSize:"18px"}}  data-aos="fade-right">
             <p>
               <span style={{fontSize:"30px", fontWeight:"bold"}}>Improve collaboration</span>
               <br/>Make all the important things easy to find, like project plans and details, files, feedback, and more.

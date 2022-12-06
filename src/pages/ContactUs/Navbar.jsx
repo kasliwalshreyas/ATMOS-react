@@ -32,6 +32,8 @@ export default function Navbar() {
               About Us
             </Link>
             </NavLink>
+            </nav>
+            <nav>  
             <NavLink to="/contactUs">
             <Link
               variant="button"

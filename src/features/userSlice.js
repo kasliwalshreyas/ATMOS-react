@@ -48,9 +48,45 @@ export const userSlice = createSlice({
             });
             console.log(res2, 'userInfo');
         },
+        addProjectToFavourite: (state, action) => {
+            const projectId = action.payload;
+            state.user.favoriteProjectList.push(projectId);
+            fetch(`http://localhost:8000/userList/${state.user.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(state.user),
+            }).then((result) => {
+                return result.json();
+            });
+
+        },
+        removeProjectFromFavourite: (state, action) => {
+            const index = action.payload;
+            state.user.favoriteProjectList.splice(index, 1);
+            fetch(`http://localhost:8000/userList/${state.user.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(state.user),
+            }).then((result) => {
+                return result.json();
+            });
+        },
+        assignTaskToUser: (state, action) => {
+            const taskId = action.payload;
+            state.user.taskAssignedIDList.push(taskId);
+        },
+        removeTaskFromUser: (state, action) => {
+            const taskId = action.payload;
+            const index = state.user.taskAssignedIDList.indexOf(taskId);
+            state.user.taskAssignedIDList.splice(index, 1);
+        }
     }
 });
 
 export const userInfo = (state) => state.user.user;
-export const { login, logout, addProjectToUser } = userSlice.actions;
+export const { login, logout, addProjectToUser, addProjectToFavourite, removeProjectFromFavourite, assignTaskToUser, removeTaskFromUser } = userSlice.actions;
 export default userSlice.reducer;
