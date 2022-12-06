@@ -10,6 +10,7 @@ import './AboutUs.module.css';
 import "../HomePage/assets/js/main"
 import img1 from '../../images/profilePicShreyas.png';
 import img2 from '../../images/profilepic.png';
+import img3 from '../../images/myself.jpeg';
 // import img3 from '../../images/caricature-dimitri.svg';
 
 const AboutUS = () => {
@@ -60,11 +61,21 @@ const AboutUS = () => {
             <div class="teams">
               <div class="team">
                 <div class="containerAboutUs">
+                  <div data-aos="zoom-in" data-aos-duration="1000">
                   <ProfileCard name={'Shreyas Kasliwal'} email={'spk@atmos.in'} image={img1} />
+                  </div>
+                  <div data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
                   <ProfileCard name={'Akash Yadav'} email={'akash@atmos.in'} image={img2} />
-                  <ProfileCard name={'Naman Bhaita'} email={'naman@atmos.in'} image={"https://img.icons8.com/cotton/64/000000/winter-outfit-man--v2.png"} />
+                  </div>
+                  <div data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400"> 
+                  <ProfileCard name={'Naman Bhaita'} email={'naman@atmos.in'} image={img3} />
+                  </div>
+                  <div data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="600">
                   <ProfileCard name={'Dushyant Yadav'} email={'dushyant@atmos.in'} image={"https://img.icons8.com/cotton/64/000000/winter-outfit-man--v2.png"} />
-                  <ProfileCard name={'Avinash Saroj'} email={'avinash@atmos.in'} image={"https://img.icons8.com/cotton/64/000000/winter-outfit-man--v2.png"} />
+                  </div>
+                  <div  data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+                  <ProfileCard name={'Avinash Saroj'} email={'avinash@atmos.in'} image={"https://img.icons8.com/cotton/64/000000/winter-outfit-man--v2.png"}/>
+                  </div>
                 </div>
               </div>
             </div>
