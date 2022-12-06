@@ -16,6 +16,7 @@ const Priority = ({ user }) => {
       <div className={styles.listUsedTask}>
         <div className={styles.TaskHeaddiv}>
           <h4 className={styles.TaskHead}>My Priorities</h4>
+          <div className={styles.blankSpace}></div>
           <div className={styles.checkTaskStatus}>
             <div
               style={
@@ -55,7 +56,7 @@ const Priority = ({ user }) => {
         <div className={styles.taskContent}>
           {taskType === 1 && <UpcomingTask user={user} />}
           {taskType === 2 && <OverdueTask user={user} />}
-          {taskType === 3 && <CompletedTask />}
+          {taskType === 3 && <CompletedTask user={user} />}
         </div>
       </div>
     </>

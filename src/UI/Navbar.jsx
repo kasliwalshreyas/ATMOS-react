@@ -1,6 +1,6 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import Dropdown from 'react-bootstrap/Dropdown';
+import React from "react";
+import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
 
 import UserDropdown from "./UserDropdown";
 
@@ -9,7 +9,9 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="head-container">
         <div className="head-atmos">
-          <h1 className="ms-5" style={{textTransform: "uppercase"}}>ATMOS</h1>
+          <h1 className="ms-5" style={{ textTransform: "uppercase" }}>
+            ATMOS
+          </h1>
         </div>
         <div className="user">
           <UserDropdown />
@@ -29,11 +31,10 @@ const Navbar = () => {
         >
           Messages
         </Link>
-        {/* <Link className="link" to="/notes">
+        <Link className="link" to="/notes">
           Notes
-        </Link> */}
+        </Link>
       </div>
-
     </nav>
   );
 };

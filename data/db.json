@@ -1,69 +1,38 @@
 {
   "userList": [
     {
-      "emailId": "spk@atmos.in",
-      "password": "$2a$10$aiSoIjrvpKG1LYS3rQ7JcetbVOB/ZbHcXWjGP5pNnj66Tp/CjCsCe",
-      "userName": "Shreyas P Kasliwal",
+      "emailId": "naman3@gmail.com",
+      "password": "$2a$10$4pLnwB5YY2eFPVUt0k9J3OBcp/QJVrDUeJkMAz9WR8hliBf98qRSW",
+      "userName": "naman3",
+      "projectIDList": [
+        1,
+        2
+      ],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 1
+    },
+    {
+      "emailId": "dushyantist@gmail.com",
+      "password": "$2a$10$4pLnwB5YY2eFPVUt0k9J3OoDDVBHO9m5gnSUCCZKmIMxMutPFDgTy",
+      "userName": "weirdo",
       "projectIDList": [
         1,
         2
       ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [
-        2,
         1,
-        3
+        2,
+        3,
+        4
       ],
-      "id": 1
-    },
-    {
-      "emailId": "spk2@atmos.in",
-      "password": "$2a$10$6d.3q6cD3Ykn5FqDXXQ/y.hZm/0qSW.4FHPuTr50lvT51tDgMnkqu",
-      "userName": "Shreyas Kasliwal",
-      "projectIDList": [
-        1
-      ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [],
       "id": 2
-    },
-    {
-      "emailId": "spk3@atmos.in",
-      "password": "$2a$10$6d.3q6cD3Ykn5FqDXXQ/y.hZm/0qSW.4FHPuTr50lvT51tDgMnkqu",
-      "userName": "SPK",
-      "projectIDList": [
-        1
-      ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [],
-      "id": 3
-    },
-    {
-      "emailId": "naman@gmail.com",
-      "password": "$2a$10$YQIIk2cQ0Qj4fSHKsl2r6.XP2clpA1PTKsjDEJoIJ9/BvomgD1J9S",
-      "userName": "naman",
-      "projectIDList": [
-        2
-      ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [],
-      "id": 4
-    },
-    {
-      "emailId": "naman2@gmail.com",
-      "password": "$2a$10$b8NUKh2aW.aJ4nh.6Z28j.bdz8bvN6k/lrH8tY66J2AgEAcr9aizm",
-      "userName": "naman2",
-      "projectIDList": [
-        2
-      ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [],
-      "id": 5
     }
   ],
   "projectList": [
     {
-      "projectName": "First Project",
+      "projectName": "dfasd",
       "type": "",
       "sectionIDList": [
         1,
@@ -72,45 +41,42 @@
       "projectStatement": "",
       "projectMission": "",
       "projectDescription": "",
-      "lastUsed": "Mon Dec 05 2022 23:33:52 GMT+0530 (India Standard Time)",
+      "lastUsed": "Tue Dec 06 2022 21:55:00 GMT+0530 (India Standard Time)",
       "projectGuidelines": "",
-      "userId": 1,
+      "userId": 2,
       "highAccess": [
-        1,
-        2
+        2,
+        1
       ],
-      "mediumAccess": [
-        3
-      ],
+      "mediumAccess": [],
       "lowAccess": [],
       "id": 1
     },
     {
-      "projectName": "fegw",
+      "projectName": "jhjbvjvhb",
       "type": "",
       "sectionIDList": [
-        3
+        3,
+        4
       ],
-      "projectStatement": "dsfgdfs",
-      "projectMission": "dgdg",
-      "projectDescription": "dgdgd",
-      "lastUsed": "Tue Dec 06 2022 02:26:30 GMT+0530 (India Standard Time)",
-      "projectGuidelines": "gddg",
-      "userId": 4,
+      "projectStatement": "",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "Tue Dec 06 2022 22:41:41 GMT+0530 (India Standard Time)",
+      "projectGuidelines": "",
+      "userId": 2,
       "highAccess": [
-        4,
+        2,
         1
       ],
-      "mediumAccess": [
-        5
-      ],
+      "mediumAccess": [],
       "lowAccess": [],
       "id": 2
     }
   ],
   "sectionList": [
     {
-      "sectionName": "Hello 1",
+      "sectionName": "fire",
       "projectId": 1,
       "taskIDList": [
         1
@@ -118,7 +84,7 @@
       "id": 1
     },
     {
-      "sectionName": "Hello 2",
+      "sectionName": "disxo",
       "projectId": 1,
       "taskIDList": [
         2
@@ -126,143 +92,89 @@
       "id": 2
     },
     {
-      "sectionName": "Section 1",
+      "sectionName": "nvh",
       "projectId": 2,
       "taskIDList": [
         3
       ],
       "id": 3
+    },
+    {
+      "sectionName": "hefak",
+      "projectId": 2,
+      "taskIDList": [
+        4
+      ],
+      "id": 4
     }
   ],
   "taskList": [
     {
-      "taskName": "Hi",
+      "taskName": "herewe go",
       "taskCompletion": false,
-      "taskAssignee": 1,
-      "taskPriority": "high",
-      "taskStatus": "on-track",
-      "taskDeadline": "2022-12-17",
-      "taskStartDate": "2022-12-05T18:00:30.102Z",
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-15",
+      "taskStartDate": "2022-12-06T14:54:21.353Z",
       "taskDescription": "",
-      "taskComments": [
-        {
-          "comment": "hi",
-          "commenter": "Shreyas P Kasliwal",
-          "commentTime": "12/5/2022, 11:33:21 PM",
-          "id": 1
-        }
-      ],
+      "taskComments": [],
       "id": 1
     },
     {
-      "taskName": "Hello",
-      "taskCompletion": true,
-      "taskAssignee": 1,
-      "taskPriority": "high",
-      "taskStatus": "on-track",
-      "taskDeadline": "2022-12-06",
-      "taskStartDate": "2022-12-05T18:00:53.471Z",
+      "taskName": "taxix",
+      "taskCompletion": false,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-10",
+      "taskStartDate": "2022-12-06T14:54:31.311Z",
       "taskDescription": "",
-      "taskComments": [
-        {
-          "comment": "hello",
-          "commenter": "Shreyas P Kasliwal",
-          "commentTime": "12/5/2022, 11:33:28 PM",
-          "id": 1
-        }
-      ],
+      "taskComments": [],
       "id": 2
     },
     {
-      "taskName": "bkjfbk",
+      "taskName": "kjbhkhjb",
       "taskCompletion": true,
-      "taskAssignee": 1,
-      "taskPriority": "high",
-      "taskStatus": "on-track",
-      "taskDeadline": "2022-12-07",
-      "taskStartDate": "2022-12-05T18:47:25.094Z",
-      "taskDescription": "dbkasjdbas",
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-24",
+      "taskStartDate": "2022-12-06T15:20:57.924Z",
+      "taskDescription": "",
       "taskComments": [],
       "id": 3
+    },
+    {
+      "taskName": "kfhasdfa",
+      "taskCompletion": true,
+      "taskAssignee": null,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-17",
+      "taskStartDate": "2022-12-06T16:24:17.367Z",
+      "taskDescription": "",
+      "taskComments": [],
+      "id": 4
     }
   ],
   "conversationList": [
     {
-      "id": "21",
-      "messages": []
-    },
-    {
       "messages": [
         {
+          "text": "hello i ",
+          "senderName": "weirdo",
+          "senderId": 2,
+          "date": "12/6/2022, 11:59:23 AM"
+        },
+        {
           "text": "hi",
-          "senderName": "Shreyas P Kasliwal",
+          "senderName": "naman3",
           "senderId": 1,
-          "date": "12/5/2022, 11:33:08 PM"
+          "date": "12/6/2022, 12:00:23 PM"
         }
       ],
-      "id": "31"
-    },
-    {
-      "messages": [
-        {
-          "text": "hi",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "06/12/2022, 00:12:52"
-        }
-      ],
-      "id": "41"
-    },
-    {
-      "messages": [
-        {
-          "text": "hi",
-          "senderName": "naman2",
-          "senderId": 5,
-          "date": "06/12/2022, 01:52:13"
-        },
-        {
-          "text": "kya hua?",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "06/12/2022, 01:53:40"
-        },
-        {
-          "text": "kuch nai",
-          "senderName": "naman2",
-          "senderId": 5,
-          "date": "06/12/2022, 01:53:59"
-        },
-        {
-          "text": "aur bhai",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "06/12/2022, 01:59:43"
-        },
-        {
-          "text": "sab badiya",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "06/12/2022, 02:07:29"
-        },
-        {
-          "text": "yes",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "06/12/2022, 02:07:34"
-        },
-        {
-          "text": "yes",
-          "senderName": "naman2",
-          "senderId": 5,
-          "date": "06/12/2022, 02:08:13"
-        }
-      ],
-      "id": "54"
-    },
-    {
-      "id": "51",
-      "messages": []
+      "id": "21"
     }
   ]
 }
