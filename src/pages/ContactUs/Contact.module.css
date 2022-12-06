@@ -92,6 +92,7 @@
     padding: 10px;
     margin: 10px;
     color: #05386b;
+    border: 2px solid transparent;
 }
 
 .contactFormDiv div {
@@ -104,7 +105,7 @@
 
 
 .contactNumberDiv:hover {
-    border: 2px solid rgb(65, 129, 217);
+    border-color:  rgb(65, 129, 217);
     box-shadow: 0 0 3px 0.1px rgb(65, 129, 217);
 }
 

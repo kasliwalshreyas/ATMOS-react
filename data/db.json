@@ -237,11 +237,6 @@
     }
   ],
   "contactList": [
-    {
-      "name": "Naman",
-      "email": "bjskj@js.com",
-      "message": "hi%20this is a test",
-      "id": 1
-    }
+    
   ]
 }
