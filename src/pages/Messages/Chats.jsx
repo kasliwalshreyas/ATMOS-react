@@ -25,7 +25,7 @@ const Chats = () => {
   // }, [userID]);
 
   return (
-    <>
+    <div className={styles.window}>
       <Navbar />
       {user&& <div className={styles.container}>
         <div className={styles.chat_sidebar}>
@@ -39,7 +39,7 @@ const Chats = () => {
       {/* {user && (
         <ProfileSection user={user} />
         )} */}
-    </>
+    </div>
     
   );
 }

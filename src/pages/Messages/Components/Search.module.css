@@ -4,6 +4,8 @@
 .searchForm input{
     padding: 10px;
     background-color: transparent;
+    border: none;
+    width: 100%;
 }
 .searchForm input::placeholder{
     color: darkgray;
