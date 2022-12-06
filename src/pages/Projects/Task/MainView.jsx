@@ -7,12 +7,14 @@ import Charts from "../Charts/Charts";
 import Navbar from "../../../UI/Navbar";
 import React from "react";
 import Timeline from "../Timeline/Timeline";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { setProject } from "../../../features/projectSlice";
 
 const MainView = ({ overview, board, charts, timeline }) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
-  const [projectId, setProjectId] = useState(parseInt(localStorage.getItem("projectId")));
+  const [projectId, setProjectId] = useState(
+    parseInt(localStorage.getItem("projectId"))
+  );
   const [projectInfo, setProjectInfo] = useState(null);
   // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
   // const [user, setUser] = useState(null);
@@ -51,7 +53,6 @@ const MainView = ({ overview, board, charts, timeline }) => {
           (element) => element.id === project.lowAccess[i]
         );
       }
-
     }
     return project;
   };
@@ -65,10 +66,11 @@ const MainView = ({ overview, board, charts, timeline }) => {
       })
       .then(async (project) => {
         // console.log(project);
-        const userInfoList = await fetch("http://localhost:8000/userList/")
-          .then((res) => {
-            return res.json();
-          });
+        const userInfoList = await fetch(
+          "http://localhost:8000/userList/"
+        ).then((res) => {
+          return res.json();
+        });
         return [project, userInfoList];
       })
       .then(([project, userInfoList]) => {
@@ -81,29 +83,57 @@ const MainView = ({ overview, board, charts, timeline }) => {
       })
       .catch((err) => {
         console.log(err.message);
-      }
-      );
+      });
   }, [projectId]);
-
 
   console.log(projectInfo);
 
   return (
     <>
-    <Navbar />
-    <div className="normal-div" onClick={handleClickOutside}>
-      {user && projectInfo && (<ProjectInfo
-        projectInfo={projectInfo}
-        setProjectInfo={setProjectInfo}
-        isProfileClicked={isProfileClicked}
-        setIsProfileClicked={setIsProfileClicked}
-        userInfo={user}
-      ></ProjectInfo>)}
-      {/* <FilterFunc></FilterFunc>s */}
-      {overview && projectInfo && <OverView projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} ></OverView>}
-      {board && projectInfo && <SectionArena projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfo={user} ></SectionArena>}
-      {user && charts && projectInfo && <Charts projectId={projectId} projectInfo={projectInfo} setProjectInfo={setProjectInfo} userInfoOfUser={user}></Charts>}
-    </div>
+      <Navbar />
+      <div className="normal-div" onClick={handleClickOutside}>
+        {user && projectInfo && (
+          <ProjectInfo
+            projectInfo={projectInfo}
+            setProjectInfo={setProjectInfo}
+            isProfileClicked={isProfileClicked}
+            setIsProfileClicked={setIsProfileClicked}
+            userInfo={user}
+          ></ProjectInfo>
+        )}
+        {/* <FilterFunc></FilterFunc>s */}
+        {overview && projectInfo && (
+          <OverView
+            projectId={projectId}
+            projectInfo={projectInfo}
+            setProjectInfo={setProjectInfo}
+          ></OverView>
+        )}
+        {board && projectInfo && (
+          <SectionArena
+            projectId={projectId}
+            projectInfo={projectInfo}
+            setProjectInfo={setProjectInfo}
+            userInfo={user}
+          ></SectionArena>
+        )}
+        {user && charts && projectInfo && (
+          <Charts
+            projectId={projectId}
+            projectInfo={projectInfo}
+            setProjectInfo={setProjectInfo}
+            userInfoOfUser={user}
+          ></Charts>
+        )}
+        {user && timeline && projectInfo && (
+          <Timeline
+            projectId={projectId}
+            projectInfo={projectInfo}
+            setProjectInfo={setProjectInfo}
+            userInfoOfUser={user}
+          ></Timeline>
+        )}
+      </div>
     </>
   );
 };

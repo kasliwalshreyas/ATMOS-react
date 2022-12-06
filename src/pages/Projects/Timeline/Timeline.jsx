@@ -16,6 +16,11 @@ import {
 function Timeline({ projectId, projectInfo, setProjectInfo, userInfoOfUser }) {
   const [user, setUser] = useState(userInfoOfUser);
 
+  console.log("this is project id")
+  // console.log(projectId)
+  console.log("this is the projectInfo")
+  // console.log(projectInfo)
+
   const {
     data: sectionData,
     is__Pending,
@@ -55,6 +60,11 @@ function Timeline({ projectId, projectInfo, setProjectInfo, userInfoOfUser }) {
       var object = { resourceId: onlyuser.id, resourceName: onlyuser.userName };
       projectResources.push(object);
     });
+
+    // projectData && projectData.map((onlyProject) => {
+    //   var object = { resourceId: onlyProject.id, resourceName:  onlyProject.userName};
+    //   projectResources.push(object)
+    // })
 
   const editOptions = {
     allowEditing: true,
