@@ -48,6 +48,16 @@
       "taskAssignedIDList": [],
       "id": 4,
       "date": "02:38"
+    },
+    {
+      "emailId": "akash123@gmail.com",
+      "password": "$2a$10$RlN9uMiV4T9RPFbujfKwUO1QbJD8383zzAV/s20SOHPOaIEGF6cSy",
+      "userName": "akash",
+      "projectIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [],
+      "id": 5,
+      "date": "03:30"
     }
   ],
   "projectList": [
@@ -116,7 +126,5 @@
       "id": 3
     }
   ],
-  "contactList": [
-    
-  ]
+  "contactList": []
 }

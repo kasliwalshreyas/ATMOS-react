@@ -9,7 +9,7 @@ import img5 from '../../images/business-deal.svg';
 import './AboutUs.module.css';
 import "../HomePage/assets/js/main"
 import img1 from '../../images/profilePicShreyas.png';
-import img2 from '../../images/profilepic.png';
+import img2 from '../../images/photoAkash.jpg';
 import img3 from '../../images/myself.jpeg';
 // import img3 from '../../images/caricature-dimitri.svg';
 
