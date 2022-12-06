@@ -18,16 +18,17 @@ const validatePassword = [required('Field is required'), regex(/^(?=.*[a-z])[A-Z
 const UserCreate = (props) => {
     return (
         <Create title="Create a User" {...props}>
-            <SimpleForm>
-                <TextInput source="userName" validate={validateUserName} />
-                <TextInput source="emailId" validate={validateEmailId} />
-                <PasswordInput source="password" validate={validatePassword} />
-                <ArrayInput source="projectIDList" label="Project ID List">
+            <SimpleForm sx={{ backgroundColor: '#fefefe' }}>
+                <h2 className="fw-bold" style={{ color: '#04315e' }}>User Info</h2>
+                <TextInput source="userName" validate={validateUserName} className="w-100" />
+                <TextInput source="emailId" validate={validateEmailId} className="w-100" />
+                <PasswordInput source="password" validate={validatePassword} className="w-100" />
+                <ArrayInput source="projectIDList" label="Project ID List" className="w-100">
                     <SimpleFormIterator getItemLabel={index => `#${index + 1}`} fullWidth>
                         <NumberInput label="Project ID" max={100} min={1} />
                     </SimpleFormIterator>
                 </ArrayInput>
-                <ArrayInput source="favouriteProjectList" label="Favourite Project List">
+                <ArrayInput source="favouriteProjectList" label="Favourite Project List" className="w-100">
                     <SimpleFormIterator getItemLabel={index => `#${index + 1}`} fullWidth>
                         <NumberInput label="Project ID" max={100} min={1} />
                     </SimpleFormIterator>

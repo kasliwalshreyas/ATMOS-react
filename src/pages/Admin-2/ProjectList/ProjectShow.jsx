@@ -10,7 +10,7 @@ const ProjectShow = (props) => {
             backgroundColor: '#54a6f7',
             color: '#032649',
             borderRadius: '10px',
-            margin: '20px 0px 0px 20px',
+            margin: '10px 0px 20px 20px',
             boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
             padding: '20px',
         },

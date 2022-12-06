@@ -4,7 +4,11 @@ import {List, Datagrid, TextField, DateField, ChipField, EditButton, DeleteButto
 const ProjectList = (props) => {
     return (
         <List {...props}>
-            <Datagrid>
+            <Datagrid size="medium" sx={{
+                '& .RaDatagrid-thead > tr > th': {
+                    backgroundColor: '#d8d9d9',
+                }
+            }}>
                 <TextField source="id" />
                 <TextField source="projectName" />
                 <TextField source="userId" emptyText="-"/>

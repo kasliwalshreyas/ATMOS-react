@@ -5,21 +5,8 @@ const UserList = (props) => {
     return (
         <List {...props}>
             <Datagrid size="medium" sx={{
-                '& .RaDatagrid-row': {
-                    backgroundColor: '#54a6f7',
-                    color: '#032649',
-                },
-                '& .RaDatagrid-row:hover': {
-                    backgroundColor: '#032649',
-                    color: '#54a6f7',
-                },
-                '& .RaDatagrid-row:active': {
-                    backgroundColor: '#032649',
-                    color: '#54a6f7',
-                },
                 '& .RaDatagrid-thead > tr > th': {
-                    backgroundColor: '#032649',
-                    color: '#54a6f7',
+                    backgroundColor: '#d8d9d9',
                 }
             }}>
                 <TextField source="id" />
