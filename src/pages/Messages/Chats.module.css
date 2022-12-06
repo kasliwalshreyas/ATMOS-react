@@ -1,3 +1,7 @@
+.window{
+    overflow: hidden;
+    height: 100vh;
+}
 .container{
     background-color: aliceblue;
     width: 100%;
