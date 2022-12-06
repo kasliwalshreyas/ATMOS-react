@@ -32,7 +32,7 @@ const Contact = () => {
     const sendMessage = (e) => {
         if (e) e.preventDefault();
         const message = inputs.message;
-        const messageEnter = message.replace(/\r\n|\r|\n/g, "%0D%0A").replace(' ', "%20");
+        // const messageEnter = message.replace(/\r\n|\r|\n/g, "%0D%0A").replace(' ', "%20");
         const res = fetch("http://localhost:8000/contactList/", {
             method: "POST",
             headers: {
@@ -41,7 +41,7 @@ const Contact = () => {
             body: JSON.stringify({
                 name: inputs.name,
                 email: inputs.email,
-                message: messageEnter
+                message: inputs.message
             })
         });
         console.log(res);
