@@ -462,7 +462,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
               </button>
             </div>
           </div>
-          <div className={styles.settingCard}>
+          {/* <div className={styles.settingCard}>
             <div className={styles.settingInfoDiv}>
               <div className={styles.projectSettingInfoHead}>
                 <p>Transfer Ownership</p>
@@ -476,7 +476,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
                 Transfer
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <Modal

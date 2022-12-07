@@ -30,26 +30,26 @@ const OverdueTask = ({ user }) => {
     if (due < now) return 1;
     else return 0;
   };
-  const [showImg, setShowImg] = useState(true);
-  sortedTaskList &&
-    sortedTaskList.map((taskList) => {
-      userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
-        if (
-          taskList.id === task &&
-          handledeadline(taskList.taskDeadline) === 1 &&
-          !taskList.taskCompletion
-        ) {
-          setShowImg(false);
-        }
-      });
-    });
+  const [showImg, setShowImg] = useState(false);
+  // sortedTaskList &&
+  //   sortedTaskList.map((taskList) => {
+  //     userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
+  //       if (
+  //         taskList.id === task &&
+  //         handledeadline(taskList.taskDeadline) === 1 &&
+  //         !taskList.taskCompletion
+  //       ) {
+  //         setShowImg(false);
+  //       }
+  //     });
+  //   });
 
   return (
     <>
       <div className={styles.completedTaskList}>
         {tasksList &&
           tasksList.map((taskList) =>
-          userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
+            userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
               (task) =>
                 taskList.id === task &&
                 handledeadline(taskList.taskDeadline) === 1 &&

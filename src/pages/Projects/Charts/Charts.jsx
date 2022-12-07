@@ -341,7 +341,7 @@ const Charts = ({ projectID, projectInfo, setProjectInfo, userInfoOfUser }) => {
                     <Bar data={statusData} options={statusOptions} />
                 </div>
             </div>
-            <div className={`${styles.chartArena} ${styles.sectionWiseArena}`}>
+            {/* <div className={`${styles.chartArena} ${styles.sectionWiseArena}`}>
                 <div className={styles.arenaHeading}>
                     <h3>Section Wise Metrics</h3>
                 </div>
@@ -352,7 +352,7 @@ const Charts = ({ projectID, projectInfo, setProjectInfo, userInfoOfUser }) => {
                         projectInfo={projectInfo}
                     />
                 </div>
-            </div>
+            </div> */}
 
 
 
