@@ -11,14 +11,14 @@ const CompletedTask = ({ user }) => {
     error,
   } = useFetch("http://localhost:8000/taskList");
 
-  const [showImg, setShowImg] = useState(true);
-  tasksList && tasksList.map((taskList) => {
-    userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
-      if (taskList.id === task && taskList.taskCompletion) {
-        setShowImg(false);
-      }
-    });
-  });
+  const [showImg, setShowImg] = useState(false);
+  // tasksList && tasksList.map((taskList) => {
+  //   userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
+  //     if (taskList.id === task && taskList.taskCompletion) {
+  //       setShowImg(false);
+  //     }
+  //   });
+  // });
 
   // console.log("hello i am here", tasksList)
   return (

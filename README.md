@@ -6,7 +6,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+1. `npm install`
+2. `npm run start`
+
+In another terminal run 
+
+3. `npx json-server --watch data/db.json --port 8000 --middlewares ./range.js`
+
+
+
+
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.

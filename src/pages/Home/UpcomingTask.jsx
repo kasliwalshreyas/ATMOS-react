@@ -40,19 +40,19 @@ const UpcomingTask = ({ user }) => {
   // console.log("i am pointing to here",tasksList)
   // console.log("i am now pointing to here", sortedTaskList)
   console.log("i am seriously here", userInfo.taskAssignedIDList);
-  const [showImg, setShowImg] = useState(true)
+  const [showImg, setShowImg] = useState(false)
   // const taskImg = () => {
-  sortedTaskList && sortedTaskList.map((taskList) => {
-    userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
-      if (
-        taskList.id === task &&
-        handledeadline(taskList.taskDeadline) === 1 &&
-        !taskList.taskCompletion
-      ) {
-        setShowImg(false);
-      }
-    });
-  });
+  // sortedTaskList && sortedTaskList.map((taskList) => {
+  //   userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
+  //     if (
+  //       taskList.id === task &&
+  //       handledeadline(taskList.taskDeadline) === 1 &&
+  //       !taskList.taskCompletion
+  //     ) {
+  //       setShowImg(false);
+  //     }
+  //   });
+  // });
   // }
 
   return (
@@ -60,7 +60,7 @@ const UpcomingTask = ({ user }) => {
       <div className={styles.upcomingTaskList}>
         {tasksList &&
           sortedTaskList.map((taskList) =>
-          userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
+            userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
               (task) =>
                 taskList.id === task &&
                 handledeadline(taskList.taskDeadline) === 1 &&

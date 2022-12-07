@@ -1,211 +1,243 @@
 {
   "userList": [
     {
-      "emailId": "dushyantist@gmail.com",
-      "password": "$2a$10$bc288/FIaRqgNOQYLK9mce3C6mTKLLAmSsYC.kx54EghQI1SNDBLm",
-      "userName": "weirdo",
+      "emailId": "pravesh@atmos.in",
+      "password": "$2a$10$gZ8HwFw8T4FliW87JYCyYuRh7ZqS6P5jLmSwNQKAk9HDbKFhJKXI6",
+      "userName": "Pravesh Kasliwal",
       "projectIDList": [
-        2,
-        3
-      ],
-      "favoriteProjectList": [
+        1,
         2
       ],
-      "taskAssignedIDList": [],
+      "favoriteProjectList": [],
+      "taskAssignedIDList": [
+        4
+      ],
       "id": 1,
-      "date": "02:37"
+      "date": "07:39"
     },
     {
-      "emailId": "spk@atmos.in",
-      "password": "$2a$10$YemXi9EJSwAREdUV7x/uw.OgayzJKqX/1DC00DiQVqpdn/IicJ61S",
-      "userName": "SPK",
-      "projectIDList": [
-        3
-      ],
+      "emailId": "naman.b20@iiits.in",
+      "password": "$2a$10$gZ8HwFw8T4FliW87JYCyYuRh7ZqS6P5jLmSwNQKAk9HDbKFhJKXI6",
+      "userName": "Naman",
+      "projectIDList": [],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
-      "id": 2,
-      "date": "02:37"
+      "id": 2
     },
     {
-      "emailId": "spk2@atmos.in",
-      "password": "$2a$10$YemXi9EJSwAREdUV7x/uw.OgayzJKqX/1DC00DiQVqpdn/IicJ61S",
-      "userName": "THESPK",
+      "emailId": "pankaj@atmos.in",
+      "password": "$2a$10$gZ8HwFw8T4FliW87JYCyYuRh7ZqS6P5jLmSwNQKAk9HDbKFhJKXI6",
+      "userName": "Pankaj Kasliwal",
       "projectIDList": [
-        2,
-        3
+        1
       ],
       "favoriteProjectList": [],
       "taskAssignedIDList": [],
       "id": 3,
-      "date": "02:37"
+      "date": "07:40"
     },
     {
-      "emailId": "naman@gmail.com",
-      "password": "$2a$10$WX4pfR0uPd5wszHXCmHzMeIlvjjFJ6EcHliDRt3elbop6rdfJBMs6",
-      "userName": "naman",
+      "emailId": "spk@atmos.in",
+      "password": "$2a$10$dr2kVi4cQh9kG9BueZMwMufj5J9Gjls34MhiOrA7v5xPeWlXoPeSi",
+      "userName": "Shreyas Kasliwal",
       "projectIDList": [
-        3
+        1,
+        2
       ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [],
+      "favoriteProjectList": [
+        1
+      ],
+      "taskAssignedIDList": [
+        1,
+        2
+      ],
       "id": 4,
-      "date": "03:55"
+      "date": "08:08"
     },
     {
-      "emailId": "akash123@gmail.com",
-      "password": "$2a$10$RlN9uMiV4T9RPFbujfKwUO1QbJD8383zzAV/s20SOHPOaIEGF6cSy",
-      "userName": "akash",
+      "emailId": "spk2@atmos.in",
+      "password": "$2a$10$27kAPyg1JBgB8dvDxbF4NukxJztgIzo6MBbGnKe9P6sjdb411lm2y",
+      "userName": "Shreyas P Kasliwal",
       "projectIDList": [
-        3
+        2
       ],
-      "favoriteProjectList": [],
-      "taskAssignedIDList": [],
-      "id": 5,
-      "date": "09:09"
+      "favoriteProjectList": [
+        2
+      ],
+      "taskAssignedIDList": [
+        3,
+        4
+      ],
+      "id": 5
     }
   ],
   "projectList": [
     {
-      "projectName": "Hello",
+      "projectName": "First Project",
       "type": "",
-      "sectionIDList": [],
-      "projectStatement": "",
-      "projectMission": "",
-      "projectDescription": "",
-      "lastUsed": "Wed Dec 07 2022 01:50:42 GMT+0530 (India Standard Time)",
-      "projectGuidelines": "",
-      "userId": 1,
-      "highAccess": [
-        1
-      ],
-      "mediumAccess": [
-        3
-      ],
-      "lowAccess": [],
-      "id": 2
-    },
-    {
-      "projectName": "new",
-      "type": "",
-      "sectionIDList": [],
-      "projectStatement": "",
-      "projectMission": "",
-      "projectDescription": "",
-      "lastUsed": "Wed Dec 07 2022 03:03:50 GMT+0530 (India Standard Time)",
-      "projectGuidelines": "",
-      "userId": 4,
-      "highAccess": [
-        4,
+      "sectionIDList": [
         1,
         2
       ],
+      "projectStatement": "First Project",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "Wed Dec 07 2022 09:10:54 GMT+0530 (India Standard Time)",
+      "projectGuidelines": "",
+      "userId": 4,
+      "highAccess": [
+        4
+      ],
       "mediumAccess": [
-        3
+        1
       ],
       "lowAccess": [
-        5
+        3
       ],
-      "id": 3
+      "id": 1
+    },
+    {
+      "projectName": "First Project",
+      "type": "",
+      "sectionIDList": [
+        4
+      ],
+      "projectStatement": "First project",
+      "projectMission": "",
+      "projectDescription": "",
+      "lastUsed": "2022-12-07T02:40:07.388Z",
+      "projectGuidelines": "",
+      "userId": 5,
+      "highAccess": [
+        5,
+        4
+      ],
+      "mediumAccess": [
+        1
+      ],
+      "lowAccess": [],
+      "id": 2
     }
   ],
-  "sectionList": [],
-  "taskList": [],
+  "sectionList": [
+    {
+      "sectionName": "frontend",
+      "projectId": 1,
+      "taskIDList": [
+        1
+      ],
+      "id": 1
+    },
+    {
+      "sectionName": "backend",
+      "projectId": 1,
+      "taskIDList": [
+        2
+      ],
+      "id": 2
+    },
+    {
+      "sectionName": "Backend",
+      "projectId": 2,
+      "taskIDList": [
+        4
+      ],
+      "id": 4
+    }
+  ],
+  "taskList": [
+    {
+      "taskName": "Create HTML",
+      "taskCompletion": true,
+      "taskAssignee": 4,
+      "taskPriority": "high",
+      "taskStatus": "on-track",
+      "taskDeadline": "2022-12-30",
+      "taskStartDate": "2022-12-07T01:57:22.015Z",
+      "taskDescription": "Creating html",
+      "taskComments": [],
+      "id": 1
+    },
+    {
+      "taskName": "Create Route",
+      "taskCompletion": false,
+      "taskAssignee": 4,
+      "taskPriority": "Choose Priority",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-01",
+      "taskStartDate": "2022-12-07T02:06:06.675Z",
+      "taskDescription": "",
+      "taskComments": [],
+      "id": 2
+    },
+    {
+      "taskName": "Create Routes",
+      "taskCompletion": false,
+      "taskAssignee": 1,
+      "taskPriority": "medium",
+      "taskStatus": "Choose Status",
+      "taskDeadline": "2022-12-15",
+      "taskStartDate": "2022-12-07T02:16:17.487Z",
+      "taskDescription": "",
+      "taskComments": [],
+      "id": 4
+    }
+  ],
   "conversationList": [
     {
       "messages": [
         {
           "text": "hi",
-          "senderName": "Shreyas Kasliwal",
+          "senderName": "Pravesh Kasliwal",
           "senderId": 1,
-          "date": "12/6/2022, 9:07:21 PM"
-        }
-      ],
-      "id": "21"
-    },
-    {
-      "taskName": "myoverdue task",
-      "taskCompletion": false,
-      "taskAssignee": null,
-      "taskPriority": "Choose Priority",
-      "taskStatus": "Choose Status",
-      "taskDeadline": "2022-11-30",
-      "taskStartDate": "2022-12-06T20:21:56.051Z",
-      "taskDescription": "",
-      "taskComments": [],
-      "id": 3
-    },
-    {
-      "messages": [
-        {
-          "text": "Hi",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "07/12/2022, 03:03:43"
-        },
-        {
-          "text": "This",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "07/12/2022, 03:59:12"
-        },
-        {
-          "text": "is",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "07/12/2022, 03:59:14"
-        },
-        {
-          "text": "a",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "07/12/2022, 03:59:17"
-        },
-        {
-          "text": "test",
-          "senderName": "naman",
-          "senderId": 4,
-          "date": "07/12/2022, 03:59:20"
+          "date": "12/7/2022, 7:39:53 AM"
         }
       ],
       "id": "41"
     },
     {
-      "id": "42",
-      "messages": []
-    },
-    {
-      "id": "43",
-      "messages": []
+      "messages": [
+        {
+          "text": "hi",
+          "senderName": "Pankaj Kasliwal",
+          "senderId": 3,
+          "date": "12/7/2022, 7:40:46 AM"
+        }
+      ],
+      "id": "43"
     },
     {
       "messages": [
         {
-          "text": "mn n",
-          "senderName": "akash",
-          "senderId": 5,
-          "date": "12/7/2022, 4:08:51 AM"
-        },
+          "text": "hello",
+          "senderName": "Pravesh Kasliwal",
+          "senderId": 1,
+          "date": "12/7/2022, 7:40:01 AM"
+        }
+      ],
+      "id": "31"
+    },
+    {
+      "messages": [
         {
           "text": "hi",
-          "senderName": "akash",
+          "senderName": "Shreyas P Kasliwal",
           "senderId": 5,
-          "date": "12/7/2022, 4:08:57 AM"
+          "date": "12/7/2022, 7:47:29 AM"
         }
       ],
       "id": "54"
     },
     {
-      "id": "51",
-      "messages": []
-    },
-    {
-      "id": "52",
-      "messages": []
-    },
-    {
-      "id": "53",
-      "messages": []
+      "messages": [
+        {
+          "text": "Hello",
+          "senderName": "Shreyas P Kasliwal",
+          "senderId": 5,
+          "date": "12/7/2022, 7:47:37 AM"
+        }
+      ],
+      "id": "51"
     }
   ],
   "contactList": []
