@@ -101,16 +101,16 @@ const ProjectInfo_v2 = ({
 
         switch (tab) {
             case 'Overview':
-                navigate(`/projects/${projectInfo.projectId}/overview`);
+                navigate(`/projects/${projectInfo._id}/overview`);
                 break;
             case 'Board':
-                navigate(`/projects/${projectInfo.projectId}/board`);
+                navigate(`/projects/${projectInfo._id}/board`);
                 break;
             case 'Charts':
-                navigate(`/projects/${projectInfo.projectId}/charts`);
+                navigate(`/projects/${projectInfo._id}/charts`);
                 break;
             case 'Timeline':
-                navigate(`/projects/${projectInfo.projectId}/timeline`);
+                navigate(`/projects/${projectInfo._id}/timeline`);
                 break;
             default:
                 break;
