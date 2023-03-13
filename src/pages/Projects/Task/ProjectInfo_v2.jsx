@@ -15,22 +15,13 @@ import {
     Header,
     // rem
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import {
-    IconLogout,
-    IconHeart,
     IconStar,
-    IconMessage,
-    IconSettings,
-    IconPlayerPause,
-    IconTrash,
-    IconSwitchHorizontal,
-    IconChevronDown,
-    Icon123,
-    IconBook2,
     IconArrowLeft,
+    IconBook2,
     IconStarFilled
 } from '@tabler/icons-react';
+import ProfileMenu from "../../../UI/ProfileMenu";
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -42,31 +33,6 @@ const useStyles = createStyles((theme) => ({
 
     mainSection: {
         paddingBottom: theme.spacing.sm,
-    },
-
-    user: {
-        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-        padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-        borderRadius: theme.radius.sm,
-        transition: 'background-color 100ms ease',
-
-        '&:hover': {
-            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-        },
-
-        [theme.fn.smallerThan('xs')]: {
-            display: 'none',
-        },
-    },
-
-    burger: {
-        [theme.fn.largerThan('xs')]: {
-            display: 'none',
-        },
-    },
-
-    userActive: {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
     },
 
     tabs: {
@@ -98,8 +64,6 @@ const useStyles = createStyles((theme) => ({
 
 
 const ProjectInfo_v2 = ({
-    isProfileClicked,
-    setIsProfileClicked,
     projectInfo,
     setProjectInfo,
     userInfo,
@@ -110,8 +74,7 @@ const ProjectInfo_v2 = ({
     const navigate = useNavigate();
 
     const { classes, theme } = useStyles();
-    const [opened, { toggle }] = useDisclosure(false);
-    const [userMenuOpened, setUserMenuOpened] = useState(false);
+    // const [userMenuOpened, setUserMenuOpened] = useState(false);
 
     const [isStarred, setIsStarred] = useState(false);
 
@@ -133,6 +96,27 @@ const ProjectInfo_v2 = ({
         </Tabs.Tab>
     ));
 
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+
+        switch (tab) {
+            case 'Overview':
+                navigate(`/projects/${projectInfo.projectId}/overview`);
+                break;
+            case 'Board':
+                navigate(`/projects/${projectInfo.projectId}/board`);
+                break;
+            case 'Charts':
+                navigate(`/projects/${projectInfo.projectId}/charts`);
+                break;
+            case 'Timeline':
+                navigate(`/projects/${projectInfo.projectId}/timeline`);
+                break;
+            default:
+                break;
+        }
+    }
+
 
 
     return (
@@ -152,51 +136,7 @@ const ProjectInfo_v2 = ({
 
                             </Group>
                         </Group>
-                        <Menu
-                            width={260}
-                            position="bottom-end"
-                            transition="pop-top-right"
-                            onClose={() => setUserMenuOpened(false)}
-                            onOpen={() => setUserMenuOpened(true)}
-                        >
-                            <Menu.Target>
-                                <UnstyledButton
-                                    className={classes.user}
-                                >
-                                    <Group spacing={7}>
-                                        <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
-                                    </Group>
-                                </UnstyledButton>
-                            </Menu.Target>
-                            <Menu.Dropdown>
-                                <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
-                                    Liked posts
-                                </Menu.Item>
-                                <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
-                                    Saved posts
-                                </Menu.Item>
-                                <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
-                                    Your comments
-                                </Menu.Item>
-
-                                <Menu.Label>Settings</Menu.Label>
-                                <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>Account settings</Menu.Item>
-                                <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
-                                    Change account
-                                </Menu.Item>
-                                <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}>Logout</Menu.Item>
-
-                                <Menu.Divider />
-
-                                <Menu.Label>Danger zone</Menu.Label>
-                                <Menu.Item icon={<IconPlayerPause size={14} stroke={1.5} />}>
-                                    Pause subscription
-                                </Menu.Item>
-                                <Menu.Item color="red" icon={<IconTrash size={14} stroke={1.5} />}>
-                                    Delete account
-                                </Menu.Item>
-                            </Menu.Dropdown>
-                        </Menu>
+                        <ProfileMenu userInfo={user} />
                     </Group>
                 </Container>
                 <Container fluid={true}>
@@ -209,7 +149,7 @@ const ProjectInfo_v2 = ({
                             tab: classes.tab,
                         }}
                         value={activeTab}
-                        onTabChange={(tab) => setActiveTab(tab)}
+                        onTabChange={(tab) => { handleTabChange(tab) }}
                     >
                         <Tabs.List>{items}</Tabs.List>
                     </Tabs>

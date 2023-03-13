@@ -22,12 +22,11 @@ const MainView = ({ overview, board, charts, timeline }) => {
 
   const navigate = useNavigate();
 
-  const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [projectId, setProjectId] = useState(projectID);
   const [projectInfo, setProjectInfo] = useState(null);
   const [user, setUser] = useState(null);
   const [userAccessLevel, setUserAccessLevel] = useState(null);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('Overview');
 
 
   useEffect(() => {
@@ -66,49 +65,22 @@ const MainView = ({ overview, board, charts, timeline }) => {
   }, [projectID]);
 
 
-
-
-
-
-  // const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user.user);
-  const handleClickOutside = (event) => {
-    event.stopPropagation();
-    setIsProfileClicked(false);
-  };
-
   return (
     <>
       {/* <Navbar /> */}
       {/* <Navbar_v2 activeLink={'/projects'} /> */}
-      <div className="normal-div" onClick={handleClickOutside}>
-        {/* {user && projectInfo && (
-          <ProjectInfo
-            projectInfo={projectInfo}
-            setProjectInfo={setProjectInfo}
-            isProfileClicked={isProfileClicked}
-            setIsProfileClicked={setIsProfileClicked}
-            userInfo={user}
-          ></ProjectInfo>
-        )} */}
+      <div className="normal-div">
         {
           user && projectInfo && (
             <ProjectInfo_v2
               projectInfo={projectInfo}
               setProjectInfo={setProjectInfo}
-              isProfileClicked={isProfileClicked}
-              setIsProfileClicked={setIsProfileClicked}
               userInfo={user}
               activeTab={activeTab}
               setActiveTab={setActiveTab}
             ></ProjectInfo_v2>
           )
-
-
         }
-
-
-        {/* <FilterFunc></FilterFunc>s */}
         {activeTab === 'Overview' && projectInfo && (
           <OverView
             projectId={projectId}
