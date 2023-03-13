@@ -6,11 +6,37 @@ import { Link } from "react-router-dom";
 const RecentProject = ({ user }) => {
   const [userInfo, setUserInfo] = useState(user);
   const [showFavorite, setShowFavorite] = useState(false);
-  const {
-    data: projects,
-    isPending,
-    error,
-  } = useFetch("http://localhost:8000/projectList");
+  const [projects, setProjects] = useState([]);
+
+
+  console.log(userInfo, "user info from recent project");
+
+
+  useEffect(() => {
+    const getProjects = async () => {
+      const res = await fetch("http://localhost:4000/project/getUserProjects", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      if (data.success) {
+        console.log(data.projects, "project data from recent project");
+        setProjects(data.projects);
+      }
+    };
+    getProjects();
+  }, []);
+
+
+
+
+
+
+
+  // let projects = [];
 
   const handleChange = () => {
     if (showFavorite === false) setShowFavorite(true);
@@ -130,13 +156,11 @@ const RecentProject = ({ user }) => {
         </div>
         {!showFavorite && (
           <div className={styles.recentListdiv}>
-            {projects && console.log(projects, "from recent")}
-            {projects &&
-              userInfo.projectIDList.length !== 0 &&
+            {projects && userInfo.projectIdList.length !== 0 &&
               projects.map((project) =>
-                userInfo.projectIDList.map(
+                userInfo.projectIdList.map(
                   (projectid, index) =>
-                    projectid === project.id &&
+                    projectid === project._id &&
                     index < 8 && (
                       <div className={styles.recentParticularProject}>
                         {late[project.id - 1] !== -1 && (
@@ -158,14 +182,6 @@ const RecentProject = ({ user }) => {
                                 </p>
                               </div>
                             </div>
-                            {/* <h6 className={styles.particularProjectName}>
-                              <div className={styles.lastUsedName}>
-                                {project.projectName}
-                              </div>
-                              <div className={styles.lastUsedTime}>
-                                last used: {late[project.id - 1]}
-                              </div>
-                            </h6> */}
                           </Link>
                         )}
                       </div>
@@ -173,7 +189,7 @@ const RecentProject = ({ user }) => {
                 )
               )}
 
-            {userInfo.projectIDList.length === 0 && (
+            {userInfo.projectIdList.length === 0 && (
               <div className={styles.mainFavorite}>
                 <div className={styles.noFavorite}>
                   <img
@@ -190,7 +206,7 @@ const RecentProject = ({ user }) => {
           </div>
         )}
 
-        {showFavorite && (
+        {/* {showFavorite && (
           <div className={styles.recentListdiv}>
             {projects &&
               userInfo.favoriteProjectList &&
@@ -239,7 +255,7 @@ const RecentProject = ({ user }) => {
               </div>
             )}
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

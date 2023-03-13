@@ -5,45 +5,45 @@ import { setProjectList, setLastUsed, selectedProjectList } from "../../features
 import { setProject } from "../../features/projectSlice";
 import { useSelector, useDispatch } from 'react-redux';
 
+
 const ProjectList = ({ projects, userInfo }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [user, setUser] = useState(userInfo);
+  console.log(user, 'user from project list');
+  console.log(projects, 'projects from project list');
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const getProjects = (projectID, projects) => {
+  //     for (let i = 0; i < projects.length; i++) {
+  //       if (projects[i].id === projectID) {
+  //         return projects[i];
+  //       }
+  //     }
+  //   }
+  //   function getProjectList() {
+  //     const projectInfoList = [];
+  //     for (let i = 0; i < user.projectIDList.length; i++) {
+  //       const data = getProjects(user.projectIDList[i], projects);
+  //       console.log(data);
+  //       projectInfoList.push(data);
+  //     }
+  //     dispatch(setProjectList(projectInfoList));
+  //   }
+  //   getProjectList();
+  // }, [dispatch]);
 
-    const getProjects = (projectID, projects) => {
-      for (let i = 0; i < projects.length; i++) {
-        if (projects[i].id === projectID) {
-          return projects[i];
-        }
-      }
-    }
-
-    function getProjectList() {
-      const projectInfoList = [];
-      for (let i = 0; i < user.projectIDList.length; i++) {
-        const data = getProjects(user.projectIDList[i], projects);
-        console.log(data);
-        projectInfoList.push(data);
-      }
-      dispatch(setProjectList(projectInfoList));
-    }
-    getProjectList();
-
-  }, [dispatch]);
-
-  const projectList = useSelector(selectedProjectList);
+  // const projectList = useSelector(selectedProjectList);
 
   const navigate = useNavigate();
-  const updateLastUsed = (project) => {
-    dispatch(setLastUsed({ projectId: project.id }));
-    console.log(project.id, projectList, 'from project list');
-  };
+  // const updateLastUsed = (project) => {
+  //   // dispatch(setLastUsed({ projectId: project.id }));
+  //   // console.log(project.id, projectList, 'from project list');
+  // };
 
   const insideProject = (project) => {
-    updateLastUsed(project);
-    localStorage.setItem("projectId", project.id);
-    navigate("/task/overview");
+    // updateLastUsed(project);
+    // localStorage.setItem("projectId", project.id);
+    navigate(`/projects/${project._id}/overview`);
   };
 
   return (
@@ -54,9 +54,9 @@ const ProjectList = ({ projects, userInfo }) => {
         </Link>
       </div>
       {/* {console.log(projectList)} */}
-      {projectList && projectList
+      {projects && projects
         .map((project) =>
-          <div className="project-real" key={project.id}>
+          <div className="project-real" key={project._id}>
             <div className="project-container">
               <a
                 onClick={() => {
@@ -65,11 +65,12 @@ const ProjectList = ({ projects, userInfo }) => {
               >
                 <img
                   className="project-img"
-                  src={`./images/img/img${project.id % 10}.PNG`}
+                  src={`./images/img/img${1 % 10}.PNG`}
                 />
               </a>
             </div>
             <div className="project-name">
+              {console.log(project)}
               <p>{project.projectName}</p>
             </div>
           </div>

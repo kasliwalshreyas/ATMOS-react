@@ -1,5 +1,6 @@
 import React from "react";
-import Nav from "react-bootstrap/Nav";
+import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
@@ -19,7 +20,7 @@ const ProjectInfo = ({
   const [user, setUser] = useState(userInfo);
 
   let initialStateOfFavorite;
-  if (user.favoriteProjectList.indexOf(projectInfo.id) === -1) {
+  if (user.favProjectIdList.indexOf(projectInfo._id) === -1) {
     initialStateOfFavorite = false;
   } else {
     initialStateOfFavorite = true;
@@ -29,12 +30,12 @@ const ProjectInfo = ({
   const handleStarClick = () => {
     if (starred === true) {
       setStarred(false);
-      let index = user.favoriteProjectList.indexOf(projectInfo.id);
+      let index = user.favProjectIdList.indexOf(projectInfo._id);
       if (index > -1) {
-        dispatch(removeProjectFromFavourite(index));
+        // dispatch(removeProjectFromFavourite(index));
       }
     } else {
-      dispatch(addProjectToFavourite(projectInfo.id));
+      // dispatch(addProjectToFavourite(projectInfo._id));
       // user.favoriteProjectList.push(projectInfo.id);
       setStarred(true);
     }
@@ -89,47 +90,27 @@ const ProjectInfo = ({
             </div>
           </div>
         </div>
-        {/* <div className="user-profiles">
-          <img
-            id="user-profile"
-            className="user-profile"
-            onClick={handleProfileClickedInside}
-            src="https://img.icons8.com/color/48/000000/name--v1.png"
-          />
-          <div
-            id="dropdownMenu-user-profile"
-            className={isProfileClicked ? "show-profile-options" : "hide-profile-options"}
-          >
-            <a href="/profile" className="user-profile-dropdown-option">
-              Profile
-            </a>
-            <a href="/admin-portal" className="user-profile-dropdown-option">
-              Admin Portal
-            </a>
-          </div>
-        </div> */}
       </div>
-      {/* <Router> */}
       <Nav className="nav-bar" as="ul">
         <Nav.Item as="li">
-          <Nav.Link href="/task/overview" className="nav-option option-1">
+          <Link to={`/projects/${projectInfo._id}/overview`} className="nav-option option-1">
             Overview
-          </Nav.Link>
+          </Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link href="/task" className="nav-option option-2">
+          <Link to={`/projects/${projectInfo._id}/board`} className="nav-option option-2">
             Board
-          </Nav.Link>
+          </Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link href="/task/charts" className="nav-option option-2">
+          <Link to={`/projects/${projectInfo._id}/charts`} className="nav-option option-2">
             Charts
-          </Nav.Link>
+          </Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link href="/task/timeline" className="nav-option option-2">
+          <Link to={`/projects/${projectInfo._id}/timeline`} className="nav-option option-2">
             Timeline
-          </Nav.Link>
+          </Link>
         </Nav.Item>
       </Nav>
       <hr></hr>

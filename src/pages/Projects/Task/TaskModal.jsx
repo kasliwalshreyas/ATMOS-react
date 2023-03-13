@@ -19,7 +19,16 @@ const TaskModal = ({
   userInfo,
 }) => {
 
-  const dispatch = useDispatch();
+  console.log(taskInfo, "taskInfo");
+  console.log(AssigneeList, "AssigneeList");
+
+  const dateFormater = (date) => {
+    let newDate = new Date(date);
+    const offset = newDate.getTimezoneOffset()
+    newDate = new Date(newDate.getTime() - (offset * 60 * 1000))
+    return newDate.toISOString().split('T')[0]
+  }
+
 
   const taskCompletionOptions = [
     { value: true, label: "Yes" },
@@ -69,319 +78,77 @@ const TaskModal = ({
 
   const [taskName, setTaskName] = useState(taskInfo.taskName);
   const [taskCompletion, setTaskCompletion] = useState(taskInfo.taskCompletion);
-  const [taskAssignee, setTaskAssignee] = useState(taskInfo.taskAssignee);
+  const [taskAssignee, setTaskAssignee] = useState(taskInfo.taskAssigneeList);
   const [taskPriority, setTaskPriority] = useState(taskInfo.taskPriority);
   const [taskStatus, setTaskStatus] = useState(taskInfo.taskStatus);
-  const [taskDeadline, setTaskDeadline] = useState(taskInfo.taskDeadline);
+  const [taskDeadline, setTaskDeadline] = useState(dateFormater(taskInfo.taskDeadline));
   const [taskStartDate, SetTaskStartDate] = useState(taskInfo.taskStartDate);
-  const [taskDescription, setTaskDescription] = useState(
-    taskInfo.taskDescription
-  );
+  const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
   const [taskComments, setTaskComments] = useState(taskInfo.taskComments);
-  const [selectedAssignee, setSelectedAssignee] = useState({
-    value: taskAssignee,
-    label: taskAssigneeLabel,
-  });
-  const [selectedCompletion, setSelectedCompletion] = useState({
-    value: taskCompletion,
-    label: taskCompletionLabel,
-  });
-  const [selectedPriority, setSelectedPriority] = useState({
-    value: taskPriority,
-    label: taskPriorityLabel,
-  });
-  const [selectedStatus, setSelectedStatus] = useState({
-    value: taskStatus,
-    label: taskStatusLabel,
-  });
-  const [updateTaskAssignee, setUpdateTaskAssignee] = useState({
-    do: false,
-    oldAssignee: null,
-  });
+  const [selectedAssignee, setSelectedAssignee] = useState({ value: taskAssignee, label: taskAssigneeLabel, });
+  const [selectedCompletion, setSelectedCompletion] = useState({ value: taskCompletion, label: taskCompletionLabel, });
+  const [selectedPriority, setSelectedPriority] = useState({ value: taskPriority, label: taskPriorityLabel, });
+  const [selectedStatus, setSelectedStatus] = useState({ value: taskStatus, label: taskStatusLabel, });
+  const [updateTaskAssignee, setUpdateTaskAssignee] = useState({ do: false, oldAssignee: null, });
   const [description, setDescription] = useState(true);
   const [comments, setComments] = useState(false);
-  // console.log(selectedAssignee, selectedCompletion, selectedPriority, selectedStatus);
-  // console.log(taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, taskDeadline, taskDescription);
 
-  const handleSubmit = (taskId, sectionId, sectionInfo) => {
-    let taskData = {
+
+
+  const handleSubmit = async (taskId, sectionId, sectionInfo) => {
+
+    // fix for now
+    let is2dArray = false;
+    if (Array.isArray(taskAssignee)) {
+      is2dArray = true;
+    }
+    // console.log(taskAssignee, "from modal")
+    // console.log(is2dArray, "from modal");
+
+
+    const task = {
+      taskId,
       taskName,
+      taskDescription,
       taskCompletion,
-      taskAssignee,
       taskPriority,
       taskStatus,
+      taskAssigneeList: is2dArray ? [taskAssignee[0]] : [taskAssignee],
+      taskSectionId: sectionInfo._id,
+      taskProjectId: projectInfo._id,
+      taskCreator: userInfo._id,
+      taskCreatedAt: new Date(),
       taskDeadline,
-      taskStartDate,
-      taskDescription,
-      taskComments,
+      taskComments
     };
 
-    //Add Task with assignee
-    console.log(taskId, taskAssignee);
-    if (taskId == null && taskAssignee != null) {
-      console.log("Need to Add Task with assignee");
-      fetch("http://localhost:8000/taskList", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(taskData),
+    // console.log(task, "from modal");
+
+    const response = await fetch('http://localhost:4000/task/updateTask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'auth-token': `Bearer ${localStorage.getItem("token")}` },
+      body: JSON.stringify({
+        taskId,
+        taskName,
+        taskDescription,
+        taskCompletion,
+        taskPriority,
+        taskStatus,
+        taskAssigneeList: is2dArray ? [taskAssignee[0]] : [taskAssignee],
+        taskSectionId: sectionInfo._id,
+        taskProjectId: projectInfo._id,
+        taskCreator: userInfo._id,
+        taskDeadline,
+        taskComments
       })
-        .then((res) => {
-          return res.json();
-        })
-        .then((response) => {
-          // console.log(response);
-          let newTaskID = response.id;
-          // console.log(response.id);
-          // console.log("newTaskID",newTaskID)
-          // console.log("Task Added");
-          // console.log(newTaskID);
-          return newTaskID;
-        })
-        .then((newTaskID) => {
-          const sectionName = sectionInfo.sectionName;
-          const projectId = sectionInfo.projectId;
-          const taskIDList = sectionInfo.taskIDList;
-          // console.log(newTaskID);
-          let newTaskIDList = [];
-          for (let i = 0; i < taskIDList.length; i++) {
-            newTaskIDList.push(taskIDList[i].id);
-          }
-          newTaskIDList.push(newTaskID);
+    });
 
-          // taskIDList.push({ ...taskData, id: newTaskID });
-          // console.log(taskIDList, "new Task");
-          const sectionData = {
-            sectionName,
-            projectId,
-            taskIDList: newTaskIDList,
-          };
-
-          fetch(`http://localhost:8000/sectionList/${sectionId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sectionData),
-          }).then(async () => {
-            console.log("Section TaskList Updated");
-            // props.setRerender(!rerender)
-            //Add task to userAssignedTaskList
-            const res = await fetch(
-              `http://localhost:8000/userList/${taskAssignee}`
-            )
-              .then((res) => {
-                return res.json();
-              })
-              .then((response) => {
-                // console.log(response.taskAssignedIDList, 'assignee Info fetched');
-                if (userInfo.id === taskAssignee) {
-                  dispatch(assignTaskToUser(newTaskID));
-                }
-                response.taskAssignedIDList.push(newTaskID);
-                // console.log(response.taskAssignedIDList, 'assignee Info updated');
-                return response;
-              })
-              .then(async (response) => {
-                const res = await fetch(
-                  `http://localhost:8000/userList/${taskAssignee}`,
-                  {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(response),
-                  }
-                )
-                  .then((res) => {
-                    return res.json();
-                  })
-                  .then((response) => {
-                    // console.log(response.taskAssignedIDList, 'assignee Info updated in DB');
-                    console.log("Assignee TaskList Updated");
-                  });
-              })
-              .then(() => {
-                console.log("Task Added");
-                setRerender(!rerender);
-              });
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    //Add Task with no assignee
-    else if (taskId == null && taskAssignee == null) {
-      console.log("Need to Add Task with no assignee");
-      fetch("http://localhost:8000/taskList", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(taskData),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((response) => {
-          // console.log(response);
-          let newTaskID = response.id;
-          // console.log(response.id);
-          // console.log("newTaskID",newTaskID)
-          // console.log("Task Added");
-          // console.log(newTaskID);
-          return newTaskID;
-        })
-        .then((newTaskID) => {
-          const sectionName = sectionInfo.sectionName;
-          const projectId = sectionInfo.projectId;
-          const taskIDList = sectionInfo.taskIDList;
-          // console.log(newTaskID);
-          let newTaskIDList = [];
-          for (let i = 0; i < taskIDList.length; i++) {
-            newTaskIDList.push(taskIDList[i].id);
-          }
-          newTaskIDList.push(newTaskID);
-
-          // taskIDList.push({ ...taskData, id: newTaskID });
-          // console.log(taskIDList, "new Task");
-          const sectionData = {
-            sectionName,
-            projectId,
-            taskIDList: newTaskIDList,
-          };
-
-          fetch(`http://localhost:8000/sectionList/${sectionId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sectionData),
-          })
-            .then(() => {
-              console.log("Section TaskList Updated");
-              // props.setRerender(!rerender)
-            })
-            .then(() => {
-              console.log("Task Added");
-              setRerender(!rerender);
-            });
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-    //Update Task with assignee change
-    else if (taskId != null && updateTaskAssignee.do == true) {
-      console.log("Need To Update Task with assignee change");
-      fetch(`http://localhost:8000/taskList/${taskId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(taskData),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then(async (taskdata) => {
-          console.log("Task Updated", taskdata);
-          const newTaskID = taskdata.id;
-          console.log(newTaskID);
-          const res = await fetch(
-            `http://localhost:8000/userList/${taskAssignee}`
-          )
-            .then((res) => {
-              return res.json();
-            })
-            .then((response) => {
-              // console.log(response);
-
-              if (userInfo.id === taskAssignee) {
-                dispatch(assignTaskToUser(newTaskID));
-              }
-              response.taskAssignedIDList.push(newTaskID);
-              console.log(response.taskAssignedIDList, "assignee Info updated");
-              return response;
-            })
-            .then(async (response) => {
-              const res = await fetch(
-                `http://localhost:8000/userList/${taskAssignee}`,
-                {
-                  method: "PUT",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(response),
-                }
-              ).then(() => {
-                console.log("New Assignee TaskList Updated");
-              });
-            });
-          // .then(() => {
-          //     console.log("Task Updated");
-          //     // setRerender(!rerender);
-          // });
-          return newTaskID;
-        })
-        .then(async (newTaskID) => {
-          console.log(newTaskID);
-          const res = await fetch(
-            `http://localhost:8000/userList/${updateTaskAssignee.oldAssignee}`
-          )
-            .then((res) => {
-              return res.json();
-            })
-            .then((response) => {
-              // console.log(response);
-
-              if (userInfo.id === updateTaskAssignee.oldAssignee) {
-                dispatch(removeTaskFromUser(newTaskID));
-              }
-              response.taskAssignedIDList = response.taskAssignedIDList.filter(
-                (taskid) => taskid != newTaskID
-              );
-              console.log(
-                response.taskAssignedIDList,
-                " assignee Info updated"
-              );
-              return response;
-            })
-            .then(async (response) => {
-              const res = await fetch(
-                `http://localhost:8000/userList/${updateTaskAssignee.oldAssignee}`,
-                {
-                  method: "PUT",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(response),
-                }
-              ).then(() => {
-                console.log("prev Assignee TaskList Updated");
-              });
-            });
-        })
-        .then(() => {
-          console.log("Task Updated");
-          setRerender(!rerender);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-    //Update Task with no assignee change
-    else if (taskId != null && updateTaskAssignee.do == false) {
-      console.log("Need To Update Task with no assignee change");
-      fetch(`http://localhost:8000/taskList/${taskId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(taskData),
-      })
-        // .then((res) => {return res.json()})
-        // .then((response) => {
-        //     console.log(response);
-        //     console.log("Task Updated");
-        // })
-        .then(() => {
-          console.log("Task Updated");
-          setRerender(!rerender);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
+    const taskData = await response.json();
+    console.log(taskData, taskData.message, "from modal");
 
     closeModal();
-  };
 
-  // console.log(projectInfo, "from modal")
+  };
 
   const handleTaskAssignee = (selectedOption) => {
     if (selectedAssignee.value !== selectedOption.value) {
@@ -540,10 +307,6 @@ const TaskModal = ({
                       }),
                     }}
                   />
-                  {/* <select className='modal-input modal-select' value={taskCompletion ? "completed" : "incompleted"} onChange={(e) => { if (e.target.value === "completed") { setTaskCompletion(true) } else { setTaskCompletion(false) } }}>
-                                        <option className='modal-select-option' value="completed">Yes</option>
-                                        <option className='modal-select-option' value="incompleted">No</option>
-                                    </select> */}
                 </td>
               </tr>
               <tr className="task-modal-table-row">
@@ -744,12 +507,6 @@ const TaskModal = ({
                       }),
                     }}
                   />
-                  {/* <select className='modal-input modal-select' value={taskPriority} onChange={(e) => { setTaskPriority(e.target.value) }}>
-                                        <option value="Choose Priority">Choose Priority</option>
-                                        <option value="high">High</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="low">Low</option>
-                                    </select> */}
                 </td>
               </tr>
               <tr className="task-modal-table-row">
@@ -850,12 +607,6 @@ const TaskModal = ({
                       }),
                     }}
                   />
-                  {/* <select className='modal-input modal-select' value={taskStatus} onChange={(e) => { setTaskStatus(e.target.value) }}>
-                                        <option value="Choose Status">Choose Status</option>
-                                        <option value="on-track">On Track</option>
-                                        <option value="off-track">Off Track</option>
-                                        <option value="at-risk">At Risk</option>
-                                    </select> */}
                 </td>
               </tr>
               <tr className="task-modal-table-row">
@@ -909,14 +660,8 @@ const TaskModal = ({
                 setTaskComments={setTaskComments}
                 userInfo={userInfo}
               />
-              {/* <textarea className='task-modal-description' value={taskComments} onChange={(e) => setTaskComments(e.target.value)} rows={5} placeholder="add comments for your team members" ></textarea> */}
             </div>
           )}
-          {/* <div className='task-modal-button-container'>
-                        <button className='task-modal-button' onClick={handleSave}>Save</button>
-                        <button className='task-modal-button' onClick={handleDelete}>Delete</button>
-                    </div> */}
-
           {/* To Do: Make description active */}
         </Modal.Body>
         <Modal.Footer className="task-modal-footer">
@@ -925,14 +670,14 @@ const TaskModal = ({
             onClick={() => {
               // console.log(taskInfo)
               // console.log(props.taskInfo)
-              handleSubmit(taskInfo.id, sectionInfo.id, sectionInfo);
+              handleSubmit(taskInfo._id, sectionInfo._id, sectionInfo);
             }}
           >
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div >
   );
 };
 

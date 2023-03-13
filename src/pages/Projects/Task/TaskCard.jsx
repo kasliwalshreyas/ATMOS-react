@@ -3,83 +3,28 @@ import { Draggable } from "react-beautiful-dnd";
 const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
     // console.log(task, 'task');
 
-    const deleteTask = (event, taskID, sectionInfo) => {
+    const dateFormater = (date) => {
+        let newDate = new Date(date);
+        const offset = newDate.getTimezoneOffset()
+        newDate = new Date(newDate.getTime() - (offset * 60 * 1000))
+        return newDate.toISOString().split('T')[0]
+    }
+
+    const deleteTask = async (event, taskID) => {
         event.stopPropagation();
 
-        const sectionName = sectionInfo.sectionName;
-        const projectId = sectionInfo.projectId;
-        const taskIDList = sectionInfo.taskIDList.filter((task) => { return !(task.id === taskID) });
-        for (let i = 0; i < taskIDList.length; i++) {
-            taskIDList[i] = taskIDList[i].id;
-        }
-        const sectionData = { sectionName, projectId, taskIDList };
-        // console.log(sectionData);
-
-        //delete task if task has an Assignee
-        if (task.taskAssignee) {
-            fetch(`http://localhost:8000/taskList/${taskID}`, {
-                method: 'DELETE'
-            })
-                .then(() => {
-                    console.log('Task Deleted');
-                    fetch(`http://localhost:8000/sectionList/${sectionInfo.id}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(sectionData)
-                    })
-                        .then(() => {
-                            console.log("Section TaskList Updated");
-                            // setRerender(!rerender)
-                        });
-                })
-                .then(() => {
-                    fetch(`http://localhost:8000/userList/${task.taskAssignee}`)
-                        .then((res) => { return res.json() })
-                        .then((AssigneeData) => {
-                            // const taskIDList = res2.taskIDList.filter((task) => { return !(task.id === taskID) });
-                            // const userData = { ...res2, taskIDList };
-                            console.log(taskID);
-                            AssigneeData.taskAssignedIDList = AssigneeData.taskAssignedIDList.filter((taskid) => { return !(taskid === taskID) });
-                            console.log(AssigneeData);
-                            fetch(`http://localhost:8000/userList/${task.taskAssignee}`, {
-                                method: 'PUT',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(AssigneeData)
-                            })
-                                .then(() => {
-                                    console.log("User TaskList Updated");
-                                    setRerender(!rerender)
-                                });
-                        }
-                        )
-                })
-                .catch((err) => { console.log(err.message); })
-        }
-        //delete task if task has no Assignee
-        else {
-            fetch(`http://localhost:8000/taskList/${taskID}`, {
-                method: 'DELETE'
-            })
-                .then(() => {
-                    console.log('Task Deleted');
-                    fetch(`http://localhost:8000/sectionList/${sectionInfo.id}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(sectionData)
-                    })
-                        .then(() => {
-                            console.log("Section TaskList Updated");
-                            setRerender(!rerender)
-                        });
-                })
-                .catch((err) => { console.log(err.message); });
-        }
+        const res = await fetch(`http://localhost:4000/task/deleteTask/${taskID}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+        });
+        console.log("deleted task", taskID);
+        setRerender(!rerender);
     }
 
     // console.log(task)
 
     return (
-        <Draggable draggableId={task.id.toString()} index={task.id}>
+        <Draggable draggableId={task._id} index={task._id}>
             {(provided) => (
                 <div className="task task-0"
                     variant="primary"
@@ -89,12 +34,8 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
                     {...provided.dragHandleProps}
                     key={task.id}>
                     <div className="task-head">
-                        <input type="checkbox" className="task-checker-input" checked={task.taskCompletion} readOnly
-                        //  onChange={(e)=>{console.log(e.target.checked);}}
-                        />
-                        <input type="text" className="task-name-input" placeholder="Task Name" value={task.taskName ? task.taskName : ""} readOnly
-                        //  onChange={(e)=>setTaskName(e.target.value)} 
-                        />
+                        <input type="checkbox" className="task-checker-input" checked={task.taskCompletion} readOnly />
+                        <input type="text" className="task-name-input" placeholder="Task Name" value={task.taskName ? task.taskName : ""} readOnly />
                     </div>
                     <div className="task-info">
                         {task.taskPriority && (task.taskPriority !== "Choose Priority") && <p className="priority-tag">{task.taskPriority}</p>}
@@ -102,9 +43,9 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
                     </div>
                     <div className="task-timeline">
                         <div className="deadine">
-                            {task.taskDeadline && <p className="date">{task.taskDeadline}</p>}
+                            {task.taskDeadline && <p className="date">{dateFormater(task.taskDeadline)}</p>}
                         </div>
-                        <div className="delete-btn-div" onClick={event => { deleteTask(event, task.id, section) }}>
+                        <div className="delete-btn-div" onClick={event => { deleteTask(event, task._id) }}>
                             <img src="https://img.icons8.com/external-inkubators-glyph-inkubators/25/000000/external-delete-ecommerce-user-interface-inkubators-glyph-inkubators.png" />
                         </div>
                     </div>

@@ -5,13 +5,16 @@ import styles from "./UpcomingTask.module.css";
 import { Link } from "react-router-dom";
 const UpcomingTask = ({ user }) => {
   const [userInfo, setUserInfo] = useState(user);
-  const {
-    data: tasksList,
-    isPending,
-    error,
-  } = useFetch("http://localhost:8000/taskList");
+  // const {
+  //   data: tasksList,
+  //   isPending,
+  //   error,
+  // } = useFetch("http://localhost:8000/taskList");
   // console.log(tasksList)
   // tasksList && console.log(tasksList)
+
+  const [tasksList, setTasksList] = useState(user.taskAssignedIdList);
+  console.log(tasksList)
 
   var sortedTaskList = tasksList;
   const compareDate = (a, b) => {
@@ -39,7 +42,7 @@ const UpcomingTask = ({ user }) => {
 
   // console.log("i am pointing to here",tasksList)
   // console.log("i am now pointing to here", sortedTaskList)
-  console.log("i am seriously here", userInfo.taskAssignedIDList);
+  // console.log("i am seriously here", userInfo.taskAssignedIdList);
   const [showImg, setShowImg] = useState(false)
   // const taskImg = () => {
   // sortedTaskList && sortedTaskList.map((taskList) => {
@@ -60,9 +63,9 @@ const UpcomingTask = ({ user }) => {
       <div className={styles.upcomingTaskList}>
         {tasksList &&
           sortedTaskList.map((taskList) =>
-            userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
+            userInfo.taskAssignedIDList && userInfo.taskAssignedIdList.map(
               (task) =>
-                taskList.id === task &&
+                taskList._id === task &&
                 handledeadline(taskList.taskDeadline) === 1 &&
                 !taskList.taskCompletion && (
                   <div className={styles.particularTask}>

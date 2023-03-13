@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./UI/Navbar";
 import Home from "./pages/Home/Home";
@@ -12,7 +12,7 @@ import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Logout from "./pages/Logout/Logout";
-import Dashboard from "./pages/Admin-2/Dashboard";
+// import Dashboard from "./pages/Admin-2/Dashboard";
 import AboutUS from "./pages/AboutUs/AboutUs";
 import Contact from "./pages/ContactUs/Contact";
 import Notes from "./pages/Notes/Notes";
@@ -22,18 +22,27 @@ import { useDispatch } from "react-redux";
 const App = () => {
   const dispatch = useDispatch();
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (user) {
-    console.log(user);
-    const userInfo = fetch("http://localhost:8000/userList/" + user)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        dispatch(login(data));
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    async function getUser() {
+      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${token}`,
+        },
       });
-  }
+      const data = await res.json();
+      console.log(data, "userInfo from appJS");
+      data["token"] = token;
+      dispatch(login(data));
+    }
+    if (token) {
+      getUser();
+    }
+  }, []);
+
 
   return (
     <div>
@@ -51,21 +60,20 @@ const App = () => {
             <Route path="/messages" element={<Chats />} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
-            <Route path="/createproject" element={<CreateProject />} />
-            <Route exact path="/task" element={<MainView board />} />
+            <Route exact path="/projects/:id/board" element={<MainView board />} />
             <Route
               exact
-              path="/task/overview"
+              path="/projects/:id/overview"
               element={<MainView overview />}
             />
-            <Route exact path="/task/charts" element={<MainView charts />} />
+            <Route exact path="/projects/:id/charts" element={<MainView charts />} />
             <Route
               exact
-              path="/task/timeline"
+              path="/projects/:id/timeline"
               element={<MainView timeline />}
             />
-            <Route path="/admin-portal/*" element={<Dashboard />} />
-          
+            {/* <Route path="/admin-portal/*" element={<Dashboard />} /> */}
+
             <Route exact path="/aboutUs" element={<AboutUS />} />
             <Route exact path="/contactUs" element={<Contact />} />
           </Routes>

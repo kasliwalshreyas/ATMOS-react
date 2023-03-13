@@ -6,6 +6,7 @@ import UpcomingTask from "./UpcomingTask";
 import CompletedTask from "./CompletedTask";
 const Priority = ({ user }) => {
   const [taskType, setTaskType] = useState(1);
+  const [userInfo, setUserInfo] = useState(user);
 
   const handletaskType = (value) => {
     setTaskType(value);

@@ -15,42 +15,65 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleLogin = async (user) => {
-        const res = fetch('http://localhost:8000/userList/'+ user.id, {
-            method: 'PUT',
+    // const handleLogin = async (user) => {
+    //     const res = fetch('http://localhost:4000/userList/' + user.id, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ ...user, date: new Date().toTimeString().slice(0, 5) })
+    //     })
+    //     console.log(res);
+    // }
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log(email, password);
+    //     fetch('http://localhost:8000/userList?emailId=' + email, {
+    //         method: 'GET'
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.length === 0) {
+    //                 alert("User does not exist!");
+    //             }
+    //             else {
+    //                 console.log(data);
+    //                 if (bcrypt.compareSync(password, data[0].password)) {
+    //                     handleLogin(data[0]);
+    //                     dispatch(login(data[0]));
+    //                     navigate('/home');
+    //                 }
+    //                 else {
+    //                     alert("Incorrect password!");
+    //                 }
+    //             }
+    //         })
+
+    // };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const res = await fetch('http://localhost:4000/user/login', {
+            method: 'POST',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
             },
-            body: JSON.stringify({...user, date: new Date().toTimeString().slice(0,5)})
-        })
-        console.log(res);
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        console.log(data);
+        if (!data.success) {
+            alert(data.error);
+        }
+        else {
+            dispatch(login(data));
+            navigate('/home');
+        }
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email, password);
-        fetch('http://localhost:8000/userList?emailId=' + email, {
-            method: 'GET'
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.length === 0) {
-                    alert("User does not exist!");
-                }
-                else {
-                    console.log(data);
-                    if (bcrypt.compareSync(password, data[0].password)) {
-                        handleLogin(data[0]);
-                        dispatch(login(data[0]));
-                        navigate('/home');
-                    }
-                    else {
-                        alert("Incorrect password!");
-                    }
-                }
-            })
-        
-    };
+
 
     return (
         <Container className={styles.container}>

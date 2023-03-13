@@ -10,18 +10,27 @@ import { ChatsProvider } from './pages/Messages/Components/context/ChatsContext'
 import { store } from './store';
 import { Provider } from 'react-redux';
 
+import { MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
+
+
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+
   <Provider store={store}>
-    <ChatProvider>
-      <ChatsProvider>
-      <App />
-      </ChatsProvider>
-    </ChatProvider>
+    <MantineProvider theme={{ colorScheme: 'light' }}>
+      <ModalsProvider>
+        <ChatProvider>
+          <ChatsProvider>
+            <App />
+          </ChatsProvider>
+        </ChatProvider>
+      </ModalsProvider>
+    </MantineProvider>
   </Provider>
   // </React.StrictMode>
 );

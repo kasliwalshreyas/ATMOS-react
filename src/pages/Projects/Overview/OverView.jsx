@@ -1,75 +1,202 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import styles from "./OverView.module.css";
 import TeamMemberCard from "./TeamMemberCard";
 import DescriptionComponent from "./DescriptionComponent";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
 // import { setProject, addMediumTeamMember, addHightTeamMember, addLowTeamMember } from "../../../features/projectSlice";
 import { useDispatch } from 'react-redux';
 import { removeProjectFromFavourite, removeProjectFromUser } from "../../../features/userSlice";
+import {
+  Box,
+  Paper,
+  Title,
+  createStyles,
+  Flex,
+  Container,
+  Group,
+  Text,
+  Button,
+  Modal,
+  Select
+} from "@mantine/core";
+import { openConfirmModal, closeAllModals } from '@mantine/modals';
+
+const useStyles = createStyles((theme) => ({
+  teamMembersArena: {
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    textAlign: 'left',
+    padding: theme.spacing.xl,
+    borderRadius: theme.radius.md,
+    cursor: 'pointer',
+    width: 'fit-content',
+    height: 'fit-content',
+
+    '&:hover': {
+      backgroundColor:
+        theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
+    },
+  },
+
+  teamMembersHeading: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: '10px',
+    borderRadius: '5px 5px 5px 5px',
+    // backgroundColor: 'ebeff3'
+
+  },
+
+  flexApart: {
+    minWidth: '90%',
+    padding: '0px',
+    maxWidth: '100%',
+  },
+
+  outerSettingContainer: {
+    border: '1px solid #dd3544',
+    borderRadius: '5px',
+    padding: '8px',
+  },
+
+  innerSettingContainer: {
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    border: '1px solid #ed2b3c',
+    borderRadius: '5px',
+    padding: '8px',
+    marginBottom: '10px',
+  }
+
+}));
+
+const memberSelectItems = forwardRef(({ userName, email, _id, value, ...others }, ref) => (
+  <div ref={ref} key={_id} {...others}>
+    <TeamMemberCard
+      name={userName}
+      email={email}
+    />
+  </div>
+));
 
 
-const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
+
+const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   // console.log(projectId);
-
   // console.log(projectInfo);
+
+  const { classes } = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
   const [projectName, setProjectName] = useState(projectInfo.projectName);
   const [projectStatement, setProjectStatement] = useState(projectInfo.projectStatement);
   const [projectMission, setProjectMission] = useState(projectInfo.projectMission);
   const [projectDescription, setProjectDescription] = useState(projectInfo.projectDescription);
   const [projectGuidelines, setProjectGuidelines] = useState(projectInfo.projectGuidelines);
   const [selectedTeamMember, setSelectedTeamMember] = useState(null);
+  const [selectedTransferMember, setSelectedTransferMember] = useState('');
   const [selectedRole, setSelectedRole] = useState(null);
-
-  // const [taskList, setTaskList] = useState(null);
-  // const [sectionList, setSectionList] = useState(null);
-
-
-
-
-  // const [projectTeam, setProjectTeam] = useState(projectInfo.projectTeam);
-
+  const [opened, setOpened] = useState(false);
+  const [openTransferModal, setOpenTransferModal] = useState(false);
   const [userList, setUserList] = useState([]);
+  const [userAccessLevel, setUserAccessLevel] = useState('no access');
+
+
+
+  const setAccessLevelFunc = () => {
+    if (projectInfo && userInfo) {
+      console.log('access Level setting');
+      console.log(userInfo, projectInfo);
+      if (userInfo._id === projectInfo.projectOwner._id) {
+        console.log('owner');
+        setUserAccessLevel('owner');
+      }
+      else if (projectInfo.projectHighAccessMembers.find((member) => member._id === userInfo._id)) {
+        console.log('high');
+        setUserAccessLevel('high');
+      }
+      else if (projectInfo.projectMediumAccessMembers.find((member) => member._id === userInfo._id)) {
+        console.log('medium');
+        setUserAccessLevel('medium');
+      }
+      else if (projectInfo.projectLowAccessMembers.find((member) => member._id === userInfo._id)) {
+        console.log('low');
+        setUserAccessLevel('low');
+      }
+      else {
+        console.log('no access');
+        setUserAccessLevel('no access');
+      }
+    }
+  }
+
   useEffect(() => {
-    fetch("http://localhost:8000/userList/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        setUserList(res);
+    setAccessLevelFunc();
+  }, [projectInfo, userInfo]);
+
+
+
+  useEffect(() => {
+    const res = async () => {
+      const response = await fetch("http://localhost:4000/user/getUserList/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
       });
+      const data = await response.json();
+      console.log(data, 'userList from over view');
+
+      //add value key to each user
+      data.userList.forEach((user) => {
+        user.value = user._id;
+        user.label = user.userName;
+      });
+
+      setUserList(data.userList);
+      return data;
+    }
+    res();
+
+
   }, []);
 
-  // console.log(userList)
 
-
-  const [show, setShow] = useState(false);
-  const navigate = useNavigate();
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const options = userList.filter((user) => {
-    let flag = !projectInfo.highAccess.find((member) => {
-      return member.id === user.id;
+  const filteredUserList = userList.filter((user) => {
+    let flag = !projectInfo.projectHighAccessMembers.find((member) => {
+      return member._id === user._id;
     });
-    flag = flag && !projectInfo.mediumAccess.find((member) => {
-      return member.id === user.id;
+    flag = flag && !projectInfo.projectMediumAccessMembers.find((member) => {
+      return member._id === user._id;
     }
     );
-    flag = flag && !projectInfo.lowAccess.find((member) => {
-      return member.id === user.id;
+    flag = flag && !projectInfo.projectLowAccessMembers.find((member) => {
+      return member._id === user._id;
     }
     );
     return flag;
   });
 
+  const transferOwnershipUserList = userList.filter((user) => {
+    // only user that are not the owner of the project
+    let flag = user._id !== projectInfo.projectOwner._id;
+    //only users that are not already the owner of the project and are high access members
+    flag = flag && projectInfo.projectHighAccessMembers.find((member) => {
+      return member._id === user._id;
+    });
 
-  const options2 = [{
+    return flag;
+  });
+
+  // console.log(transferOwnershipUserList, "transferOwnershipUserList");
+
+
+
+
+  const roleList = [{
     value: 'highAccess',
     label: 'High'
   }, {
@@ -80,366 +207,368 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
     label: 'Low'
   }]
 
-  const formatOptionLabel = ({ userName, emailId, id }) => (
-    <TeamMemberCard
-      name={userName}
-      email={emailId}
-    // size={'small'}
-    />
-  );
+  const addTeamMember = async () => {
+    console.log(selectedTeamMember, selectedRole, "Add Team Member Data");
 
-  const addTeamMember = () => {
-    // console.log(selectedTeamMember, selectedRole);
-    // console.log(projectInfo);
-    if (selectedTeamMember && selectedRole) {
-      const projectInfoID = JSON.parse(JSON.stringify(projectInfo));
+    const response = await fetch(`http://localhost:4000/project/addTeamMember/${projectId}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": `Bearer ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({
+        userId: selectedTeamMember,
+        accessLevel: selectedRole
 
-      for (let i = 0; i < projectInfoID.highAccess.length; i++) {
-        projectInfoID.highAccess[i] = projectInfo.highAccess[i].id;
-      }
-      for (let i = 0; i < projectInfoID.mediumAccess.length; i++) {
-        projectInfoID.mediumAccess[i] = projectInfo.mediumAccess[i].id;
-      }
-      for (let i = 0; i < projectInfoID.lowAccess.length; i++) {
-        projectInfoID.lowAccess[i] = projectInfo.lowAccess[i].id;
-      }
-
-      selectedTeamMember.projectIDList.push(projectId);
-
-      if (selectedRole.value === 'highAccess') {
-        // dispatch(addHightTeamMember(selectedTeamMember));
-        projectInfo.highAccess.push(selectedTeamMember);
-        projectInfoID.highAccess.push(selectedTeamMember.id);
-      } else if (selectedRole.value === 'mediumAccess') {
-        // dispatch(addMediumTeamMember(selectedTeamMember));
-        projectInfo.mediumAccess.push(selectedTeamMember);
-        projectInfoID.mediumAccess.push(selectedTeamMember.id);
-      } else if (selectedRole.value === 'lowAccess') {
-        // dispatch(addLowTeamMember(selectedTeamMember));
-        projectInfo.lowAccess.push(selectedTeamMember);
-        projectInfoID.lowAccess.push(selectedTeamMember.id);
-      }
-      // console.log(projectInfo, projectInfoID);
-
-      // dispatch(setProject(projectInfo));
-      setProjectInfo(projectInfo);
-      // add user to project
-      fetch(`http://localhost:8000/projectList/${projectId}`, {
-        method: 'PUT',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(projectInfoID)
       })
-        .then((res) => {
-          return res.json();
-        })
-        .then(async (project) => {
-          //add project to user
-          const res = await fetch(`http://localhost:8000/userList/${selectedTeamMember.id}`, {
-            method: 'PUT',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(selectedTeamMember)
-          })
-          return project;
-        })
-        .then((project) => {
-          // console.log(project);
-          console.log('new team member added');
-          // setProjectInfo(project);
-        })
+    });
+
+    const data = await response.json();
+    console.log(data);
+    if (data.success) {
+      console.log("Team Member Added");
+      setOpened(false);
+      setSelectedTeamMember(null);
+      setSelectedRole(null);
     }
-
-    handleClose();
-
   }
   const handleMemberChange = (option) => {
-    // console.log(option);
+    console.log(option);
     setSelectedTeamMember(option);
+    // console.log(selectedTeamMember, "selectedTeamMember");
   }
+
   const handleRoleChange = (option) => {
-    // console.log(option);
+    console.log(option);
     setSelectedRole(option);
   }
-
-  async function deleteProjectFromUser(projectID, projectAssignee) {
-    const res = await fetch(`http://localhost:8000/userList/${projectAssignee}`).then((response) => { return response.json() })
-      .then((user) => {
-        const projectList = user.projectIDList.filter((project) => {
-          return project !== projectID;
-        })
-        user.projectIDList = projectList;
-        dispatch(removeProjectFromUser(projectID));
-        const favProjectList = user.favoriteProjectList.filter((project) => {
-          return project !== projectID;
-        })
-        user.favoriteProjectList = favProjectList;
-
-        let index = user.favoriteProjectList.indexOf(projectInfo.id);
-        if (index > -1) {
-          dispatch(removeProjectFromFavourite(index));
-
-        }
-        return user;
-      })
-      .then((user) => {
-        return fetch(`http://localhost:8000/userList/${projectAssignee}`, {
-          method: 'PUT',
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(user)
-        })
-      })
-      .then((res) => {
-        return res.json();
-      }
-      )
-      .then((user) => {
-        return user;
-      }
-      )
-    console.log(res, 'deleted user data from DELETEPROJECTFROMUSER');
-    return res;
+  const handleTransferMemberChange = (option) => {
+    // console.log(option);
+    setSelectedTransferMember(option);
+    // console.log(selectedTransferMember, "selectedTransferMember");
   }
-
-  async function deleteTaskFromUser(taskID, taskAssignee) {
-    const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`)
-      .then((res) => { return res.json() })
-      .then((AssigneeData) => {
-        // const taskIDList = res2.taskIDList.filter((task) => { return !(task.id === taskID) });
-        // const userData = { ...res2, taskIDList };
-        // console.log(taskID);
-        AssigneeData.taskAssignedIDList = AssigneeData.taskAssignedIDList.filter((taskid) => { return !(taskid === taskID) });
-        console.log(AssigneeData);
-        return fetch(`http://localhost:8000/userList/${taskAssignee}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(AssigneeData)
-        })
-          .then((user) => {
-            console.log("Deleted Task from User");
-            return user;
-          });
-      }
-      )
-    console.log(res, 'deleted user data from DELETETASKFROMUSER');
-    return res;
-  }
-
-  async function deleteTask(taskID, assigneeID) {
-
-    if (assigneeID) {
-      const res1 = await deleteTaskFromUser(taskID, assigneeID);
-    }
-
-    const res = await fetch(`http://localhost:8000/taskList/${taskID}`, {
-      method: 'DELETE'
-    });
-    console.log("deleted task", taskID);
-    return res;
-  }
-
-  async function deleteSection(sectionID, sectionInfo) {
-
-    //delete task inside section
-    for (let i = 0; i < sectionInfo.taskIDList.length; i++) {
-      // console.log("inside delete section", i);
-      let res3 = await deleteTask(sectionInfo.taskIDList[i].id, sectionInfo.taskIDList[i].taskAssignee);
-    }
-
-    //delete section
-    const res = await fetch(`http://localhost:8000/sectionList/${sectionID}`, {
-      method: 'DELETE'
-    })
-      .then((res) => {
-        console.log('Section Deleted');
-        return res.json();
-      });
-    return res;
-  }
-
-  const populateTask = (sec, task) => {
-    // console.log(data);
-
-    if (sec) {
-      for (let i = 0; i < sec.length; i++) {
-        for (let j = 0; j < sec[i].taskIDList.length; j++) {
-          sec[i].taskIDList[j] = task.find(
-            (element) => element.id === sec[i].taskIDList[j]
-          );
-        }
-      }
-    }
-    // console.log("populated", sec);
-    return sec;
-  };
-
-  async function populateProjectInfo() {
-    return fetch(`http://localhost:8000/sectionList?projectId_like=${projectId}`)
-      .then((res) => {
-        // console.log("sectionList fetched", res);
-        if (!res.ok) {
-          throw Error("Not able to fetch the SectionList");
-        }
-        return res.json();
-      })
-      .then(async (sec) => {
-        // console.log(sec);
-        const task = await fetch("http://localhost:8000/taskList").then(
-          (res) => {
-            // console.log(res);
-            if (!res.ok) {
-              throw Error("Not able to fetch the TaskList");
-            }
-            return res.json();
-          }
-        );
-        return [sec, task];
-      })
-      .then(([sec, task]) => {
-        // console.log(sec, task);
-        // setTaskList(task);
-        // setError(null);
-        return [sec, task];
-      })
-      .then(([sec, task]) => {
-        // console.log(sec, task);
-        sec = populateTask(sec, task);
-        // setSectionList(sec);
-        // setError(null);
-        return sec;
-      })
-      .catch((err) => {
-        // setError(err.message);
-        // setSectionList(null);
-      });
-
-  }
-
 
   const handleDeleteProject = async () => {
-
-    console.log(projectInfo);
-
-    const sec = await populateProjectInfo();
-    console.log(sec, "sec");
-    // console.log(taskList, 'tasklist');
-    // console.log(sectionList, 'sec');
-
-
-    // delete the task from of that project from task list
-
-    // delete the section of that project from section list
-    for (let i = 0; i < sec.length; i++) {
-      // console.log("inside delete section", i);
-      let res = await deleteSection(sec[i].id, sec[i]);
-    }
-    console.log("deleted all section");
-
-    // delete the project from user's projectIDList
-    for (let i = 0; i < projectInfo.highAccess.length; i++) {
-      const res2 = await deleteProjectFromUser(projectInfo.id, projectInfo.highAccess[i].id);
-    }
-    for (let i = 0; i < projectInfo.mediumAccess.length; i++) {
-      const res2 = await deleteProjectFromUser(projectInfo.id, projectInfo.mediumAccess[i].id);
-    }
-    for (let i = 0; i < projectInfo.lowAccess.length; i++) {
-      const res2 = await deleteProjectFromUser(projectInfo.id, projectInfo.lowAccess[i].id);
-    }
-
-    console.log("deleted project from userList");
-
-    // delete the project from project list
-    const res = await fetch(`http://localhost:8000/projectList/${projectId}`, {
-      method: 'DELETE'
+    const res = await fetch(`http://localhost:4000/project/deleteProject/${projectId}`, {
+      method: 'DELETE',
+      headers: {
+        'auth-token': `Bearer ${localStorage.getItem("token")}`
+      },
     })
-      .then((res) => {
-        console.log('Project Deleted');
-        return res.json();
-      }
-      )
-      .then((data) => {
-        console.log(data);
-        navigate('/projects');
-      }
-      )
-      .catch((err) => {
-        console.log(err.message);
-      }
-      );
+
+    const data = await res.json();
+
+    if (data.success) {
+      console.log(data.message);
+      navigate('/projects');
+    }
+  }
+  const handleTransfer = async () => {
+    console.log(selectedTransferMember, "newOwner");
+    const res = await fetch(`http://localhost:4000/project/transferOwnership/${projectId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        newOwner: selectedTransferMember
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      console.log(data.message);
+      setSelectedTransferMember(null);
+      setOpenTransferModal(false);
+      navigate('/projects');
+    }
   }
 
-  const handleTransfer = () => {
-  }
-
-
+  const openDeleteModal = () =>
+    openConfirmModal({
+      title: 'Delete Project',
+      centered: true,
+      children: (
+        <Text size="sm">
+          This action cannot be undone.
+          This will <b>permanently delete</b> the <b>{projectInfo.projectName}</b> project, and sections, tasks, comments and remove all collaborator associations.
+          <b> Are you sure you want to delete your project?</b>
+        </Text>
+      ),
+      labels: { confirm: 'Delete Project', cancel: "No don't delete it" },
+      confirmProps: { color: 'red' },
+      onCancel: () => console.log('Cancel'),
+      onConfirm: () => handleDeleteProject(),
+    });
 
   return (
+
     <div className={styles.overviewMainView}>
-      <div className={styles.descriptionArena}>
-        <div className={styles.descriptionArenaHeading}>
-          <h3>About Project</h3>
-        </div>
-        <div className={styles.descriptionArenaDescription}>
-          <DescriptionComponent
-            heading="Project Statement"
-            description={projectStatement !== "" ? projectStatement : "What is your project about?"}
-          />
-          <DescriptionComponent
-            heading="Project Mission"
-            description={projectMission !== "" ? projectMission : "Write about the mission of your project"}
-          />
-          <DescriptionComponent
-            heading="Project Description"
-            description={projectDescription !== "" ? projectDescription : "Describe your project for your team mates."}
-          />
-          <DescriptionComponent
-            heading="Project Guidelines"
-            description={projectGuidelines !== "" ? projectGuidelines : "Share the guidelines of the project with your team mates."}
-          />
-        </div>
-      </div>
+      <Paper sx={{ minWidth: '70vw' }} withBorder p={'10px'}>
+        {/* <div className={styles.descriptionArena}> */}
+        {/* <div className={styles.descriptionArenaHeading}>
+            <h3>About Project</h3>
+          </div> */}
+        <Flex direction={'column'}>
+          <Title mb={'10px'} sx={classes.teamMembersHeading}>About Project</Title>
+          <div className={styles.descriptionArenaDescription}>
+            <DescriptionComponent
+              heading="Project Statement"
+              description={projectStatement !== "" ? projectStatement : "What is your project about?"}
+            />
+            <DescriptionComponent
+              heading="Project Mission"
+              description={projectMission !== "" ? projectMission : "Write about the mission of your project"}
+            />
+            <DescriptionComponent
+              heading="Project Description"
+              description={projectDescription !== "" ? projectDescription : "Describe your project for your team mates."}
+            />
+            <DescriptionComponent
+              heading="Project Guidelines"
+              description={projectGuidelines !== "" ? projectGuidelines : "Share the guidelines of the project with your team mates."}
+            />
+          </div>
+
+        </Flex>
+
+      </Paper>
+
+
+      {/* <Box sx={classes.teamMembersArena}> */}
+      <Paper sx={{ minWidth: '25vw', marginLeft: '20px' }} withBorder p={'10px'}>
+        <Title mb={'10px'}>Team Members</Title>
+        {/* <div className={styles.descriptionArenaHeading}>
+          <h3>Team Members</h3>
+        </div> */}
+        <Box sx={styles.teamMembersList}>
+          {projectInfo.projectHighAccessMembers.map((member, index) => {
+            return (
+              <TeamMemberCard
+                name={member.userName}
+                email={member.email}
+                rightSectionIcon={true}
+                key={index}
+              />
+            )
+          })}
+          {projectInfo.projectMediumAccessMembers.map((member, index) => {
+            return (
+              <TeamMemberCard
+                name={member.userName}
+                email={member.email}
+                rightSectionIcon={true}
+                key={index}
+              />
+            )
+          })}
+          {projectInfo.projectLowAccessMembers.map((member, index) => {
+            return (
+              <TeamMemberCard
+                name={member.userName}
+                email={member.email}
+                rightSectionIcon={true}
+                key={index}
+              />
+            )
+          })}
+        </Box>
+        {
+          (
+            userAccessLevel === "high" || userAccessLevel === "medium" || userAccessLevel === "owner"
+          ) &&
+
+          <>
+            <Modal
+              opened={opened}
+              onClose={() => {
+                setOpened(false);
+                setSelectedTeamMember(null);
+                setSelectedRole(null);
+              }}
+              size="lg"
+            >
+              <Title>Add Team Member</Title>
+              {/* <Text>Choose a team member to add to the project</Text> */}
+              {/* {console.log(selectedTeamMember, "selectedTeamMember")} */}
+              <Select
+                label="Choose a team member to add to the project"
+                placeholder="Pick a User"
+                value={selectedTeamMember}
+                onChange={handleMemberChange}
+                itemComponent={memberSelectItems}
+                data={filteredUserList}
+                searchable
+                maxDropdownHeight={400}
+                nothingFound="Nobody here"
+                filter={(value, item) => item.email.toLowerCase().includes(value.toLowerCase().trim()) || item.userName.toLowerCase().includes(value.toLowerCase().trim())}
+              />
+              <Select
+                label="Choose a role for the team member"
+                placeholder="Pick a Role"
+                data={roleList}
+                value={selectedRole}
+                onChange={handleRoleChange}
+              />
+              <Button onClick={addTeamMember} color="blue" mt={'30px'}>Add Team Member</Button>
+            </Modal>
+            <Group position="center">
+              <Button onClick={() => setOpened(true)}>Add Team Member</Button>
+            </Group>
+          </>
+        }
+      </Paper>
+
+
+      {(userAccessLevel == 'owner') && <Paper sx={{ minWidth: 'calc(100vw - 65px)' }} p={'10px'} mt={'20px'}>
+        <Title mb={'10px'}>Project Settings</Title>
+        <Flex direction={'column'} sx={classes.outerSettingContainer}>
+          {userAccessLevel == 'owner' && <Flex direction={'row'} sx={classes.innerSettingContainer}>
+            <Flex direction={'column'} >
+              <Flex sx={{ flex: 1 }}>
+                <Title order={4}>Delete Project</Title>
+              </Flex>
+              <Flex sx={{ flex: 1 }}>
+                <Text>Once you delete a project, there is no going back. Please be certain.</Text>
+              </Flex>
+            </Flex>
+            <Button onClick={openDeleteModal} color="red">Delete Project</Button>
+          </Flex>}
+
+          {userAccessLevel == 'owner' && <Flex direction={'row'} justify={'center'} align={'center'} sx={classes.innerSettingContainer}>
+            <Flex direction={'column'} >
+              <Flex>
+                <Title order={4}>Transfer Project</Title>
+              </Flex>
+              <Flex>
+                <Text>Transfer this project to another user or to an organization where you have the ability to create projects.</Text>
+              </Flex>
+            </Flex>
+
+            <Modal
+              opened={openTransferModal}
+              onClose={() => {
+                setOpenTransferModal(false);
+                setSelectedTransferMember(null);
+              }}
+              title="Transfer Ownership"
+              centered
+              size="xl"
+            >
+              <>
+                <Text size="sm">
+                  This action cannot be undone.
+                  This will <b>permanently transfer</b> the ownership of <b>{projectInfo.projectName}</b> project.
+                  <b> Are you sure you want to transfer your project?</b>
+                </Text>
+                <hr></hr>
+                < Select
+                  label="Choose a team member to transfer project to (only with high access level)"
+                  placeholder="Pick a User"
+                  value={selectedTransferMember}
+                  onChange={handleTransferMemberChange}
+                  itemComponent={memberSelectItems}
+                  data={transferOwnershipUserList}
+                  searchable
+                  maxDropdownHeight={400}
+                  nothingFound="Nobody here"
+                  filter={(value, item) => item.email.toLowerCase().includes(value.toLowerCase().trim()) || item.userName.toLowerCase().includes(value.toLowerCase().trim())}
+                />
+                <hr></hr>
+                <Button onClick={handleTransfer} color="blue" mt={'30px'}>Transfer Project</Button>
+              </>
+
+
+
+            </Modal>
+
+            <Button onClick={() => setOpenTransferModal(true)} variant={'danger'}>Transfer Project</Button>
+          </Flex>
+          }
+        </Flex>
+      </Paper>
+      }
+
+
+      {/* <Paper>
+        <Title mb={'10px'} sx={styles.teamMembersHeading}>Team Members</Title>
+        <Paper >
+          {projectInfo.projectHighAccessMembers.map((member, index) => {
+            return (
+              <TeamMemberCard
+                name={member.userName}
+                email={member.email}
+                key={index}
+                size={'small'}
+              />
+            )
+          })}
+          {projectInfo.projectMediumAccessMembers.map((member, index) => {
+            return (
+              <TeamMemberCard
+                name={member.userName}
+                email={member.email}
+                key={index}
+                size={'small'}
+              />
+            )
+          })}
+          {projectInfo.projectLowAccessMembers.map((member, index) => {
+            return (
+              <TeamMemberCard
+                name={member.userName}
+                email={member.email}
+                key={index}
+                size={'small'}
+              />
+            )
+          })}
+        </Paper>
+      </Paper> */}
+
+
+
+      {/* <div className={styles.overviewMainView}>
       <div className={styles.teamMembersArena}>
         <div className={styles.teamMembersHeading}>
           <h3>Team Members</h3>
         </div>
         <div className={styles.teamMembersList}>
           {console.log(projectInfo)}
-          {projectInfo.highAccess.map((member, index) => {
+          {projectInfo.projectHighAccessMembers.map((member, index) => {
             return (
               <TeamMemberCard
                 name={member.userName}
-                email={member.emailId}
+                email={member.email}
                 key={index}
-              // size={'large'}
               />
             )
           })}
-          {projectInfo.mediumAccess.map((member, index) => {
+          {projectInfo.projectMediumAccessMembers.map((member, index) => {
             return (
               <TeamMemberCard
                 name={member.userName}
-                email={member.emailId}
+                email={member.email}
                 key={index}
-              // size={'large'}
               />
             )
           })}
-          {projectInfo.lowAccess.map((member, index) => {
+          {projectInfo.projectLowAccessMembers.map((member, index) => {
             return (
               <TeamMemberCard
                 name={member.userName}
-                email={member.emailId}
+                email={member.email}
                 key={index}
-              // size={'large'}
               />
             )
           })}
           <div className={styles.addMemberDiv} variant="primary" onClick={handleShow}>
-            {/* <img className={styles.addMemberImg} src="https://img.icons8.com/sf-black-filled/64/000000/plus-math.png" /> */}
-            {/* <img className={styles.addMemberImg} src="https://img.icons8.com/carbon-copy/100/000000/plus-2-math.png" /> */}
-            {/* <img className={styles.addMemberImg} src="https://img.icons8.com/carbon-copy/100/000000/plus-2-math.png" /> */}
             <img className={styles.addMemberImg} src="https://img.icons8.com/sf-regular/48/000000/add.png" />
             <p className={styles.para}>Add Member</p>
           </div>
-
+      
         </div>
       </div>
       <div className={styles.projectSettings}>
@@ -462,7 +591,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
               </button>
             </div>
           </div>
-          {/* <div className={styles.settingCard}>
+          <div className={styles.settingCard}>
             <div className={styles.settingInfoDiv}>
               <div className={styles.projectSettingInfoHead}>
                 <p>Transfer Ownership</p>
@@ -476,7 +605,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
                 Transfer
               </button>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
       <Modal
@@ -500,7 +629,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
               option: (provided, state) => ({
                 ...provided,
                 // border: '1px solid #ccc',
-
+      
                 backgroundColor: state.isSelected ? 'gray' : 'white',
                 backgroundColor: state.isFocused ? 'lightgray' : 'white',
                 backgroundColor: state.isClicked ? 'lightgray' : 'white',
@@ -526,7 +655,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
                 flexDirection: 'row',
                 marginRight: 20
               })
-
+      
             }}
           />
           <Select
@@ -539,7 +668,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
               option: (provided, state) => ({
                 ...provided,
                 // border: '1px solid #ccc',
-
+      
                 backgroundColor: state.isSelected ? 'gray' : 'white',
                 backgroundColor: state.isFocused ? 'lightgray' : 'white',
                 backgroundColor: state.isClicked ? 'lightgray' : 'white',
@@ -566,8 +695,8 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
                 width: '150px'
               })
             }}
-
-
+      
+      
           />
         </Modal.Body>
         <Modal.Footer>
@@ -577,8 +706,12 @@ const OverView = ({ projectId, projectInfo, setProjectInfo }) => {
           <Button variant="primary" onClick={addTeamMember}>Add</Button>
         </Modal.Footer>
       </Modal>
-    </div>
+      </div> */}
+    </div >
+
   );
 };
 
 export default OverView;
+
+

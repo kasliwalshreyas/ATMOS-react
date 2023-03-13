@@ -5,11 +5,12 @@ import styles from "./OverdueTask.module.css";
 import { Link } from "react-router-dom";
 const OverdueTask = ({ user }) => {
   const [userInfo, setUserInfo] = useState(user);
-  const {
-    data: tasksList,
-    isPending,
-    error,
-  } = useFetch("http://localhost:8000/taskList");
+  // const {
+  //   data: tasksList,
+  //   isPending,
+  //   error,
+  // } = useFetch("http://localhost:8000/taskList");
+  const [tasksList, setTasksList] = useState(user.taskAssignedIdList);
 
   var sortedTaskList = tasksList;
   const compareDate = (a, b) => {
@@ -49,9 +50,9 @@ const OverdueTask = ({ user }) => {
       <div className={styles.completedTaskList}>
         {tasksList &&
           tasksList.map((taskList) =>
-            userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map(
+            userInfo.taskAssignedIdList && userInfo.taskAssignedIdList.map(
               (task) =>
-                taskList.id === task &&
+                taskList._id === task &&
                 handledeadline(taskList.taskDeadline) === 1 &&
                 !taskList.taskCompletion && (
                   <div className={styles.particularTask}>

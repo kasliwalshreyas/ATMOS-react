@@ -6,131 +6,37 @@ import { Droppable } from "react-beautiful-dnd";
 
 
 const SectionCard = ({ createTask, error, taskList, expandModal, section: sectionInfo, rerender, setRerender, projectInfo }) => {
-
-    // console.log("section", sectionInfo);
-    // console.log("taskList", taskList);
-
-
     const [sectionName, setSectionName] = useState(sectionInfo.sectionName);
     const [isSectionOptionClicked, setIsSectionOptionClicked] = useState(false);
 
-
-    const saveSectionName = (event) => {
-        const taskIDList = sectionInfo.taskIDList;
-        let newTaskIDList = []
-        for (let i = 0; i < taskIDList.length; i++) {
-            newTaskIDList.push(taskIDList[i].id);
-        }
-
-        const sectionID = sectionInfo.id;
-        sectionInfo.sectionName = event.nativeEvent.target.value;
-        const sectionData = { sectionName: event.nativeEvent.target.value, projectId: sectionInfo.projectId, taskIDList: newTaskIDList }
-
-        // console.log(sectionInfo);
-        fetch(`http://localhost:8000/sectionList/${sectionID}`, {
+    const saveSectionName = async (event) => {
+        const sectionID = sectionInfo._id;
+        const response = await fetch(`http://localhost:4000/section/renameSection/${sectionID}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(sectionData)
+            headers: { 'Content-Type': 'application/json', 'auth-token': `Bearer ${localStorage.getItem('token')}` },
+            body: JSON.stringify({ sectionName: event.nativeEvent.target.value })
         })
-            .then((res) => { return res.json() })
-            .then((res2) => { console.log(res2, 'Section Name Updated') })
-            .catch(err => console.log(err.message));
-
+        const data = await response.json();
+        console.log(data, 'Section Name Updated');
+        setSectionName(event.nativeEvent.target.value);
     }
-
-
     const handleSectionOptionClicked = (event) => {
         event.stopPropagation();
         setIsSectionOptionClicked(true);
     }
 
-    // console.log(sectionInfo);
+    const deleteSection = async (event) => {
+        event.stopPropagation();
 
-    async function deleteTaskFromUser(taskID, taskAssignee) {
-        const res = await fetch(`http://localhost:8000/userList/${taskAssignee}`)
-            .then((res) => { return res.json() })
-            .then((AssigneeData) => {
-                // const taskIDList = res2.taskIDList.filter((task) => { return !(task.id === taskID) });
-                // const userData = { ...res2, taskIDList };
-                // console.log(taskID);
-                AssigneeData.taskAssignedIDList = AssigneeData.taskAssignedIDList.filter((taskid) => { return !(taskid === taskID) });
-                console.log(AssigneeData);
-                fetch(`http://localhost:8000/userList/${taskAssignee}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(AssigneeData)
-                })
-                    .then(() => {
-                        console.log("Deleted Task from User");
-                    });
-            }
-            )
-        return res;
-    }
-
-    async function deleteTask(taskID, assigneeID) {
-
-        if (assigneeID) {
-            const res1 = await deleteTaskFromUser(taskID, assigneeID);
-        }
-
-        const res = await fetch(`http://localhost:8000/taskList/${taskID}`, {
-            method: 'DELETE'
-        });
-        // console.log("deleted task", taskID);
-        return res;
-    }
-
-    async function deleteSection(sectionID) {
-
-        //delete task inside section
-        for (let i = 0; i < taskList.length; i++) {
-            // console.log("inside delete section", i);
-            let res3 = await deleteTask(taskList[i].id, taskList[i].taskAssignee);
-        }
-
-        //delete section
-        const res = await fetch(`http://localhost:8000/sectionList/${sectionID}`, {
-            method: 'DELETE'
+        const sectionID = sectionInfo._id;
+        const response = await fetch(`http://localhost:4000/section/deleteSection/${sectionID}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'auth-token': `Bearer ${localStorage.getItem('token')}` }
         })
-            .then((res) => {
-                console.log('Section Deleted');
-                return res.json();
-            })
-
-        console.log(res, 'section...')
-        //update project sectionIDList
-        const projectData = JSON.parse(JSON.stringify(projectInfo));
-        for (let i = 0; i < projectData.highAccess.length; i++) {
-            projectData.highAccess[i] = projectInfo.highAccess[i].id;
-        }
-        for (let i = 0; i < projectData.mediumAccess.length; i++) {
-            projectData.mediumAccess[i] = projectInfo.mediumAccess[i].id;
-        }
-        for (let i = 0; i < projectData.lowAccess.length; i++) {
-            projectData.lowAccess[i] = projectInfo.lowAccess[i].id;
-        }
-
-        projectInfo.sectionIDList = projectInfo.sectionIDList.filter((sectionid) => { return !(sectionid === sectionID) });
-        projectData.sectionIDList = projectData.sectionIDList.filter((sectionid) => { return !(sectionid === sectionID) });
-        const res2 = await fetch(`http://localhost:8000/projectList/${sectionInfo.projectId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(projectData)
-        })
-            .then((response) => {
-                return response.json()
-            }
-            )
-            .then((project) => {
-                console.log(project, 'Project Updated');
-                setRerender(!rerender);
-                return project;
-            }
-            )
-
+        const data = await response.json();
+        console.log(data, 'Section Deleted');
+        setRerender(!rerender);
     }
-
 
     const handleClickOutside = (event) => {
         event.stopPropagation();
@@ -138,12 +44,10 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
     }
 
 
-    // console.log(taskList2);
-
     return (
         <>
             <div className={isSectionOptionClicked ? "show-section-option" : "hide-section-option"} onClick={handleClickOutside}></div>
-            <Droppable droppableId={sectionInfo.id.toString()}>
+            <Droppable droppableId={sectionInfo._id.toString()}>
                 {(provided) => (
                     <div
                         ref={provided.innerRef}
@@ -169,7 +73,7 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
                                     src="https://img.icons8.com/material-outlined/24/000000/more.png"
                                 />
                                 <div className={isSectionOptionClicked ? "section-dropdown-option-div" : "hide-section-option"} >
-                                    <p className="section-dropdown-menu-option" onClick={() => deleteSection(sectionInfo.id)}>Delete Section</p>
+                                    <p className="section-dropdown-menu-option" onClick={(e) => deleteSection(e)}>Delete Section</p>
                                     <p className="section-dropdown-menu-option">Add Section To Left</p>
                                     <p className="section-dropdown-menu-option">Add Section To Right</p>
                                 </div>
@@ -177,16 +81,16 @@ const SectionCard = ({ createTask, error, taskList, expandModal, section: sectio
                         </div>
                         <div className="task-arena">
                             {error && <p>{error}</p>}
-                            {/* {console.log(taskList)} */}
                             {taskList && taskList.map((task) => (
                                 <TaskCard
-                                    index={task.id}
+                                    index={task._id}
                                     task={task}
                                     section={sectionInfo}
+                                    projectId={projectInfo.projectId}
                                     expandModal={expandModal}
                                     rerender={rerender}
                                     setRerender={setRerender}
-                                    key={task.id} />
+                                    key={task._id} />
                             ))}
                             {provided.placeholder}
                             <div className='add-task-div' onClick={() => { createTask(sectionInfo) }} ><img className="add-task-img-2" src="https://img.icons8.com/sf-regular/48/000000/add.png" /><p className="paraChanges">Add Task</p></div>

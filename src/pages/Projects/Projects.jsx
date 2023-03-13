@@ -5,6 +5,7 @@ import useFetch from "../../useFetch";
 import ProjectList from "./ProjectList";
 import Navbar from "../../UI/Navbar";
 import { useSelector } from 'react-redux';
+import Navbar_v2 from "../../UI/Navbar_v2";
 
 
 const Projects = () => {
@@ -22,7 +23,18 @@ const Projects = () => {
 
   // }, []);
 
-  const user = useSelector((state) => state.user.user);
+
+  const user = useSelector((state) => state.user.userInfo);
+  console.log(user, 'user from projects')
+  // let token = useSelector((state) => state.user.token);
+  // console.log(user, 'user from projects');
+  // if (token == null) {
+  //   token = localStorage.getItem('token');
+  // }
+  // console.log(token, 'token from projects');
+
+  const [projectInfo, setProjectInfo] = useState(null);
+  // const [user, setUser] = useState(null);
 
   // const getAllProjects = async () => {
   //   const res = await fetch("http://localhost:8000/projectList");
@@ -32,15 +44,32 @@ const Projects = () => {
   // const projects = null;
   // projects = getAllProjects();
 
-  const { data: projects, isPending, error } = useFetch(
-    "http://localhost:8000/projectList"
-  );
+  // const { data: projects, isPending, error } = useFetch(
+  //   "http://localhost:4000/project/getUserProjects"
+  // );
 
-    
+  //async query to get all user's projects
+  useEffect(() => {
+    const projects = async () => {
+      const res = await fetch("http://localhost:4000/project/getUserProjects", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        }
+      });
+      const data = await res.json();
+      console.log(data, 'data from Projects');
+      setProjectInfo(data.projects);
+    };
+    projects();
+  }, []);
+
   return (
     <>
-      <Navbar />
-      {user && projects && <ProjectList projects={projects} userInfo={user} />}
+      <Navbar_v2 activeLink={'/projects'} />
+      {/* <Navbar /> */}
+      {user && projectInfo && <ProjectList projects={projectInfo} userInfo={user} />}
     </>
   );
 };

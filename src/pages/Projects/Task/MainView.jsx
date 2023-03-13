@@ -9,90 +9,80 @@ import React from "react";
 import Timeline from "../Timeline/Timeline";
 import { useSelector, useDispatch } from "react-redux";
 import { setProject } from "../../../features/projectSlice";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Navbar_v2 from "../../../UI/Navbar_v2";
+import ProjectInfo_v2 from "./ProjectInfo_v2";
 
 const MainView = ({ overview, board, charts, timeline }) => {
+
+
+  const { id: projectID } = useParams();
+  // console.log(projectID, 'id from main view');
+
+  const navigate = useNavigate();
+
   const [isProfileClicked, setIsProfileClicked] = useState(false);
-  const [projectId, setProjectId] = useState(
-    parseInt(localStorage.getItem("projectId"))
-  );
+  const [projectId, setProjectId] = useState(projectID);
   const [projectInfo, setProjectInfo] = useState(null);
-  // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
-  // const [user, setUser] = useState(null);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  // const projectInfo = useSelector((state) => state.projectInfo.projectInfo);
+  const [user, setUser] = useState(null);
+  const [userAccessLevel, setUserAccessLevel] = useState(null);
+  const [activeTab, setActiveTab] = useState('overview');
 
-  // useEffect(() => {
-  //   async function getUser() {
-  //     const res = await fetch("http://localhost:8000/userList/" + userID);
-  //     const data = await res.json();
-  //     setUser(data);
-  //   }
-  //   getUser();
-  // }, [userID]);
 
+  useEffect(() => {
+    const user = async () => {
+      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      console.log(data, 'userInfo from main view');
+      setUser(data.user);
+      return data;
+    }
+    user();
+  }, [projectID]);
+
+
+  useEffect(() => {
+    const project = async () => {
+      const res = await fetch(`http://localhost:4000/project/getProjectDetails/${projectId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      console.log(data, 'projectInfo from main view');
+      setProjectInfo(data.project);
+      return data;
+    }
+    project();
+  }, [projectID]);
+
+
+
+
+
+
+  // const dispatch = useDispatch();
+  // const user = useSelector((state) => state.user.user);
   const handleClickOutside = (event) => {
     event.stopPropagation();
     setIsProfileClicked(false);
   };
 
-  const populateProject = (project, userInfoList) => {
-    if (project) {
-      for (let i = 0; i < project.highAccess.length; i++) {
-        project.highAccess[i] = userInfoList.find(
-          (element) => element.id === project.highAccess[i]
-        );
-      }
-      for (let i = 0; i < project.mediumAccess.length; i++) {
-        project.mediumAccess[i] = userInfoList.find(
-          (element) => element.id === project.mediumAccess[i]
-        );
-      }
-      for (let i = 0; i < project.lowAccess.length; i++) {
-        project.lowAccess[i] = userInfoList.find(
-          (element) => element.id === project.lowAccess[i]
-        );
-      }
-    }
-    return project;
-  };
-
-  useEffect(() => {
-    // console.log("projectID:", projectId);
-    fetch(`http://localhost:8000/projectList/${projectId}`)
-      .then((res) => {
-        // console.log(res);
-        return res.json();
-      })
-      .then(async (project) => {
-        // console.log(project);
-        const userInfoList = await fetch(
-          "http://localhost:8000/userList/"
-        ).then((res) => {
-          return res.json();
-        });
-        return [project, userInfoList];
-      })
-      .then(([project, userInfoList]) => {
-        // console.log(data);
-        // console.log(userInfoList, project);
-        project = populateProject(project, userInfoList);
-        // console.log(project);xx
-        setProjectInfo(project);
-        // dispatch(setProject(project));
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, [projectId]);
-
-  console.log(projectInfo);
-
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      {/* <Navbar_v2 activeLink={'/projects'} /> */}
       <div className="normal-div" onClick={handleClickOutside}>
-        {user && projectInfo && (
+        {/* {user && projectInfo && (
           <ProjectInfo
             projectInfo={projectInfo}
             setProjectInfo={setProjectInfo}
@@ -100,16 +90,34 @@ const MainView = ({ overview, board, charts, timeline }) => {
             setIsProfileClicked={setIsProfileClicked}
             userInfo={user}
           ></ProjectInfo>
-        )}
+        )} */}
+        {
+          user && projectInfo && (
+            <ProjectInfo_v2
+              projectInfo={projectInfo}
+              setProjectInfo={setProjectInfo}
+              isProfileClicked={isProfileClicked}
+              setIsProfileClicked={setIsProfileClicked}
+              userInfo={user}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            ></ProjectInfo_v2>
+          )
+
+
+        }
+
+
         {/* <FilterFunc></FilterFunc>s */}
-        {overview && projectInfo && (
+        {activeTab === 'Overview' && projectInfo && (
           <OverView
             projectId={projectId}
             projectInfo={projectInfo}
             setProjectInfo={setProjectInfo}
+            userInfo={user}
           ></OverView>
         )}
-        {board && projectInfo && (
+        {activeTab === 'Board' && projectInfo && (
           <SectionArena
             projectId={projectId}
             projectInfo={projectInfo}
@@ -117,7 +125,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
             userInfo={user}
           ></SectionArena>
         )}
-        {user && charts && projectInfo && (
+        {user && activeTab === 'Charts' && projectInfo && (
           <Charts
             projectId={projectId}
             projectInfo={projectInfo}
@@ -125,7 +133,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
             userInfoOfUser={user}
           ></Charts>
         )}
-        {user && timeline && projectInfo && (
+        {user && activeTab === 'Timeline' && projectInfo && (
           <Timeline
             projectId={projectId}
             projectInfo={projectInfo}

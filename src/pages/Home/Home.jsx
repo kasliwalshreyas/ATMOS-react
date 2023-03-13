@@ -5,21 +5,34 @@ import Greeting from "./Greeting"
 import RecentProject from "./RecentProject"
 import Priority from "./Priority"
 import { useEffect } from "react";
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import Navbar_v2 from "../../UI/Navbar_v2";
+
 const Home = () => {
-  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
-  // const [user, setUser] = useState(null);
-  const user = useSelector((state) => state.user.user);
+  // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(null);
+  // const user = useSelector((state) => state.user.userInfo);
 
-  // useEffect(() => {
+  useEffect(() => {
+    async function getUser() {
+      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
-  //   async function getUser() {
-  //     const res = await fetch("http://localhost:8000/userList/" + userID);
-  //     const data = await res.json();
-  //     setUser(data);
-  //   }
-  //   getUser();
-  // }, [userID]);
+      const data = await res.json();
+      if (data.success) {
+        setUser(data.user);
+      }
+
+    }
+    getUser();
+  }, []);
+
+
 
 
 
@@ -27,7 +40,8 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar_v2 activeLink={'/home'} />
       <div className={styles.home}>
         <div className={styles.greetingContainer}>
           {user && <Greeting user={user} />}

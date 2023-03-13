@@ -10,13 +10,10 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   const [selectedSection, setSelectedSection] = useState(null);
   const [taskList, setTaskList] = useState(null);
   const [sectionList, setSectionList] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setaskListtError] = useState(null);
 
   //state variable to re-render the Section Arena when a task or a section is added, deleted or updated
   const [rerender, setRerender] = useState(false);
-  // const [taskName, setTaskName] = useState("")
-
-  // console.log(projectId);
 
   const expandModal = (taskInfo, sectionInfo) => {
     setSelectedTask(taskInfo);
@@ -30,63 +27,13 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     setShow(false);
   };
 
-
-  const populateTask = (sec, task) => {
-    // console.log(data);
-
-    if (sec) {
-      for (let i = 0; i < sec.length; i++) {
-        for (let j = 0; j < sec[i].taskIDList.length; j++) {
-          sec[i].taskIDList[j] = task.find(
-            (element) => element.id === sec[i].taskIDList[j]
-          );
-        }
-      }
-    }
-    // console.log("populated", sec);
-    return sec;
-  };
-  //fetch request to get sectionList (At the moment this gets all the sections, In node it has to implemented in such a way that only sections of this specific section are send)
-
   useEffect(() => {
-    fetch(`http://localhost:8000/sectionList?projectId_like=${projectId}`)
-      .then((res) => {
-        // console.log("sectionList fetched", res);
-        if (!res.ok) {
-          throw Error("Not able to fetch the SectionList");
-        }
-        return res.json();
-      })
-      .then(async (sec) => {
-        // console.log(sec);
-        const task = await fetch("http://localhost:8000/taskList").then(
-          (res) => {
-            // console.log(res);
-            if (!res.ok) {
-              throw Error("Not able to fetch the TaskList");
-            }
-            return res.json();
-          }
-        );
-        return [sec, task];
-      })
-      .then(([sec, task]) => {
-        // console.log(sec, task);
-        setTaskList(task);
-        setError(null);
-        return [sec, task];
-      })
-      .then(([sec, task]) => {
-        // console.log(sec, task);
-        sec = populateTask(sec, task);
-        setSectionList(sec);
-        setError(null);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setSectionList(null);
-      });
-  }, [rerender]);
+    setSectionList(projectInfo.projectSectionIdList);
+    setTaskList(projectInfo.projectTaskIdList);
+
+    console.log(projectInfo, "projectInfo");
+  }, [projectInfo]);
+
 
   //func to create Task
   const createTask = (sectionInfo) => {
@@ -94,7 +41,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
       {
         taskName: null,
         taskCompletion: false,
-        taskAssignee: null,
+        taskAssigneeList: null,
         taskPriority: "Choose Priority",
         taskStatus: "Choose Status",
         taskDeadline: null,
@@ -106,50 +53,26 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     );
   };
 
-  //func to create Section
   const createSection = async () => {
-    const sec = await fetch("http://localhost:8000/sectionList", {
+    const sec = await fetch("http://localhost:4000/section/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "auth-token": `Bearer ${localStorage.getItem("token")}` },
       body: JSON.stringify({
         sectionName: "",
         projectId: projectId,
-        taskIDList: [],
-      }),
-    }).then((res) => {
-      console.log("New Section Added");
-      // setRerender(!rerender);
-      return res.json();
+      })
     });
-    console.log(sec, 'new section');
+    const data = await sec.json();
+    console.log(data, 'new section');
+    setProjectInfo(data.project);
+    setSectionList(data.project.projectSectionIdList);
+    setTaskList(data.project.projectTaskIdList);
+    setRerender(!rerender);
 
-    const projectData = JSON.parse(JSON.stringify(projectInfo));
-    for (let i = 0; i < projectData.highAccess.length; i++) {
-      projectData.highAccess[i] = projectInfo.highAccess[i].id;
-    }
-    for (let i = 0; i < projectData.mediumAccess.length; i++) {
-      projectData.mediumAccess[i] = projectInfo.mediumAccess[i].id;
-    }
-    for (let i = 0; i < projectData.lowAccess.length; i++) {
-      projectData.lowAccess[i] = projectInfo.lowAccess[i].id;
-    }
-
-    projectInfo.sectionIDList.push(sec.id);
-    projectData.sectionIDList.push(sec.id);
-    console.log(projectData, 'projectData');
-    console.log(projectInfo, 'projectInfo');
-    const project = await fetch(`http://localhost:8000/projectList/${projectId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(projectData)
-    }).then((res) => {
-      console.log("Project Updated");
-      setRerender(!rerender);
-      return res.json();
-    }
-    );
-    setProjectInfo(projectInfo);
   };
+
+
+
 
   //func to swap the taskIDList of two sections
   function changePos(arr, i, j) {
@@ -277,14 +200,14 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   // console.log(sectionList);
 
   const AssigneeList = [];
-  for (let i = 0; i < projectInfo.highAccess.length; i++) {
-    AssigneeList.push({ value: projectInfo.highAccess[i].id, label: projectInfo.highAccess[i].userName });
+  for (let i = 0; i < projectInfo.projectHighAccessMembers.length; i++) {
+    AssigneeList.push({ value: projectInfo.projectHighAccessMembers[i]._id, label: projectInfo.projectHighAccessMembers[i].userName });
   }
-  for (let i = 0; i < projectInfo.mediumAccess.length; i++) {
-    AssigneeList.push({ value: projectInfo.mediumAccess[i].id, label: projectInfo.mediumAccess[i].userName });
+  for (let i = 0; i < projectInfo.projectMediumAccessMembers.length; i++) {
+    AssigneeList.push({ value: projectInfo.projectMediumAccessMembers[i]._id, label: projectInfo.projectMediumAccessMembers[i].userName });
   }
-  for (let i = 0; i < projectInfo.lowAccess.length; i++) {
-    AssigneeList.push({ value: projectInfo.lowAccess[i].id, label: projectInfo.lowAccess[i].userName });
+  for (let i = 0; i < projectInfo.projectLowAccessMembers.length; i++) {
+    AssigneeList.push({ value: projectInfo.projectLowAccessMembers[i]._id, label: projectInfo.projectLowAccessMembers[i].userName });
   }
   // console.log(AssigneeList, 'assigneeList')
 
@@ -292,19 +215,17 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     <>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <div className="section-arena">
-          {console.log(sectionList)}
-
           {sectionList &&
             sectionList.map((section) => (
               <SectionCard
                 createTask={createTask}
                 error={error}
-                taskList={section.taskIDList}
+                taskList={section.taskIdList}
                 expandModal={expandModal}
                 section={section}
                 rerender={rerender}
                 setRerender={setRerender}
-                key={section.id}
+                key={section._id}
                 projectInfo={projectInfo}
               />
             ))}
@@ -317,10 +238,6 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
           </div>
         </div>
       </DragDropContext>
-      {/* {selectedTask != null && 
-        <TaskNameContext.Provider value =  {{selectedTask,setTaskName}}>
-        </TaskNameContext.Provider>
-        } */}
       {selectedTask != null && (
         <TaskModal
           taskInfo={selectedTask}

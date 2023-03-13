@@ -7,9 +7,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 export default function Navbar() {
-    return (
-        <>
-         <AppBar
+  return (
+    <>
+      <AppBar
         position="static"
         color="default"
         elevation={0}
@@ -17,41 +17,41 @@ export default function Navbar() {
       >
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <Typography variant="h4" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-          <NavLink to="/">
-            ATMOS
-          </NavLink>
+            <NavLink to="/">
+              ATMOS
+            </NavLink>
           </Typography>
           <nav className='homeNav' id='homeNav'>
-          <NavLink to="/aboutUs">
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              About Us
-            </Link>
+            <NavLink to="/aboutUs">
+              <Link
+                variant="button"
+                color="text.primary"
+                href="#"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                About Us
+              </Link>
             </NavLink>
-              
-            </nav>
-            <nav className='homeNav' id='homeNav'>
+
+          </nav>
+          <nav className='homeNav' id='homeNav'>
             <NavLink to="/contactUs">
-            <Link
-              variant="button"
-              color="text.primary"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Contact Us
-            </Link>
+              <Link
+                variant="button"
+                color="text.primary"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Contact Us
+              </Link>
             </NavLink>
           </nav>
           <NavLink to="/login">
-          <Button className="getstarted" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
-        </NavLink>
+            <Button className="getstarted" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Login
+            </Button>
+          </NavLink>
         </Toolbar>
       </AppBar>
-        </>
-    );
+    </>
+  );
 }

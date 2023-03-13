@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Rightdiv from "./Rightdiv";
-import Navbar from "../../UI/Navbar";
+// import Navbar from "../../UI/Navbar";
+import Navbar_v2 from "../../UI/Navbar_v2";
 import styles from "./CreateProject.module.css";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -24,80 +25,57 @@ const CreateProject = () => {
 
   const history = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.userInfo);
 
   const [projectName, setProjectName] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState("Personal");
   const [projectStatement, setProjectStatement] = useState("");
   const [projectMission, setProjectMission] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectGuidelines, setProjectGuidelines] = useState("");
-  const [sectionIDList, setsectionIDList] = useState([]);
+  // const [sectionIDList, setsectionIDList] = useState([]);
 
   const [isPending, setIsPending] = useState(false);
   const [nextPage, setnextPage] = useState(1);
-  let lastUsed;
 
-  console.log(user, 'user from create project');
+  // console.log(user, 'user from create project');
 
   function backToHome() {
     setnextPage(1);
-    history("/Projects");
+    history("/projects");
   }
 
   const handleSubmit = async (e) => {
-    lastUsed = new Date();
     e.preventDefault();
     const project = {
       projectName,
-      type,
-      sectionIDList,
+      projectType: type,
       projectStatement,
       projectMission,
       projectDescription,
-      lastUsed,
       projectGuidelines,
-      userId: user.id,
-      highAccess: [user.id],
-      mediumAccess: [],
-      lowAccess: [],
+      projectOwner: user._id,
     };
+
+    console.log(project, 'project from create project');
+
     setIsPending(true);
 
-    const newProjectInfo = await fetch("http://localhost:8000/projectList", {
+    const newProjectInfo = await fetch("http://localhost:4000/project/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": `Bearer ${localStorage.getItem("token")}`,
+      },
       body: JSON.stringify(project),
-    }).then(res => {
-      return res.json();
-    }).
-      then(data => {
-        dispatch(addProjectToUser(data.id));
-        setIsPending(false);
-        setnextPage(1);
-        history("/projects");
-        return data;
-      });
-    console.log(newProjectInfo, 'newProjectInfo');
+    });
+    const data = await newProjectInfo.json();
+    console.log(data, 'data from create project');
+    // dispatch(addProjectToUser(data.id));
 
-
-
-    // console.log('create project user', userInfo);
-
-    // const res2 = await fetch(`http://localhost:8000/userList/${newProjectInfo.userId}`, {
-    //   method: "PUT",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(user),
-    // }).then((res) => {
-    //   setIsPending(false);
-    //   setnextPage(1);
-    //   history("/projects");
-    //   return res.json();
-    // });
-    // console.log(res2, 'userInfo');
-
-    // localStorage.setItem("user", JSON.stringify(userInfo));
-
+    setIsPending(false);
+    setnextPage(1);
+    history("/projects");
   };
 
   const checkProjectName = () => {
@@ -112,7 +90,8 @@ const CreateProject = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar_v2 activeLink={'/projects'} />
       <div className={styles.createProject}>
         <div className={styles.projectLeftPart}>
           <div className={styles.leftFix}>
@@ -218,7 +197,6 @@ const CreateProject = () => {
                   Back
                 </button>
               )}
-              {console.log(projectName)}
               {nextPage >= 1 && nextPage <= 4 && (
                 <button
                   onClick={() => {
