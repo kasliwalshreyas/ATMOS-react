@@ -76,13 +76,15 @@ const TaskModal = ({
 
   // console.log(taskAssigneeLabel);
 
+  // console.log(task);
+
   const [taskName, setTaskName] = useState(taskInfo.taskName);
   const [taskCompletion, setTaskCompletion] = useState(taskInfo.taskCompletion);
   const [taskAssignee, setTaskAssignee] = useState(taskInfo.taskAssigneeList);
   const [taskPriority, setTaskPriority] = useState(taskInfo.taskPriority);
   const [taskStatus, setTaskStatus] = useState(taskInfo.taskStatus);
   const [taskDeadline, setTaskDeadline] = useState(dateFormater(taskInfo.taskDeadline));
-  const [taskStartDate, SetTaskStartDate] = useState(taskInfo.taskStartDate);
+  const [taskStartDate, SetTaskStartDate] = useState(dateFormater(taskInfo.taskStartDate));
   const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
   const [taskComments, setTaskComments] = useState(taskInfo.taskComments);
   const [selectedAssignee, setSelectedAssignee] = useState({ value: taskAssignee, label: taskAssigneeLabel, });
@@ -92,6 +94,10 @@ const TaskModal = ({
   const [updateTaskAssignee, setUpdateTaskAssignee] = useState({ do: false, oldAssignee: null, });
   const [description, setDescription] = useState(true);
   const [comments, setComments] = useState(false);
+
+
+  console.log(taskStartDate, "taskInfo.taskStartDate");
+  console.log(taskDeadline, "taskInfo.taskDeadline");
 
 
 
@@ -615,7 +621,7 @@ const TaskModal = ({
                   <input
                     className="modal-input modal-select"
                     type="date"
-                    value={taskDeadline == null ? "" : taskDeadline}
+                    value={taskInfo.taskDeadline == null ? taskStartDate : taskDeadline}
                     onChange={(e) => setTaskDeadline(e.target.value)}
                   ></input>
                 </td>

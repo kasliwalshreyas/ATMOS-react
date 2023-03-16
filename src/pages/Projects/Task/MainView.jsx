@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar_v2 from "../../../UI/Navbar_v2";
 import ProjectInfo_v2 from "./ProjectInfo_v2";
+import Charts_v2 from "../Charts/Charts_v2";
 
 const MainView = ({ overview, board, charts, timeline }) => {
 
@@ -39,7 +40,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
         },
       });
       const data = await res.json();
-      console.log(data, 'userInfo from main view');
+      // console.log(data, 'userInfo from main view');
       setUser(data.user);
       return data;
     }
@@ -57,7 +58,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
         },
       });
       const data = await res.json();
-      console.log(data, 'projectInfo from main view');
+      // console.log(data, 'projectInfo from main view');
       setProjectInfo(data.project);
       return data;
     }
@@ -97,7 +98,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
             userInfo={user}
           ></SectionArena>
         )}
-        {user && activeTab === 'Charts' && projectInfo && (
+        {user && activeTab === 'Timeline' && projectInfo && (
           <Charts
             projectId={projectId}
             projectInfo={projectInfo}
@@ -105,14 +106,22 @@ const MainView = ({ overview, board, charts, timeline }) => {
             userInfoOfUser={user}
           ></Charts>
         )}
-        {user && activeTab === 'Timeline' && projectInfo && (
+        {user && activeTab === 'Charts' && projectInfo && (
+          <Charts_v2
+            projectId={projectId}
+            projectInfo={projectInfo}
+            setProjectInfo={setProjectInfo}
+            userInfo={user}
+          ></Charts_v2>
+        )}
+        {/* {user && activeTab === 'Timeline' && projectInfo && (
           <Timeline
             projectId={projectId}
             projectInfo={projectInfo}
             setProjectInfo={setProjectInfo}
             userInfoOfUser={user}
           ></Timeline>
-        )}
+        )} */}
       </div>
     </>
   );

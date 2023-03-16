@@ -133,7 +133,6 @@ const ProjectInfo_v2 = ({
                                 </Title>
                                 {isStarred && <IconStarFilled size={20} onClick={() => { setIsStarred(!isStarred) }} />}
                                 {!isStarred && <IconStar size={20} onClick={() => { setIsStarred(!isStarred) }} />}
-
                             </Group>
                         </Group>
                         <ProfileMenu userInfo={user} />

@@ -107,26 +107,26 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
 
   const setAccessLevelFunc = () => {
     if (projectInfo && userInfo) {
-      console.log('access Level setting');
-      console.log(userInfo, projectInfo);
+      // console.log('access Level setting');
+      // console.log(userInfo, projectInfo);
       if (userInfo._id === projectInfo.projectOwner._id) {
-        console.log('owner');
+        // console.log('owner');
         setUserAccessLevel('owner');
       }
       else if (projectInfo.projectHighAccessMembers.find((member) => member._id === userInfo._id)) {
-        console.log('high');
+        // console.log('high');
         setUserAccessLevel('high');
       }
       else if (projectInfo.projectMediumAccessMembers.find((member) => member._id === userInfo._id)) {
-        console.log('medium');
+        // console.log('medium');
         setUserAccessLevel('medium');
       }
       else if (projectInfo.projectLowAccessMembers.find((member) => member._id === userInfo._id)) {
-        console.log('low');
+        // console.log('low');
         setUserAccessLevel('low');
       }
       else {
-        console.log('no access');
+        // console.log('no access');
         setUserAccessLevel('no access');
       }
     }
@@ -148,7 +148,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
         },
       });
       const data = await response.json();
-      console.log(data, 'userList from over view');
+      // console.log(data, 'userList from over view');
 
       //add value key to each user
       data.userList.forEach((user) => {
@@ -208,7 +208,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   }]
 
   const addTeamMember = async () => {
-    console.log(selectedTeamMember, selectedRole, "Add Team Member Data");
+    // console.log(selectedTeamMember, selectedRole, "Add Team Member Data");
 
     const response = await fetch(`http://localhost:4000/project/addTeamMember/${projectId}`, {
       method: 'PUT',
@@ -224,22 +224,22 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     });
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.success) {
-      console.log("Team Member Added");
+      // console.log("Team Member Added");
       setOpened(false);
       setSelectedTeamMember(null);
       setSelectedRole(null);
     }
   }
   const handleMemberChange = (option) => {
-    console.log(option);
+    // console.log(option);
     setSelectedTeamMember(option);
     // console.log(selectedTeamMember, "selectedTeamMember");
   }
 
   const handleRoleChange = (option) => {
-    console.log(option);
+    // console.log(option);
     setSelectedRole(option);
   }
   const handleTransferMemberChange = (option) => {
@@ -264,7 +264,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     }
   }
   const handleTransfer = async () => {
-    console.log(selectedTransferMember, "newOwner");
+    // console.log(selectedTransferMember, "newOwner");
     const res = await fetch(`http://localhost:4000/project/transferOwnership/${projectId}`, {
       method: 'POST',
       headers: {
