@@ -1,55 +1,80 @@
-import { useState } from "react";
-import React from "react";
-import useFetch from "../../useFetch";
 import styles from "./CompletedTask.module.css";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const CompletedTask = ({ user }) => {
-  const [userInfo, setUserInfo] = useState(user);
-  // const {
-  //   data: tasksList,
-  //   isPending,
-  //   error,
-  // } = useFetch("http://localhost:8000/taskList");
+  const [tasksList, setTasksList] = useState();
 
-  const [tasksList, setTasksList] = useState(user.taskAssignedIdList);
+  const dateFormater = (date) => {
+    let newDate = new Date(date);
+    const offset = newDate.getTimezoneOffset();
+    newDate = new Date(newDate.getTime() - offset * 60 * 1000);
+    return newDate.toISOString().split("T")[0];
+  };
 
-  const [showImg, setShowImg] = useState(false);
-  // tasksList && tasksList.map((taskList) => {
-  //   userInfo.taskAssignedIDList && userInfo.taskAssignedIDList.map((task) => {
-  //     if (taskList.id === task && taskList.taskCompletion) {
-  //       setShowImg(false);
-  //     }
-  //   });
-  // });
+  useEffect(() => {
+    const getTaskLists = async () => {
+      const res = await fetch("http://localhost:4000/task/getTaskList", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      if (data.success) {
+        setTasksList(data.Tasks);
+      }
+    };
+    getTaskLists();
+  }, []);
 
-  // console.log("hello i am here", tasksList)
+  var sortedTaskList = tasksList;
+  const compareDate = (a, b) => {
+    var c = new Date(a.taskDeadline);
+    var d = new Date(b.taskDeadline);
+    if (c >= d) return 1;
+    else return -1;
+  };
+
+  const sortTaskList = () => {
+    sortedTaskList = tasksList.sort(compareDate);
+  };
+
+  tasksList && sortTaskList();
+
+  let showImg = true;
+
   return (
     <>
       <div className={styles.completedTaskList}>
-        {tasksList &&
-          tasksList.map((taskList) =>
-            userInfo.taskAssignedIDList && userInfo.taskAssignedIdList.map(
-              (task) =>
-                taskList._id === task &&
-                taskList.taskCompletion && (
-                  <div className={styles.particularTask}>
-                    <Link to="/task">
-                      <div className={styles.projectDiv}>
-                        <div className={styles.projectInfoName}>
-                          <h4 className={styles.projectName}>
-                            {taskList.taskName}
-                          </h4>
-                        </div>
-                        <div className={styles.projectInfoLastUsed}>
-                          <p className={styles.lastUsed}>
-                            due: {taskList.taskDeadline}
-                          </p>
-                        </div>
+        {sortedTaskList &&
+          sortedTaskList.map(
+            (task) =>
+              task.taskCompletion && (
+                <div className={styles.particularTask}>
+                  <Link to="/projects">
+                    <div className={styles.projectDiv}>
+                      <div className={styles.projectInfoName}>
+                        <h4 className={styles.projectName}>{task.taskName}</h4>
                       </div>
-                    </Link>
-                  </div>
-                )
-            )
+                      <div className={styles.projectInfoLastUsed}>
+                        <p className={styles.lastUsed}>
+                          due: {dateFormater(task.taskDeadline)}
+                          {(showImg = false)}
+                        </p>
+                      </div>
+                    </div>
+                    {/* <h6 className={styles.particularTaskName}>
+                        <div className={styles.taskName}>
+
+                        </div>
+                        <div className={styles.taskTime}>
+
+                        </div>
+                      </h6> */}
+                  </Link>
+                </div>
+              )
           )}
         {showImg && (
           <div className={styles.mainTask}>
@@ -61,7 +86,7 @@ const CompletedTask = ({ user }) => {
             </div>
             <div className={styles.noTaskText}>
               <p className={styles.upperTaskTxt}>You don't have</p>
-              <p className={styles.lowerTaskTxt}> any Upcoming Task </p>
+              <p className={styles.lowerTaskTxt}> any Overdue Task </p>
             </div>
           </div>
         )}

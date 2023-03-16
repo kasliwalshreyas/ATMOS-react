@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { setProjectList, setLastUsed, selectedProjectList } from "../../features/projectListSlice";
+import {
+  setProjectList,
+  setLastUsed,
+  selectedProjectList,
+} from "../../features/projectListSlice";
 import { setProject } from "../../features/projectSlice";
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useSelector, useDispatch } from "react-redux";
 
 const ProjectList = ({ projects, userInfo }) => {
   // const dispatch = useDispatch();
   const [user, setUser] = useState(userInfo);
-  console.log(user, 'user from project list');
-  console.log(projects, 'projects from project list');
+  console.log(user, "user from project list");
+  console.log(projects, "projects from project list");
 
   // useEffect(() => {
   //   const getProjects = (projectID, projects) => {
@@ -34,6 +37,28 @@ const ProjectList = ({ projects, userInfo }) => {
 
   // const projectList = useSelector(selectedProjectList);
 
+  const handleLinkClick = async (project) => {
+    project.projectLastUsed &&
+      project.projectLastUsed.map((lasttime) => {
+        if (lasttime.userid === user._id) {
+          lasttime.lastUsed = new Date();
+        }
+      });
+
+    const res = await fetch(
+      `http://localhost:4000/project/updateUserProjects/${project._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(project),
+      }
+    );
+    const data = await res.json();
+  };
+
   const navigate = useNavigate();
   // const updateLastUsed = (project) => {
   //   // dispatch(setLastUsed({ projectId: project.id }));
@@ -43,6 +68,7 @@ const ProjectList = ({ projects, userInfo }) => {
   const insideProject = (project) => {
     // updateLastUsed(project);
     // localStorage.setItem("projectId", project.id);
+    handleLinkClick(project)
     navigate(`/projects/${project._id}/overview`);
   };
 
@@ -54,28 +80,29 @@ const ProjectList = ({ projects, userInfo }) => {
         </Link>
       </div>
       {/* {console.log(projectList)} */}
-      {projects && projects
-        .map((project) =>
-          <div className="project-real" key={project._id}>
-            <div className="project-container">
-              <a
-                onClick={() => {
-                  insideProject(project);
-                }}
-              >
-                <img
-                  className="project-img"
-                  src={`./images/img/img${1 % 10}.PNG`}
-                />
-              </a>
+      {projects &&
+        projects
+          .map((project) => (
+            <div className="project-real" key={project._id}>
+              <div className="project-container">
+                <a
+                  onClick={() => {
+                    insideProject(project);
+                  }}
+                >
+                  <img
+                    className="project-img"
+                    src={`./images/img/img${1 % 10}.PNG`}
+                  />
+                </a>
+              </div>
+              <div className="project-name">
+                {console.log(project)}
+                <p>{project.projectName}</p>
+              </div>
             </div>
-            <div className="project-name">
-              {console.log(project)}
-              <p>{project.projectName}</p>
-            </div>
-          </div>
-        )
-        .reverse()}
+          ))
+          .reverse()}
     </div>
   );
 };

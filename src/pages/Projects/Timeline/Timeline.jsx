@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Timeline.module.css";
-import useFetch from "../../../useFetch";
+// import useFetch from "../../../useFetch";
 import {
   GanttComponent,
   TaskFieldsModel,
@@ -16,43 +16,50 @@ import {
 function Timeline({ projectId, projectInfo, setProjectInfo, userInfoOfUser }) {
   const [user, setUser] = useState(userInfoOfUser);
 
-  console.log("this is project id")
+  console.log("this is project id");
   // console.log(projectId)
-  console.log("this is the projectInfo")
+  console.log("this is the projectInfo");
   // console.log(projectInfo)
 
-  const {
-    data: sectionData,
-    is__Pending,
-    is__error,
-  } = useFetch(`http://localhost:8000/sectionList?projectId_like=${projectId}`);
+  // const {
+  //   data: sectionData,
+  //   is__Pending,
+  //   is__error,
+  // } = useFetch(`http://localhost:8000/sectionList?projectId_like=${projectId}`);
 
-  const {
-    data: taskData,
-    isPending,
-    iserror,
-  } = useFetch("http://localhost:8000/taskList");
+  // const {
+  //   data: taskData,
+  //   isPending,
+  //   iserror,
+  // } = useFetch("http://localhost:8000/taskList");
+
+  const sectionData = [];
+  const taskData = [];
 
   const taskList = [];
   const projectData = [];
-  sectionData && sectionData.map((onlySection) => {
-    onlySection.taskIDList.map((onlyTask) => {
+  sectionData &&
+    sectionData.map((onlySection) => {
+      onlySection.taskIDList.map((onlyTask) => {
         taskList.push(onlyTask);
-    })
-  })
+      });
+    });
 
-  taskData && taskData.map((onlyOriginalTask) => {
-    taskList.map((onlytask) => {
-        if(onlyOriginalTask.id === onlytask) {
-            projectData.push(onlyOriginalTask);
+  taskData &&
+    taskData.map((onlyOriginalTask) => {
+      taskList.map((onlytask) => {
+        if (onlyOriginalTask.id === onlytask) {
+          projectData.push(onlyOriginalTask);
         }
-    })
-  })
-  const {
-    data: userData,
-    is_Pending,
-    is_error,
-  } = useFetch("http://localhost:8000/userList");
+      });
+    });
+  // const {
+  //   data: userData,
+  //   is_Pending,
+  //   is_error,
+  // } = useFetch("http://localhost:8000/userList");
+
+  const userData = [];
 
   const projectResources = [];
   userData &&
@@ -61,10 +68,10 @@ function Timeline({ projectId, projectInfo, setProjectInfo, userInfoOfUser }) {
       projectResources.push(object);
     });
 
-    // projectData && projectData.map((onlyProject) => {
-    //   var object = { resourceId: onlyProject.id, resourceName:  onlyProject.userName};
-    //   projectResources.push(object)
-    // })
+  // projectData && projectData.map((onlyProject) => {
+  //   var object = { resourceId: onlyProject.id, resourceName:  onlyProject.userName};
+  //   projectResources.push(object)
+  // })
 
   const editOptions = {
     allowEditing: true,
@@ -100,7 +107,7 @@ function Timeline({ projectId, projectInfo, setProjectInfo, userInfoOfUser }) {
   return (
     <div className={styles.timelineMainView}>
       {projectData && (
-        <GanttComponent 
+        <GanttComponent
           labelSettings={labelSettings}
           resourceFields={resourceFields}
           resources={projectResources}

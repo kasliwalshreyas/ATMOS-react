@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { Route, Router, Routes } from "react-router-dom";
 import SectionArena from "./SectionArena";
 import { useState } from "react";
-import useFetch from "../../../useFetch";
-import { addProjectToFavourite, removeProjectFromFavourite } from "../../../features/userSlice";
+import {
+  addProjectToFavourite,
+  removeProjectFromFavourite,
+} from "../../../features/userSlice";
 import { useDispatch } from "react-redux";
 
 const ProjectInfo = ({
@@ -13,9 +15,8 @@ const ProjectInfo = ({
   setIsProfileClicked,
   projectInfo,
   setProjectInfo,
-  userInfo
+  userInfo,
 }) => {
-
   const dispatch = useDispatch();
   const [user, setUser] = useState(userInfo);
 
@@ -39,8 +40,6 @@ const ProjectInfo = ({
       // user.favoriteProjectList.push(projectInfo.id);
       setStarred(true);
     }
-
-
   };
 
   const handleProfileClickedInside = (event) => {
@@ -93,22 +92,34 @@ const ProjectInfo = ({
       </div>
       <Nav className="nav-bar" as="ul">
         <Nav.Item as="li">
-          <Link to={`/projects/${projectInfo._id}/overview`} className="nav-option option-1">
+          <Link
+            to={`/projects/${projectInfo._id}/overview`}
+            className="nav-option option-1"
+          >
             Overview
           </Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Link to={`/projects/${projectInfo._id}/board`} className="nav-option option-2">
+          <Link
+            to={`/projects/${projectInfo._id}/board`}
+            className="nav-option option-2"
+          >
             Board
           </Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Link to={`/projects/${projectInfo._id}/charts`} className="nav-option option-2">
+          <Link
+            to={`/projects/${projectInfo._id}/charts`}
+            className="nav-option option-2"
+          >
             Charts
           </Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Link to={`/projects/${projectInfo._id}/timeline`} className="nav-option option-2">
+          <Link
+            to={`/projects/${projectInfo._id}/timeline`}
+            className="nav-option option-2"
+          >
             Timeline
           </Link>
         </Nav.Item>
