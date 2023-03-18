@@ -105,6 +105,11 @@ const Charts_v2 = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
             'not-completed': 0,
             'total': 0,
         },
+        'Choose Priority': {
+            'completed': 0,
+            'not-completed': 0,
+            'total': 0,
+        },
     };
 
     // const projectTaskListByStatus = {

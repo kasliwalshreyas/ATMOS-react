@@ -1,34 +1,34 @@
-import ProjectInfo from "./ProjectInfo";
-import FilterFunc from "./FilterFunc";
-import SectionArena from "./SectionArena";
+import SectionArena from "./Board/SectionArena";
 import { useState, useEffect } from "react";
-import OverView from "../Overview/OverView";
-import Charts from "../Charts/Charts";
-import Navbar from "../../../UI/Navbar";
-import React from "react";
-import Timeline from "../Timeline/Timeline";
-import { useSelector, useDispatch } from "react-redux";
-import { setProject } from "../../../features/projectSlice";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import Navbar_v2 from "../../../UI/Navbar_v2";
-import ProjectInfo_v2 from "./ProjectInfo_v2";
-import Charts_v2 from "../Charts/Charts_v2";
+import OverView from "./Overview/OverView";
+import Charts from "./Charts/Charts";
+import Timeline from "./Timeline/Timeline";
+import { useParams, useNavigate } from "react-router-dom";
+import ProjectInfoBar_v2 from "./ProjectInfoBar/ProjectInfoBar_v2";
+import Charts_v2 from "./Charts/Charts_v2";
 
-const MainView = ({ overview, board, charts, timeline }) => {
+const ProjectMainView = ({ Overview, Board, Charts, Timeline }) => {
 
 
-  const { id: projectID } = useParams();
-  // console.log(projectID, 'id from main view');
-
+  const { id: projectId } = useParams();
   const navigate = useNavigate();
 
-  const [projectId, setProjectId] = useState(projectID);
+  //states
   const [projectInfo, setProjectInfo] = useState(null);
   const [user, setUser] = useState(null);
   const [userAccessLevel, setUserAccessLevel] = useState(null);
+  //set active tab to whichever is true [Overview, Board, Charts, Timeline]
   const [activeTab, setActiveTab] = useState('Overview');
 
+
+
+  //useEffect Functions
+  useEffect(() => {
+    if (Overview) setActiveTab('Overview');
+    if (Board) setActiveTab('Board');
+    if (Charts) setActiveTab('Charts');
+    if (Timeline) setActiveTab('Timeline');
+  }, [Overview, Board, Charts, Timeline]);
 
   useEffect(() => {
     const user = async () => {
@@ -45,7 +45,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
       return data;
     }
     user();
-  }, [projectID]);
+  }, [projectId]);
 
 
   useEffect(() => {
@@ -63,23 +63,21 @@ const MainView = ({ overview, board, charts, timeline }) => {
       return data;
     }
     project();
-  }, [projectID]);
+  }, [projectId]);
 
 
   return (
     <>
-      {/* <Navbar /> */}
-      {/* <Navbar_v2 activeLink={'/projects'} /> */}
       <div className="normal-div">
         {
           user && projectInfo && (
-            <ProjectInfo_v2
+            <ProjectInfoBar_v2
               projectInfo={projectInfo}
               setProjectInfo={setProjectInfo}
               userInfo={user}
               activeTab={activeTab}
               setActiveTab={setActiveTab}
-            ></ProjectInfo_v2>
+            ></ProjectInfoBar_v2>
           )
         }
         {activeTab === 'Overview' && projectInfo && (
@@ -96,6 +94,7 @@ const MainView = ({ overview, board, charts, timeline }) => {
             projectInfo={projectInfo}
             setProjectInfo={setProjectInfo}
             userInfo={user}
+            setUserInfo={setUser}
           ></SectionArena>
         )}
         {user && activeTab === 'Timeline' && projectInfo && (
@@ -127,4 +126,4 @@ const MainView = ({ overview, board, charts, timeline }) => {
   );
 };
 
-export default MainView;
+export default ProjectMainView;
