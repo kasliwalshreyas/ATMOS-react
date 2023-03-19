@@ -1,7 +1,8 @@
 import React from "react";
 import "./assets/css/style.scss";
 import "./assets/js/main"
-import Navbar from "./Navbar";
+import HeaderMegaMenu from "./HeaderMegaMenu";
+// import Navbar from "../../UI/Navbar_v2";
 import Client from "./Client";
 import i from "./assets/img/hero-img.png";
 import Features from "./Features";
@@ -11,7 +12,8 @@ import Pricing from "./Pricing";
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <HeaderMegaMenu />
+      {/* <Navbar /> */}
       <section id="hero" className="d-flex align-items-center">
         {/* navbar , scroll */}
         <div className="area" >
@@ -50,7 +52,7 @@ export default function Home() {
       <Client />
       <Features />
       <div data-aos="zoom-in" data-aos-duration="1000">
-        <Pricing />
+        {/* <Pricing /> */}
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import a from "../../images/work.svg"
 import b from "../../images/office.svg"
 import c from "../../images/business-deal.svg"
-import "./assets/css/style.scss";
+// import "./assets/css/style.scss";
 
 const Features = () => {
     return(
