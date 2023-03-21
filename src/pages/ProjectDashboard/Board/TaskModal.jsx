@@ -21,7 +21,7 @@ const TaskModal = ({
 
   const dateFormater = (date) => {
     let newDate = new Date(date);
-    console.log(newDate, "newDate");
+    // console.log(newDate, "newDate");
     const offset = newDate.getTimezoneOffset()
     newDate = new Date(newDate.getTime() - (offset * 60 * 1000))
     return newDate.toISOString().split('T')[0]
@@ -76,8 +76,8 @@ const TaskModal = ({
 
   // console.log(task);
 
-  console.log(taskInfo.taskDeadline
-    , "taskInfo.taskdeadline");
+  // console.log(taskInfo.taskDeadline
+  //   , "taskInfo.taskdeadline");
 
   const [taskName, setTaskName] = useState(taskInfo.taskName);
   const [taskCompletion, setTaskCompletion] = useState(taskInfo.taskCompletion);
@@ -97,8 +97,8 @@ const TaskModal = ({
   const [comments, setComments] = useState(false);
 
 
-  console.log(taskStartDate, "taskInfo.taskStartDate");
-  console.log(taskDeadline, "taskInfo.taskDeadline");
+  // console.log(taskStartDate, "taskInfo.taskStartDate");
+  // console.log(taskDeadline, "taskInfo.taskDeadline");
 
 
 
@@ -151,10 +151,10 @@ const TaskModal = ({
     });
 
     const taskData = await response.json();
-    console.log(taskData, taskData.message, "from modal");
+    // console.log(taskData, taskData.message, "from modal");
 
-    closeModal();
     setRerender(!rerender);
+    closeModal();
 
   };
 
@@ -165,11 +165,11 @@ const TaskModal = ({
         prev.oldAssignee = selectedAssignee.value;
         return prev;
       });
-      console.log("Assignee Changed", updateTaskAssignee);
+      // console.log("Assignee Changed", updateTaskAssignee);
     }
     setSelectedAssignee(selectedOption);
     setTaskAssignee(selectedOption.value);
-    console.log("newAssignee", selectedOption.value);
+    // console.log("newAssignee", selectedOption.value);
   };
   const handleTaskCompletion = (selectedOption) => {
     setSelectedCompletion(selectedOption);

@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
     card: {
         minWidth: 325,
         maxWidth: 325,
-        height: 600,
+        height: 'fit-content',
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
         border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
         borderRadius: theme.radius.sm,
@@ -23,6 +23,12 @@ const useStyles = createStyles((theme) => ({
         // justifyContent: 'space-between',
         cursor: 'pointer',
         transition: 'box-shadow 100ms ease-out',
+        xOverflow: 'auto',
+
+        //remove srcollbar
+        '&::-webkit-scrollbar': {
+            display: 'none',
+        },
 
         '&:hover': {
             // boxShadow: theme.shadows.sm,
@@ -54,11 +60,22 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-const SectionCard = ({ createTask, taskList, expandModal, section: sectionInfo, rerender, setRerender, projectInfo }) => {
+const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, expandModal, rerender, setRerender, sectionIndex, handleProvided }) => {
+
+    // console.log(sectionInfo, 'sectionInfo');
+    // console.log(taskList, 'taskList');
 
     const { classes } = useStyles();
     const { hovered, ref } = useHover();
-    const [state, handlers] = useListState(taskList);
+    let count = 0;
+    const taskOrder = [];
+    console.log(taskList, 'taskList from sectionCard');
+    for (let i = 0; i < taskList.length; i++) {
+        taskOrder.push(i);
+    }
+    const [state, handlers] = useListState(taskOrder);
+
+    // console.log(state, 'state from section Card');
 
 
     const [sectionName, setSectionName] = useState(sectionInfo.sectionName);
@@ -100,9 +117,9 @@ const SectionCard = ({ createTask, taskList, expandModal, section: sectionInfo, 
         setIsSectionOptionClicked(false);
     }
 
-    const items = state.map((task, index) => (
-        <Draggable key={task._id} index={index} draggableId={task._id}>
-            {(provided, snapshot) => (
+    const items = state.map((taskIndex, index) => (
+        <Draggable key={taskIndex} index={sectionIndex} draggableId={'' + taskIndex}>
+            {(provided) => (
                 <div
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -110,7 +127,7 @@ const SectionCard = ({ createTask, taskList, expandModal, section: sectionInfo, 
                 >
                     <TaskCard
                         key={index}
-                        task={task}
+                        task={taskList[taskIndex]}
                         section={sectionInfo}
                         expandModal={expandModal}
                         rerender={rerender}
@@ -131,45 +148,69 @@ const SectionCard = ({ createTask, taskList, expandModal, section: sectionInfo, 
 
 
                 <Card mr={'20px'} sx={classes.card} ref={ref} bg={'#ebeff3'}>
-                    <Group sx={classes.cardTopContainer} m={0} p={0} pr={5} position='apart' >
-                        <Input placeholder="Section Name"
-                            mr={'sm'}
-                            sx={{
-                                Input: classes.sectionTitleInput,
-                            }}
-                            style={{
-                                width: '80%'
-                            }}
-                            value={sectionName}
-                            onChange={e => { setSectionName(e.target.value) }}
-                            onBlur={saveSectionName}
-                        />
-                        {
-                            hovered && (
-                                <Menu
-                                    transitionProps={{ transition: 'pop' }}
-                                    withArrow
-                                    position="bottom"
-                                    menuPosition="right"
-                                >
-                                    <Menu.Target>
-                                        <ActionIcon>
-                                            <IconDots size="1rem" stroke={1.5} />
-                                        </ActionIcon>
-                                    </Menu.Target>
-                                    <Menu.Dropdown>
-                                        <Menu.Item icon={<IconTrash size="1rem" stroke={1.5} />} color="red" onClick={(e) => deleteSection(e)}>
-                                            Delete Section
-                                        </Menu.Item>
-                                    </Menu.Dropdown>
-                                </Menu>
-                            )
-                        }
+                    <div>
+                        <Group sx={classes.cardTopContainer} m={0} p={0} pr={5} position='apart'  >
+                            <Input placeholder="Section Name"
+                                mr={'sm'}
+                                sx={{
+                                    Input: classes.sectionTitleInput,
+                                }}
+                                style={{
+                                    width: '80%'
+                                }}
+                                value={sectionName}
+                                onChange={e => { setSectionName(e.target.value) }}
+                                onBlur={saveSectionName}
+                            />
+                            {
+                                hovered && (
+                                    <Menu
+                                        transitionProps={{ transition: 'pop' }}
+                                        withArrow
+                                        position="bottom"
+                                        menuPosition="right"
+                                    >
+                                        <Menu.Target>
+                                            <ActionIcon>
+                                                <IconDots size="1rem" stroke={1.5} />
+                                            </ActionIcon>
+                                        </Menu.Target>
+                                        <Menu.Dropdown>
+                                            <Menu.Item icon={<IconTrash size="1rem" stroke={1.5} />} color="red" onClick={(e) => deleteSection(e)}>
+                                                Delete Section
+                                            </Menu.Item>
+                                        </Menu.Dropdown>
+                                    </Menu>
+                                )
+                            }
 
-                    </Group>
+                        </Group>
+                    </div>
+
                     <Container m={0} p={0} mt={'20px'} pb={20} >
-                        <Droppable droppableId="dnd-list" direction="vertical">
-                            {(provided) => (
+                        <Droppable
+                            droppableId={sectionInfo._id}
+                        // mode="virtual"
+                        // renderClone={(provided, snapshot, rubric) => {
+                        //     const { source } = rubric;
+                        //     console.log(source, 'source');
+                        //     const task = taskList[source.index];
+                        //     console.log(task, 'task');
+                        //     return (
+                        //         <TaskCard
+                        //             key={task._id}
+                        //             task={task}
+                        //             section={sectionInfo}
+                        //             expandModal={expandModal}
+                        //             rerender={rerender}
+                        //             setRerender={setRerender}
+                        //         />
+                        //     );
+                        // }
+                        // }
+
+                        >
+                            {(provided, snapshot) => (
                                 <div {...provided.droppableProps} ref={provided.innerRef}>
                                     {items}
                                     {provided.placeholder}

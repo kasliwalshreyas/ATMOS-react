@@ -13,12 +13,10 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
   const [selectedSection, setSelectedSection] = useState(null);
   const [taskList, setTaskList] = useState(projectInfo.projectTaskIdList);
   const [sectionList, setSectionList] = useState(projectInfo.projectSectionIdList);
-  // const [taskList, setTaskList] = useState(null);
-  // const [sectionList, setSectionList] = useState(null);
-  //state variable to re-render the Section Arena when a task or a section is added, deleted or updated
   const [rerender, setRerender] = useState(false);
+  const [columnOrder, setColumnOrder] = useState([]);
 
-  const [state, handlers] = useListState(sectionList);
+  const [state, handlers] = useListState([columnOrder]);
 
 
   useEffect(() => {
@@ -52,6 +50,15 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
       // console.log(data, 'projectInfo from main view');
       setProjectInfo(data.project);
       setSectionList(data.project.projectSectionIdList);
+      //calulate the column order
+      let columnOrderTemp = [];
+      let i = 0;
+      data.project.projectSectionIdList.forEach((section) => {
+        columnOrderTemp.push(i);
+        i++;
+      });
+      setColumnOrder(columnOrderTemp);
+      // handlers.setState(columnOrderTemp);
       setTaskList(data.project.projectTaskIdList);
       return data;
     }
@@ -94,6 +101,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
       },
       sectionInfo
     );
+    setRerender(!rerender);
   };
 
   const createSection = async () => {
@@ -128,29 +136,24 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
   }
   // console.log(AssigneeList, 'assigneeList')
 
-  const items = state.map((section, index) => (
-    <Draggable key={section._id} index={index} draggableId={section._id}>
-      {(provided, snapshot) => (
-        <div
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-        >
-          <SectionCard
-            projectInfo={projectInfo}
-            section={section}
-            taskList={section.taskIdList}
-            createTask={createTask}
-            expandModal={expandModal}
-            setRerender={setRerender}
-            rerender={rerender}
-            key={section._id}
-          />
+  console.log(state, 'state');
 
-        </div>
-      )}
-    </Draggable>
-  ));
+  const onDragEndFunc = (result) => {
+
+    console.log(result, 'result');
+    const { source, destination } = result;
+
+    if (source.droppableId === destination.droppableId && source.droppableId === 'dnd-list') {
+      const items = Array.from(columnOrder);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      handlers.setState(items);
+      setColumnOrder(items);
+      return;
+    }
+  };
+
+
 
   return (
     <>
@@ -158,20 +161,56 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
         className="section-arena-container"
       >
         <DragDropContext
-          onDragEnd={({ destination, source }) =>
-            handlers.reorder({ from: source.index, to: destination?.index || 0 })
-          }
+          onDragEnd={(result) => { onDragEndFunc(result) }}
         >
-          <Droppable droppableId="dnd-list" direction="horizontal">
+          <Droppable
+            droppableId="dnd-list"
+            direction="horizontal"
+            type="column"
+          >
             {(provided) => (
               <div className="section-arena" {...provided.droppableProps} ref={provided.innerRef}>
-                {items}
+                {columnOrder && columnOrder.map((columnIndex, index) => (
+                  <Draggable
+                    key={columnIndex}
+                    draggableId={'' + columnIndex}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        <SectionCard
+
+                          projectInfo={projectInfo}
+                          section={sectionList[columnIndex]}
+                          taskList={sectionList[columnIndex].taskIdList}
+
+                          createTask={createTask}
+                          expandModal={expandModal}
+
+                          setRerender={setRerender}
+                          rerender={rerender}
+
+                          //props for draggable
+                          sectionIndex={index}
+                        // handleProvided={provided}
+                        />
+
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
                 {provided.placeholder}
               </div>
             )}
           </Droppable>
         </DragDropContext>
-        <Button w={315} color="blue" onClick={createSection}>Add Section</Button>
+        <div className="section-arena">
+          <Button w={315} color="blue" onClick={createSection}>Add Section</Button>
+        </div>
       </div>
       {
         selectedTask != null && (

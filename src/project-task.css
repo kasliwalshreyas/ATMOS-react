@@ -285,6 +285,8 @@
   /* border-radius: 1px; */
   overflow-x: auto;
   min-height: 76vh;
+  max-height: fit-content;
+  height: fit-content;
 
   /* background-color: #05386b; */
   /* background-color: #5CDB95; */
@@ -298,6 +300,10 @@
 
 }
 
+.section-arena-container::-webkit-scrollbar {
+  display: none;
+}
+
 .section-arena {
   display: flex;
   flex-direction: row;
@@ -306,6 +312,8 @@
   /* border-radius: 1px; */
   /* overflow-x: auto; */
   min-height: 76vh;
+  max-height: fit-content;
+  height: fit-content;
 
   /* background-color: #05386b; */
   /* background-color: #5CDB95; */

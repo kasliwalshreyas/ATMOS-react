@@ -6,6 +6,8 @@ import Timeline from "./Timeline/Timeline";
 import { useParams, useNavigate } from "react-router-dom";
 import ProjectInfoBar_v2 from "./ProjectInfoBar/ProjectInfoBar_v2";
 import Charts_v2 from "./Charts/Charts_v2";
+import SectionArena_v2 from "./DnD/SectionArena";
+import SectionArena_v3 from "./DnD/SectionArena copy";
 
 const ProjectMainView = ({ Overview, Board, Charts, Timeline }) => {
 
@@ -75,6 +77,7 @@ const ProjectMainView = ({ Overview, Board, Charts, Timeline }) => {
               projectInfo={projectInfo}
               setProjectInfo={setProjectInfo}
               userInfo={user}
+              setUserInfo={setUser}
               activeTab={activeTab}
               setActiveTab={setActiveTab}
             ></ProjectInfoBar_v2>
@@ -97,13 +100,27 @@ const ProjectMainView = ({ Overview, Board, Charts, Timeline }) => {
             setUserInfo={setUser}
           ></SectionArena>
         )}
-        {user && activeTab === 'Timeline' && projectInfo && (
+        {/* {user && activeTab === 'Timeline' && projectInfo && (
           <Charts
             projectId={projectId}
             projectInfo={projectInfo}
             setProjectInfo={setProjectInfo}
             userInfoOfUser={user}
           ></Charts>
+        )} */}
+        {user && activeTab === 'Timeline' && projectInfo && (
+          // <SectionArena_v2
+          //   projectId={projectId}
+          // />
+          // <SectionArena_v3
+          //   projectId={projectId}
+          // />
+          <Charts_v2
+            projectId={projectId}
+            projectInfo={projectInfo}
+            setProjectInfo={setProjectInfo}
+            userInfo={user}
+          ></Charts_v2>
         )}
         {user && activeTab === 'Charts' && projectInfo && (
           <Charts_v2

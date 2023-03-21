@@ -15,10 +15,11 @@ const useStyles = createStyles((theme) => ({
         padding: theme.spacing.md,
         boxSizing: 'border-box',
         cursor: 'pointer',
-        // transition: 'box-shadow 100ms ease-out',
-        // '&:hover': {
-        //     boxShadow: theme.shadows.sm,
-        // },
+        transition: 'box-shadow 150ms ease, transform 100ms ease',
+        '&:hover': {
+            boxShadow: theme.shadows.md,
+            transform: 'scale(1.05)',
+        },
         maxWidth: 325,
         maxHeight: 200,
         margin: '0 0 20px 0',
@@ -99,33 +100,34 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
                         truncate
                         sx={classes.taskName}
                     >{task.taskName}</Text>
-                    {/* {hovered && */}
-                    <Menu
-                        transitionProps={{ transition: 'pop' }}
-                        withArrow
-                        position="bottom-end"
-                        menuPosition="right"
-                        zIndex={10}
-                    // onClick={(e) => e.stopPropagation()}
-                    >
-                        <Menu.Target >
-                            <ActionIcon
-                                zIndex={100}
-                                onClick={(e) => e.stopPropagation()}
-
-                            >
-                                <IconDots size="1rem" stroke={1.5} />
-                            </ActionIcon>
-                        </Menu.Target>
-                        <Menu.Dropdown
+                    {hovered &&
+                        <Menu
+                            transitionProps={{ transition: 'pop' }}
+                            withArrow
+                            position="bottom-end"
+                            menuPosition="right"
+                            zIndex={100}
                         // onClick={(e) => e.stopPropagation()}
                         >
-                            <Menu.Item icon={<IconTrash size="1rem" stroke={1.5} />} color="red">
-                                Delete Task
-                            </Menu.Item>
-                        </Menu.Dropdown>
-                    </Menu>
-                    {/* } */}
+                            <Menu.Target >
+                                <ActionIcon
+                                    zIndex={100}
+                                    onClick={(e) => e.stopPropagation()}
+
+                                >
+                                    <IconDots size="1rem" stroke={1.5} />
+                                </ActionIcon>
+                            </Menu.Target>
+                            <Menu.Dropdown
+                                onClick={(e) => e.stopPropagation()}
+                                zIndex={100}
+                            >
+                                <Menu.Item icon={<IconTrash size="1rem" stroke={1.5} />} color="red" onClick={event => { deleteTask(event, task._id) }}>
+                                    Delete Task
+                                </Menu.Item>
+                            </Menu.Dropdown>
+                        </Menu>
+                    }
                 </Group>
                 {
                     ((task.taskPriority !== "Choose Priority") || (task.taskStatus !== "Choose Status")) &&
