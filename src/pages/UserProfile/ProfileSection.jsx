@@ -81,6 +81,10 @@ const ProfileSection = ({ user }) => {
     }
 
     const handleFileChange = (e) => {
+        // avoid null error of file
+        if (!e.target.files[0]) {
+            return;
+        }
         console.log(e.target.files[0]);
         setFile(e.target.files[0]);
         // File reader to display the image
@@ -243,7 +247,7 @@ const ProfileSection = ({ user }) => {
                                         <Form.Label className="fw-semibold">Update Avatar</Form.Label>
                                         <Form.Control type="file" accept="image/png, image/jpeg, image/jpg" ref={fileInputRef} onChange={(e)=>handleFileChange(e)} />
                                     </Form.Group>
-                                    <Button className="btn-md ms-2" variant="primary" type="submit" onClick={(e)=>handleFileSubmit(e) }  disabled={fileInputRef.current.files.length===0}
+                                    <Button className="btn-md ms-2" variant="primary" type="submit" onClick={(e)=>handleFileSubmit(e)}  disabled={!fileInputRef.current?.files.length}
                                     >Update</Button>
                                     {/* <Box w={250}>
                                         <ButtonProgress onClick={(e)=>handleFileSubmit(e)} />
