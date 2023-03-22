@@ -10,7 +10,7 @@ import {
 
 const useStyles = createStyles((theme) => ({
     comment: {
-        padding: `${theme.spacing.lg} ${theme.spacing.xl}`,
+        padding: `${theme.spacing.sm} ${theme.spacing.sm}`,
     },
 
     body: {
@@ -33,7 +33,7 @@ const ChatFormat = ({ postedAt, body, author }) => {
 
     return (
         <>
-            <Paper withBorder radius="md" className={classes.comment}>
+            <Paper withBorder radius="md" className={classes.comment} m={5}>
                 <Group>
                     <Avatar src={author.image} alt={author.name} radius="xl" />
                     <div>

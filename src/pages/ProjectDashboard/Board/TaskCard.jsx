@@ -62,11 +62,11 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
 
     const colorPickerPriority = (priority) => {
         switch (priority) {
-            case 'high':
+            case 'High':
                 return 'orange';
-            case 'medium':
+            case 'Medium':
                 return 'yellow';
-            case 'low':
+            case 'Low':
                 return 'lime';
             default:
                 return 'gray';
@@ -75,11 +75,11 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
 
     const colorPickerStatus = (status) => {
         switch (status) {
-            case "on-track":
+            case "In Progress":
                 return 'teal';
-            case 'off-track':
+            case 'Stuck':
                 return 'pink';
-            case 'at-risk':
+            case 'Backlog':
                 return 'red';
             default:
                 return 'gray';

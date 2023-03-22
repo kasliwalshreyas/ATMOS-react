@@ -59,15 +59,16 @@ const Charts_v2 = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
 
 
     const projectTaskCountByPriority = {
-        'high': 0,
-        'medium': 0,
-        'low': 0,
+        'High': 0,
+        'Medium': 0,
+        'Low': 0,
     };
 
     const projectTaskCountByStatus = {
-        'on-track': 0,
-        'off-track': 0,
-        'at-risk': 0,
+        'In progress': 0,
+        'Stuck': 0,
+        'Backlog': 0,
+        'Done': 0,
     };
 
     const projectCompletionCount = {
@@ -90,17 +91,17 @@ const Charts_v2 = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     };
 
     const projectTaskListByPriority = {
-        'high': {
+        'High': {
             'completed': 0,
             'not-completed': 0,
             'total': 0,
         },
-        'medium': {
+        'Medium': {
             'completed': 0,
             'not-completed': 0,
             'total': 0,
         },
-        'low': {
+        'Low': {
             'completed': 0,
             'not-completed': 0,
             'total': 0,
@@ -221,7 +222,7 @@ const Charts_v2 = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                     <ChartContainer
                         title={'Priority Chart'}
                         userInfo={userInfo}
-                        dataArray={[projectTaskListByPriority['high'], projectTaskListByPriority['medium'], projectTaskListByPriority['low']]}
+                        dataArray={[projectTaskListByPriority['High'], projectTaskListByPriority['Medium'], projectTaskListByPriority['Low']]}
                         chartType='combined'
                         bgColorPalette={[
                             'rgb(255, 107, 107)',

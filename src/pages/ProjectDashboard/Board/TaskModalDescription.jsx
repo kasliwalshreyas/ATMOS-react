@@ -7,13 +7,21 @@ import TextAlign from '@tiptap/extension-text-align';
 import Superscript from '@tiptap/extension-superscript';
 import SubScript from '@tiptap/extension-subscript';
 import { Button, Flex } from '@mantine/core';
+import { useHover, useClickOutside } from '@mantine/hooks';
+import { useState } from 'react';
 
 
-const content =
-    '<h2 style="text-align: center;">Task Description</h2>';
+// const content =
+//     '<h2 style="text-align: center;">Task Description</h2>';
 
 
-const TaskModalDescription = () => {
+const TaskModalDescription = ({
+    taskDescription,
+    setTaskDescription,
+}) => {
+
+    // const [value, setValue] = useState(taskDescription);
+
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -24,46 +32,59 @@ const TaskModalDescription = () => {
             Highlight,
             TextAlign.configure({ types: ['heading', 'paragraph'] }),
         ],
-        content,
+        content: taskDescription,
+        onUpdate: ({ editor }) => {
+            setTaskDescription(editor.getHTML());
+            // setValue(editor.getHTML());
+        },
     });
+
+    // console.log(value);
+
+    // console.log(taskDescription);
+
+    const [clicked, setClicked] = useState(false);
+    const ref = useClickOutside(() => setClicked(false));
 
     return (
         <>
-            <RichTextEditor editor={editor} sx={{ maxHeight: '50', height: 'fit-content' }}>
-                <RichTextEditor.Toolbar sticky stickyOffset={60}>
-                    <RichTextEditor.ControlsGroup>
-                        <RichTextEditor.Bold />
-                        <RichTextEditor.Italic />
-                        <RichTextEditor.Underline />
-                        <RichTextEditor.Strikethrough />
-                        <RichTextEditor.ClearFormatting />
-                        <RichTextEditor.Highlight />
-                        <RichTextEditor.Code />
-                    </RichTextEditor.ControlsGroup>
+            <RichTextEditor editor={editor} sx={{ maxHeight: '50', height: 'fit-content' }} onClick={setClicked} ref={ref}>
+                {clicked && (
+                    <RichTextEditor.Toolbar sticky stickyOffset={60}>
+                        <RichTextEditor.ControlsGroup>
+                            <RichTextEditor.Bold />
+                            <RichTextEditor.Italic />
+                            <RichTextEditor.Underline />
+                            <RichTextEditor.Strikethrough />
+                            <RichTextEditor.ClearFormatting />
+                            <RichTextEditor.Highlight />
+                            <RichTextEditor.Code />
+                        </RichTextEditor.ControlsGroup>
 
-                    <RichTextEditor.ControlsGroup>
-                        <RichTextEditor.Blockquote />
-                        <RichTextEditor.Hr />
-                        <RichTextEditor.BulletList />
-                        <RichTextEditor.OrderedList />
-                        <RichTextEditor.Subscript />
-                        <RichTextEditor.Superscript />
-                    </RichTextEditor.ControlsGroup>
+                        <RichTextEditor.ControlsGroup>
+                            <RichTextEditor.Blockquote />
+                            <RichTextEditor.Hr />
+                            <RichTextEditor.BulletList />
+                            <RichTextEditor.OrderedList />
+                            <RichTextEditor.Subscript />
+                            <RichTextEditor.Superscript />
+                        </RichTextEditor.ControlsGroup>
 
-                    <RichTextEditor.ControlsGroup>
-                        <RichTextEditor.Link />
-                        <RichTextEditor.Unlink />
-                    </RichTextEditor.ControlsGroup>
+                        <RichTextEditor.ControlsGroup>
+                            <RichTextEditor.Link />
+                            <RichTextEditor.Unlink />
+                        </RichTextEditor.ControlsGroup>
 
-                    <RichTextEditor.ControlsGroup>
-                        <RichTextEditor.AlignLeft />
-                        <RichTextEditor.AlignCenter />
-                        <RichTextEditor.AlignJustify />
-                        <RichTextEditor.AlignRight />
-                    </RichTextEditor.ControlsGroup>
-                </RichTextEditor.Toolbar>
+                        <RichTextEditor.ControlsGroup>
+                            <RichTextEditor.AlignLeft />
+                            <RichTextEditor.AlignCenter />
+                            <RichTextEditor.AlignJustify />
+                            <RichTextEditor.AlignRight />
+                        </RichTextEditor.ControlsGroup>
+                    </RichTextEditor.Toolbar>
+                )}
 
-                <RichTextEditor.Content />
+                <RichTextEditor.Content onChange={setTaskDescription} />
             </RichTextEditor>
             {/* <Flex justify={'end'} mt={5}>
                 <Button>Update</Button>
