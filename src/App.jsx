@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage/Home";
 import Projects from "./pages/Projects/Projects";
 import Chats from "./pages/Messages/Chats";
 // import Notes from "./pages/Notes/Notes";
-import MainView from "./pages/Projects/Task/MainView";
+import ProjectMainView from "./pages/ProjectDashboard/ProjectMainView";
 import CreateProject from "./pages/Projects/CreateProject";
 import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
@@ -60,17 +60,17 @@ const App = () => {
             <Route path="/messages" element={<Chats />} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
-            <Route exact path="/projects/:id/board" element={<MainView board />} />
+            <Route exact path="/projects/:id/board" element={<ProjectMainView Board />} />
             <Route
               exact
               path="/projects/:id/overview"
-              element={<MainView overview />}
+              element={<ProjectMainView Overview />}
             />
-            <Route exact path="/projects/:id/charts" element={<MainView charts />} />
+            <Route exact path="/projects/:id/charts" element={<ProjectMainView Charts />} />
             <Route
               exact
               path="/projects/:id/timeline"
-              element={<MainView timeline />}
+              element={<ProjectMainView Timeline />}
             />
             {/* <Route path="/admin-portal/*" element={<Dashboard />} /> */}
 

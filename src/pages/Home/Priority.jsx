@@ -6,7 +6,6 @@ import UpcomingTask from "./UpcomingTask";
 import CompletedTask from "./CompletedTask";
 const Priority = ({ user }) => {
   const [taskType, setTaskType] = useState(1);
-  const [userInfo, setUserInfo] = useState(user);
 
   const handletaskType = (value) => {
     setTaskType(value);
@@ -20,9 +19,7 @@ const Priority = ({ user }) => {
           <div className={styles.blankSpace}></div>
           <div className={styles.checkTaskStatus}>
             <div
-              style={
-                taskType === 1 ? { borderBottom: "3px solid black" } : {}
-              }
+              style={taskType === 1 ? { borderBottom: "3px solid black" } : {}}
               onClick={() => {
                 handletaskType(1);
               }}
@@ -31,9 +28,7 @@ const Priority = ({ user }) => {
               Upcoming
             </div>
             <div
-              style={
-                taskType === 2 ? { borderBottom: "3px solid black" } : {}
-              }
+              style={taskType === 2 ? { borderBottom: "3px solid black" } : {}}
               onClick={() => {
                 handletaskType(2);
               }}
@@ -42,9 +37,7 @@ const Priority = ({ user }) => {
               Overdue
             </div>
             <div
-              style={
-                taskType === 3 ? { borderBottom: "3px solid black" } : {}
-              }
+              style={taskType === 3 ? { borderBottom: "3px solid black" } : {}}
               onClick={() => {
                 handletaskType(3);
               }}

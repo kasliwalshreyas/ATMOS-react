@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import useFetch from "../../useFetch";
 import ProjectList from "./ProjectList";
 import Navbar from "../../UI/Navbar";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import Navbar_v2 from "../../UI/Navbar_v2";
 
-
 const Projects = () => {
-
   // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
   // const [user, setUser] = useState(null);
   // useEffect(() => {
@@ -23,9 +20,8 @@ const Projects = () => {
 
   // }, []);
 
-
   const user = useSelector((state) => state.user.userInfo);
-  console.log(user, 'user from projects')
+  console.log(user, "user from projects");
   // let token = useSelector((state) => state.user.token);
   // console.log(user, 'user from projects');
   // if (token == null) {
@@ -56,10 +52,10 @@ const Projects = () => {
         headers: {
           "Content-Type": "application/json",
           "auth-token": `Bearer ${localStorage.getItem("token")}`,
-        }
+        },
       });
       const data = await res.json();
-      console.log(data, 'data from Projects');
+      console.log(data, "data from Projects");
       setProjectInfo(data.projects);
     };
     projects();
@@ -67,9 +63,11 @@ const Projects = () => {
 
   return (
     <>
-      <Navbar_v2 activeLink={'/projects'} />
+      <Navbar_v2 activeLink={"/projects"} />
       {/* <Navbar /> */}
-      {user && projectInfo && <ProjectList projects={projectInfo} userInfo={user} />}
+      {user && projectInfo && (
+        <ProjectList projects={projectInfo} userInfo={user} />
+      )}
     </>
   );
 };

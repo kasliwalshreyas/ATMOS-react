@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RecentProject.module.css";
-import useFetch from "../../useFetch";
 import { Link } from "react-router-dom";
 
 const RecentProject = ({ user }) => {
-  const [userInfo, setUserInfo] = useState(user);
   const [showFavorite, setShowFavorite] = useState(false);
   const [projects, setProjects] = useState([]);
 
-
-  console.log(userInfo, "user info from recent project");
-
+  // console.log("this is the only one of my favorite project from user defined object", user.favProjectIdList)
 
   useEffect(() => {
     const getProjects = async () => {
@@ -23,20 +19,12 @@ const RecentProject = ({ user }) => {
       });
       const data = await res.json();
       if (data.success) {
-        console.log(data.projects, "project data from recent project");
+        // console.log(data.projects, "project data from recent project");
         setProjects(data.projects);
       }
     };
     getProjects();
   }, []);
-
-
-
-
-
-
-
-  // let projects = [];
 
   const handleChange = () => {
     if (showFavorite === false) setShowFavorite(true);
@@ -44,34 +32,39 @@ const RecentProject = ({ user }) => {
   };
 
   function timeDiff(a, b) {
-    const c = new Date(a.lastUsed);
-    const d = new Date(b.lastUsed);
-    const utc1 = Date.UTC(
-      c.getFullYear(),
-      c.getMonth(),
-      c.getDate(),
-      c.getHours(),
-      c.getMinutes(),
-      c.getSeconds()
-    );
-    const utc2 = Date.UTC(
-      d.getFullYear(),
-      d.getMonth(),
-      d.getDate(),
-      d.getHours(),
-      d.getMinutes(),
-      d.getSeconds()
-    );
-    return Math.floor(utc2 - utc1);
+    var a_time, b_time;
+    a.projectLastUsed &&
+      a.projectLastUsed.map((lasttime) => {
+        if (lasttime.userid === user._id) {
+          a_time = lasttime.lastUsed;
+        }
+      });
+    b.projectLastUsed &&
+      b.projectLastUsed.map((lasttime) => {
+        if (lasttime.userid === user._id) {
+          b_time = lasttime.lastUsed;
+        }
+      });
+    // console.log("here is the one ", b_time)
+    // console.log("here is the another time", a_time)
+    return b_time > a_time;
   }
+
   projects &&
     projects.sort((a, b) => {
-      if (timeDiff(a, b) > 0) return 1;
+      if (timeDiff(a, b) === true) return 1;
       else return -1;
     });
 
-  function timeDiffNow(a, b) {
-    const c = new Date(a.lastUsed);
+  function timeDiffNow(project, b) {
+    var lasttimeused;
+    project.projectLastUsed &&
+      project.projectLastUsed.map((lasttime) => {
+        if (lasttime.userid === user._id) {
+          lasttimeused = lasttime.lastUsed;
+        }
+      });
+    const c = new Date(lasttimeused);
     const d = new Date(b);
     const utc1 = Date.UTC(
       c.getFullYear(),
@@ -91,43 +84,54 @@ const RecentProject = ({ user }) => {
     );
     return Math.floor(utc2 - utc1);
   }
+
   const late = [];
+  let projectNumber = 0;
   projects &&
     projects.map((project) => {
       let now = new Date();
       let timeDivision = timeDiffNow(project, now) / 1000;
       if (timeDivision > 31536000) {
-        late[project.id - 1] = -1;
+        late[projectNumber++] = -1;
       } else if (2678400 <= timeDivision) {
         timeDivision = Math.floor(timeDivision / 2678400);
-        late[project.id - 1] = timeDivision + "mon ago";
+        late[projectNumber++] = timeDivision + "mon ago";
       } else if (2678400 > timeDivision && timeDivision >= 86400) {
         timeDivision = Math.floor(timeDivision / 86400);
-        late[project.id - 1] = timeDivision + "days ago";
+        late[projectNumber++] = timeDivision + "days ago";
       } else if (86400 > timeDivision && timeDivision >= 3600) {
         timeDivision = Math.floor(timeDivision / 3600);
-        late[project.id - 1] = timeDivision + "h ago";
+        late[projectNumber++] = timeDivision + "h ago";
       } else if (3600 > timeDivision && timeDivision >= 60) {
         timeDivision = Math.floor(timeDivision / 60);
-        late[project.id - 1] = timeDivision + "min ago";
+        late[projectNumber++] = timeDivision + "min ago";
       } else {
-        late[project.id - 1] = Math.floor(timeDivision) + "s ago";
+        late[projectNumber++] = Math.floor(timeDivision) + "s ago";
       }
     });
 
-  const handleLinkClick = (project) => {
-    project.lastUsed = new Date();
-    localStorage.setItem("projectId", project.id);
-    fetch(`http://localhost:8000/projectList/${project.id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(project),
-    }).then((result) => {
-      return result.json();
-    });
+  projectNumber = 0;
+
+  const handleLinkClick = async (projects, project) => {
+    project.projectLastUsed &&
+      project.projectLastUsed.map((lasttime) => {
+        if (lasttime.userid === user._id) {
+          lasttime.lastUsed = new Date();
+        }
+      });
+
+    const res = await fetch(
+      `http://localhost:4000/project/updateUserProjects/${project._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(project),
+      }
+    );
+    const data = await res.json();
   };
 
   return (
@@ -154,47 +158,43 @@ const RecentProject = ({ user }) => {
             </select>
           </h4>
         </div>
+
         {!showFavorite && (
           <div className={styles.recentListdiv}>
-            {projects && userInfo.projectIdList.length !== 0 &&
-              projects.map((project) =>
-                userInfo.projectIdList.map(
-                  (projectid, index) =>
-                    projectid === project._id &&
-                    index < 8 && (
-                      <div className={styles.recentParticularProject}>
-                        {late[project.id - 1] !== -1 && (
-                          <Link
-                            onClick={() => {
-                              handleLinkClick(project);
-                            }}
-                            to="/task/overview"
-                          >
-                            <div className={styles.projectDiv}>
-                              <div className={styles.projectInfoName}>
-                                <h4 className={styles.projectName}>
-                                  {project.projectName}
-                                </h4>
-                              </div>
-                              <div className={styles.projectInfoLastUsed}>
-                                <p className={styles.lastUsed}>
-                                  last used: {late[project.id - 1]}
-                                </p>
-                              </div>
-                            </div>
-                          </Link>
-                        )}
+            {projects &&
+              projects.map((project) => (
+                <div className={styles.recentParticularProject}>
+                  {
+                    <Link
+                      onClick={() => {
+                        handleLinkClick(projects, project);
+                      }}
+                      to="/projects"
+                    >
+                      <div className={styles.projectDiv}>
+                        <div className={styles.projectInfoName}>
+                          <h4 className={styles.projectName}>
+                            {project.projectName}
+                          </h4>
+                        </div>
+                        <div className={styles.projectInfoLastUsed}>
+                          <p className={styles.lastUsed}>
+                            last used: {late[projectNumber++]}
+                          </p>
+                        </div>
                       </div>
-                    )
-                )
-              )}
+                    </Link>
+                  }
+                </div>
+              ))}
 
-            {userInfo.projectIdList.length === 0 && (
+            {projects.length === 0 && (
               <div className={styles.mainFavorite}>
                 <div className={styles.noFavorite}>
                   <img
                     className={styles.noFavoriteImgRecent}
                     src="https://www.linkpicture.com/q/project-management.png"
+                    alt="No Recents"
                   ></img>
                 </div>
                 <div ClassName={styles.noFavoriteTxt}>
@@ -206,46 +206,50 @@ const RecentProject = ({ user }) => {
           </div>
         )}
 
-        {/* {showFavorite && (
+        {showFavorite && (
           <div className={styles.recentListdiv}>
             {projects &&
-              userInfo.favoriteProjectList &&
+              user.favProjectIdList &&
               projects.map((project) =>
-                userInfo.favoriteProjectList.map(
-                  (favorite) =>
-                    project.id === favorite && (
-                      <div className={styles.recentParticularProject}>
-                        {
-                          <Link
-                            onClick={() => {
-                              handleLinkClick(project);
-                            }}
-                            to="/task/overview"
-                          >
-                            <div className={styles.projectDiv}>
-                              <div className={styles.projectInfoName}>
-                                <h4 className={styles.projectName}>
-                                  {project.projectName}
-                                </h4>
-                              </div>
-                              <div className={styles.projectInfoLastUsed}>
-                                <p className={styles.lastUsed}>
-                                  last used: {late[project.id - 1]}
-                                </p>
-                              </div>
+                user.favProjectIdList.map((userfavid) => {
+                  if (userfavid === project._id) {
+                    <div className={styles.recentParticularProject}>
+                      {
+                        <Link
+                          onClick={() => {
+                            handleLinkClick(projects, project);
+                          }}
+                          to="/projects"
+                        >
+                          <div className={styles.projectDiv}>
+                            <div className={styles.projectInfoName}>
+                              <h4 className={styles.projectName}>
+                                {project.projectName}
+                              </h4>
                             </div>
-                          </Link>
-                        }
-                      </div>
-                    )
-                )
+                            <div className={styles.projectInfoLastUsed}>
+                              <p className={styles.lastUsed}>
+                                last used: {late[projectNumber]}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      }
+                    </div>;
+                    {
+                      projectNumber++;
+                    }
+                  }
+                })
               )}
-            {userInfo.favoriteProjectList.length === 0 && (
+
+            {user.favProjectIdList.length === 0 && (
               <div className={styles.mainFavorite}>
                 <div className={styles.noFavorite}>
                   <img
                     className={styles.noFavoriteImg}
                     src="https://www.linkpicture.com/q/favorites.png"
+                    alt="No favorite"
                   ></img>
                 </div>
                 <div ClassName={styles.noFavoriteTxt}>
@@ -255,7 +259,7 @@ const RecentProject = ({ user }) => {
               </div>
             )}
           </div>
-        )} */}
+        )}
       </div>
     </>
   );
