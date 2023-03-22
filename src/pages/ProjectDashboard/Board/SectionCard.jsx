@@ -69,7 +69,7 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
     const { hovered, ref } = useHover();
     let count = 0;
     const taskOrder = [];
-    console.log(taskList, 'taskList from sectionCard');
+    // console.log(taskList, 'taskList from sectionCard');
     for (let i = 0; i < taskList.length; i++) {
         taskOrder.push(i);
     }

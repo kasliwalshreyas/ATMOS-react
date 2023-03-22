@@ -5,6 +5,7 @@ import SectionCard from "./SectionCard";
 import { Button } from "@mantine/core";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useListState } from "@mantine/hooks";
+import TaskModal_v2 from "./TaskModal_v2";
 
 
 const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUserInfo }) => {
@@ -214,7 +215,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
       </div>
       {
         selectedTask != null && (
-          <TaskModal
+          <TaskModal_v2
             taskInfo={selectedTask}
             sectionInfo={selectedSection}
             show={show}
