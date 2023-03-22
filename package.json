@@ -41,7 +41,7 @@
     "chart.js": "^3.9.1",
     "dayjs": "^1.11.7",
     "formik": "^2.2.9",
-    "framer-motion": "^10.6.0",
+    "framer-motion": "^10.8.4",
     "fs.realpath": "^1.0.0",
     "glightbox": "^3.2.0",
     "isotope": "^1.0.0-alpha.3",

@@ -86,7 +86,7 @@ const CompletedTask = ({ user }) => {
             </div>
             <div className={styles.noTaskText}>
               <p className={styles.upperTaskTxt}>You don't have</p>
-              <p className={styles.lowerTaskTxt}> any Overdue Task </p>
+              <p className={styles.lowerTaskTxt}> any Completed Task </p>
             </div>
           </div>
         )}
