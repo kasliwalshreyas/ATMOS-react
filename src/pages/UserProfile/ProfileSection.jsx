@@ -1,54 +1,104 @@
 import React from "react";
 import { useState } from "react";
-import { CardImg, Card, Container } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
+import { CardImg, Card, Container, Button, Form, Row, Col } from "react-bootstrap";
+import { Image, FileInput, Box } from '@mantine/core';
+import { ButtonProgress } from "./ButtonProgress";
+
 
 import bcrypt from "bcryptjs";   // For hashing the password before saving it to the json server
 
 import styles from "./ProfileSection.module.css";
 
+const salt = bcrypt.genSaltSync(10);
+
 const ProfileSection = ({ user }) => {
     const [userName, setUserName] = useState(user.userName);
-    const [emailId, setemailId] = useState(user.emailId);
+    const [emailId, setemailId] = useState(user.email);
     const [password, setPassword] = useState(user.password);
+    const [file, setFile] = useState("null");
+    const [avatar, setAvatar] = useState(user.avatar);
     console.log(user, 'from profile section');
 
     const [isEdit, setIsEdit] = useState(false);
 
-    // const handleEdit = () => {
-    //     setIsEdit(true);
-    // }
+    // Refrence for file input
+    const fileInputRef = React.useRef(null);
 
-    const salt = bcrypt.genSaltSync(10);
-
-    const handleClick = () => {
-        console.log(isEdit);
+    const handleClick = async () => {
+        // console.log(isEdit);
+        // console.log('In handle click');
         let hashedPassword = password;
         if (isEdit) {
             if (password !== user.password) {
                 hashedPassword = bcrypt.hashSync(password, salt);
             }
-            const updatedUser = { ...user, userName, emailId, password: hashedPassword };
-            fetch("http://localhost:8000/userList/" + user.id, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
+            const updatedUser = { ...user, userName, email: emailId, password: hashedPassword };
+            const res = await fetch("http://localhost:4000/user/updateUser", {
+                method: "POST",
+                headers: { "Content-Type": "application/json",
+                            "auth-token": `Bearer ${localStorage.getItem("token")}`
+                        },
                 body: JSON.stringify(updatedUser),
-            }).then(() => {
+            })
+            // console.log(res);
+            const data = await res.json();
+            // console.log(data);
+            if(!data.success){
+                console.log(data.error);
+                alert(data.message);
+            }
+            else{
                 setIsEdit(false);
-            });
+            }
         }
         // setIsEdit(!isEdit);
     }
 
+    const handleFileSubmit = async (e) => {
+        try {
+            // console.log(file, 'from handle file submit');
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append("avatar", file);
+            const res = await fetch("http://localhost:4000/user/uploadAvatar", {
+                method: "POST",
+                headers: { "auth-token": `Bearer ${localStorage.getItem("token")}` },
+                body: formData,
+            });
+            const data = await res.json();
+            if(!data.success){
+                console.log(data.error);
+                alert(data.message);
+            }
+            else{
+                // alert(data.message);
+                fileInputRef.current.value = null;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
+
+    const handleFileChange = (e) => {
+        console.log(e.target.files[0]);
+        setFile(e.target.files[0]);
+        // File reader to display the image
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setAvatar(reader.result);
+            }
+        }
+    }
+
     return (
-        <>
-            <Container className="profile-container mt-3" >
-                <Card className="profile-card" style={{ backgroundColor: "#f5f5f5" }}>
+        <div className="mt-0" style={{ backgroundColor: "#f5f5f5", minHeight: "100vh" }}>
+            <Container className="profile-container py-3 my-0"  >
+                <Card className="profile-card" >
                     <Card.Body className="d-flex align-items-center justify-content-between">
-                        <h1 className="profile-heading fw-semibold" style={{ color: "#05386B" }}>Profile</h1>
+                        <p className="fs-2 profile-heading fw-semibold align-items-center" style={{ color: "#05386B" }}>Profile</p>
                         <div>
                             <Button variant="info" className="edit-button" onClick={!isEdit?()=> setIsEdit(!isEdit):handleClick}>{isEdit ? <i className="fa-solid fa-floppy-disk"></i> : <i className="fa-solid fa-pen"></i>}</Button>
                         </div>
@@ -59,14 +109,21 @@ const ProfileSection = ({ user }) => {
                 <Row>
                     <Col md={4} sm={12} className="mb-3">
                         <Card className={styles.profileCard+ ` shadow`}>
+                        <Image mx="auto" radius="md" height={222} src="https://i.imgur.com/K7A78We.jpg" alt="Profile back" />
                             <Card.Body className="text-center">
-                                <CardImg src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                    className="rounded-circle fluid"
-                                    style={{ width: '150px' }}
+                                <CardImg src={avatar}
+                                    className="rounded-circle fluid bg-white"
+                                    style={{ width: '160px', marginTop: '-90px', zIndex: '5', position: 'relative', border: '5px solid #fff' }}
                                 />
 
                                 <h1 className="profile-heading fw-semibold mt-3" style={{color:"#05386B"}}>{userName}</h1>
                                 <p className="profile-para fw-bold text-secondary">{emailId}</p>
+                                <div className="d-flex justify-content-evenly">
+                                    <Button variant="light" className="btn-floating"><i class="fab fa-facebook-f fa-2x" style={{color: "#3b5998"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i class="fab fa-twitter fa-2x" style={{color: "#55acee"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i class="fab fa-instagram fa-2x" style={{color: "#ac2bac"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i class="fab fa-linkedin-in fa-2x" style={{color: "#0082ca"}}></i></Button>
+                                </div>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -74,10 +131,10 @@ const ProfileSection = ({ user }) => {
                         <Card className={`shadow `+ styles.profileCard}>
                         <Card.Body className="profile-card-body">
                                     <Row className="mb-3">
-                                        <Form.Label column className="fw-semibold" lg={2}>
+                                        <Form.Label column className="fw-semibold" xl={2} sm={12}>
                                                 Username
                                             </Form.Label>
-                                            <Col className="text-center">
+                                            <Col className="text-center" lg={10} sm={12}>
                                                 {isEdit && 
                                                     <Form.Control type="text" placeholder="Username" value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!isEdit} />
                                                 }
@@ -88,10 +145,10 @@ const ProfileSection = ({ user }) => {
                                     </Row>
 
                                     <Row className="mb-3">
-                                        <Form.Label column className="fw-semibold" lg={2}>
+                                        <Form.Label column className="fw-semibold" xl={2} sm={12}>
                                             Email
                                         </Form.Label>
-                                        <Col className="text-center">
+                                        <Col className="text-center" lg={10} sm={12}>
                                             {isEdit &&
                                                 <Form.Control type="email" placeholder="Email" value={emailId} onChange={(e) => setemailId(e.target.value)} disabled={!isEdit} />
                                             }
@@ -102,10 +159,10 @@ const ProfileSection = ({ user }) => {
                                     </Row>
 
                                     <Row className="mb-3">
-                                        <Form.Label column className="fw-semibold" lg={2}>
+                                        <Form.Label column className="fw-semibold" xl={2} sm={12} >
                                             Password
                                         </Form.Label>
-                                        <Col className="text-center">
+                                        <Col className="text-center" lg={10} sm={12}>
                                             {isEdit &&
                                                 <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={!isEdit} />
                                             }
@@ -117,7 +174,7 @@ const ProfileSection = ({ user }) => {
                             </Card.Body>
                         </Card>
                         <Row className=" mt-3 mb-3">
-                        <Col md={4}>
+                        <Col md={6} lg={4} sm={12}>
                             <div className={styles.countContainer}>
                                 <div className={styles.containerHead}>
                                     <div className={styles.headIcon}><img src="https://img.icons8.com/ios-glyphs/30/000000/to-do.png" /></div>
@@ -137,7 +194,7 @@ const ProfileSection = ({ user }) => {
                             </div>
                             
                         </Col>
-                        <Col md={4}>
+                        <Col lg={4} md={6} sm={12}>
                         <div className={styles.countContainer}>
                                 <div className={styles.containerHead}>
                                     <div className={styles.headIcon}><i className="fa-solid fa-star"></i></div>
@@ -157,7 +214,7 @@ const ProfileSection = ({ user }) => {
                             </div>
                             
                         </Col>
-                            <Col md={4}>
+                            <Col md={6} lg={4} sm={12}>
                                 <div className={styles.countContainer}>
                                     <div className={styles.containerHead}>
                                         <div className={styles.headIcon}><i className="fa-solid fa-bars-progress"></i></div>
@@ -178,12 +235,37 @@ const ProfileSection = ({ user }) => {
                             </Col>
 
                         </Row>
+                        <Card className={`shadow `+ styles.profileCard}>
+                            <Card.Body className="update-avatar-body d-flex justify-content-between align-items-end">
+                            {/* react bootstrap form for file input*/}
+                                <Form className="d-flex justify-content-between w-100 align-items-end">
+                                    <Form.Group className=" w-100" controlId="formFile">
+                                        <Form.Label className="fw-semibold">Update Avatar</Form.Label>
+                                        <Form.Control type="file" accept="image/png, image/jpeg, image/jpg" ref={fileInputRef} onChange={(e)=>handleFileChange(e)} />
+                                    </Form.Group>
+                                    <Button className="btn-md ms-2" variant="primary" type="submit" onClick={(e)=>handleFileSubmit(e) }  disabled={fileInputRef.current.files.length===0}
+                                    >Update</Button>
+                                    {/* <Box w={250}>
+                                        <ButtonProgress onClick={(e)=>handleFileSubmit(e)} />
+                                    </Box> */}
+                                </Form>
 
+                                {/* <FileInput
+                                placeholder="JPG, PNG or JPEG. Max size of 800K"
+                                icon={<i class="fa-solid fa-paperclip" style={{color: "#05386B"}}></i>}
+                                label="Choose Avatar"
+                                variant="unstyled"
+                                accept="image/png, image/jpeg, image/jpg"
+                                onChange={(e)=>handleFileChange(e)}
+                                /> */}
+                                
+                            </Card.Body>
+                        </Card>
                     </Col>
                 </Row>
             </Container>
 
-        </>
+        </div>
     );
 }
 

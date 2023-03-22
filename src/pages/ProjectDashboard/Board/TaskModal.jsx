@@ -19,11 +19,9 @@ const TaskModal = ({
   userInfo,
 }) => {
 
-  console.log(taskInfo, "taskInfo");
-  console.log(AssigneeList, "AssigneeList");
-
   const dateFormater = (date) => {
     let newDate = new Date(date);
+    // console.log(newDate, "newDate");
     const offset = newDate.getTimezoneOffset()
     newDate = new Date(newDate.getTime() - (offset * 60 * 1000))
     return newDate.toISOString().split('T')[0]
@@ -78,13 +76,16 @@ const TaskModal = ({
 
   // console.log(task);
 
+  // console.log(taskInfo.taskDeadline
+  //   , "taskInfo.taskdeadline");
+
   const [taskName, setTaskName] = useState(taskInfo.taskName);
   const [taskCompletion, setTaskCompletion] = useState(taskInfo.taskCompletion);
   const [taskAssignee, setTaskAssignee] = useState(taskInfo.taskAssigneeList);
   const [taskPriority, setTaskPriority] = useState(taskInfo.taskPriority);
   const [taskStatus, setTaskStatus] = useState(taskInfo.taskStatus);
   const [taskDeadline, setTaskDeadline] = useState(dateFormater(taskInfo.taskDeadline));
-  const [taskStartDate, SetTaskStartDate] = useState(dateFormater(taskInfo.taskStartDate));
+  const [taskStartDate, SetTaskStartDate] = useState(taskInfo.taskStartDate);
   const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
   const [taskComments, setTaskComments] = useState(taskInfo.taskComments);
   const [selectedAssignee, setSelectedAssignee] = useState({ value: taskAssignee, label: taskAssigneeLabel, });
@@ -96,8 +97,8 @@ const TaskModal = ({
   const [comments, setComments] = useState(false);
 
 
-  console.log(taskStartDate, "taskInfo.taskStartDate");
-  console.log(taskDeadline, "taskInfo.taskDeadline");
+  // console.log(taskStartDate, "taskInfo.taskStartDate");
+  // console.log(taskDeadline, "taskInfo.taskDeadline");
 
 
 
@@ -128,7 +129,7 @@ const TaskModal = ({
       taskComments
     };
 
-    // console.log(task, "from modal");
+    console.log(task, "from modal");
 
     const response = await fetch('http://localhost:4000/task/updateTask', {
       method: 'POST',
@@ -150,8 +151,9 @@ const TaskModal = ({
     });
 
     const taskData = await response.json();
-    console.log(taskData, taskData.message, "from modal");
+    // console.log(taskData, taskData.message, "from modal");
 
+    setRerender(!rerender);
     closeModal();
 
   };
@@ -163,11 +165,11 @@ const TaskModal = ({
         prev.oldAssignee = selectedAssignee.value;
         return prev;
       });
-      console.log("Assignee Changed", updateTaskAssignee);
+      // console.log("Assignee Changed", updateTaskAssignee);
     }
     setSelectedAssignee(selectedOption);
     setTaskAssignee(selectedOption.value);
-    console.log("newAssignee", selectedOption.value);
+    // console.log("newAssignee", selectedOption.value);
   };
   const handleTaskCompletion = (selectedOption) => {
     setSelectedCompletion(selectedOption);
@@ -621,7 +623,7 @@ const TaskModal = ({
                   <input
                     className="modal-input modal-select"
                     type="date"
-                    value={taskInfo.taskDeadline == null ? taskStartDate : taskDeadline}
+                    value={taskDeadline == '1970-01-01' ? taskStartDate : taskDeadline}
                     onChange={(e) => setTaskDeadline(e.target.value)}
                   ></input>
                 </td>

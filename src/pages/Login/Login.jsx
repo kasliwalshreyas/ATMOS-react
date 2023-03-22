@@ -65,7 +65,7 @@ function Login() {
         const data = await res.json();
         console.log(data);
         if (!data.success) {
-            alert(data.error);
+            alert(data.message);
         }
         else {
             dispatch(login(data));
@@ -79,11 +79,11 @@ function Login() {
         <Container className={styles.container}>
             <Row className={styles.row}>
                 <Col xs={12} md={5} lg={6} className="d-flex flex-column justify-content-center align-items-center">
-                    <h1 className="my-3 ms-1 display-3 fw-bold ls-tight px-3">
+                    <h1 className="my-3 ms-1 text-xs-center text-md-right display-3 fw-bold ls-tight px-3">
                         The best offer <br />
                         <span className="" style={{ color: "#37517e" }}>to grow your<br /> business</span>
                     </h1>
-                    <p className="my-3 mx-5 fs-5 px-5 text-secondary">
+                    <p className="my-3 mx-5 text-md-right fs-5 px-5 text-secondary">
                         Collaborate better with <span className="fw-bold" style={{ color: "#37517e" }}>ATMOS</span>, the best platform to manage your business.
                         Manage resources, simplify workflows, and plan with confidence no matter your industry.
                         Track your progress and get the most out of your business.

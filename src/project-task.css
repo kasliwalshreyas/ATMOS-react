@@ -277,7 +277,7 @@
 
 .filter-func {}
 
-.section-arena {
+.section-arena-container {
   display: flex;
   flex-direction: row;
   padding: 20px 20px 40px 20px;
@@ -285,6 +285,35 @@
   /* border-radius: 1px; */
   overflow-x: auto;
   min-height: 76vh;
+  max-height: fit-content;
+  height: fit-content;
+
+  /* background-color: #05386b; */
+  /* background-color: #5CDB95; */
+  /* background-color: #8ee4af; */
+  /* background-color: #efeeef; */
+  background-color: #f5f5f5;
+  /* background-color: #222629; */
+  /* background-color: black; */
+  /* background-color: rgb(33, 33, 33); */
+
+
+}
+
+.section-arena-container::-webkit-scrollbar {
+  display: none;
+}
+
+.section-arena {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 20px 40px 20px;
+  /* border: 1px solid; */
+  /* border-radius: 1px; */
+  /* overflow-x: auto; */
+  min-height: 76vh;
+  max-height: fit-content;
+  height: fit-content;
 
   /* background-color: #05386b; */
   /* background-color: #5CDB95; */

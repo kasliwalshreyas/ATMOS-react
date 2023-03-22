@@ -115,8 +115,11 @@ function SignUp() {
             });
             const data = await res.json();
             console.log(data);
-            if (data.status === 200) {
+            if (data.success) {
                 navigate("/login");
+            }
+            else {
+                alert(data.message);
             }
         }
     };

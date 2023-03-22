@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Navbar from "../../UI/Navbar";
+import Navbar_v2 from "../../UI/Navbar_v2";
 import ProfileSection from "./ProfileSection";
+// import ProfileSection2 from "../Profile/ProfileSection";
 import { useSelector } from 'react-redux';
 
 
@@ -9,7 +10,7 @@ const UserProfile = () => {
   // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
   // const [user, setUser] = useState(null);
 
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.userInfo);
   console.log(user, 'from user profile');
 
   // useEffect(() => {
@@ -25,7 +26,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar_v2 />
       {user && (
         <ProfileSection user={user} />
       )}

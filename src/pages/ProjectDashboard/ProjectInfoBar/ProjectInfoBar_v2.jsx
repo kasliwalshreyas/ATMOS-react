@@ -13,13 +13,18 @@ import {
     Burger,
     Title,
     Header,
+    Flex,
     // rem
 } from '@mantine/core';
 import {
     IconStar,
     IconArrowLeft,
     IconBook2,
-    IconStarFilled
+    IconStarFilled,
+    IconNotebook,
+    IconLayoutKanban,
+    IconChartHistogram,
+    IconTimeline
 } from '@tabler/icons-react';
 import ProfileMenu from "../../../UI/ProfileMenu";
 
@@ -63,26 +68,32 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-const ProjectInfo_v2 = ({
+const ProjectInfoBar_v2 = ({
     projectInfo,
     setProjectInfo,
     userInfo,
+    setUserInfo,
     activeTab,
     setActiveTab,
 }) => {
 
     const navigate = useNavigate();
+    // console.log(userInfo.favProjectIdList, 'userInfo from ProjectInfoBar_v2');
+
+
+    const isProjectFavorite = userInfo?.favProjectIdList?.includes(projectInfo?._id);
+
+    // console.log(isProjectFavorite, 'isProjectFavorite from ProjectInfoBar_v2');
 
     const { classes, theme } = useStyles();
-    // const [userMenuOpened, setUserMenuOpened] = useState(false);
-
-    const [isStarred, setIsStarred] = useState(false);
+    const [isStarred, setIsStarred] = useState(isProjectFavorite);
 
     const [user, setUser] = useState({
-        "name": "Jane Spoonfighter",
-        "email": "janspoon@fighter.dev",
+        userInfo,
         "image": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
     });
+
+    // console.log(user, 'user from ProjectInfoBar_v2');
 
     const backToProjects = () => {
         navigate('/projects');
@@ -92,7 +103,14 @@ const ProjectInfo_v2 = ({
 
     const items = ['Overview', 'Board', 'Charts', 'Timeline'].map((tab) => (
         <Tabs.Tab value={tab} key={tab}>
+            {/* <Flex align={'center'} > */}
+            {tab === 'Overview' && <IconNotebook size={20} />}
+            {tab === 'Board' && <IconLayoutKanban size={20} />}
+            {tab === 'Charts' && <IconChartHistogram size={20} />}
+            {tab === 'Timeline' && <IconTimeline size={20} />}
+
             {tab}
+            {/* </Flex> */}
         </Tabs.Tab>
     ));
 
@@ -117,6 +135,66 @@ const ProjectInfo_v2 = ({
         }
     }
 
+    const handleFavoriteClick = async (e) => {
+        e.stopPropagation();
+        // console.log('handleFavoriteClick');
+
+        if (isStarred) {
+            const newFavProjectIdList = userInfo.favProjectIdList.filter(id => id !== projectInfo._id);
+
+
+            const response = await fetch(`http://localhost:4000/user/removeProjectFromFavorite`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "auth-token": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({
+                    projectId: projectInfo._id
+                })
+            });
+
+            const data = await response.json();
+            if (data.error) {
+                console.log(data.error, 'error from removeProjectToFavorite');
+            }
+            if (data.message) {
+                console.log(data.message, 'message from removeProjectToFavorite');
+            }
+            if (data.success) {
+                setUserInfo({ ...userInfo, favProjectIdList: newFavProjectIdList });
+                setIsStarred(!isStarred);
+            }
+        } else {
+            const newFavProjectIdList = [...userInfo.favProjectIdList, projectInfo._id];
+            // setUserInfo({ ...userInfo, favProjectIdList: newFavProjectIdList });
+
+            const response = await fetch(`http://localhost:4000/user/addProjectToFavorite`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "auth-token": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({
+                    projectId: projectInfo._id
+                })
+            });
+
+            const data = await response.json();
+            if (data.error) {
+                console.log(data.error, 'error from addProjectToFavorite');
+            }
+            if (data.message) {
+                console.log(data.message, 'message from addProjectToFavorite');
+            }
+            if (data.success) {
+                setUserInfo({ ...userInfo, favProjectIdList: newFavProjectIdList });
+                setIsStarred(!isStarred);
+            }
+
+        }
+    }
+
 
 
     return (
@@ -131,8 +209,8 @@ const ProjectInfo_v2 = ({
                                 <Title order={3}>
                                     {projectInfo.projectName}
                                 </Title>
-                                {isStarred && <IconStarFilled size={20} onClick={() => { setIsStarred(!isStarred) }} />}
-                                {!isStarred && <IconStar size={20} onClick={() => { setIsStarred(!isStarred) }} />}
+                                {isStarred && <IconStarFilled size={20} onClick={(e) => { handleFavoriteClick(e) }} />}
+                                {!isStarred && <IconStar size={20} onClick={(e) => { handleFavoriteClick(e) }} />}
                             </Group>
                         </Group>
                         <ProfileMenu userInfo={user} />
@@ -158,4 +236,4 @@ const ProjectInfo_v2 = ({
     );
 }
 
-export default ProjectInfo_v2;
+export default ProjectInfoBar_v2;
