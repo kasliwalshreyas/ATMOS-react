@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
     createStyles,
@@ -73,11 +74,6 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-const user = {
-    "name": "Jane Spoonfighter",
-    "email": "janspoon@fighter.dev",
-    "image": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-}
 
 // const tabs = ["Home", "Projects", "Message", "Notes"];
 
@@ -100,18 +96,25 @@ const links = [
     }
 ]
 
-const Navbar_v2 = ({ activeLink }) => {
+const Navbar_v2 = ({ activeLink, user }) => {
     const { classes, theme } = useStyles();
     const [opened, { toggle, close }] = useDisclosure(false);
     const [active, setActive] = useState(activeLink);
     const [userMenuOpened, setUserMenuOpened] = useState(false);
 
-    const items = links.map((link) => (
+    // console.log("Navbar_v2: user: ", user);
+
+    // const user = useSelector((state) => state.user.userInfo);
+
+    const items = links.map((link, index) => (
         <div className={active === link.link ? classes.linkActive : classes.link} onClick={(event) => {
             event.preventDefault();
             setActive(link.link);
             close();
-        }}>
+        }}
+        
+            key={index}
+        >
             <Link to={link.link} key={link.label} >
                 {link.label}
             </Link>

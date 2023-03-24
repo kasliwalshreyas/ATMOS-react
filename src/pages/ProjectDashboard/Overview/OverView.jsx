@@ -144,7 +144,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   const [userList, setUserList] = useState([]);
   const [userAccessLevel, setUserAccessLevel] = useState('no access');
   const [rerender, setRerender] = useState(false);
-
+  const projectOwnerId = projectInfo.projectOwner._id;
 
   useEffect(() => {
     const project = async () => {
@@ -406,7 +406,13 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                   <TeamMemberCard
                     name={member.userName}
                     email={member.email}
-                    rightSectionIcon={true}
+                    id={member._id}
+                projectOwnerId={projectOwnerId}
+                projectId={projectId}
+                role="highAccess"
+                userAccessLevel={userAccessLevel}
+                avatar={member.avatar}
+                rightSectionIcon={true}
                     key={index}
                   />
                 )
@@ -416,7 +422,13 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                   <TeamMemberCard
                     name={member.userName}
                     email={member.email}
-                    rightSectionIcon={true}
+                    id={member._id}
+                projectOwnerId={projectOwnerId}
+                projectId={projectId}
+                role="mediumAccess"
+                userAccessLevel={userAccessLevel}
+                avatar={member.avatar}
+                rightSectionIcon={true}
                     key={index}
                   />
                 )
@@ -426,7 +438,13 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                   <TeamMemberCard
                     name={member.userName}
                     email={member.email}
-                    rightSectionIcon={true}
+                    id={member._id}
+                projectOwnerId={projectOwnerId}
+                projectId={projectId}
+                role="lowAccess"
+                userAccessLevel={userAccessLevel}
+                avatar={member.avatar}
+                rightSectionIcon={true}
                     key={index}
                   />
                 )
@@ -484,6 +502,9 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
         </MediaQuery>
 
       </Flex>
+
+
+    
 
 
 

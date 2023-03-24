@@ -14,7 +14,8 @@ const Home = () => {
   // const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
-    async function getUser() {
+    // console.log('use effect from home');
+    const getUser = async () => {
       const res = await fetch("http://localhost:4000/user/getUserInfo", {
         method: "GET",
         headers: {
@@ -24,7 +25,9 @@ const Home = () => {
       });
 
       const data = await res.json();
+      // console.log(data, 'data from home');
       if (data.success) {
+        // console.log(data.user, 'from home');
         setUser(data.user);
       }
 
@@ -41,7 +44,7 @@ const Home = () => {
   return (
     <>
       {/* <Navbar /> */}
-      <Navbar_v2 activeLink={'/home'} />
+      {user && <Navbar_v2 activeLink={'/home'} user={user} />}
       <div className={styles.home}>
         <div className={styles.greetingContainer}>
           {user && <Greeting user={user} />}

@@ -78,7 +78,7 @@ const ProfileMenu = ({ userInfo }) => {
                     className={classes.user}
                 >
                     <Group spacing={7}>
-                        <Avatar src={user.image} alt={user.name} radius="xl" size={24} />
+                        <Avatar src={userInfo.avatar} alt={userInfo.userName} radius="xl" size={24} />
                     </Group>
                 </UnstyledButton>
             </Menu.Target>

@@ -167,8 +167,8 @@ const RecentProject = ({ user }) => {
         {!showFavorite && (
           <div className={styles.recentListdiv}>
             {projects &&
-              projects.map((project) => (
-                <div className={styles.recentParticularProject}>
+              projects.map((project, index) => (
+                <div className={styles.recentParticularProject} key={index}>
                   {
                     <Link
                       onClick={() => {
@@ -202,7 +202,7 @@ const RecentProject = ({ user }) => {
                     alt="No Recents"
                   ></img>
                 </div>
-                <div ClassName={styles.noFavoriteTxt}>
+                <div className={styles.noFavoriteTxt}>
                   <p className={styles.upperFavoriteTxt}>You haven't started</p>
                   <p className={styles.lowerFavoriteTxt}> any Project yet</p>
                 </div>
@@ -216,9 +216,9 @@ const RecentProject = ({ user }) => {
             {projects &&
               user.favProjectIdList &&
               projects.map((project) =>
-                user.favProjectIdList.map((userfavid) => {
+                user.favProjectIdList.map((userfavid, index) => {
                   if (userfavid === project._id) {
-                    <div className={styles.recentParticularProject}>
+                    <div className={styles.recentParticularProject} key={index}>
                       {
                         <Link
                           onClick={() => {
@@ -257,7 +257,7 @@ const RecentProject = ({ user }) => {
                     alt="No favorite"
                   ></img>
                 </div>
-                <div ClassName={styles.noFavoriteTxt}>
+                <div className={styles.noFavoriteTxt}>
                   <p className={styles.upperFavoriteTxt}>You don't have any</p>
                   <p className={styles.lowerFavoriteTxt}>favorite project</p>
                 </div>
