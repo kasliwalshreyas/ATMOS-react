@@ -3,7 +3,7 @@ import { IconMessageCircle, IconSettings, IconTextCaption } from "@tabler/icons-
 import TaskModalDescription from "./TaskModalDescription"
 import TaskModalDiscussion from "./TaskModalDiscussion"
 
-const ExtraTaskComponent = ({ taskDescription, setTaskDescription }) => {
+const ExtraTaskComponent = ({ taskDescription, setTaskDescription, taskDiscussionId }) => {
     return (
         <>
             <Tabs defaultValue="description" h={'100%'}>
@@ -21,7 +21,9 @@ const ExtraTaskComponent = ({ taskDescription, setTaskDescription }) => {
                 </Tabs.Panel>
 
                 <Tabs.Panel value="discussion" pt="xs" h={'94%'} p={20}>
-                    <TaskModalDiscussion />
+                    <TaskModalDiscussion
+                        taskDiscussionId={taskDiscussionId}
+                    />
                 </Tabs.Panel>
 
                 <Tabs.Panel value="settings" pt="xs">

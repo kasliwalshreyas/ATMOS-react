@@ -41,19 +41,30 @@ export const options = {
 };
 
 
-const BarChart = ({ UserInfo, basicData, bgColorPalette }) => {
+const BarChart = ({ basicData, bgColorPalette }) => {
 
     const data = {
         labels: Object.keys(basicData),
         datasets: [
             {
+                labels: 'Personal Tasks',
                 data: Object.values(basicData),
                 // backgroundColor: 'rgb(130, 205, 255)',
                 backgroundColor: bgColorPalette,
                 borderColor: 'rgb(65, 129, 217)',
             }
         ],
+
     };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+        },
+    }
 
     return (
         <>

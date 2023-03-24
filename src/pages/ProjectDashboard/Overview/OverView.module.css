@@ -151,8 +151,10 @@
 .teamMembersList {
     display: flex;
     flex-direction: column;
-
     background-color: inherit;
+    height: '70px';
+    overflow-y: auto;
+
 }
 
 .addMemberDiv {

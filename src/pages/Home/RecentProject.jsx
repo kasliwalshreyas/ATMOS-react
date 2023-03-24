@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RecentProject.module.css";
 import { Link } from "react-router-dom";
+import { Select, Table } from "@mantine/core";
 
 const RecentProject = ({ user }) => {
   const [showFavorite, setShowFavorite] = useState(false);
   const [projects, setProjects] = useState([]);
+
+  const [selected, setSelected] = useState("All");
 
   // console.log("this is the only one of my favorite project from user defined object", user.favProjectIdList)
 
@@ -113,22 +116,24 @@ const RecentProject = ({ user }) => {
   projectNumber = 0;
 
   const handleLinkClick = async (projects, project) => {
-    project.projectLastUsed &&
-      project.projectLastUsed.map((lasttime) => {
-        if (lasttime.userid === user._id) {
-          lasttime.lastUsed = new Date();
-        }
-      });
+    // project.projectLastUsed &&
+    //   project.projectLastUsed.map((lasttime) => {
+    //     if (lasttime.userid === user._id) {
+    //       lasttime.lastUsed = new Date();
+    //     }
+    //   });
 
     const res = await fetch(
-      `http://localhost:4000/project/updateUserProjects/${project._id}`,
+      `http://localhost:4000/project/updateLastUsed/${project._id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "auth-token": `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(project),
+        body: JSON.stringify({
+          updatedLastUsed: new Date()
+        })
       }
     );
     const data = await res.json();

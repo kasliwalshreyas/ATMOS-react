@@ -32,7 +32,7 @@ const TaskModalDescription = ({
             Highlight,
             TextAlign.configure({ types: ['heading', 'paragraph'] }),
         ],
-        content: taskDescription,
+        content: taskDescription ? taskDescription : '<p>Write a description for the task</p>',
         onUpdate: ({ editor }) => {
             setTaskDescription(editor.getHTML());
             // setValue(editor.getHTML());

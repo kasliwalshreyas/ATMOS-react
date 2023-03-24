@@ -124,9 +124,9 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
+                    key={index}
                 >
                     <TaskCard
-                        key={index}
                         task={taskList[taskIndex]}
                         section={sectionInfo}
                         expandModal={expandModal}
@@ -166,17 +166,27 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
                                 hovered && (
                                     <Menu
                                         transitionProps={{ transition: 'pop' }}
+                                        offset={2}
+                                        arrowPosition="center"
                                         withArrow
                                         position="bottom"
                                         menuPosition="right"
+                                        zIndex={100}
                                     >
                                         <Menu.Target>
                                             <ActionIcon>
                                                 <IconDots size="1rem" stroke={1.5} />
                                             </ActionIcon>
                                         </Menu.Target>
-                                        <Menu.Dropdown>
-                                            <Menu.Item icon={<IconTrash size="1rem" stroke={1.5} />} color="red" onClick={(e) => deleteSection(e)}>
+                                        <Menu.Dropdown
+                                            zindex={100}
+                                        >
+                                            <Menu.Item
+                                                icon={<IconTrash size="1rem" stroke={1.5} />}
+                                                color="red"
+                                                onClick={(e) => deleteSection(e)}
+                                                zindex={100}
+                                            >
                                                 Delete Section
                                             </Menu.Item>
                                         </Menu.Dropdown>

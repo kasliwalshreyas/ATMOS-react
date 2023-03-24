@@ -28,6 +28,20 @@ const TaskModalForm = ({
 
     const { classes } = useStyles();
 
+    // console.log(taskDeadline, "taskDeadline");
+
+    // const checkDate = (date) => {
+    //     if (date === 'Thu Jan 01 1970 05:30:00 GMT+0530 (India Standard Time)') {
+    //         const newdate = new Date();
+    //         console.log(newdate, "newdate");
+    //         return newdate;
+    //     }
+    //     else {
+    //         return date;
+    //     }
+    // }
+
+
     return (
         <>
             <Table>
@@ -37,7 +51,7 @@ const TaskModalForm = ({
                             <IconTextSize />
                             <Text size={'sm'} ml={5}>Task Name</Text>
                         </td>
-                        <td>
+                        <td >
                             <TextInput
                                 value={taskName}
                                 onChange={(e) => setTaskName(e.target.value)}
@@ -54,6 +68,7 @@ const TaskModalForm = ({
                             <Select
                                 placeholder="Task Completed"
                                 value={taskCompletion}
+                                onChange={setTaskCompletion}
                                 data={[
                                     { value: true, label: 'Yes' },
                                     { value: false, label: 'No' },
@@ -68,10 +83,16 @@ const TaskModalForm = ({
                         </td>
                         <td>
                             <MultiSelect
+                                miw={'350px'}
+                                maw={'350px'}
                                 placeholder='Select assignee'
                                 value={taskAssigneeList}
                                 onChange={setTaskAssigneeList}
                                 data={AssigneeList}
+                                searchable
+                                nothingFound="Nothing found"
+                                maxDropdownHeight={160}
+                                size={'sm'}
                             />
                         </td>
                     </tr>

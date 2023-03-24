@@ -171,6 +171,8 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
                     key={columnIndex}
                     draggableId={'' + columnIndex}
                     index={index}
+                    style={{ height: 'fit-content' }}
+                    className='section section-0'
                   >
                     {(provided) => (
                       <div

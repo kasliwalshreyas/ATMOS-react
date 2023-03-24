@@ -11,7 +11,7 @@ import { Button, Flex, Group, Paper } from '@mantine/core';
 
 const content = ""
 
-const ChatEditor = () => {
+const ChatEditor = ({ taskDiscussionId, setDiscussionThread }) => {
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -24,6 +24,32 @@ const ChatEditor = () => {
         ],
         content,
     });
+
+
+    const saveDiscussion = async () => {
+        // console.log(editor.getHTML());
+        const res = await fetch(`http://localhost:4000/task/createDiscussionThread/${taskDiscussionId}`, {
+            // mode: "no-cors",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+                "discussion": editor.getHTML(),
+            })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            // console.log(data);
+            setDiscussionThread(data.discussion.discussionThread);
+            editor.commands.setContent("");
+        }
+    }
+
+
+
     return (
         <>
             <RichTextEditor editor={editor}
@@ -79,7 +105,7 @@ const ChatEditor = () => {
                     </Flex>
 
                     <RichTextEditor.ControlsGroup>
-                        <Button>Send</Button>
+                        <Button onClick={saveDiscussion}>Send</Button>
                     </RichTextEditor.ControlsGroup>
                 </RichTextEditor.Toolbar>
             </RichTextEditor>

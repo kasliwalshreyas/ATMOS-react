@@ -15,13 +15,16 @@ const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRe
     // console.log(AssigneeList, "AssigneeList");
     const theme = useMantineTheme();
     const dateFormater = (date) => {
-        let newDate = new Date(date);
-        return newDate
+        if (date) {
+            let newDate = new Date(date);
+            return newDate
+        }
+        return date;
     }
 
     const assigneeFormatter = (assigneeList) => {
         let assigneeListTemp = [];
-        assigneeList.forEach((assignee) => {
+        assigneeList?.forEach((assignee) => {
             assigneeListTemp.push(assignee._id);
         })
         return assigneeListTemp;
@@ -36,10 +39,11 @@ const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRe
     const [taskDeadline, setTaskDeadline] = useState(dateFormater(taskInfo.taskDeadline));
     const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
 
-
+    // console.log(taskDeadline, "taskDeadline");
     // console.log(value, "value");
     // console.log(taskAssignee, "taskAssignee");
     // console.log(taskName, taskCompletion, taskAssigneeList, taskPriority, taskStatus, taskDescription, "taskInfo");
+    // console.log(taskInfo.taskDiscussion, "taskInfo.taskDiscussion")
 
     const saveTask = async () => {
         console.log(taskName, taskCompletion, taskAssigneeList, taskPriority, taskStatus, taskDeadline, taskDescription, "taskInfo");
@@ -90,6 +94,7 @@ const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRe
                             <ExtraTaskComponent
                                 taskDescription={taskDescription}
                                 setTaskDescription={setTaskDescription}
+                                taskDiscussionId={taskInfo.taskDiscussion}
                             />
                         </Paper>
                         <Paper size={'sm'} mr={0} w={'40%'} p={20} pl={30} >
