@@ -117,8 +117,12 @@ const ProfileSection = ({ user, setUser }) => {
                         <Card className={styles.profileCard+ ` shadow`}>
                         <Image mx="auto" radius="md" height={222} src="https://i.imgur.com/K7A78We.jpg" alt="Profile back" />
                             <Card.Body className="text-center">
-                                <CardImg src={avatar}
+                                {/* Hover effect on hover avatar */}
+                                <CardImg src={avatar} 
                                     className="rounded-circle fluid bg-white"
+                                    // Scale avatar on hover with ease
+                                    onMouseEnter={(e) => {e.target.style.transform = "scale(1.2)"; e.target.style.transition = "all 0.5s ease"}}
+                                    onMouseLeave={(e) => {e.target.style.transform = "scale(1)"; e.target.style.transition = "all 0.5s ease"}}
                                     style={{ width: '160px', marginTop: '-90px', zIndex: '5', position: 'relative', border: '5px solid #fff' }}
                                 />
 
