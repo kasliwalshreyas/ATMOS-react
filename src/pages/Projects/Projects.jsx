@@ -21,7 +21,7 @@ const Projects = () => {
   // }, []);
 
   const user = useSelector((state) => state.user.userInfo);
-  console.log(user, "user from projects");
+  // console.log(user, "user from projects");
   // let token = useSelector((state) => state.user.token);
   // console.log(user, 'user from projects');
   // if (token == null) {
@@ -55,7 +55,7 @@ const Projects = () => {
         },
       });
       const data = await res.json();
-      console.log(data, "data from Projects");
+      // console.log(data, "data from Projects");
       setProjectInfo(data.projects);
     };
     projects();

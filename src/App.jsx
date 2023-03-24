@@ -18,6 +18,7 @@ import Contact from "./pages/ContactUs/Contact";
 import Notes from "./pages/Notes/Notes";
 import { login } from "./features/userSlice";
 import { useDispatch } from "react-redux";
+import NoteEditor from "./pages/Notes/NoteEditor";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const App = () => {
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
             <Route exact path="/projects/:id/board" element={<ProjectMainView Board />} />
+            <Route exact path="/noteeditor/:id" element={<NoteEditor />} />
             <Route
               exact
               path="/projects/:id/overview"

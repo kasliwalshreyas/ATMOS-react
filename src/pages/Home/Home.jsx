@@ -1,11 +1,11 @@
 import Navbar from "../../UI/Navbar";
-import React, { useState } from "react"
+import React, { useState } from "react";
 import styles from "./Home.module.css";
-import Greeting from "./Greeting"
-import RecentProject from "./RecentProject"
-import Priority from "./Priority"
+import Greeting from "./Greeting";
+import RecentProject from "./RecentProject";
+import Priority from "./Priority";
 import { useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import Navbar_v2 from "../../UI/Navbar_v2";
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
   // const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
-    async function getUser() {
+    const getUser = async () => {
       const res = await fetch("http://localhost:4000/user/getUserInfo", {
         method: "GET",
         headers: {
@@ -27,21 +27,14 @@ const Home = () => {
       if (data.success) {
         setUser(data.user);
       }
-
-    }
+    };
     getUser();
   }, []);
-
-
-
-
-
-
 
   return (
     <>
       {/* <Navbar /> */}
-      <Navbar_v2 activeLink={'/home'} />
+      <Navbar_v2 activeLink={"/home"} />
       <div className={styles.home}>
         <div className={styles.greetingContainer}>
           {user && <Greeting user={user} />}

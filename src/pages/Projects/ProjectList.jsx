@@ -97,7 +97,7 @@ const ProjectList = ({ projects, userInfo }) => {
                 </a>
               </div>
               <div className="project-name">
-                {console.log(project)}
+                {/* {console.log(project)} */}
                 <p>{project.projectName}</p>
               </div>
             </div>

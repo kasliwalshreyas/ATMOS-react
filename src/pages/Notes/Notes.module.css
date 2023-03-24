@@ -1,0 +1,18 @@
+.note-real {
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 30px;
+    overflow: hidden;
+  }
+  
+.note-container {
+    width: 150px;
+    height: 120px;
+    border-radius: 15px;
+  }
+
+  .note-container:hover {
+    border: 3px solid black;
+    transition: 0.1s;
+  }
