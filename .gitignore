@@ -6,6 +6,9 @@
 .pnp.js
 contributions.md
 
+# Ignoring .env 
+.env
+
 # testing
 /coverage
 

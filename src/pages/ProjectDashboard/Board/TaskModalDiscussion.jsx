@@ -1,55 +1,84 @@
-import { Paper } from "@mantine/core";
+import { createStyles, Flex, Paper } from "@mantine/core";
+import { useEffect, useState } from "react";
 import ChatEditor from "./ChatEditor";
 import ChatFormat from "./ChatFormat";
 
-const dummyChat = [
-    {
-        "postedAt": "10 minutes ago",
-        "body": "<p>I use <a href=\"https://heroku.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Heroku</a> to host my Node.js application, but MongoDB add-on appears to be too <strong>expensive</strong>. I consider switching to <a href=\"https://www.digitalocean.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Digital Ocean</a> VPS to save some cash.</p>",
-        "author": {
-            "name": "Jacob Warnhalter",
-            "image": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80"
-        }
+
+const useStyles = createStyles((theme) => ({
+    discussionWindow: {
+        overflowY: 'scroll',
+        flexDirection: 'column-reverse',
+        // height: '100%',
+        // maxHeight: '100%',
+        // minHeight: '100%',
+        //remove scrollbar
+        '&::-webkit-scrollbar': {
+            display: 'none',
+        },
+        // justifyContent: 'flex-end',
     },
-    {
-        "postedAt": "10 minutes ago",
-        "body": "<p>I use <a href=\"https://heroku.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Heroku</a> to host my Node.js application, but MongoDB add-on appears to be too <strong>expensive</strong>. I consider switching to <a href=\"https://www.digitalocean.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Digital Ocean</a> VPS to save some cash.</p>",
-        "author": {
-            "name": "Jacob Warnhalter",
-            "image": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80"
-        }
-    },
-    {
-        "postedAt": "10 minutes ago",
-        "body": "<p>I use <a href=\"https://heroku.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Heroku</a> to host my Node.js application, but MongoDB add-on appears to be too <strong>expensive</strong>. I consider switching to <a href=\"https://www.digitalocean.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Digital Ocean</a> VPS to save some cash.</p>",
-        "author": {
-            "name": "Jacob Warnhalter",
-            "image": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80"
-        }
-    },
-];
+}));
 
 
-const TaskModalDiscussion = () => {
+
+const TaskModalDiscussion = ({ taskDiscussionId }) => {
+
+    // console.log(taskDiscussion);
+    const [discusssionThread, setDiscussionThread] = useState([]);
+    const { classes } = useStyles();
+
+    useEffect(() => {
+        const getDiscussion = async () => {
+            const response = await fetch(`http://localhost:4000/task/getDiscussionThread/${taskDiscussionId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            const data = await response.json();
+            if (data.success) {
+                setDiscussionThread(data.discussion[0].discussionThread);
+                // console.log(data.message);
+                // console.log(data.discussion);
+            }
+            else {
+                console.log(data.message);
+            }
+        }
+        getDiscussion();
+    }, [taskDiscussionId]);
+
+    // console.log(discusssionThread, 'discussion thread');
+
+
+
+
+
     return (
         <>
-            <Paper>
-                <Paper>
-                    {dummyChat.map((chat) => (
+            <Flex direction={'column'} justify={'end'} h={'100%'}>
+                <Flex direction={'column'} p={20} sx={classes.discussionWindow}>
+                    {discusssionThread.map((chat, index) => (
                         <ChatFormat
-                            postedAt={chat.postedAt}
-                            body={chat.body}
-                            author={chat.author}
+                            key={index}
+                            postedAt={chat.createdAt}
+                            body={chat.message}
+                            author={chat.userId}
+                            discussionThreadId={chat._id}
+                            taskDiscussionId={taskDiscussionId}
+                            setDiscussionThread={setDiscussionThread}
                         />
-                    ))}
-
-
+                    )).reverse()}
+                </Flex>
+                <Paper >
+                    <ChatEditor
+                        taskDiscussionId={taskDiscussionId}
+                        setDiscussionThread={setDiscussionThread}
+                    />
                 </Paper>
-                <Paper>
-                    <ChatEditor />
-                </Paper>
 
-            </Paper>
+            </Flex>
         </>
     );
 }

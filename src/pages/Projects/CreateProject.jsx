@@ -25,7 +25,28 @@ const CreateProject = () => {
 
   const history = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.userInfo);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // console.log('use effect from home');
+    const getUser = async () => {
+      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        // console.log(data.user, 'from home');
+        setUser(data.user);
+      }
+
+    }
+    getUser();
+  }, []);
 
   const [projectName, setProjectName] = useState("");
   const [type, setType] = useState("Personal");
@@ -91,7 +112,7 @@ const CreateProject = () => {
   return (
     <>
       {/* <Navbar /> */}
-      <Navbar_v2 activeLink={'/projects'} />
+      {user && <Navbar_v2 activeLink={'/projects'} user={user} />}
       <div className={styles.createProject}>
         <div className={styles.projectLeftPart}>
           <div className={styles.leftFix}>

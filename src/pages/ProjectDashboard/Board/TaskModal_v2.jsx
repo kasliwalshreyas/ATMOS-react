@@ -1,50 +1,79 @@
 import { useDisclosure } from '@mantine/hooks';
-import { Container, createStyles, Modal, MultiSelect, NativeSelect, Paper, Select, Table, Text, TextInput, useMantineTheme } from '@mantine/core';
+import { Container, createStyles, Flex, Modal, MultiSelect, NativeSelect, Paper, Select, Table, Text, TextInput, useMantineTheme, Button } from '@mantine/core';
 import { IconCalendarDue, IconChecks, IconCircleLetterP, IconCircleLetterS, IconTextSize, IconUrgent, IconUser, IconUsers } from '@tabler/icons-react';
 import { DatePickerInput } from '@mantine/dates';
 import { useState } from 'react';
 import ExtraTaskComponent from './ExtraTaskComponent';
-
-
-const useStyles = createStyles((theme) => ({
-    containerWithRightSideBorder: {
+import TaskModalForm from './TaskModalForm';
 
 
 
-
-
-    }
-
-}));
 
 const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList, userInfo }) => {
     // const [opened, { open, close }] = useDisclosure(show);
 
-    const { classes } = useStyles();
+    // console.log(AssigneeList, "AssigneeList");
     const theme = useMantineTheme();
     const dateFormater = (date) => {
-        let newDate = new Date(date);
-        // console.log(newDate, "newDate");
-        // const offset = newDate.getTimezoneOffset()
-        // newDate = new Date(newDate.getTime() - (offset * 60 * 1000))
-        // return newDate.toISOString().split('T')[0]
-        return newDate
+        if (date) {
+            let newDate = new Date(date);
+            return newDate
+        }
+        return date;
+    }
+
+    const assigneeFormatter = (assigneeList) => {
+        let assigneeListTemp = [];
+        assigneeList?.forEach((assignee) => {
+            assigneeListTemp.push(assignee._id);
+        })
+        return assigneeListTemp;
     }
 
 
     const [taskName, setTaskName] = useState(taskInfo.taskName);
     const [taskCompletion, setTaskCompletion] = useState(taskInfo.taskCompletion);
-    const [taskAssignee, setTaskAssignee] = useState(taskInfo.taskAssigneeList);
+    const [taskAssigneeList, setTaskAssigneeList] = useState(assigneeFormatter(taskInfo.taskAssigneeList));
     const [taskPriority, setTaskPriority] = useState(taskInfo.taskPriority);
     const [taskStatus, setTaskStatus] = useState(taskInfo.taskStatus);
     const [taskDeadline, setTaskDeadline] = useState(dateFormater(taskInfo.taskDeadline));
-    // const [value, setvalue] = useState(null);
+    const [taskDescription, setTaskDescription] = useState(taskInfo.taskDescription);
 
+    // console.log(taskDeadline, "taskDeadline");
     // console.log(value, "value");
-    console.log(taskDeadline);
+    // console.log(taskAssignee, "taskAssignee");
+    // console.log(taskName, taskCompletion, taskAssigneeList, taskPriority, taskStatus, taskDescription, "taskInfo");
+    // console.log(taskInfo.taskDiscussion, "taskInfo.taskDiscussion")
+
+    const saveTask = async () => {
+        console.log(taskName, taskCompletion, taskAssigneeList, taskPriority, taskStatus, taskDeadline, taskDescription, "taskInfo");
+
+        const response = await fetch('http://localhost:4000/task/updateTask', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'auth-token': `Bearer ${localStorage.getItem("token")}` },
+            body: JSON.stringify({
+                taskId: taskInfo._id,
+                taskName,
+                taskDescription,
+                taskCompletion,
+                taskPriority,
+                taskStatus,
+                taskAssigneeList,
+                taskSectionId: sectionInfo._id,
+                taskProjectId: projectInfo._id,
+                taskCreator: userInfo._id,
+                taskDeadline,
+            })
+        });
+        const data = await response.json();
+        console.log(data, "data");
+        if (data.success) {
+            setRerender(!rerender);
+            closeModal();
+        }
+    }
 
 
-    console.log(taskName, taskCompletion, taskAssignee, taskPriority, taskStatus, "taskInfo");
 
     return (
         <>
@@ -57,127 +86,40 @@ const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRe
                     opacity: 0.55,
                     blur: 3,
                 }}
-                size="80%"
+                size="80vw"
             >
-                <Container p={0} m={0} display={'flex'} fluid={true}>
-                    <Paper w={'60%'} >
-                        <ExtraTaskComponent />
+                <Container p={0} m={0} display={'flex'} fluid={true} sx={{ flexDirection: 'column' }} >
+                    <Flex h={'70vh'} p={0} m={0}>
+                        <Paper w={'60%'} h={'108%'} sx={{ borderRight: '2px solid #dee2e6', borderRadius: '0px' }}>
+                            <ExtraTaskComponent
+                                taskDescription={taskDescription}
+                                setTaskDescription={setTaskDescription}
+                                taskDiscussionId={taskInfo.taskDiscussion}
+                            />
+                        </Paper>
+                        <Paper size={'sm'} mr={0} w={'40%'} p={20} pl={30} >
+                            <TaskModalForm
+                                taskName={taskName}
+                                setTaskName={setTaskName}
+                                taskCompletion={taskCompletion}
+                                setTaskCompletion={setTaskCompletion}
+                                taskAssigneeList={taskAssigneeList}
+                                setTaskAssigneeList={setTaskAssigneeList}
+                                taskPriority={taskPriority}
+                                setTaskPriority={setTaskPriority}
+                                taskStatus={taskStatus}
+                                setTaskStatus={setTaskStatus}
+                                taskDeadline={taskDeadline}
+                                setTaskDeadline={setTaskDeadline}
+                                AssigneeList={AssigneeList}
+                            />
+                        </Paper>
+                    </Flex>
 
-                    </Paper>
-                    <Paper size={'sm'} mr={0} w={'40%'} p={20} pl={30}>
-                        <Table>
-                            <tbody>
-                                <tr>
-                                    <td style={{ display: 'flex' }}>
-                                        <IconTextSize />
-                                        <Text size={'lg'} ml={5}>Task Name</Text>
-                                    </td>
-                                    <td>
-                                        <TextInput
-                                            value={taskName}
-                                            onChange={(e) => setTaskName(e.target.value)}
-                                            placeholder='Enter task name'
-                                        />
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td style={{ display: 'flex', alignItems: 'center' }}>
-                                        <IconChecks />
-                                        <Text size={'lg'} ml={5}>Completed</Text>
-                                    </td>
-                                    <td>
-                                        <Select
-                                            placeholder="Task Completed"
-                                            value={taskCompletion}
-                                            data={[
-                                                { value: true, label: 'Yes' },
-                                                { value: false, label: 'No' },
-                                            ]}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td style={{ display: 'flex', alignItems: 'center' }}>
-                                        <IconUsers />
-                                        <Text size={'lg'} ml={5}>Assignee</Text>
-                                    </td>
-                                    <td>
-                                        <MultiSelect
-                                            placeholder='Select assignee'
-                                            value={taskAssignee}
-                                            onChange={(e) => { setTaskAssignee(e.target.value) }}
-                                            data={[
-                                                { value: 'react', label: 'React' },
-                                                { value: 'ng', label: 'Angular' },
-                                                { value: 'svelte', label: 'Svelte' },
-                                                { value: 'vue', label: 'Vue' },
-                                                { value: 'riot', label: 'Riot' },
-                                                { value: 'next', label: 'Next.js' },
-                                                { value: 'blitz', label: 'Blitz.js' },
-                                            ]}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td style={{ display: 'flex', alignItems: 'center' }}>
-                                        <IconCircleLetterP />
-                                        <Text size={'lg'} ml={5}>Priority</Text>
-                                    </td>
-                                    <td>
-                                        <Select
-                                            placeholder="Select Priority"
-                                            value={taskPriority}
-                                            onChange={(e) => { setTaskPriority(e.target.value) }}
-                                            data={[
-                                                { value: 'High', label: 'High' },
-                                                { value: 'Medium', label: 'Medium' },
-                                                { value: 'Low', label: 'Low' },
-                                            ]}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td style={{ display: 'flex', alignItems: 'center' }}>
-                                        <IconCircleLetterS />
-                                        <Text size={'lg'} ml={5}>Status</Text>
-                                    </td>
-                                    <td>
-                                        <Select
-                                            placeholder="Select Status"
-                                            value={taskStatus}
-                                            onChange={(e) => { setTaskStatus(e.target.value) }}
-                                            data={[
-                                                { value: 'In Progress', label: 'In Progress' },
-                                                { value: 'Stuck', label: 'Stuck' },
-                                                { value: 'Backlog', label: 'Backlog' },
-                                                { value: 'Done', label: 'Done' },
-                                            ]}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td style={{ display: 'flex', alignItems: 'center' }}>
-                                        <IconCalendarDue />
-                                        <Text size={'lg'} ml={5}>Deadline</Text>
-                                    </td>
-                                    <td>
-                                        <DatePickerInput
-                                            placeholder='Select date'
-                                            // value={taskDeadline}
-                                            // onChange={(e) => setTaskDeadline(dateFormater(e.target.value))}
-                                            value={taskDeadline}
-                                            onChange={setTaskDeadline}
-                                        />
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </Table>
-
-
-                    </Paper>
-
-
+                    <Flex justify={'end'} gap={5}>
+                        <Button size='sm' onClick={saveTask}>Save</Button>
+                        <Button size='sm' onClick={closeModal}>Close</Button>
+                    </Flex>
                 </Container>
             </Modal>
         </>

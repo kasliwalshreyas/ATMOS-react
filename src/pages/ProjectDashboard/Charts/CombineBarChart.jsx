@@ -32,7 +32,7 @@ export const options = {
 const CombineBarChart = ({ UserInfo, dataArray, bgColorPalette }) => {
 
     const data = {
-        labels: ['High Priority', 'Medium Priority', 'Low Priority'],
+        labels: ['High Priority', 'Medium Priority', 'Low Priority', 'Choose Priority'],
         datasets: [
             {
                 label: 'Total Tasks',
@@ -40,6 +40,7 @@ const CombineBarChart = ({ UserInfo, dataArray, bgColorPalette }) => {
                     dataArray[0]['total'],
                     dataArray[1]['total'],
                     dataArray[2]['total'],
+                    dataArray[3]['total'],
                 ],
                 // backgroundColor: 'rgb(130, 205, 255)',
                 backgroundColor: bgColorPalette[0],
@@ -51,6 +52,7 @@ const CombineBarChart = ({ UserInfo, dataArray, bgColorPalette }) => {
                     dataArray[0]['completed'],
                     dataArray[1]['completed'],
                     dataArray[2]['completed'],
+                    dataArray[3]['completed'],
                 ],
                 // backgroundColor: 'rgb(130, 205, 255)',
                 backgroundColor: bgColorPalette[1],
@@ -62,6 +64,7 @@ const CombineBarChart = ({ UserInfo, dataArray, bgColorPalette }) => {
                     dataArray[0]['not-completed'],
                     dataArray[1]['not-completed'],
                     dataArray[2]['not-completed'],
+                    dataArray[3]['not-completed'],
                 ],
                 // backgroundColor: 'rgb(130, 205, 255)',
                 backgroundColor: bgColorPalette[2],

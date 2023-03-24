@@ -3,25 +3,30 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import ProjectList from "./ProjectList";
 import Navbar from "../../UI/Navbar";
-import { useSelector } from "react-redux";
 import Navbar_v2 from "../../UI/Navbar_v2";
 
 const Projects = () => {
-  // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
-  // const [user, setUser] = useState(null);
-  // useEffect(() => {
-  //   async function getUser() {
-  //     const res = await fetch("http://localhost:8000/userList/" + userID);
-  //     const data = await res.json();
-  //     setUser(data);
-  //   }
-  //   getUser();
-  //   console.log(user, 'from projects');
+  const [user, setUser] = useState(null);
 
-  // }, []);
+  useEffect(() => {
+    // console.log('use effect from home');
+    const getUser = async () => {
+      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
-  const user = useSelector((state) => state.user.userInfo);
-  // console.log(user, "user from projects");
+      const data = await res.json();
+      if (data.success) {
+        // console.log(data.user, 'from home');
+        setUser(data.user);
+      }
+    };
+    getUser();
+  }, []);
   // let token = useSelector((state) => state.user.token);
   // console.log(user, 'user from projects');
   // if (token == null) {
@@ -63,7 +68,7 @@ const Projects = () => {
 
   return (
     <>
-      <Navbar_v2 activeLink={"/projects"} />
+      {user && <Navbar_v2 activeLink={"/projects"} user={user} />}
       {/* <Navbar /> */}
       {user && projectInfo && (
         <ProjectList projects={projectInfo} userInfo={user} />

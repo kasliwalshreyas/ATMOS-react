@@ -11,7 +11,7 @@ import styles from "./ProfileSection.module.css";
 
 const salt = bcrypt.genSaltSync(10);
 
-const ProfileSection = ({ user }) => {
+const ProfileSection = ({ user, setUser }) => {
     const [userName, setUserName] = useState(user.userName);
     const [emailId, setemailId] = useState(user.email);
     const [password, setPassword] = useState(user.password);
@@ -32,7 +32,7 @@ const ProfileSection = ({ user }) => {
             if (password !== user.password) {
                 hashedPassword = bcrypt.hashSync(password, salt);
             }
-            const updatedUser = { ...user, userName, email: emailId, password: hashedPassword };
+            const updatedUser = {userName, email: emailId, password: hashedPassword };
             const res = await fetch("http://localhost:4000/user/updateUser", {
                 method: "POST",
                 headers: { "Content-Type": "application/json",
@@ -48,6 +48,7 @@ const ProfileSection = ({ user }) => {
                 alert(data.message);
             }
             else{
+                setUser(data.user);
                 setIsEdit(false);
             }
         }
@@ -72,6 +73,7 @@ const ProfileSection = ({ user }) => {
             }
             else{
                 // alert(data.message);
+                setUser(data.user);
                 fileInputRef.current.value = null;
             }
         } catch (error) {
@@ -81,6 +83,10 @@ const ProfileSection = ({ user }) => {
     }
 
     const handleFileChange = (e) => {
+        // avoid null error of file
+        if (!e.target.files[0]) {
+            return;
+        }
         console.log(e.target.files[0]);
         setFile(e.target.files[0]);
         // File reader to display the image
@@ -119,10 +125,10 @@ const ProfileSection = ({ user }) => {
                                 <h1 className="profile-heading fw-semibold mt-3" style={{color:"#05386B"}}>{userName}</h1>
                                 <p className="profile-para fw-bold text-secondary">{emailId}</p>
                                 <div className="d-flex justify-content-evenly">
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-facebook-f fa-2x" style={{color: "#3b5998"}}></i></Button>
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-twitter fa-2x" style={{color: "#55acee"}}></i></Button>
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-instagram fa-2x" style={{color: "#ac2bac"}}></i></Button>
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-linkedin-in fa-2x" style={{color: "#0082ca"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-facebook-f fa-2x" style={{color: "#3b5998"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-twitter fa-2x" style={{color: "#55acee"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-instagram fa-2x" style={{color: "#ac2bac"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-linkedin-in fa-2x" style={{color: "#0082ca"}}></i></Button>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -183,7 +189,7 @@ const ProfileSection = ({ user }) => {
                                 </div>
                                 <div className={styles.containerBody}>
                                     <p className={styles.para}>
-                                    {user.projectIDList? user.projectIDList.length:"0"}
+                                    {user.projectIdList? user.projectIdList.length:"0"}
                                     </p>
                                 </div>
                                 <div className={styles.containerFoot}>
@@ -203,7 +209,7 @@ const ProfileSection = ({ user }) => {
                                 </div>
                                 <div className={styles.containerBody}>
                                     <p className={styles.para}>
-                                    {user.favoriteProjectList? user.favoriteProjectList.length:"0"}
+                                    {user.favProjectIdList? user.favProjectIdList.length:"0"}
                                     </p>
                                 </div>
                                 <div className={styles.containerFoot}>
@@ -243,7 +249,7 @@ const ProfileSection = ({ user }) => {
                                         <Form.Label className="fw-semibold">Update Avatar</Form.Label>
                                         <Form.Control type="file" accept="image/png, image/jpeg, image/jpg" ref={fileInputRef} onChange={(e)=>handleFileChange(e)} />
                                     </Form.Group>
-                                    <Button className="btn-md ms-2" variant="primary" type="submit" onClick={(e)=>handleFileSubmit(e) }  disabled={fileInputRef.current.files.length===0}
+                                    <Button className="btn-md ms-2" variant="primary" type="submit" onClick={(e)=>handleFileSubmit(e)}  disabled={!fileInputRef.current?.files.length}
                                     >Update</Button>
                                     {/* <Box w={250}>
                                         <ButtonProgress onClick={(e)=>handleFileSubmit(e)} />
@@ -252,7 +258,7 @@ const ProfileSection = ({ user }) => {
 
                                 {/* <FileInput
                                 placeholder="JPG, PNG or JPEG. Max size of 800K"
-                                icon={<i class="fa-solid fa-paperclip" style={{color: "#05386B"}}></i>}
+                                icon={<i className="fa-solid fa-paperclip" style={{color: "#05386B"}}></i>}
                                 label="Choose Avatar"
                                 variant="unstyled"
                                 accept="image/png, image/jpeg, image/jpg"

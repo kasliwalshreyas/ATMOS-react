@@ -78,7 +78,7 @@ const ProfileMenu = ({ userInfo }) => {
                     className={classes.user}
                 >
                     <Group spacing={7}>
-                        <Avatar src={user.image} alt={user.name} radius="xl" size={24} />
+                        <Avatar src={userInfo.avatar} alt={userInfo.userName} radius="xl" size={24} />
                     </Group>
                 </UnstyledButton>
             </Menu.Target>
@@ -87,7 +87,7 @@ const ProfileMenu = ({ userInfo }) => {
                     <Link to="/profile">Profile</Link>
                 </Menu.Item>
                 <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
-                <Link to="/admin-portal">Admin Portal</Link>
+                    <Link to="/admin-portal">Admin Portal</Link>
                 </Menu.Item>
                 <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
                     Comments

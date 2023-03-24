@@ -19,6 +19,8 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
 
   const [state, handlers] = useListState([columnOrder]);
 
+  // console.log(projectInfo, "projectInfo");
+
 
   useEffect(() => {
     const user = async () => {
@@ -77,13 +79,6 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
     setSelectedSection(null);
     setShow(false);
   };
-
-  // useEffect(() => {
-  //   setSectionList(projectInfo.projectSectionIdList);
-  //   setTaskList(projectInfo.projectTaskIdList);
-
-  //   console.log(projectInfo, "projectInfo");
-  // }, [rerender]);
 
 
   //func to create Task
@@ -176,6 +171,8 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
                     key={columnIndex}
                     draggableId={'' + columnIndex}
                     index={index}
+                    style={{ height: 'fit-content' }}
+                    className='section section-0'
                   >
                     {(provided) => (
                       <div
