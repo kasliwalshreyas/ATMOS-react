@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import styles from "./Home.module.css";
-import Greeting from "./Greeting";
-import RecentProject from "./RecentProject";
-import Priority from "./Priority";
+import React, { useState } from "react"
+import Greeting from "./Greeting"
+import RecentProject from "./RecentProject"
+import Priority from "./Priority"
 import { useEffect } from "react";
 import Navbar_v2 from "../../UI/Navbar_v2";
+import { Center, Container, Flex } from "@mantine/core";
 
 const Home = () => {
-  // const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("user")));
   const [user, setUser] = useState(null);
-  // const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
-    // console.log('use effect from home');
     const getUser = async () => {
       const res = await fetch("http://localhost:4000/user/getUserInfo", {
         method: "GET",
@@ -32,19 +29,22 @@ const Home = () => {
     getUser();
   }, []);
 
+
   return (
     <>
-      {/* <Navbar /> */}
-      {user && <Navbar_v2 activeLink={"/home"} user={user} />}
-      <div className={styles.home}>
-        <div className={styles.greetingContainer}>
+      {user && <Navbar_v2 activeLink={'/home'} user={user} />}
+      <Container fluid={true} bg={'#f8f9fa'} h={'93vh'}>
+        <Center>
           {user && <Greeting user={user} />}
-        </div>
-        <div className={styles.projectUsedContainer}>
-          {user && <RecentProject user={user} />}
-          {user && <Priority user={user} />}
-        </div>
-      </div>
+        </Center>
+        <Center>
+          <Flex p={10} gap={120}>
+            {user && <RecentProject user={user} />}
+            {user && <Priority user={user} />}
+          </Flex>
+        </Center>
+      </Container>
+
     </>
   );
 };

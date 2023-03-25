@@ -162,8 +162,40 @@ const HighAccessChartControl = ({ projectInfo, userInfo }) => {
 
     const fillTheData = () => {
 
+        userInfo.taskAssignedIdList.forEach((task) => {
+            if (task.taskProjectId === projectInfo._id) {
+                projectTaskCountForUser['Assigned Tasks']++;
+                if (task.taskStatus === 'Done') {
+                    projectTaskCountForUser['Completed Tasks']++;
+                }
+                projectTaskCountByPriorityForUser[task.taskPriority]++;
+                projectTaskCountByStatusForUser[task.taskStatus]++;
+                projectTaskCountByPriorityAndStatusForUser[task.taskPriority][task.taskStatus]++;
+                projectTaskCountByStatusAndPriorityForUser[task.taskStatus][task.taskPriority]++;
+                projectTaskListByPriorityForUser[task.taskPriority]['total']++;
+                if (task.taskStatus === 'Done') {
+                    projectTaskListByPriorityForUser[task.taskPriority]['completed']++;
+                } else {
+                    projectTaskListByPriorityForUser[task.taskPriority]['incomplete']++;
+                }
+            }
+        });
 
     }
+
+    { projectInfo && userInfo && fillTheData() }
+
+    console.log(projectTaskCountForUser, 'projectTaskCountForUser');
+    console.log(projectTaskCountByPriorityForUser, 'projectTaskCountByPriorityForUser');
+    console.log(projectTaskCountByStatusForUser, 'projectTaskCountByStatusForUser');
+    console.log(projectTaskCountByPriorityAndStatusForUser, 'projectTaskCountByPriorityAndStatusForUser');
+    console.log(projectTaskCountByStatusAndPriorityForUser, 'projectTaskCountByStatusAndPriorityForUser');
+    console.log(projectTaskListByPriorityForUser, 'projectTaskListByPriorityForUser');
+
+
+
+
+
 
 
 
@@ -175,10 +207,56 @@ const HighAccessChartControl = ({ projectInfo, userInfo }) => {
     return (
         <>
             <Container fluid={true} mt={'30px'} sx={classes.statsContainer} >
-                {/* <StatsChart basicData={projectTaskCount} /> */}
+                <StatsChart basicData={projectTaskCountForUser} />
             </Container>
             <Container fluid={true} mt={'30px'} sx={classes.container}>
+                <Container sx={classes.chartOuterContainer}>
+                    <Container sx={classes.chartInnerContainer}>
+                        <ChartContainer
+                            title='Task Priority'
+                            basicData={projectTaskCountByPriorityForUser}
+                        />
+                        <ChartContainer
+                            title='Task Status'
+                            basicData={projectTaskCountByStatusForUser}
+                            bgColorPalette={[
+                                'rgb(32, 201, 151)',
+                                'rgb(252, 196, 25)',
+                                'rgb(255, 107, 107)',
+                            ]}
+                        />
+                        <ChartContainer
+                            title={'Priority Chart'}
+                            dataArray={[projectTaskListByPriorityForUser['High'], projectTaskListByPriorityForUser['Medium'], projectTaskListByPriorityForUser['Low'], projectTaskListByPriorityForUser['Choose Priority']]}
+                            chartType='combined'
+                            bgColorPalette={[
+                                'rgb(255, 107, 107)',
+                                'rgb(252, 196, 25)',
+                                'rgb(32, 201, 151)',
+                                'rgb(32, 201, 151)',
+                                'rgb(252, 196, 25)',
+                                'rgb(255, 107, 107)',
+                            ]}
+                        />
+                        <ChartContainer
+                            title={'Status Chart'}
+                            dataArray={[projectTaskCountByStatusAndPriorityForUser['In Progress'], projectTaskCountByStatusAndPriorityForUser['Stuck'], projectTaskCountByStatusAndPriorityForUser['Backlog'], projectTaskCountByStatusAndPriorityForUser['Done'], projectTaskCountByStatusAndPriorityForUser['Choose Status']]}
+                            chartType='StatusPriorityChart'
+                            bgColorPalette={[
+                                'rgb(32, 201, 151)',
+                                'rgb(255, 107, 107)',
+                                'rgb(252, 196, 25)',
+                                'rgb(32, 201, 151)',
+                                'rgb(32, 201, 151)',
+                                'rgb(255, 107, 107)',
+                                'rgb(252, 196, 25)',
+                                'rgb(32, 201, 151)',
+                            ]}
+                        />
 
+
+                    </Container>
+                </Container>
             </Container>
         </>
     );

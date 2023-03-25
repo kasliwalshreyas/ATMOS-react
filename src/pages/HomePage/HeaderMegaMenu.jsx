@@ -151,8 +151,13 @@ export default function HeaderMegaMenu() {
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           {/* <MantineLogo size={30} /> */}
-          <Title>ATMOS</Title>
-
+          
+          <Title>
+          <div data-aos="fade" data-aos-easing="linear" data-aos-duration="1500">
+          ATMOS
+          </div>  
+          </Title>
+          <div data-aos="fade" data-aos-easing="linear" data-aos-duration="1500">
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="#" className={classes.link}>
               Home
@@ -209,12 +214,13 @@ export default function HeaderMegaMenu() {
               Academy
             </a>
           </Group>
-
+          </div>
+          <div data-aos="fade" data-aos-easing="linear" data-aos-duration="1500">
           <Group className={classes.hiddenMobile}>
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <a href="/login"><Button variant="default">Log in</Button></a>
+            <a href="/signup"><Button>Sign up</Button></a>
           </Group>
-
+          </div>
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
       </Header>

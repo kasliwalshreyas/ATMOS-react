@@ -2,6 +2,7 @@ import { createStyles, Flex, Paper, Title } from "@mantine/core";
 import BarChart from "./BarChart";
 import CombineBarChart from "./CombineBarChart";
 import PieChart from "./PieChart";
+import StatusPriorityChart from "./StatusPriorityChart";
 
 const useStyles = createStyles((themes) => ({
     chartOuterContainer: {
@@ -38,6 +39,7 @@ const ChartContainer = ({ title, basicData, bgColorPalette = [
                     {chartType == 'bar' && <BarChart basicData={basicData} bgColorPalette={bgColorPalette} />}
                     {chartType == 'pie' && <PieChart basicData={basicData} bgColorPalette={bgColorPalette} />}
                     {chartType == 'combined' && <CombineBarChart dataArray={dataArray} bgColorPalette={bgColorPalette} />}
+                    {chartType == 'StatusPriorityChart' && <StatusPriorityChart dataArray={dataArray} bgColorPalette={bgColorPalette} />}
                 </Flex>
             </Paper>
         </>

@@ -3,20 +3,22 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  createStyles,
-  Container,
-  Avatar,
-  UnstyledButton,
-  Group,
-  Text,
-  Menu,
-  Tabs,
-  Burger,
-  Title,
-  Header,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import ProfileMenu from "./ProfileMenu";
+    createStyles,
+    Container,
+    Avatar,
+    UnstyledButton,
+    Group,
+    Text,
+    Menu,
+    Tabs,
+    Burger,
+    Title,
+    Header,
+    Anchor
+} from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import ProfileMenu from './ProfileMenu';
+
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -113,26 +115,31 @@ const Navbar_v2 = ({ activeLink, user }) => {
 
   // const user = useSelector((state) => state.user.userInfo);
 
-  const items = links.map((link, index) => (
-    <div
-      className={active === link.link ? classes.linkActive : classes.link}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-        close();
-      }}
-      key={index}
-    >
-      <Link to={link.link} key={link.label}>
-        {link.label}
-      </Link>
-    </div>
-  ));
+    const items = links.map((link, index) => (
+        <div className={active === link.link ? classes.linkActive : classes.link} onClick={(event) => {
+            event.preventDefault();
+            setActive(link.link);
+            close();
+        }}
 
-  return (
-    <Header height={56} className={`${classes.header}`}>
-      <div className={classes.inner}>
-        <Title>ATMOS</Title>
+            key={index}
+        >
+            <Link to={link.link} key={link.label} >
+                {link.label}
+            </Link>
+        </div>
+
+    ));
+
+    return (
+        <Header height={56} className={`${classes.header}`} bg={'#f8f9fa'} >
+            <div className={classes.inner}>
+
+                <Title>
+                    <Anchor href='/home'>
+                        ATMOS
+                    </Anchor>
+                </Title>
 
         <Group>
           {items}
