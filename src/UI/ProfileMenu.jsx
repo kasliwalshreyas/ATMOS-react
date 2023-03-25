@@ -78,19 +78,19 @@ const ProfileMenu = ({ userInfo }) => {
                     className={classes.user}
                 >
                     <Group spacing={7}>
-                        <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
+                        <Avatar src={userInfo.avatar} alt={userInfo.userName} radius="xl" size={24} />
                     </Group>
                 </UnstyledButton>
             </Menu.Target>
             <Menu.Dropdown>
                 <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
-                    Liked posts
+                    <Link to="/profile">Profile</Link>
                 </Menu.Item>
                 <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
-                    Saved posts
+                    <Link to="/admin-portal">Admin Portal</Link>
                 </Menu.Item>
                 <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
-                    Your comments
+                    Comments
                 </Menu.Item>
 
                 <Menu.Label>Settings</Menu.Label>
@@ -98,7 +98,7 @@ const ProfileMenu = ({ userInfo }) => {
                 <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
                     Change account
                 </Menu.Item>
-                <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}>Logout</Menu.Item>
+                <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}><Link to="/logout">Log Out</Link></Menu.Item>
 
                 <Menu.Divider />
 

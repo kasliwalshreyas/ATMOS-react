@@ -11,11 +11,6 @@ import { Col } from "react-bootstrap";
 
 import styles from './Sign-Up.module.css';
 
-// For hashing the password before saving it to the json server
-import bcrypt from "bcryptjs";
-
-const salt = bcrypt.genSaltSync(10);
-
 function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,9 +19,6 @@ function SignUp() {
     const [nameError, setNameError] = useState("");
     const [formValid, setFormValid] = useState(true);
     const [passwordError, setPasswordError] = useState("");
-    const taskAssignedIDList = [];
-    const favoriteProjectList = [];
-    const projectIDList = [];
     const navigate = useNavigate();
 
     const isValidPassword = password => {
@@ -115,8 +107,11 @@ function SignUp() {
             });
             const data = await res.json();
             console.log(data);
-            if (data.status === 200) {
+            if (data.success) {
                 navigate("/login");
+            }
+            else {
+                alert(data.message);
             }
         }
     };

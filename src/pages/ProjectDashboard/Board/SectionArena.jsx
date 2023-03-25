@@ -5,6 +5,7 @@ import SectionCard from "./SectionCard";
 import { Button } from "@mantine/core";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useListState } from "@mantine/hooks";
+import TaskModal_v2 from "./TaskModal_v2";
 
 
 const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUserInfo }) => {
@@ -17,6 +18,8 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
   const [columnOrder, setColumnOrder] = useState([]);
 
   const [state, handlers] = useListState([columnOrder]);
+
+  // console.log(projectInfo, "projectInfo");
 
 
   useEffect(() => {
@@ -76,13 +79,6 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
     setSelectedSection(null);
     setShow(false);
   };
-
-  // useEffect(() => {
-  //   setSectionList(projectInfo.projectSectionIdList);
-  //   setTaskList(projectInfo.projectTaskIdList);
-
-  //   console.log(projectInfo, "projectInfo");
-  // }, [rerender]);
 
 
   //func to create Task
@@ -175,6 +171,8 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
                     key={columnIndex}
                     draggableId={'' + columnIndex}
                     index={index}
+                    style={{ height: 'fit-content' }}
+                    className='section section-0'
                   >
                     {(provided) => (
                       <div
@@ -214,7 +212,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
       </div>
       {
         selectedTask != null && (
-          <TaskModal
+          <TaskModal_v2
             taskInfo={selectedTask}
             sectionInfo={selectedSection}
             show={show}

@@ -29,45 +29,61 @@ export const options = {
     }
 };
 
-const CombineBarChart = ({ dataArray, bgColorPalette }) => {
+const StatusPriorityChart = ({ dataArray, bgColorPalette }) => {
 
     const data = {
-        labels: ['High Priority', 'Medium Priority', 'Low Priority', 'Choose Priority'],
+        labels: ['In Progress', 'Backlog', 'Stuck', 'Done', 'Status Not Selected'],
         datasets: [
             {
-                label: 'Total Tasks',
+                label: 'High Priority',
                 data: [
-                    dataArray[0]['total'],
-                    dataArray[1]['total'],
-                    dataArray[2]['total'],
-                    dataArray[3]['total'],
+                    dataArray[0]['High'],
+                    dataArray[1]['High'],
+                    dataArray[2]['High'],
+                    dataArray[3]['High'],
+                    dataArray[4]['High'],
                 ],
                 // backgroundColor: 'rgb(130, 205, 255)',
                 backgroundColor: bgColorPalette[0],
                 borderColor: 'rgb(65, 129, 217)',
             },
             {
-                label: 'Completed Tasks',
+                label: 'Medium Priority',
                 data: [
-                    dataArray[0]['completed'],
-                    dataArray[1]['completed'],
-                    dataArray[2]['completed'],
-                    dataArray[3]['completed'],
+                    dataArray[0]['Medium'],
+                    dataArray[1]['Medium'],
+                    dataArray[2]['Medium'],
+                    dataArray[3]['Medium'],
+                    dataArray[4]['Medium'],
                 ],
                 // backgroundColor: 'rgb(130, 205, 255)',
                 backgroundColor: bgColorPalette[1],
                 borderColor: 'rgb(65, 129, 217)',
             },
             {
-                label: 'Pending Tasks',
+                label: 'Low Priority',
                 data: [
-                    dataArray[0]['not-completed'],
-                    dataArray[1]['not-completed'],
-                    dataArray[2]['not-completed'],
-                    dataArray[3]['not-completed'],
+                    dataArray[0]['Low'],
+                    dataArray[1]['Low'],
+                    dataArray[2]['Low'],
+                    dataArray[3]['Low'],
+                    dataArray[4]['Low'],
                 ],
                 // backgroundColor: 'rgb(130, 205, 255)',
                 backgroundColor: bgColorPalette[2],
+                borderColor: 'rgb(65, 129, 217)',
+            },
+            {
+                label: 'Choose Priority',
+                data: [
+                    dataArray[0]['Choose Priority'],
+                    dataArray[1]['Choose Priority'],
+                    dataArray[2]['Choose Priority'],
+                    dataArray[3]['Choose Priority'],
+                    dataArray[4]['Choose Priority'],
+                ],
+                // backgroundColor: 'rgb(130, 205, 255)',
+                backgroundColor: bgColorPalette[3],
                 borderColor: 'rgb(65, 129, 217)',
             },
         ],
@@ -85,5 +101,4 @@ const CombineBarChart = ({ dataArray, bgColorPalette }) => {
     );
 }
 
-
-export default CombineBarChart;
+export default StatusPriorityChart;

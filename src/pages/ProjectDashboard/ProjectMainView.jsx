@@ -1,7 +1,6 @@
 import SectionArena from "./Board/SectionArena";
 import { useState, useEffect } from "react";
 import OverView from "./Overview/OverView";
-import Charts from "./Charts/Charts";
 import Timeline from "./Timeline/Timeline";
 import { useParams, useNavigate } from "react-router-dom";
 import ProjectInfoBar_v2 from "./ProjectInfoBar/ProjectInfoBar_v2";

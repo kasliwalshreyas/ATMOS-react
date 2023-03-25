@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RecentProject.module.css";
 import { Link } from "react-router-dom";
+import { Select, Table } from "@mantine/core";
 
 const RecentProject = ({ user }) => {
   const [showFavorite, setShowFavorite] = useState(false);
   const [projects, setProjects] = useState([]);
+
+  const [selected, setSelected] = useState("All");
 
   // console.log("this is the only one of my favorite project from user defined object", user.favProjectIdList)
 
@@ -113,22 +116,24 @@ const RecentProject = ({ user }) => {
   projectNumber = 0;
 
   const handleLinkClick = async (projects, project) => {
-    project.projectLastUsed &&
-      project.projectLastUsed.map((lasttime) => {
-        if (lasttime.userid === user._id) {
-          lasttime.lastUsed = new Date();
-        }
-      });
+    // project.projectLastUsed &&
+    //   project.projectLastUsed.map((lasttime) => {
+    //     if (lasttime.userid === user._id) {
+    //       lasttime.lastUsed = new Date();
+    //     }
+    //   });
 
     const res = await fetch(
-      `http://localhost:4000/project/updateUserProjects/${project._id}`,
+      `http://localhost:4000/project/updateLastUsed/${project._id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "auth-token": `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(project),
+        body: JSON.stringify({
+          updatedLastUsed: new Date()
+        })
       }
     );
     const data = await res.json();
@@ -162,8 +167,8 @@ const RecentProject = ({ user }) => {
         {!showFavorite && (
           <div className={styles.recentListdiv}>
             {projects &&
-              projects.map((project) => (
-                <div className={styles.recentParticularProject}>
+              projects.map((project, index) => (
+                <div className={styles.recentParticularProject} key={index}>
                   {
                     <Link
                       onClick={() => {
@@ -197,7 +202,7 @@ const RecentProject = ({ user }) => {
                     alt="No Recents"
                   ></img>
                 </div>
-                <div ClassName={styles.noFavoriteTxt}>
+                <div className={styles.noFavoriteTxt}>
                   <p className={styles.upperFavoriteTxt}>You haven't started</p>
                   <p className={styles.lowerFavoriteTxt}> any Project yet</p>
                 </div>
@@ -211,9 +216,9 @@ const RecentProject = ({ user }) => {
             {projects &&
               user.favProjectIdList &&
               projects.map((project) =>
-                user.favProjectIdList.map((userfavid) => {
+                user.favProjectIdList.map((userfavid, index) => {
                   if (userfavid === project._id) {
-                    <div className={styles.recentParticularProject}>
+                    <div className={styles.recentParticularProject} key={index}>
                       {
                         <Link
                           onClick={() => {
@@ -252,7 +257,7 @@ const RecentProject = ({ user }) => {
                     alt="No favorite"
                   ></img>
                 </div>
-                <div ClassName={styles.noFavoriteTxt}>
+                <div className={styles.noFavoriteTxt}>
                   <p className={styles.upperFavoriteTxt}>You don't have any</p>
                   <p className={styles.lowerFavoriteTxt}>favorite project</p>
                 </div>

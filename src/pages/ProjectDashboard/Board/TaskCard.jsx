@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
         transition: 'box-shadow 150ms ease, transform 100ms ease',
         '&:hover': {
             boxShadow: theme.shadows.md,
-            transform: 'scale(1.05)',
+            transform: 'scale(1.03)',
         },
         maxWidth: 325,
         maxHeight: 200,
@@ -62,11 +62,11 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
 
     const colorPickerPriority = (priority) => {
         switch (priority) {
-            case 'high':
+            case 'High':
                 return 'orange';
-            case 'medium':
+            case 'Medium':
                 return 'yellow';
-            case 'low':
+            case 'Low':
                 return 'lime';
             default:
                 return 'gray';
@@ -75,11 +75,11 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
 
     const colorPickerStatus = (status) => {
         switch (status) {
-            case "on-track":
+            case "In Progress":
                 return 'teal';
-            case 'off-track':
+            case 'Stuck':
                 return 'pink';
-            case 'at-risk':
+            case 'Backlog':
                 return 'red';
             default:
                 return 'gray';
@@ -103,10 +103,14 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
                     {hovered &&
                         <Menu
                             transitionProps={{ transition: 'pop' }}
+                            offset={2}
+                            arrowPosition="center"
                             withArrow
-                            position="bottom-end"
+                            position="bottom"
                             menuPosition="right"
                             zIndex={100}
+                            trigger="click"
+
                         // onClick={(e) => e.stopPropagation()}
                         >
                             <Menu.Target >
@@ -122,7 +126,11 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
                                 onClick={(e) => e.stopPropagation()}
                                 zIndex={100}
                             >
-                                <Menu.Item icon={<IconTrash size="1rem" stroke={1.5} />} color="red" onClick={event => { deleteTask(event, task._id) }}>
+                                <Menu.Item
+                                    icon={<IconTrash size="1rem" stroke={1.5} z={5} />}
+                                    color="red"
+                                    onClick={event => { deleteTask(event, task._id) }}
+                                >
                                     Delete Task
                                 </Menu.Item>
                             </Menu.Dropdown>

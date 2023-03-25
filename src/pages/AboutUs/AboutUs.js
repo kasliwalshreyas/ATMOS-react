@@ -54,13 +54,13 @@ const AboutUS = () => {
             </div>
           </div>
         </div>
-        <div class="team-section">
-          <h2 class="aboutus-title">Meet Our Members</h2>
+        <div className="team-section">
+          <h2 className="aboutus-title">Meet Our Members</h2>
 
-          <div class="inner-width">
-            <div class="teams">
-              <div class="team">
-                <div class="containerAboutUs">
+          <div className="inner-width">
+            <div className="teams">
+              <div className="team">
+                <div className="containerAboutUs">
                   <div data-aos="zoom-in" data-aos-duration="1000">
                   <ProfileCard name={'Shreyas Kasliwal'} email={'spk@atmos.in'} image={img1} />
                   </div>

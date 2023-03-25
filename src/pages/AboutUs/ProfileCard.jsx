@@ -4,14 +4,14 @@ import { BsLinkedin, BsGithub } from "react-icons/bs";
 const ProfileCard = ({ name, email, image }) => {
     return (
         <>
-            <div class="boxAboutUs">
-                <div class="top-barAboutUs"></div>
-                <div class="topAboutUs">
-                    {/* <i class="fa fa-check-circle" aria-hidden="true"></i> */}
-                    {/* <input type="checkbox" class="heart-btn" id="heart-btn-1" /> */}
-                    {/* <label class="heart" for="heart-btn-1"></label> */}
+            <div className="boxAboutUs">
+                <div className="top-barAboutUs"></div>
+                <div className="topAboutUs">
+                    {/* <i className="fa fa-check-circle" aria-hidden="true"></i> */}
+                    {/* <input type="checkbox" className="heart-btn" id="heart-btn-1" /> */}
+                    {/* <label className="heart" for="heart-btn-1"></label> */}
                 </div>
-                <div class="contentAboutUs">
+                <div className="contentAboutUs">
                     <img src={image} alt="" />
                     <strong>{name}</strong>
                     <p>{email}</p>

@@ -17,24 +17,22 @@ import {
   Text,
   Button,
   Modal,
-  Select
+  Select,
+  MediaQuery
 } from "@mantine/core";
 import { openConfirmModal, closeAllModals } from '@mantine/modals';
+import { margin } from "@mui/system";
 
 const useStyles = createStyles((theme) => ({
-  teamMembersArena: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    textAlign: 'left',
-    padding: theme.spacing.xl,
-    borderRadius: theme.radius.md,
-    cursor: 'pointer',
-    width: 'fit-content',
-    height: 'fit-content',
+  aboutProjectMainView: {
+    display: 'flex',
+    flexDirection: 'column',
+    // justifyContent: 'space-between',
+    height: '680px',
+    minHeight: '680px',
+    maxHeight: '680px',
+    width: '100%',
 
-    '&:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
-    },
   },
 
   teamMembersHeading: {
@@ -46,6 +44,20 @@ const useStyles = createStyles((theme) => ({
     // backgroundColor: 'ebeff3'
 
   },
+
+  teamMemberList: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    // justifyContent: 'space-between',
+    overflowY: 'scroll',
+    height: '550px',
+    marginBottom: '10px',
+
+    '&::-webkit-scrollbar': {
+      width: '10px',
+    },
+  },
+
 
   flexApart: {
     minWidth: '90%',
@@ -66,7 +78,34 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '5px',
     padding: '8px',
     marginBottom: '10px',
-  }
+  },
+  responsiveaboutProjectMainView: {
+    display: 'flex',
+    flexDirection: 'column',
+    // justifyContent: 'space-between',
+    height: '680px',
+    minHeight: '680px',
+    maxHeight: '680px',
+    width: '100%',
+    padding: '10px',
+  },
+  responsiveTeamMembers: {
+    display: 'flex',
+    flexDirection: 'column',
+    // justifyContent: 'space-between',
+    overflowY: 'scroll',
+    height: '550px',
+    width: '100%',
+    marginTop: '10px',
+    marginBottom: '10px',
+    padding: '10px',
+    '&::-webkit-scrollbar': {
+      width: '10px',
+    },
+  },
+
+
+
 
 }));
 
@@ -89,6 +128,8 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log(projectInfo, 'projectInfo from over view');
+
 
   const [projectName, setProjectName] = useState(projectInfo.projectName);
   const [projectStatement, setProjectStatement] = useState(projectInfo.projectStatement);
@@ -102,6 +143,25 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   const [openTransferModal, setOpenTransferModal] = useState(false);
   const [userList, setUserList] = useState([]);
   const [userAccessLevel, setUserAccessLevel] = useState('no access');
+  const [rerender, setRerender] = useState(false);
+  const projectOwnerId = projectInfo.projectOwner._id;
+
+  useEffect(() => {
+    const project = async () => {
+      const res = await fetch(`http://localhost:4000/project/getProjectDetails/${projectId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      // console.log(data, 'projectInfo from main view');
+      setProjectInfo(data.project);
+      return data;
+    }
+    project();
+  }, [rerender]);
 
 
 
@@ -230,6 +290,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
       setOpened(false);
       setSelectedTeamMember(null);
       setSelectedRole(null);
+      setRerender(!rerender);
     }
   }
   const handleMemberChange = (option) => {
@@ -306,120 +367,151 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   return (
 
     <div className={styles.overviewMainView}>
-      <Paper sx={{ minWidth: '70vw' }} withBorder p={'10px'}>
-        {/* <div className={styles.descriptionArena}> */}
-        {/* <div className={styles.descriptionArenaHeading}>
-            <h3>About Project</h3>
-          </div> */}
-        <Flex direction={'column'}>
-          <Title mb={'10px'} sx={classes.teamMembersHeading}>About Project</Title>
-          <div className={styles.descriptionArenaDescription}>
-            <DescriptionComponent
-              heading="Project Statement"
-              description={projectStatement !== "" ? projectStatement : "What is your project about?"}
-            />
-            <DescriptionComponent
-              heading="Project Mission"
-              description={projectMission !== "" ? projectMission : "Write about the mission of your project"}
-            />
-            <DescriptionComponent
-              heading="Project Description"
-              description={projectDescription !== "" ? projectDescription : "Describe your project for your team mates."}
-            />
-            <DescriptionComponent
-              heading="Project Guidelines"
-              description={projectGuidelines !== "" ? projectGuidelines : "Share the guidelines of the project with your team mates."}
-            />
-          </div>
+      <Flex gap={20} sx={{ flexWrap: 'wrap' }}>
+        <MediaQuery smallerThan={1200} styles={classes.responsiveaboutProjectMainView}>
 
-        </Flex>
+          <Paper sx={{ minWidth: '70vw' }} withBorder p={'10px'}>
+            <Flex direction={'column'} sx={classes.aboutProjectMainView}>
+              <Title mb={'10px'} sx={classes.teamMembersHeading}>About Project</Title>
+              {/* <div className={styles.descriptionArenaDescription}> */}
+              <DescriptionComponent
+                heading="Project Statement"
+                description={projectStatement !== "" ? projectStatement : "What is your project about?"}
+              />
+              <DescriptionComponent
+                heading="Project Mission"
+                description={projectMission !== "" ? projectMission : "Write about the mission of your project"}
+              />
+              <DescriptionComponent
+                heading="Project Description"
+                description={projectDescription !== "" ? projectDescription : "Describe your project for your team mates."}
+              />
+              <DescriptionComponent
+                heading="Project Guidelines"
+                description={projectGuidelines !== "" ? projectGuidelines : "Share the guidelines of the project with your team mates."}
+              />
+              {/* </div> */}
 
-      </Paper>
+            </Flex>
+
+          </Paper>
+        </MediaQuery>
+
+        <MediaQuery smallerThan={1200} styles={classes.responsiveTeamMembers}>
+          <Paper sx={{ minWidth: '25vw', maxHeight: '700px', minHeight: '700px' }} withBorder p={'10px'}>
+            <Title mb={'10px'}>Team Members</Title>
+            <Box sx={classes.teamMemberList} >
+              {projectInfo.projectHighAccessMembers.map((member, index) => {
+                return (
+                  <TeamMemberCard
+                    name={member.userName}
+                    email={member.email}
+                    id={member._id}
+                    projectOwnerId={projectOwnerId}
+                    projectId={projectId}
+                    role="highAccess"
+                    userAccessLevel={userAccessLevel}
+                    avatar={member.avatar}
+                    rightSectionIcon={true}
+                    key={index}
+                    rerender={rerender}
+                    setRerender={setRerender}
+                  />
+                )
+              })}
+              {projectInfo.projectMediumAccessMembers.map((member, index) => {
+                return (
+                  <TeamMemberCard
+                    name={member.userName}
+                    email={member.email}
+                    id={member._id}
+                    projectOwnerId={projectOwnerId}
+                    projectId={projectId}
+                    role="mediumAccess"
+                    userAccessLevel={userAccessLevel}
+                    avatar={member.avatar}
+                    rightSectionIcon={true}
+                    key={index}
+                    rerender={rerender}
+                    setRerender={setRerender}
+                  />
+                )
+              })}
+              {projectInfo.projectLowAccessMembers.map((member, index) => {
+                return (
+                  <TeamMemberCard
+                    name={member.userName}
+                    email={member.email}
+                    id={member._id}
+                    projectOwnerId={projectOwnerId}
+                    projectId={projectId}
+                    role="lowAccess"
+                    userAccessLevel={userAccessLevel}
+                    avatar={member.avatar}
+                    rightSectionIcon={true}
+                    key={index}
+                    rerender={rerender}
+                    setRerender={setRerender}
+                  />
+                )
+              })}
+            </Box>
+            {
+              (
+                userAccessLevel === "high" || userAccessLevel === "medium" || userAccessLevel === "owner"
+              ) &&
+
+              <>
+                <Modal
+                  opened={opened}
+                  onClose={() => {
+                    setOpened(false);
+                    setSelectedTeamMember(null);
+                    setSelectedRole(null);
+                    // setRerender(!rerender);
+                  }}
+                  scrollable
+                  size="lg"
+                >
+                  <Title>Add Team Member</Title>
+                  {/* <Text>Choose a team member to add to the project</Text> */}
+                  {/* {console.log(selectedTeamMember, "selectedTeamMember")} */}
+                  <Select
+                    label="Choose a team member to add to the project"
+                    placeholder="Pick a User"
+                    value={selectedTeamMember}
+                    onChange={handleMemberChange}
+                    itemComponent={memberSelectItems}
+                    data={filteredUserList}
+                    searchable
+                    // maxDropdownHeight={100}
+                    withinPortal
+                    nothingFound="Nobody here"
+                    filter={(value, item) => item.email.toLowerCase().includes(value.toLowerCase().trim()) || item.userName.toLowerCase().includes(value.toLowerCase().trim())}
+                  />
+                  <Select
+                    label="Choose a role for the team member"
+                    placeholder="Pick a Role"
+                    data={roleList}
+                    value={selectedRole}
+                    withinPortal
+                    onChange={handleRoleChange}
+                  />
+                  <Button onClick={addTeamMember} color="blue" mt={'30px'}>Add Team Member</Button>
+                </Modal>
+                <Group position="center">
+                  <Button onClick={() => setOpened(true)}>Add Team Member</Button>
+                </Group>
+              </>
+            }
+          </Paper>
+        </MediaQuery>
+
+      </Flex>
 
 
-      {/* <Box sx={classes.teamMembersArena}> */}
-      <Paper sx={{ minWidth: '25vw', marginLeft: '20px' }} withBorder p={'10px'}>
-        <Title mb={'10px'}>Team Members</Title>
-        {/* <div className={styles.descriptionArenaHeading}>
-          <h3>Team Members</h3>
-        </div> */}
-        <Box sx={styles.teamMembersList}>
-          {projectInfo.projectHighAccessMembers.map((member, index) => {
-            return (
-              <TeamMemberCard
-                name={member.userName}
-                email={member.email}
-                rightSectionIcon={true}
-                key={index}
-              />
-            )
-          })}
-          {projectInfo.projectMediumAccessMembers.map((member, index) => {
-            return (
-              <TeamMemberCard
-                name={member.userName}
-                email={member.email}
-                rightSectionIcon={true}
-                key={index}
-              />
-            )
-          })}
-          {projectInfo.projectLowAccessMembers.map((member, index) => {
-            return (
-              <TeamMemberCard
-                name={member.userName}
-                email={member.email}
-                rightSectionIcon={true}
-                key={index}
-              />
-            )
-          })}
-        </Box>
-        {
-          (
-            userAccessLevel === "high" || userAccessLevel === "medium" || userAccessLevel === "owner"
-          ) &&
 
-          <>
-            <Modal
-              opened={opened}
-              onClose={() => {
-                setOpened(false);
-                setSelectedTeamMember(null);
-                setSelectedRole(null);
-              }}
-              size="lg"
-            >
-              <Title>Add Team Member</Title>
-              {/* <Text>Choose a team member to add to the project</Text> */}
-              {/* {console.log(selectedTeamMember, "selectedTeamMember")} */}
-              <Select
-                label="Choose a team member to add to the project"
-                placeholder="Pick a User"
-                value={selectedTeamMember}
-                onChange={handleMemberChange}
-                itemComponent={memberSelectItems}
-                data={filteredUserList}
-                searchable
-                maxDropdownHeight={400}
-                nothingFound="Nobody here"
-                filter={(value, item) => item.email.toLowerCase().includes(value.toLowerCase().trim()) || item.userName.toLowerCase().includes(value.toLowerCase().trim())}
-              />
-              <Select
-                label="Choose a role for the team member"
-                placeholder="Pick a Role"
-                data={roleList}
-                value={selectedRole}
-                onChange={handleRoleChange}
-              />
-              <Button onClick={addTeamMember} color="blue" mt={'30px'}>Add Team Member</Button>
-            </Modal>
-            <Group position="center">
-              <Button onClick={() => setOpened(true)}>Add Team Member</Button>
-            </Group>
-          </>
-        }
-      </Paper>
+
 
 
       {(userAccessLevel == 'owner') && <Paper sx={{ minWidth: 'calc(100vw - 65px)' }} p={'10px'} mt={'20px'}>
@@ -472,9 +564,11 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                   itemComponent={memberSelectItems}
                   data={transferOwnershipUserList}
                   searchable
-                  maxDropdownHeight={400}
+                  // maxDropdownHeight={1000}
                   nothingFound="Nobody here"
                   filter={(value, item) => item.email.toLowerCase().includes(value.toLowerCase().trim()) || item.userName.toLowerCase().includes(value.toLowerCase().trim())}
+                  withinPortal
+
                 />
                 <hr></hr>
                 <Button onClick={handleTransfer} color="blue" mt={'30px'}>Transfer Project</Button>

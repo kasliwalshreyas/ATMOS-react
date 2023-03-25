@@ -2,6 +2,7 @@ import { createStyles, Flex, Paper, Title } from "@mantine/core";
 import BarChart from "./BarChart";
 import CombineBarChart from "./CombineBarChart";
 import PieChart from "./PieChart";
+import StatusPriorityChart from "./StatusPriorityChart";
 
 const useStyles = createStyles((themes) => ({
     chartOuterContainer: {
@@ -18,7 +19,7 @@ const useStyles = createStyles((themes) => ({
 }));
 
 
-const ChartContainer = ({ title, userInfo, basicData, bgColorPalette = [
+const ChartContainer = ({ title, basicData, bgColorPalette = [
     'rgb(255, 107, 107)',
     'rgb(252, 196, 25)',
     'rgb(32, 201, 151)',
@@ -35,9 +36,10 @@ const ChartContainer = ({ title, userInfo, basicData, bgColorPalette = [
             <Paper mt={'30px'} sx={classes.chartOuterContainer} shadow="md" radius="lg" withBorder>
                 <Flex direction={'column'}>
                     <Title order={3}>{title}</Title>
-                    {chartType == 'bar' && <BarChart userInfo={userInfo} basicData={basicData} bgColorPalette={bgColorPalette} />}
-                    {chartType == 'pie' && <PieChart userInfo={userInfo} basicData={basicData} bgColorPalette={bgColorPalette} />}
-                    {chartType == 'combined' && <CombineBarChart userInfo={userInfo} dataArray={dataArray} bgColorPalette={bgColorPalette} />}
+                    {chartType == 'bar' && <BarChart basicData={basicData} bgColorPalette={bgColorPalette} />}
+                    {chartType == 'pie' && <PieChart basicData={basicData} bgColorPalette={bgColorPalette} />}
+                    {chartType == 'combined' && <CombineBarChart dataArray={dataArray} bgColorPalette={bgColorPalette} />}
+                    {chartType == 'StatusPriorityChart' && <StatusPriorityChart dataArray={dataArray} bgColorPalette={bgColorPalette} />}
                 </Flex>
             </Paper>
         </>
