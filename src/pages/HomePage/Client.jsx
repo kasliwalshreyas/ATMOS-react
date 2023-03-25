@@ -11,7 +11,7 @@ import { motion, useScroll } from "framer-motion"
 
 const Client = ({ isVisible }) => {
     return (
-        <section id="clients" class="clients section-bg" >
+        <section id="clients" className="clients section-bg" >
         {/* <Container >
         <Flex
           direction={{ base: 'column', sm: 'row' }}
@@ -27,30 +27,30 @@ const Client = ({ isVisible }) => {
           <Image width={200} height={80} fit="contain" src={f} />
         </Flex> */}
           
-          <div class="row" data-aos="zoom-in">
+          <div className="row" data-aos="zoom-in">
   
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img src={a} class="img-fluid" alt=""/>
+            <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+              <img src={a} className="img-fluid" alt=""/>
             </div>
   
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img src={b} class="img-fluid" alt=""/>
+            <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+              <img src={b} className="img-fluid" alt=""/>
             </div>
   
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img src={c} class="img-fluid" alt=""/>
+            <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+              <img src={c} className="img-fluid" alt=""/>
             </div>
   
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img src={d} class="img-fluid" alt=""/>
+            <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+              <img src={d} className="img-fluid" alt=""/>
             </div>
   
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img src={e} class="img-fluid" alt=""/>
+            <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+              <img src={e} className="img-fluid" alt=""/>
             </div>
   
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img src={f} class="img-fluid" alt=""/>
+            <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+              <img src={f} className="img-fluid" alt=""/>
             </div>
   
           </div>

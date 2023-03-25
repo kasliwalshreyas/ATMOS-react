@@ -8,8 +8,8 @@ const Sidebar = ({projects, user}) => {
      {projects && (projects.map((project) => {
                 return(
                     <>
-                    <button class="dropdown-btn">{project.name}
-                    <i class="fa fa-caret-down"></i>
+                    <button className="dropdown-btn">{project.name}
+                    <i className="fa fa-caret-down"></i>
                     </button>
                     <h2>High Access</h2>
                     {project.high.map((user) => {

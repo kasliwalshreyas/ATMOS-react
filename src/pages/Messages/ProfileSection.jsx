@@ -148,15 +148,15 @@ const ProfileSection = ({user} ) => {
             {projects && (
         <Sidebar user={user} projects={projects}  />
         )}
-            {/* <div class="sidenav">
+            {/* <div className="sidenav">
   <a href="#about">About</a>
   <a href="#services">Services</a>
   <a href="#clients">Clients</a>
   <a href="#contact">Contact</a>
-  <button class="dropdown-btn">Dropdown
-    <i class="fa fa-caret-down"></i>
+  <button className="dropdown-btn">Dropdown
+    <i className="fa fa-caret-down"></i>
   </button>
-  <div class="dropdown-container">
+  <div className="dropdown-container">
     <a href="#">Link 1</a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>

@@ -95,13 +95,13 @@ function Login() {
                         <h2 className="text-center fw-bold">Login</h2>
                         <Form className="mt-4" onSubmit={handleSubmit}>
                             <div className="mt-4 d-flex flex-row align-items-center">
-                                <i class="fa-solid fs-4 me-2 fa-envelope"></i>
+                                <i className="fa-solid fs-4 me-2 fa-envelope"></i>
                                 <FloatingLabel controlId="floatingInput" label="Email" className="w-100">
                                     <Form.Control type="email" className="fs-5" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 </FloatingLabel>
                             </div>
                             <div className="mt-4 d-flex flex-row align-items-center">
-                                <i class="fa-solid fs-4 me-2 fa-lock"></i>
+                                <i className="fa-solid fs-4 me-2 fa-lock"></i>
                                 <FloatingLabel controlId="floatingPassword" className="w-100" label="Password">
                                     <Form.Control type="password" placeholder="Password" className="fs-5" required value={password} onChange={(e) => setPassword(e.target.value)} />
                                 </FloatingLabel>
@@ -115,12 +115,12 @@ function Login() {
                             <p className="mt-2 text-secondary text-end">
                                 Don't have an account? <Link to="/signup" className={styles.atmosColor + ` text-decoration-none`}>Register here</Link>
                             </p>
-                            <div class="d-flex justify-content-center">
-                                <Link to="#" class="small text-secondary text-decoration-none me-5">Terms of use</Link>
-                                <Link to="#" class="small text-secondary text-decoration-none">Privacy policy</Link>
+                            <div className="d-flex justify-content-center">
+                                <Link to="#" className="small text-secondary text-decoration-none me-5">Terms of use</Link>
+                                <Link to="#" className="small text-secondary text-decoration-none">Privacy policy</Link>
                             </div>
-                            <div class="mt-4 mb-0">
-                                <p class="m-0 text-center text-secondary">
+                            <div className="mt-4 mb-0">
+                                <p className="m-0 text-center text-secondary">
                                     © 2022 ATMOS. All rights reserved.
                                 </p>
                             </div>

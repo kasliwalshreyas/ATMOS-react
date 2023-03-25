@@ -11,7 +11,7 @@ import styles from "./ProfileSection.module.css";
 
 const salt = bcrypt.genSaltSync(10);
 
-const ProfileSection = ({ user }) => {
+const ProfileSection = ({ user, setUser }) => {
     const [userName, setUserName] = useState(user.userName);
     const [emailId, setemailId] = useState(user.email);
     const [password, setPassword] = useState(user.password);
@@ -32,7 +32,7 @@ const ProfileSection = ({ user }) => {
             if (password !== user.password) {
                 hashedPassword = bcrypt.hashSync(password, salt);
             }
-            const updatedUser = { ...user, userName, email: emailId, password: hashedPassword };
+            const updatedUser = {userName, email: emailId, password: hashedPassword };
             const res = await fetch("http://localhost:4000/user/updateUser", {
                 method: "POST",
                 headers: { "Content-Type": "application/json",
@@ -48,6 +48,7 @@ const ProfileSection = ({ user }) => {
                 alert(data.message);
             }
             else{
+                setUser(data.user);
                 setIsEdit(false);
             }
         }
@@ -72,6 +73,7 @@ const ProfileSection = ({ user }) => {
             }
             else{
                 // alert(data.message);
+                setUser(data.user);
                 fileInputRef.current.value = null;
             }
         } catch (error) {
@@ -115,18 +117,22 @@ const ProfileSection = ({ user }) => {
                         <Card className={styles.profileCard+ ` shadow`}>
                         <Image mx="auto" radius="md" height={222} src="https://i.imgur.com/K7A78We.jpg" alt="Profile back" />
                             <Card.Body className="text-center">
-                                <CardImg src={avatar}
+                                {/* Hover effect on hover avatar */}
+                                <CardImg src={avatar} 
                                     className="rounded-circle fluid bg-white"
+                                    // Scale avatar on hover with ease
+                                    onMouseEnter={(e) => {e.target.style.transform = "scale(1.2)"; e.target.style.transition = "all 0.5s ease"}}
+                                    onMouseLeave={(e) => {e.target.style.transform = "scale(1)"; e.target.style.transition = "all 0.5s ease"}}
                                     style={{ width: '160px', marginTop: '-90px', zIndex: '5', position: 'relative', border: '5px solid #fff' }}
                                 />
 
                                 <h1 className="profile-heading fw-semibold mt-3" style={{color:"#05386B"}}>{userName}</h1>
                                 <p className="profile-para fw-bold text-secondary">{emailId}</p>
                                 <div className="d-flex justify-content-evenly">
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-facebook-f fa-2x" style={{color: "#3b5998"}}></i></Button>
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-twitter fa-2x" style={{color: "#55acee"}}></i></Button>
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-instagram fa-2x" style={{color: "#ac2bac"}}></i></Button>
-                                    <Button variant="light" className="btn-floating"><i class="fab fa-linkedin-in fa-2x" style={{color: "#0082ca"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-facebook-f fa-2x" style={{color: "#3b5998"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-twitter fa-2x" style={{color: "#55acee"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-instagram fa-2x" style={{color: "#ac2bac"}}></i></Button>
+                                    <Button variant="light" className="btn-floating"><i className="fab fa-linkedin-in fa-2x" style={{color: "#0082ca"}}></i></Button>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -187,7 +193,7 @@ const ProfileSection = ({ user }) => {
                                 </div>
                                 <div className={styles.containerBody}>
                                     <p className={styles.para}>
-                                    {user.projectIDList? user.projectIDList.length:"0"}
+                                    {user.projectIdList? user.projectIdList.length:"0"}
                                     </p>
                                 </div>
                                 <div className={styles.containerFoot}>
@@ -207,7 +213,7 @@ const ProfileSection = ({ user }) => {
                                 </div>
                                 <div className={styles.containerBody}>
                                     <p className={styles.para}>
-                                    {user.favoriteProjectList? user.favoriteProjectList.length:"0"}
+                                    {user.favProjectIdList? user.favProjectIdList.length:"0"}
                                     </p>
                                 </div>
                                 <div className={styles.containerFoot}>
@@ -256,7 +262,7 @@ const ProfileSection = ({ user }) => {
 
                                 {/* <FileInput
                                 placeholder="JPG, PNG or JPEG. Max size of 800K"
-                                icon={<i class="fa-solid fa-paperclip" style={{color: "#05386B"}}></i>}
+                                icon={<i className="fa-solid fa-paperclip" style={{color: "#05386B"}}></i>}
                                 label="Choose Avatar"
                                 variant="unstyled"
                                 accept="image/png, image/jpeg, image/jpg"
