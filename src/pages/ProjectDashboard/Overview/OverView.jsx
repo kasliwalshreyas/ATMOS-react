@@ -407,13 +407,15 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                     name={member.userName}
                     email={member.email}
                     id={member._id}
-                projectOwnerId={projectOwnerId}
-                projectId={projectId}
-                role="highAccess"
-                userAccessLevel={userAccessLevel}
-                avatar={member.avatar}
-                rightSectionIcon={true}
+                    projectOwnerId={projectOwnerId}
+                    projectId={projectId}
+                    role="highAccess"
+                    userAccessLevel={userAccessLevel}
+                    avatar={member.avatar}
+                    rightSectionIcon={true}
                     key={index}
+                    rerender={rerender}
+                    setRerender={setRerender}
                   />
                 )
               })}
@@ -423,13 +425,15 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                     name={member.userName}
                     email={member.email}
                     id={member._id}
-                projectOwnerId={projectOwnerId}
-                projectId={projectId}
-                role="mediumAccess"
-                userAccessLevel={userAccessLevel}
-                avatar={member.avatar}
-                rightSectionIcon={true}
+                    projectOwnerId={projectOwnerId}
+                    projectId={projectId}
+                    role="mediumAccess"
+                    userAccessLevel={userAccessLevel}
+                    avatar={member.avatar}
+                    rightSectionIcon={true}
                     key={index}
+                    rerender={rerender}
+                    setRerender={setRerender}
                   />
                 )
               })}
@@ -439,13 +443,15 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                     name={member.userName}
                     email={member.email}
                     id={member._id}
-                projectOwnerId={projectOwnerId}
-                projectId={projectId}
-                role="lowAccess"
-                userAccessLevel={userAccessLevel}
-                avatar={member.avatar}
-                rightSectionIcon={true}
+                    projectOwnerId={projectOwnerId}
+                    projectId={projectId}
+                    role="lowAccess"
+                    userAccessLevel={userAccessLevel}
+                    avatar={member.avatar}
+                    rightSectionIcon={true}
                     key={index}
+                    rerender={rerender}
+                    setRerender={setRerender}
                   />
                 )
               })}
@@ -504,7 +510,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
       </Flex>
 
 
-    
+
 
 
 
