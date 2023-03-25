@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createStyles, getStylesRef, Paper, Text, Title } from "@mantine/core";
-import { IconHexagonLetterA, IconHexagonLetterP, IconPlus } from "@tabler/icons-react";
+import { createStyles, getStylesRef, Group, Paper, Text, Title } from "@mantine/core";
+import { Icon3dCubeSphere, IconChartArcs3, IconChartBar, IconHexagonLetterA, IconHexagonLetterP, IconMenu2, IconPlus } from "@tabler/icons-react";
 
 
 const colorCodes = [
@@ -20,6 +20,7 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     width: "100%",
+    minHeight: "93vh",
     height: "100%",
     padding: theme.spacing.md,
   },
@@ -36,14 +37,11 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.md,
     transition: "transform 150ms ease, box-shadow 150ms ease",
     boxShadow: theme.shadows.lg,
-    // backgroundColor: '#e7f5ff',
-    // "&:hover": {
-    //   transform: "scale(1.01)",
-    //   boxShadow: theme.shadows.md,
-    // },
+    borderRadius: theme.radius.lg,
     [`&:hover`]: {
       transform: 'scale(1.03)',
     },
+    marginBottom: 0,
   },
 
 
@@ -75,13 +73,6 @@ const ProjectList = ({ projects, userInfo }) => {
   console.log(projects, "projects from project list");
 
   const handleLinkClick = async (project) => {
-    // project.projectLastUsed &&
-    //   project.projectLastUsed.map((lasttime) => {
-    //     if (lasttime.userid === user._id) {
-    //       lasttime.lastUsed = new Date();
-    //     }
-    //   });
-
     const res = await fetch(
       `http://localhost:4000/project/updateLastUsed/${project._id}`,
       {
@@ -106,29 +97,33 @@ const ProjectList = ({ projects, userInfo }) => {
   };
 
   return (
-    <Paper p={20} sx={classes.projectContainer}>
-      <Paper sx={classes.projectBox} withBorder bg={colorCodes[colorCodes.length - 1]} onClick={() => { navigate('/createproject') }}>
-        <Paper sx={classes.plus} h={150} w={160} bg={colorCodes[colorCodes.length - 1]} px={10}>
-          <IconPlus className={classes.iconPlus} color='white' />
+    <Paper p={20} sx={classes.projectContainer} bg={'#f8f9fa'}>
+      <Group sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Paper sx={classes.projectBox} withBorder bg={colorCodes[colorCodes.length - 1]} onClick={() => { navigate('/createproject') }}>
+          <Paper sx={classes.plus} h={110} w={130} bg={colorCodes[colorCodes.length - 1]} px={10}>
+            <IconPlus className={classes.iconPlus} color='white' />
+          </Paper>
         </Paper>
-        <Text color='white'>Add Project</Text>
-      </Paper>
+        <Title order={4}>Add Project</Title>
+      </Group>
 
-      {/* <div className="plus-container">
-        <Link className="plus" to="/createproject">
-          +
-        </Link>
-      </div> */}
-      {/* {console.log(projectList)} */}
       {projects &&
         projects
           .map((project, index) => (
-            <Paper sx={classes.projectBox} onClick={() => { insideProject(project) }} key={index} bg={colorCodes[index]} withBorder>
-              <Paper sx={classes.plus} h={150} w={160} bg={colorCodes[index]} px={10}>
-                <IconHexagonLetterA color='white' className={classes.iconPlus} />
-              </Paper>
-              <Title color='white' order={4}>{project.projectName}</Title>
-            </Paper>
+            <>
+              <Group sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Paper sx={classes.projectBox} onClick={() => { insideProject(project) }} key={index} bg={colorCodes[index]} withBorder>
+                  <Paper sx={classes.plus} h={110} w={130} bg={colorCodes[index]} px={10}>
+                    {index === 0 && <IconHexagonLetterA color='white' className={classes.iconPlus} />}
+                    {index === 1 && <IconChartBar color='white' className={classes.iconPlus} />}
+                    {index === 2 && <IconChartArcs3 color='white' className={classes.iconPlus} />}
+                    {index === 3 && <Icon3dCubeSphere color='white' className={classes.iconPlus} />}
+                    {index === 4 && <IconMenu2 color='white' className={classes.iconPlus} />}
+                  </Paper>
+                </Paper>
+                <Title order={4}>{project.projectName}</Title>
+              </Group>
+            </>
 
           ))
           .reverse()}
@@ -137,22 +132,3 @@ const ProjectList = ({ projects, userInfo }) => {
 };
 
 export default ProjectList;
-
-{/* <div className="project-real" key={project._id}>
-              <div className="project-container">
-                <a
-                  onClick={() => {
-                    insideProject(project);
-                  }}
-                >
-                  <img
-                    className="project-img"
-                    src={`./images/img/img${1 % 10}.PNG`}
-                  />
-                </a>
-              </div>
-              <div className="project-name">
-                {console.log(project)}
-                <p>{project.projectName}</p>
-              </div>
-            </div> */}

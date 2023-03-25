@@ -18,6 +18,7 @@ import Contact from "./pages/ContactUs/Contact";
 import Notes from "./pages/Notes/Notes";
 import { login } from "./features/userSlice";
 import { useDispatch } from "react-redux";
+import Page404 from "./pages/Extra/Page404";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -76,6 +77,8 @@ const App = () => {
 
             <Route exact path="/aboutUs" element={<AboutUS />} />
             <Route exact path="/contactUs" element={<Contact />} />
+
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </div>
       </Router>

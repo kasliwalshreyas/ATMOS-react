@@ -13,7 +13,8 @@ import {
     Tabs,
     Burger,
     Title,
-    Header
+    Header,
+    Anchor
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import ProfileMenu from './ProfileMenu';
@@ -112,7 +113,7 @@ const Navbar_v2 = ({ activeLink, user }) => {
             setActive(link.link);
             close();
         }}
-        
+
             key={index}
         >
             <Link to={link.link} key={link.label} >
@@ -123,10 +124,14 @@ const Navbar_v2 = ({ activeLink, user }) => {
     ));
 
     return (
-        <Header height={56} className={`${classes.header}`} >
+        <Header height={56} className={`${classes.header}`} bg={'#f8f9fa'} >
             <div className={classes.inner}>
 
-                <Title>ATMOS</Title>
+                <Title>
+                    <Anchor href='/home'>
+                        ATMOS
+                    </Anchor>
+                </Title>
 
                 <Group>
                     {items}
