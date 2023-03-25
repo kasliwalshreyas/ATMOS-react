@@ -3,10 +3,11 @@ import React from 'react';
 import './project-task.css';
 import './project.css';
 import './common.css';
+
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ChatProvider } from './pages/Messages/Components/context/ChatContext';
-import { ChatsProvider } from './pages/Messages/Components/context/ChatsContext';
+// import { ChatProvider } from './pages/Messages/Components/context/ChatContext';
+// import { ChatsProvider } from './pages/Messages/Components/context/ChatsContext';
 import { store } from './store';
 import { Provider } from 'react-redux';
 
@@ -24,11 +25,11 @@ root.render(
   <Provider store={store}>
     <MantineProvider theme={{ colorScheme: 'light' }}>
       <ModalsProvider>
-        <ChatProvider>
-          <ChatsProvider>
+        {/* <ChatProvider> */}
+          {/* <ChatsProvider> */}
             <App />
-          </ChatsProvider>
-        </ChatProvider>
+          {/* </ChatsProvider> */}
+        {/* </ChatProvider> */}
       </ModalsProvider>
     </MantineProvider>
   </Provider>

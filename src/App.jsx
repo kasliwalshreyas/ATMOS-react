@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./UI/Navbar";
 import Home from "./pages/Home/Home";
+import io from "socket.io-client";
 import HomePage from "./pages/HomePage/Home";
 import Projects from "./pages/Projects/Projects";
-import Chats from "./pages/Messages/Chats";
+import Chats from "./pages/Messages/chat";
 // import Notes from "./pages/Notes/Notes";
 import ProjectMainView from "./pages/ProjectDashboard/ProjectMainView";
 import CreateProject from "./pages/Projects/CreateProject";
@@ -19,6 +20,11 @@ import Notes from "./pages/Notes/Notes";
 import { login } from "./features/userSlice";
 import { useDispatch } from "react-redux";
 import Page404 from "./pages/Extra/Page404";
+// 6,50,000 + 2,50,000 + 1,00,000 + 9,10,000 + 1,00,000
+
+// 40,000 + 35,000 + 
+// const socket = io.connect("http://localhost:4001/message");
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,8 +49,6 @@ const App = () => {
       getUser();
     }
   }, []);
-
-
   return (
     <div>
       <Router>
@@ -58,7 +62,7 @@ const App = () => {
             <Route exact path="/logout" element={<Logout />} />
             <Route exact path="/home" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/messages" element={<Chats />} />
+            <Route path="/message" element={<Chats />} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
             <Route exact path="/projects/:id/board" element={<ProjectMainView Board />} />

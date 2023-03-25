@@ -8,6 +8,7 @@ import i from "./assets/img/hero-img.png";
 import Features from "./Features";
 import { NavLink } from "react-router-dom";
 import Pricing from "./Pricing";
+import FooterSocial from "./FooterSocial"
 
 export default function Home() {
   return (
@@ -53,7 +54,10 @@ export default function Home() {
       <Features />
       <div data-aos="zoom-in" data-aos-duration="1000">
         {/* <Pricing /> */}
+
       </div>
+      
+        <FooterSocial/>
     </>
   );
 }
