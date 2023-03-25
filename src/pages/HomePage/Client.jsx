@@ -27,7 +27,7 @@ const Client = ({ isVisible }) => {
           <Image width={200} height={80} fit="contain" src={f} />
         </Flex> */}
           
-          <div class="row" data-aos="zoom-in">
+          <div class="row" data-aos="zoom-in"  data-aos-easing="linear" data-aos-duration="500">
   
             <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
               <img src={a} class="img-fluid" alt=""/>
