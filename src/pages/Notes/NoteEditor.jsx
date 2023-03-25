@@ -8,14 +8,29 @@ import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
 import Navbar_v2 from "../../UI/Navbar_v2";
 import { useState } from "react";
-import { Button } from "@mantine/core";
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useDisclosure } from "@mantine/hooks";
+import { Modal, Group, Button } from "@mantine/core";
 
 let content = "";
 
-const NoteEditor = () => {
-  const params = useParams();
-  console.log("checking paramssssssss in NoteEditor", params)
+const NoteEditor = ({
+  selectedNote,
+  setSelectedNote,
+  setEditorOpen,
+  rerender,
+  setRerender,
+}) => {
+  let newNote = false;
+  // console.log(selectedNote);
+  if (selectedNote === null) {
+    newNote = true;
+  }
+
+  // console.log("checking paramssssssss in NoteEditor", params);
+  // console.log("checking paramssssssss in NoteEditor id", params.id);
+  // const [param, setParam] = useState(params.id);
   const navigate = useNavigate();
 
   const editor = useEditor({
@@ -31,8 +46,65 @@ const NoteEditor = () => {
     content,
   });
 
+  useEffect(() => {
+    const notes = async () => {
+      const res = await fetch(
+        `http://localhost:4000/note/getNote/${selectedNote}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await res.json();
+      if (data.success) {
+        editor?.commands.setContent(data.note.NoteDescription);
+      } else {
+        console.log(data.message);
+      }
+    };
+    notes();
+  }, [selectedNote, editor]);
+
+  const handleUpdate = async () => {
+    const maincontent = editor.getHTML();
+    const maintext = editor.getText().toString();
+
+    const res = await fetch(
+      `http://localhost:4000/note/updateNote/${selectedNote}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          NoteId: selectedNote,
+          NoteDescription: maincontent,
+          NoteText: maintext,
+          NoteOwner: null,
+          NoteUpdateAt: new Date(),
+        }),
+      }
+    );
+    const data = await res.json();
+    if (data.success) {
+      console.log(data.message);
+      editor.commands.setContent("");
+      // navigate("/notes");
+      setEditorOpen(false);
+      setSelectedNote(null);
+      setRerender(!rerender);
+    } else {
+      console.log(data.message);
+    }
+  };
+
   const handleSave = async () => {
-    console.log(editor.getHTML(), "content from NoteEditor");
+    const maincontent = editor.getHTML();
+    const maintext = editor.getText().toString();
 
     const res = await fetch(`http://localhost:4000/note/create/`, {
       method: "POST",
@@ -41,15 +113,18 @@ const NoteEditor = () => {
         "auth-token": `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        description: content,
+        description: maincontent,
+        text: maintext,
       }),
     });
-
     const data = await res.json();
     if (data.success) {
       console.log(data.message);
       editor.commands.setContent("");
-      navigate("/notes");
+      // navigate("/notes");
+      setEditorOpen(false);
+      setSelectedNote(null);
+      setRerender(!rerender);
     } else {
       console.log(data.message);
     }
@@ -57,7 +132,7 @@ const NoteEditor = () => {
 
   return (
     <>
-      <Navbar_v2 activeLink={"/projects"} />
+      {/* <Navbar_v2 activeLink={"/projects"} /> */}
       <RichTextEditor editor={editor}>
         <RichTextEditor.Toolbar sticky stickyOffset={60}>
           <RichTextEditor.ControlsGroup>
@@ -102,7 +177,14 @@ const NoteEditor = () => {
         <RichTextEditor.Content />
       </RichTextEditor>
       <Button
-        onClick={handleSave}
+        onClick={() => {
+          {
+            newNote && handleSave();
+          }
+          {
+            newNote === false && handleUpdate();
+          }
+        }}
         variant="default"
         gradient={{ from: "indigo", to: "cyan" }}
       >

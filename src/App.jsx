@@ -44,7 +44,6 @@ const App = () => {
     }
   }, []);
 
-
   return (
     <div>
       <Router>
@@ -59,16 +58,23 @@ const App = () => {
             <Route exact path="/home" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/messages" element={<Chats />} />
-            <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
-            <Route exact path="/projects/:id/board" element={<ProjectMainView Board />} />
+            <Route
+              exact
+              path="/projects/:id/board"
+              element={<ProjectMainView Board />}
+            />
             <Route exact path="/noteeditor/:id" element={<NoteEditor />} />
             <Route
               exact
               path="/projects/:id/overview"
               element={<ProjectMainView Overview />}
             />
-            <Route exact path="/projects/:id/charts" element={<ProjectMainView Charts />} />
+            <Route
+              exact
+              path="/projects/:id/charts"
+              element={<ProjectMainView Charts />}
+            />
             <Route
               exact
               path="/projects/:id/timeline"
