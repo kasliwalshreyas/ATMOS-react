@@ -1,9 +1,11 @@
 import io from "socket.io-client";
 import React, { useState, useEffect } from "react"
-import Nav from "./Components/Nav.jsx"
+import ChatSidebar from "./ChatSidebar"
 import Navbar_v2 from "../../UI/Navbar_v2";
-import { ScrollArea } from '@mantine/core';
+import { Container, Flex, ScrollArea } from '@mantine/core';
 import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
+import { TextInput } from '@mantine/core';
+import { Box } from '@mantine/core';
 import {
   AppShell,
   Navbar,
@@ -18,6 +20,9 @@ import {
 import { Group, Avatar, Accordion } from '@mantine/core';
 import { Badge } from '@mantine/core';
 import { Tabs } from '@mantine/core';
+import GetMessages from "./chats";
+import ChatEditor from "../ProjectDashboard/Board/ChatEditor";
+import ChatWriter from "./ChatWriter";
 
 // import "./styles.css"
 // const socket = io.connect("http://localhost:4001/message");
@@ -25,6 +30,8 @@ const socket = io.connect("http://localhost:4000");
 
 const Chats = () => {
   const [user, setUser] = useState(null);
+  const [allUsers, setAllUsers] = useState(null);
+  const [projects, setProjects] = useState(null);
   // const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
@@ -41,136 +48,207 @@ const Chats = () => {
       if (data.success) {
         setUser(data.user);
       }
-
     }
     getUser();
   }, []);
 
+    useEffect(() => {
+      async function getAllUsers() {
+      const res = await fetch("http://localhost:4000/user/getUserList", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setAllUsers(data.userList);
+      }
+    }
+    getAllUsers();
+  }, []);
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
-  socket && console.log(socket)
+  // socket && console.log(socket)
+  // user && console.log(user)
+  const projectChat = (project)=>{
+    console.log(project)
+    setProjects(project)
+
+  }
+ 
+
   return (
     <>
-
-
-      <AppShell
-        styles={{
-          main: {
-            background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-          },
-        }}
-        navbarOffsetBreakpoint="sm"
-        asideOffsetBreakpoint="sm"
-        navbar={
-          <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }} grow component={ScrollArea}>
-            <Tabs defaultValue="gallery">
+    <Container fluid={true} p={0} m={0} h={'93vh'}>
+    {user && <Navbar_v2 activeLink={'/message'} user={user} />}
+    {
+        <Flex h={'90vh'}>
+          <Flex>
+          <Navbar p={0} m={0} hiddenBreakpoint="sm" hidden={!opened} width={'20%'} grow component={ScrollArea}>
+            <Tabs defaultValue="gallery" m={0} p={0}>
               <Tabs.List>
                 <Tabs.Tab value="gallery" icon={<IconPhoto size="0.8rem" />}> Projects</Tabs.Tab>
                 <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" />}>Direct Messages</Tabs.Tab>
               </Tabs.List>
 
-              <Tabs.Panel value="gallery" pt="xs">
+              <Tabs.Panel value="gallery">
                 <Accordion defaultValue="customization"
-                  chevron >
-                  <Accordion.Item value="customization">
-                    <Accordion.Control>Project 1<br />
-                      <Badge>On-Track</Badge>
-                      <Badge color="red">Priority</Badge>
-                    </Accordion.Control>
-
-                  </Accordion.Item>
-
-                  <Accordion.Item value="flexibility">
-                    <Accordion.Control>Project 2<br />
-                      <Badge>On-Track</Badge>
-                      <Badge color="red">Priority</Badge></Accordion.Control>
-
-                  </Accordion.Item>
-
-                  <Accordion.Item value="focus-ring">
-                    <Accordion.Control>Project 3<br />
-                      <Badge>On-Track</Badge>
-                      <Badge color="red">Priority</Badge></Accordion.Control>
-
-                  </Accordion.Item>
+                 chevron >
+                  {user && user.projectIdList.map((project,index) => {
+                    // console.log(project)
+                    return(
+                          <Accordion.Item value={project._id} onClick={()=>{projectChat(project)}}
+                          key={index}
+                          >
+                          <Accordion.Control>{project.projectName}<br />
+                            <Badge>{project.projectType}</Badge>
+                          </Accordion.Control>
+                        </Accordion.Item>
+                        )
+                  })}
                 </Accordion>
               </Tabs.Panel>
 
-              <Tabs.Panel value="messages" pt="xs">
+              <Tabs.Panel value="messages">
                 <Accordion defaultValue="customization" chevron>
-                  <Accordion.Item value="customization">
+                  {allUsers && allUsers.map((allUser,index)=>{
+                    // console.log(allUser)
+                    return(
+                  <Accordion.Item value="customization" key={index}>
                     <Accordion.Control>
                       <Group noWrap>
                         <Avatar src="avatar.png" radius="xl" size="lg" alt="it's me" />
                         <div>
-                          <Text>Person 1</Text>
-                          <Badge color="red">Priority</Badge>
+                          <Text>{allUser.userName}</Text>
                         </div>
                       </Group>
                     </Accordion.Control>
                   </Accordion.Item>
-
-                  <Accordion.Item value="flexibility">
-                    <Accordion.Control> <Group noWrap>
-                      <Avatar src="avatar.png" radius="xl" size="lg" alt="it's me" />
-                      <div>
-                        <Text>Person 2</Text>
-                        <Badge color="red">Priority</Badge>
-                      </div>
-                    </Group>    </Accordion.Control>
-                  </Accordion.Item>
-
-                  <Accordion.Item value="focus-ring">
-                    <Accordion.Control> <Group noWrap>
-                      <Avatar src="avatar.png" radius="xl" size="lg" alt="it's me" />
-                      <div>
-                        <Text>Person 3</Text>
-                        <Badge color="red">Priority</Badge>
-                      </div>
-                    </Group>    </Accordion.Control>
-                  </Accordion.Item>
-
-
+                    )
+                  })}       
                 </Accordion>
               </Tabs.Panel>
             </Tabs>
-
           </Navbar>
-        }
-        aside={
-          <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-            <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-              <Text>Application sidebar</Text>
-            </Aside>
-          </MediaQuery>
-        }
-        footer={
-          <Footer height={60} p="md">
-            Application footer
-          </Footer>
-        }
-        header={
-          <Header height={{ base: 50, md: 56 }} p="md">
-            <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-              <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                <Burger
-                  opened={opened}
-                  onClick={() => setOpened((o) => !o)}
-                  size="sm"
-                  color={theme.colors.gray[6]}
-                  mr="xl"
-                />
-              </MediaQuery>
+          </Flex>
+          <Flex direction={'column'} justify={'flex-end'}  w={'60%'} pb={15} >
+            
+          {projects &&  <GetMessages project={projects} />}
+          {projects && <ChatWriter />}
 
-              <Navbar_v2 activeLink={'/message'} />
-            </div>
-          </Header>
-        }
-      >
-        <Text>Resize app to see responsive navbar in action</Text>
-      </AppShell>
+          </Flex>
+          <Flex sx={{borderLeft: '5px'}} mr={0} w={'20%'}> 
+
+          <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+           <Aside hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
+            {projects && <ChatSidebar projects = {projects} />}
+             </Aside>
+         </MediaQuery>
+          </Flex>
+        </Flex>
+
+    }
+    </Container>
     </>
   );
 };
 
 export default Chats;
+
+      // <AppShell
+      // navbarOffsetBreakpoint="sm"
+      // asideOffsetBreakpoint="sm"
+      // // padding= "1"
+      // navbar={
+      //   <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }} grow component={ScrollArea}>
+      //       <Tabs defaultValue="gallery">
+      //         <Tabs.List>
+      //           <Tabs.Tab value="gallery" icon={<IconPhoto size="0.8rem" />}> Projects</Tabs.Tab>
+      //           <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" />}>Direct Messages</Tabs.Tab>
+      //         </Tabs.List>
+
+      //         <Tabs.Panel value="gallery" pt="xs">
+      //           <Accordion defaultValue="customization"
+      //            chevron >
+      //             {user && user.projectIdList.map((project,index) => {
+      //               // console.log(project)
+      //               return(
+      //                     <Accordion.Item value={project._id} onClick={()=>{projectChat(project)}}
+      //                     key={index}
+      //                     >
+      //                     <Accordion.Control>{project.projectName}<br />
+      //                       <Badge>{project.projectType}</Badge>
+      //                     </Accordion.Control>
+      //                   </Accordion.Item>
+      //                   )
+      //             })}
+      //           </Accordion>
+      //         </Tabs.Panel>
+
+      //         <Tabs.Panel value="messages" pt="xs">
+      //           <Accordion defaultValue="customization" chevron>
+      //             {allUsers && allUsers.map((allUser,index)=>{
+      //               // console.log(allUser)
+      //               return(
+      //             <Accordion.Item value="customization" key={index}>
+      //               <Accordion.Control>
+      //                 <Group noWrap>
+      //                   <Avatar src="avatar.png" radius="xl" size="lg" alt="it's me" />
+      //                   <div>
+      //                     <Text>{allUser.userName}</Text>
+      //                   </div>
+      //                 </Group>
+      //               </Accordion.Control>
+      //             </Accordion.Item>
+      //               )
+      //             })}       
+      //           </Accordion>
+      //         </Tabs.Panel>
+      //       </Tabs>
+      //     </Navbar>
+      //   }
+      //   aside={
+      //     <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+      //       <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
+      //       {projects && <ChatSidebar projects = {projects} />}
+      //       </Aside>
+      //     </MediaQuery>
+      //   }
+      //   header={
+      //     <Header height={{ base: 50, md: 56 }} p="md">
+      //       <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+      //         <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+      //           <Burger
+      //             opened={opened}
+      //             onClick={() => setOpened((o) => !o)}
+      //             size="sm"
+      //             color={theme.colors.gray[6]}
+      //             mr="xl"
+      //           />
+      //         </MediaQuery>
+      //       {user && 
+      //         <Navbar_v2 activeLink={'/message'} user={user} />}
+      //       </div>
+      //     </Header>
+      //   }
+
+      //   sx={{
+      //     main: {
+      //       paddingLeft: 0,
+      //       display: 'flex',
+      //       flexDirection: 'column',
+      //       justifyContent: 'flex-end',
+      //       padding: 0,
+      //     },
+
+      //   }}
+      // >
+        
+       
+      // {projects &&  <GetMessages project={projects} />}
+      // {projects && <ChatWriter />}
+       
+      // </AppShell>
