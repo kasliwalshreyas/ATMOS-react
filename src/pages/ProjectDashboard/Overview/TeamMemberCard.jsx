@@ -86,7 +86,7 @@ const TeamMemberCard = ({ name, email, role, id, projectOwnerId, projectId, user
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": `Bearer ${localStorage.getItem("token")}`
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({
                     userId: id,
@@ -135,7 +135,7 @@ const TeamMemberCard = ({ name, email, role, id, projectOwnerId, projectId, user
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": `Bearer ${localStorage.getItem("token")}`
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({
                     userId: id

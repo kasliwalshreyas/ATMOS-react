@@ -1,15 +1,62 @@
 import React, { useEffect, useState } from "react";
-import styles from "./RecentProject.module.css";
-import { Link } from "react-router-dom";
-import { Select, Table } from "@mantine/core";
+import { Center, Container, createStyles, Flex, Group, Image, Loader, Paper, Select, Table, Text, Title } from "@mantine/core";
+import RecentProjectContent from "./RecentProjectContent";
+import FavoriteProjectContent from "./FavoriteProjectContent";
+import { IconChevronDown } from "@tabler/icons-react";
+
+
+const useStyles = createStyles((theme) => ({
+  projectContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "40vw",
+    height: "450px",
+    backgroundColor: '#f1f3f5',
+    borderRadius: theme.radius.lg,
+    boxShadow: theme.shadows.lg,
+    // border: '1px solid',
+
+    '&:hover': {
+      // border: '1px solid white',
+      // transform: 'scale(1.005)', 
+    }
+
+  },
+  projectContentContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+
+    // '&:hover': {
+    //   border: '1px solid gray',
+    // }
+
+  },
+  projectHeadContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    height: "fit-height",
+    padding: theme.spacing.md,
+    paddingBottom: '0px'
+  },
+
+
+
+}));
+
+
+
 
 const RecentProject = ({ user }) => {
-  const [showFavorite, setShowFavorite] = useState(false);
+
+  const { classes } = useStyles();
   const [projects, setProjects] = useState([]);
-
-  const [selected, setSelected] = useState("All");
-
-  // console.log("this is the only one of my favorite project from user defined object", user.favProjectIdList)
+  const [value, setValue] = useState('Recent');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getProjects = async () => {
@@ -17,119 +64,27 @@ const RecentProject = ({ user }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
       const data = await res.json();
       if (data.success) {
         // console.log(data.projects, "project data from recent project");
         setProjects(data.projects);
+        setIsLoading(false);
       }
     };
     getProjects();
   }, []);
 
-  const handleChange = () => {
-    if (showFavorite === false) setShowFavorite(true);
-    else setShowFavorite(false);
-  };
-
-  function timeDiff(a, b) {
-    var a_time, b_time;
-    a.projectLastUsed &&
-      a.projectLastUsed.map((lasttime) => {
-        if (lasttime.userid === user._id) {
-          a_time = lasttime.lastUsed;
-        }
-      });
-    b.projectLastUsed &&
-      b.projectLastUsed.map((lasttime) => {
-        if (lasttime.userid === user._id) {
-          b_time = lasttime.lastUsed;
-        }
-      });
-    // console.log("here is the one ", b_time)
-    // console.log("here is the another time", a_time)
-    return b_time > a_time;
-  }
-
-  projects &&
-    projects.sort((a, b) => {
-      if (timeDiff(a, b) === true) return 1;
-      else return -1;
-    });
-
-  function timeDiffNow(project, b) {
-    var lasttimeused;
-    project.projectLastUsed &&
-      project.projectLastUsed.map((lasttime) => {
-        if (lasttime.userid === user._id) {
-          lasttimeused = lasttime.lastUsed;
-        }
-      });
-    const c = new Date(lasttimeused);
-    const d = new Date(b);
-    const utc1 = Date.UTC(
-      c.getFullYear(),
-      c.getMonth(),
-      c.getDate(),
-      c.getHours(),
-      c.getMinutes(),
-      c.getSeconds()
-    );
-    const utc2 = Date.UTC(
-      d.getFullYear(),
-      d.getMonth(),
-      d.getDate(),
-      d.getHours(),
-      d.getMinutes(),
-      d.getSeconds()
-    );
-    return Math.floor(utc2 - utc1);
-  }
-
-  const late = [];
-  let projectNumber = 0;
-  projects &&
-    projects.map((project) => {
-      let now = new Date();
-      let timeDivision = timeDiffNow(project, now) / 1000;
-      if (timeDivision > 31536000) {
-        late[projectNumber++] = -1;
-      } else if (2678400 <= timeDivision) {
-        timeDivision = Math.floor(timeDivision / 2678400);
-        late[projectNumber++] = timeDivision + "mon ago";
-      } else if (2678400 > timeDivision && timeDivision >= 86400) {
-        timeDivision = Math.floor(timeDivision / 86400);
-        late[projectNumber++] = timeDivision + "days ago";
-      } else if (86400 > timeDivision && timeDivision >= 3600) {
-        timeDivision = Math.floor(timeDivision / 3600);
-        late[projectNumber++] = timeDivision + "h ago";
-      } else if (3600 > timeDivision && timeDivision >= 60) {
-        timeDivision = Math.floor(timeDivision / 60);
-        late[projectNumber++] = timeDivision + "min ago";
-      } else {
-        late[projectNumber++] = Math.floor(timeDivision) + "s ago";
-      }
-    });
-
-  projectNumber = 0;
-
   const handleLinkClick = async (projects, project) => {
-    // project.projectLastUsed &&
-    //   project.projectLastUsed.map((lasttime) => {
-    //     if (lasttime.userid === user._id) {
-    //       lasttime.lastUsed = new Date();
-    //     }
-    //   });
-
     const res = await fetch(
       `http://localhost:4000/project/updateLastUsed/${project._id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           updatedLastUsed: new Date()
@@ -141,131 +96,44 @@ const RecentProject = ({ user }) => {
 
   return (
     <>
-      <div className={styles.listUsedProject}>
-        <div className={styles.recentHeaddiv}>
-          <h4 className={styles.projectHead}>
-            Projects
-            <select
-              onChange={handleChange}
-              className={styles.projectsCategory}
-              name="projectcategory"
-              id="projectCategory"
-            >
-              <option className={styles.projectsCategoryOption} value="recent">
-                Recents
-              </option>
-              <option
-                className={styles.projectsCategoryOption}
-                value="favorite"
-              >
-                Favorites
-              </option>
-            </select>
-          </h4>
-        </div>
+      <Paper sx={classes.projectContainer} withBorder>
+        <Container fluid={true} m={0} p={0} mb={10} sx={classes.projectHeadContainer}>
+          <Flex w={'100%'} pt={20} align={'center'} gap={10}>
+            <Title order={2} color={"#05386b"} pl={10}>Projects</Title>
+            <Select
+              onChange={setValue}
+              value={value}
+              data={[{ value: "Recent", label: "Recent" }, { value: "Favorite", label: "Favorite" }]}
+              size="small"
+              rightSection={<IconChevronDown size="1rem" />}
+              w={100}
+              styles={{ rightSection: { pointerEvents: 'none' } }}
+              variant="filled"
+              color={"#05386b"}
+            />
+          </Flex>
+        </Container>
 
-        {!showFavorite && (
-          <div className={styles.recentListdiv}>
-            {projects &&
-              projects.map((project, index) => (
-                <div className={styles.recentParticularProject} key={index}>
-                  {
-                    <Link
-                      onClick={() => {
-                        handleLinkClick(projects, project);
-                      }}
-                      to="/projects"
-                    >
-                      <div className={styles.projectDiv}>
-                        <div className={styles.projectInfoName}>
-                          <h4 className={styles.projectName}>
-                            {project.projectName}
-                          </h4>
-                        </div>
-                        <div className={styles.projectInfoLastUsed}>
-                          <p className={styles.lastUsed}>
-                            last used: {late[projectNumber++]}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  }
-                </div>
-              ))}
-
-            {projects.length === 0 && (
-              <div className={styles.mainFavorite}>
-                <div className={styles.noFavorite}>
-                  <img
-                    className={styles.noFavoriteImgRecent}
-                    src="https://www.linkpicture.com/q/project-management.png"
-                    alt="No Recents"
-                  ></img>
-                </div>
-                <div className={styles.noFavoriteTxt}>
-                  <p className={styles.upperFavoriteTxt}>You haven't started</p>
-                  <p className={styles.lowerFavoriteTxt}> any Project yet</p>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {showFavorite && (
-          <div className={styles.recentListdiv}>
-            {projects &&
-              user.favProjectIdList &&
-              projects.map((project) =>
-                user.favProjectIdList.map((userfavid, index) => {
-                  if (userfavid === project._id) {
-                    <div className={styles.recentParticularProject} key={index}>
-                      {
-                        <Link
-                          onClick={() => {
-                            handleLinkClick(projects, project);
-                          }}
-                          to="/projects"
-                        >
-                          <div className={styles.projectDiv}>
-                            <div className={styles.projectInfoName}>
-                              <h4 className={styles.projectName}>
-                                {project.projectName}
-                              </h4>
-                            </div>
-                            <div className={styles.projectInfoLastUsed}>
-                              <p className={styles.lastUsed}>
-                                last used: {late[projectNumber]}
-                              </p>
-                            </div>
-                          </div>
-                        </Link>
-                      }
-                    </div>;
-                    {
-                      projectNumber++;
-                    }
-                  }
-                })
-              )}
-
-            {user.favProjectIdList.length === 0 && (
-              <div className={styles.mainFavorite}>
-                <div className={styles.noFavorite}>
-                  <img
-                    className={styles.noFavoriteImg}
-                    src="https://www.linkpicture.com/q/favorites.png"
-                    alt="No favorite"
-                  ></img>
-                </div>
-                <div className={styles.noFavoriteTxt}>
-                  <p className={styles.upperFavoriteTxt}>You don't have any</p>
-                  <p className={styles.lowerFavoriteTxt}>favorite project</p>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+        {
+          <Container fluid={true} m={0} p={0} sx={classes.projectContentContainer}>
+            {!isLoading && value === "Recent" && projects.length > 0 && <RecentProjectContent userId={user._id} projectList={projects} />}
+            {!isLoading && value === "Favorite" && user && <FavoriteProjectContent userId={user._id} favProjectList={user.favProjectIdList} />}
+            {
+              !isLoading && value == "Recent" && projects.length === 0 &&
+              <Flex w={'100%'} h={'100%'} align={'center'} justify={'center'} direction={'column'}>
+                <Image maw={120} mx="auto" radius="md" src="https://www.linkpicture.com/q/project-management.png" alt="Random image" />
+                <Text>No Projects</Text>
+              </Flex>
+            }
+            {
+              isLoading &&
+              <Flex w={'100%'} h={'100%'} align={'center'} justify={'center'} direction={'column'}>
+                <Loader size="lg" />
+              </Flex>
+            }
+          </Container>
+        }
+      </Paper>
     </>
   );
 };

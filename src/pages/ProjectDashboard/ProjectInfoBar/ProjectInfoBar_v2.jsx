@@ -147,7 +147,7 @@ const ProjectInfoBar_v2 = ({
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    "auth-token": `Bearer ${localStorage.getItem("token")}`
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({
                     projectId: projectInfo._id
@@ -173,7 +173,7 @@ const ProjectInfoBar_v2 = ({
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    "auth-token": `Bearer ${localStorage.getItem("token")}`
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({
                     projectId: projectInfo._id

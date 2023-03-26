@@ -103,10 +103,6 @@ const useStyles = createStyles((theme) => ({
       width: '10px',
     },
   },
-
-
-
-
 }));
 
 const memberSelectItems = forwardRef(({ userName, email, _id, value, ...others }, ref) => (
@@ -152,7 +148,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
       const data = await res.json();
@@ -204,7 +200,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
       const data = await response.json();
@@ -274,7 +270,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
-        "auth-token": `Bearer ${localStorage.getItem("token")}`
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify({
         userId: selectedTeamMember,
@@ -313,7 +309,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     const res = await fetch(`http://localhost:4000/project/deleteProject/${projectId}`, {
       method: 'DELETE',
       headers: {
-        'auth-token': `Bearer ${localStorage.getItem("token")}`
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
       },
     })
 
@@ -330,7 +326,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': `Bearer ${localStorage.getItem("token")}`,
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         newOwner: selectedTransferMember

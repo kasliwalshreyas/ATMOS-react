@@ -13,12 +13,14 @@ import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Logout from "./pages/Logout/Logout";
-// import Dashboard from "./pages/Admin-2/Dashboard";
+import Dashboard from "./pages/Admin/Dashboard";
 import AboutUS from "./pages/AboutUs/AboutUs";
 import Contact from "./pages/ContactUs/Contact";
 import Notes from "./pages/Notes/Notes";
 import { login } from "./features/userSlice";
 import { useDispatch } from "react-redux";
+import NoteEditor from "./pages/Notes/NoteEditor";
+import Page404 from "./pages/Extra/Page404";
 // 6,50,000 + 2,50,000 + 1,00,000 + 9,10,000 + 1,00,000
 
 // 40,000 + 35,000 + 
@@ -36,7 +38,7 @@ const App = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
       const data = await res.json();
@@ -62,24 +64,34 @@ const App = () => {
             <Route exact path="/home" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/message" element={<Chats />} />
-            <Route path="/notes" element={<Notes />} />
             <Route path="/createproject" element={<CreateProject />} />
-            <Route exact path="/projects/:id/board" element={<ProjectMainView Board />} />
+            <Route
+              exact
+              path="/projects/:id/board"
+              element={<ProjectMainView Board />}
+            />
+            <Route exact path="/noteeditor/:id" element={<NoteEditor />} />
             <Route
               exact
               path="/projects/:id/overview"
               element={<ProjectMainView Overview />}
             />
-            <Route exact path="/projects/:id/charts" element={<ProjectMainView Charts />} />
+            <Route
+              exact
+              path="/projects/:id/charts"
+              element={<ProjectMainView Charts />}
+            />
             <Route
               exact
               path="/projects/:id/timeline"
               element={<ProjectMainView Timeline />}
             />
-            {/* <Route path="/admin-portal/*" element={<Dashboard />} /> */}
+            <Route path="/admin-portal/*" element={<Dashboard />} />
 
             <Route exact path="/aboutUs" element={<AboutUS />} />
             <Route exact path="/contactUs" element={<Contact />} />
+
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </div>
       </Router>

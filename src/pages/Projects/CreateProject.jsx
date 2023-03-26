@@ -34,7 +34,7 @@ const CreateProject = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -86,12 +86,12 @@ const CreateProject = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify(project),
     });
     const data = await newProjectInfo.json();
-    console.log(data, 'data from create project');
+    // console.log(data, 'data from create project');
     // dispatch(addProjectToUser(data.id));
 
     setIsPending(false);
