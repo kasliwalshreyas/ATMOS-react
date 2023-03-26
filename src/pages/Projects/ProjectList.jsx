@@ -5,15 +5,13 @@ import { Icon3dCubeSphere, IconChartArcs3, IconChartBar, IconHexagonLetterA, Ico
 
 
 const colorCodes = [
-  '#ff6b6b',
+  "#ff6b6b",
   "#f06595",
-  '#cc5de8',
-  '#845ef7',
-  '#5c7cfa',
-  '#4dabf7',
+  "#cc5de8",
+  "#845ef7",
+  "#5c7cfa",
+  "#4dabf7",
 ];
-
-
 
 const useStyles = createStyles((theme) => ({
   projectContainer: {
@@ -39,14 +37,13 @@ const useStyles = createStyles((theme) => ({
     boxShadow: theme.shadows.lg,
     borderRadius: theme.radius.lg,
     [`&:hover`]: {
-      transform: 'scale(1.03)',
+      transform: "scale(1.03)",
     },
     marginBottom: 0,
   },
 
-
   plus: {
-    transition: 'transform 150ms ease, box-shadow 150ms ease',
+    transition: "transform 150ms ease, box-shadow 150ms ease",
     // backgroundColor: '#e7f5ff',
     // '&:hover': {
     //   transform: 'scale(1.01)',
@@ -56,17 +53,14 @@ const useStyles = createStyles((theme) => ({
   projectCard: {},
 
   iconPlus: {
-    ref: getStylesRef('image'),
+    ref: getStylesRef("image"),
     height: "100%",
     width: "100%",
     // backgroundColor: colorCodes[],
   },
-
 }));
 
-
 const ProjectList = ({ projects, userInfo }) => {
-
   const { classes } = useStyles();
   const [user, setUser] = useState(userInfo);
   console.log(user, "user from project list");
@@ -83,7 +77,7 @@ const ProjectList = ({ projects, userInfo }) => {
         },
         body: JSON.stringify({
           updatedLastUsed: new Date(),
-        })
+        }),
       }
     );
     const data = await res.json();
@@ -92,7 +86,7 @@ const ProjectList = ({ projects, userInfo }) => {
   const navigate = useNavigate();
 
   const insideProject = (project) => {
-    handleLinkClick(project)
+    handleLinkClick(project);
     navigate(`/projects/${project._id}/overview`);
   };
 

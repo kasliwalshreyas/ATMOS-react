@@ -91,7 +91,7 @@ const CreateProject = () => {
       body: JSON.stringify(project),
     });
     const data = await newProjectInfo.json();
-    console.log(data, 'data from create project');
+    // console.log(data, 'data from create project');
     // dispatch(addProjectToUser(data.id));
 
     setIsPending(false);

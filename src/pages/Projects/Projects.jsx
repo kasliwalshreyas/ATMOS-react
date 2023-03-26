@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import ProjectList from "./ProjectList";
 import Navbar from "../../UI/Navbar";
-import { useSelector } from "react-redux";
 import Navbar_v2 from "../../UI/Navbar_v2";
 
 const Projects = () => {
@@ -24,8 +23,7 @@ const Projects = () => {
       if (data.success) {
         setUser(data.user);
       }
-
-    }
+    };
     getUser();
   }, []);
 
@@ -40,7 +38,7 @@ const Projects = () => {
         },
       });
       const data = await res.json();
-      console.log(data, "data from Projects");
+      // console.log(data, "data from Projects");
       setProjectInfo(data.projects);
     };
     projects();

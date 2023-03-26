@@ -25,8 +25,7 @@ const Home = () => {
         // console.log(data.user, 'from home');
         setUser(data.user);
       }
-
-    }
+    };
     getUser();
   }, []);
 

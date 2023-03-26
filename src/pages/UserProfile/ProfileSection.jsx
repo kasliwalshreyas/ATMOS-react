@@ -48,6 +48,9 @@ const ProfileSection = ({ user, setUser }) => {
                 alert(data.message);
             }
             else{
+                setUserName(data.user.userName);
+                setemailId(data.user.email);
+                setPassword(data.user.password);
                 setUser(data.user);
                 setIsEdit(false);
             }
@@ -174,7 +177,7 @@ const ProfileSection = ({ user, setUser }) => {
                                         </Form.Label>
                                         <Col className="text-center" lg={10} sm={12}>
                                             {isEdit &&
-                                                <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={!isEdit} />
+                                                <Form.Control type="password" placeholder="Password" defaultValue={password} onChange={(e) => setPassword(e.target.value)} disabled={!isEdit} />
                                             }
                                             {!isEdit &&
                                                 <div className="fw-bold border-bottom border-dark border-opacity-50 fs-4" style={{color:"#05386B"}}>....................</div>

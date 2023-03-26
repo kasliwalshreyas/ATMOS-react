@@ -1,0 +1,127 @@
+.countContainer {
+    display: flex;
+    flex-direction: column;
+   
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px 1px 1px black;
+    background-color: white;
+
+}
+
+.profileCard:hover {
+    background-color: #f5f5f5;
+
+}
+
+.countContainer:hover {
+   
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    transition-delay: background-color 5s ease-in-out;
+     border: 1px solid #000000;
+    background-color: #06407a;
+}
+
+.countContainer:hover .containerHead {
+    color: white;
+    background-color: #06407a;
+}
+
+.countContainer:hover .headText {
+    color: white;
+    background-color: #06407a;
+}
+
+.countContainer:hover .containerBody {
+    color: white;
+    background-color: #06407a;
+
+}
+
+.countContainer:hover .containerBody p {
+    color: white;
+    background-color: #06407a;
+
+}
+
+.countContainer:hover .containerFoot {
+    color: white;
+    background-color: #06407a;
+
+}
+
+.countContainer:hover .containerFoot p {
+    color: white;
+    background-color: #06407a;
+
+}
+
+.countContainer:hover .containerFoot p span {
+    font-weight: 900;
+    color: white;
+    background-color: #06407a;
+}
+
+
+
+
+
+.containerHead {
+    display: flex;
+    flex-direction: row;
+    background-color: inherit;
+}
+
+.headIcon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(111, 111, 111, 0.2);
+}
+
+.headText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 10px;
+    font-weight: bolder;
+    font-size: 0.8rem;
+    background-color: inherit;
+}
+
+.containerBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 2rem;
+    background-color: inherit;
+}
+
+.containerFoot {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    opacity: 1;
+    background-color: inherit;
+}
+
+.para {
+    margin-bottom: 0;
+    background-color: inherit;
+}
+
+.containerFoot p span {
+    font-weight: 700;
+    background-color: inherit;
+}
