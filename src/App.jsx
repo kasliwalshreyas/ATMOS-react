@@ -38,7 +38,7 @@ const App = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
       const data = await res.json();

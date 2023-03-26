@@ -33,7 +33,7 @@ const TaskModalDiscussion = ({ taskDiscussionId }) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': `Bearer ${localStorage.getItem('token')}`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
             });
             const data = await response.json();

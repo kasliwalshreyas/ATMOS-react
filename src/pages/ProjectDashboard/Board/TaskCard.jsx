@@ -54,7 +54,7 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
 
         const res = await fetch(`http://localhost:4000/task/deleteTask/${taskID}`, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json', 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         console.log("deleted task", taskID);
         setRerender(!rerender);

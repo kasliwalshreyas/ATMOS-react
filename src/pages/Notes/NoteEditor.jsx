@@ -54,7 +54,7 @@ const NoteEditor = ({
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "auth-token": `Bearer ${localStorage.getItem("token")}`,
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -78,7 +78,7 @@ const NoteEditor = ({
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           NoteId: selectedNote,
@@ -110,7 +110,7 @@ const NoteEditor = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         description: maincontent,

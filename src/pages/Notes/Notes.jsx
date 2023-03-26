@@ -32,7 +32,7 @@ const Notes = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -52,7 +52,7 @@ const Notes = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
       const data = await res.json();
@@ -81,7 +81,7 @@ const Notes = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );

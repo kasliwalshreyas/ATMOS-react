@@ -34,7 +34,7 @@ const CreateProject = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -86,7 +86,7 @@ const CreateProject = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify(project),
     });

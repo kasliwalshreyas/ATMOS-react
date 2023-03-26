@@ -1,6 +1,8 @@
 import { Box, Center, Container, createStyles, Flex, Paper, SegmentedControl, Title } from "@mantine/core";
 import StatsChart from "./StatsChart";
 import ChartContainer from './ChartContainer';
+import UserInfoTable from "../../AdminPortal/UserInfoTable";
+import { useEffect, useState } from "react";
 
 const useStyles = createStyles((themes) => ({
     statsContainer: {
@@ -49,6 +51,26 @@ const LowAcessChartControl = ({ projectInfo, userInfo }) => {
 
     const { classes, } = useStyles();
     console.log(projectInfo, 'projectInfo from LowAcessChartControl');
+    const [memberList, setMemberList] = useState([]);
+
+
+    //get the high access members and medium access members and low members data from projectInfo
+
+    const getMembersData = () => {
+        const highAccessMembers = projectInfo.projectHighAccessMembers;
+        const mediumAccessMembers = projectInfo.projectMediumAccessMembers;
+        const lowAccessMembers = projectInfo.projectLowAccessMembers;
+
+        const allMembers = [...highAccessMembers, ...mediumAccessMembers, ...lowAccessMembers];
+
+        setMemberList(allMembers);
+    }
+
+    useEffect(() => {
+        getMembersData();
+
+    }, [projectInfo]);
+
 
     const projectTaskCountByPriority = {
         'High': 0,
@@ -218,6 +240,9 @@ const LowAcessChartControl = ({ projectInfo, userInfo }) => {
                         'rgb(65, 129, 217)'
                     ]}
                 />
+
+                {memberList && memberList.length > 0 && <UserInfoTable data={memberList} />}
+                {/* {taskList && taskList.length > 0 && <TaskInfoTable data={taskList} />} */}
 
 
             </Container>

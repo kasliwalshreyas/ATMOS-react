@@ -33,7 +33,7 @@ const Chats = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -71,27 +71,27 @@ const Chats = () => {
 
               <Tabs.Panel value="gallery" pt="xs">
                 <Accordion defaultValue="customization"
-                 chevron >
+                  chevron >
                   <Accordion.Item value="customization">
                     <Accordion.Control>Project 1<br />
                       <Badge>On-Track</Badge>
                       <Badge color="red">Priority</Badge>
                     </Accordion.Control>
-                    
+
                   </Accordion.Item>
 
                   <Accordion.Item value="flexibility">
                     <Accordion.Control>Project 2<br />
                       <Badge>On-Track</Badge>
                       <Badge color="red">Priority</Badge></Accordion.Control>
-                    
+
                   </Accordion.Item>
 
                   <Accordion.Item value="focus-ring">
                     <Accordion.Control>Project 3<br />
                       <Badge>On-Track</Badge>
                       <Badge color="red">Priority</Badge></Accordion.Control>
-                    
+
                   </Accordion.Item>
                 </Accordion>
               </Tabs.Panel>
@@ -129,8 +129,8 @@ const Chats = () => {
                       </div>
                     </Group>    </Accordion.Control>
                   </Accordion.Item>
-                   
-                   
+
+
                 </Accordion>
               </Tabs.Panel>
             </Tabs>

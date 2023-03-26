@@ -50,7 +50,7 @@ const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRe
 
         const response = await fetch('http://localhost:4000/task/updateTask', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'auth-token': `Bearer ${localStorage.getItem("token")}` },
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem("token")}` },
             body: JSON.stringify({
                 taskId: taskInfo._id,
                 taskName,
