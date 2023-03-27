@@ -12,6 +12,7 @@ import {
 } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
 // import { ContactIconsList } from '../ContactIcons/ContactIcons';
+import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -80,6 +81,34 @@ const social = [IconBrandTwitter, IconBrandYoutube, IconBrandInstagram];
 
 export function ContactComponent() {
     const { classes } = useStyles();
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSend = () => {
+        console.log(email, name, message);
+        const data = {
+            email,
+            name,
+            message,
+        }
+        fetch('http://localhost:4000/user/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+            }
+            )
+            .catch((error) => {
+                console.error('Error:', error);
+            }
+            );
+    };
 
     const icons = social.map((Icon, index) => (
         <ActionIcon key={index} size={28} className={classes.social} variant="transparent">
@@ -103,6 +132,7 @@ export function ContactComponent() {
                 <div className={classes.form}>
                     <TextInput
                         label="Email"
+                        onChange={(event) => setEmail(event.currentTarget.value)}
                         placeholder="your@email.com"
                         required
                         classNames={{ input: classes.input, label: classes.inputLabel }}
@@ -110,6 +140,7 @@ export function ContactComponent() {
                     <TextInput
                         label="Name"
                         placeholder="John Doe"
+                        onChange={(event) => setName(event.currentTarget.value)}
                         mt="md"
                         classNames={{ input: classes.input, label: classes.inputLabel }}
                     />
@@ -117,13 +148,15 @@ export function ContactComponent() {
                         required
                         label="Your message"
                         placeholder="I want to order your goods"
+                        onChange={(event) => setMessage(event.currentTarget.value)}
                         minRows={4}
                         mt="md"
+
                         classNames={{ input: classes.input, label: classes.inputLabel }}
                     />
 
                     <Group position="right" mt="md">
-                        <Button className={classes.control}>Send message</Button>
+                        <Button className={classes.control} onClick={handleSend}>Send message</Button>
                     </Group>
                 </div>
             </SimpleGrid>
