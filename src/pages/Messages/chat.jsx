@@ -81,9 +81,9 @@ const Chats = () => {
     socket.emit("load_project", project._id)
 
   }
-  const loadChats = (project)=>{
-    socket.emit("load_project", project._id)
-  }
+  // const loadChats = (project)=>{
+  //   socket.emit("load_project", project._id)
+  // }
 
   return (
     <>

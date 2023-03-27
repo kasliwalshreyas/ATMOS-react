@@ -37,7 +37,7 @@ const ChatWriter = ({socket,user ,projectid }) => {
                 message: editor.getText(),
                 time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
             }
-            // console.log(messageData)
+            console.log(messageData)
             await socket.emit("send_message", messageData);
         }
 

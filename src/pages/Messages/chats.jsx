@@ -18,6 +18,9 @@ const GetMessages = ({socket, user ,projectid })=>{
       <Text size="sm" color="dimmed">
         {messages && messages.message}
       </Text>
+      <Text size="sm" color="dimmed">
+        {messages && messages.time}
+      </Text>
     </Card>
     </>
   )
