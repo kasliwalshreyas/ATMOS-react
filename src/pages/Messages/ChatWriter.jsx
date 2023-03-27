@@ -41,6 +41,7 @@ const ChatWriter = ({ }) => {
                 }}>
                 <RichTextEditor.Content
                     sx={{
+                        width: '100%',
                         height: '100px',
                         maxHeight: '100px',
                         overflowY: 'scroll',

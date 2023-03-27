@@ -1,38 +1,74 @@
 import React, { useState, useEffect } from "react"
-import { Text } from '@mantine/core';
+import { createStyles, Flex, Paper, Text } from '@mantine/core';
 import { Group, Avatar, Accordion } from '@mantine/core';
 import { List, ThemeIcon, Badge } from '@mantine/core';
-const ChatSidebar= ({projects})=>{
+
+const useStyles = createStyles((theme) => ({
+    user: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        padding: theme.spacing.md,
+        height: '50px',
+
+        // border: '1px solid rgba(206, 201, 201, 0.7)',
+        // borderRadius: '5px',
+        // margin: '5px 0 5px 0',
+
+        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+
+        '&:hover': {
+            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+        },
+    },
+}));
+
+
+
+
+
+
+
+
+const ChatSidebar = ({ projects }) => {
     // console.log("sidebar",projects)
+
+    const { classes } = useStyles();
     const collaborators = []
-    projects.projectHighAccessMembers.map(collaborator =>{
+    projects.projectHighAccessMembers.map(collaborator => {
         collaborators.push(collaborator.userName)
     })
-    projects.projectMediumAccessMembers.map(collaborator =>{
+    projects.projectMediumAccessMembers.map(collaborator => {
         collaborators.push(collaborator.userName)
     })
-    projects.projectLowAccessMembers.map(collaborator =>{
+    projects.projectLowAccessMembers.map(collaborator => {
         collaborators.push(collaborator.userName)
     })
     console.log(collaborators)
     return (
         <>
-            <List>
-                {collaborators && collaborators.map((collaborator,index) =>{
-                    // console.log(collaborator)
-                    return(
-                        <List.Item 
+            {collaborators && collaborators.map((collaborator, index) => {
+                return (
+                    <Paper
+                        sx={classes.user}
                         key={index}
-                        icon={
-                            <ThemeIcon color="teal" size={24} radius="xl">
-                                <Avatar src="avatar.png" alt="it's me" />
-                            </ThemeIcon>
-                        }>
-                          {collaborator}
-                        </List.Item>
-                    )
-                })}
-            </List>
+                    >
+                        <Flex align={'center'} justify={'center'} sx={classes.membercard}>
+                            <div style={{ display: 'flex' }}>
+                                <ThemeIcon color="teal" size={24} radius="xl">
+                                    <Avatar src="avatar.png" alt="it's me" />
+                                </ThemeIcon>
+                            </div>
+                            <div style={{ flex: 1, paddingLeft: '20px' }}>
+                                <Text size="sm" weight={500}>
+                                    {collaborator}
+                                </Text>
+                            </div>
+                        </Flex>
+                    </Paper>
+                )
+            })}
+            {/* </Flex> */}
         </>
     )
 }
