@@ -10,7 +10,7 @@ const ExtraTaskComponent = ({ taskDescription, setTaskDescription, taskDiscussio
                 <Tabs.List>
                     <Tabs.Tab value="description" icon={<IconTextCaption size="0.8rem" />}>Description</Tabs.Tab>
                     <Tabs.Tab value="discussion" icon={<IconMessageCircle size="0.8rem" />}>Discussion</Tabs.Tab>
-                    <Tabs.Tab value="settings" icon={<IconSettings size="0.8rem" />}>Settings</Tabs.Tab>
+                    {/* <Tabs.Tab value="settings" icon={<IconSettings size="0.8rem" />}>Settings</Tabs.Tab> */}
                 </Tabs.List>
 
                 <Tabs.Panel value="description" pt="xs" h={'94%'} p={20}>
@@ -26,9 +26,9 @@ const ExtraTaskComponent = ({ taskDescription, setTaskDescription, taskDiscussio
                     />
                 </Tabs.Panel>
 
-                <Tabs.Panel value="settings" pt="xs">
+                {/* <Tabs.Panel value="settings" pt="xs">
                     Settings tab content
-                </Tabs.Panel>
+                </Tabs.Panel> */}
             </Tabs>
         </>
     );

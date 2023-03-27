@@ -81,8 +81,8 @@ const ProjectInfoBar_v2 = ({
     console.log(userInfo, 'user from ProjectInfoBar_v2');
     console.log(userInfo.favProjectIdList, 'userInfo from ProjectInfoBar_v2');
 
-    // const isProjectFavorite = userInfo.favProjectIdList.map((project) => project._id).includes(projectInfo._id);
-    const isProjectFavorite = userInfo.favProjectIdList.includes(projectInfo._id);
+    const isProjectFavorite = userInfo.favProjectIdList.map((project) => project._id).includes(projectInfo._id);
+    // const isProjectFavorite = userInfo.favProjectIdList.includes(projectInfo._id);
 
     console.log(isProjectFavorite, 'isProjectFavorite from ProjectInfoBar_v2');
 
@@ -102,13 +102,13 @@ const ProjectInfoBar_v2 = ({
 
 
 
-    const items = ['Overview', 'Board', 'Charts', 'Timeline'].map((tab) => (
+    const items = ['Overview', 'Board', 'Charts'].map((tab) => (
         <Tabs.Tab value={tab} key={tab}>
             {/* <Flex align={'center'} > */}
             {tab === 'Overview' && <IconNotebook size={20} />}
             {tab === 'Board' && <IconLayoutKanban size={20} />}
             {tab === 'Charts' && <IconChartHistogram size={20} />}
-            {tab === 'Timeline' && <IconTimeline size={20} />}
+            {/* {tab === 'Timeline' && <IconTimeline size={20} />} */}
 
             {tab}
             {/* </Flex> */}

@@ -4,17 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
-
-1. `npm install`
-2. `npm run start`
-
-In another terminal run 
-
-3. `npx json-server --watch data/db.json --port 8000 --middlewares ./range.js`
-
-
-
+## Installation and Setup Instructions
+- Clone the repo `git clone https://github.com/kasliwalshreyas/ATMOS-react.git`
+- Install the dependencies `npm install`
+- Run the app `npm start` 
+- Make sure your backend server is running on port 4000
 
 
 

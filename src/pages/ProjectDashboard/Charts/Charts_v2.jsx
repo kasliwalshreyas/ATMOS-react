@@ -62,7 +62,7 @@ const Charts_v2 = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
     return (
         <>
             <Flex p={'20px'} direction={'column'}>
-                <Flex justify={'end'}>
+                {/* <Flex justify={'end'}>
                     <SegmentedControl
                         size={'sm'}
                         w={'300px'}
@@ -98,18 +98,22 @@ const Charts_v2 = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                             },
                         ]}
                     />
-                </Flex>
+                </Flex> */}
                 {
-                    ChartAccess === 'Low' && (
+                    ChartAccess === 'High' && (
                         <>
                             <LowAcessChartControl
                                 projectInfo={projectInfo}
                                 userInfo={userInfo}
                             />
+                            {/* <HighAccessChartControl
+                                projectInfo={projectInfo}
+                                userInfo={userInfo}
+                            /> */}
                         </>
                     )
                 }
-                {
+                {/* {
                     ChartAccess === 'Medium' && (
                         <>
                             <LowAcessChartControl
@@ -118,14 +122,18 @@ const Charts_v2 = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
                             />
                         </>
                     )
-                }
+                } */}
                 {
-                    ChartAccess === 'High' && (
+                    ChartAccess === 'Low' && (
                         <>
-                            <HighAccessChartControl
+                            <LowAcessChartControl
                                 projectInfo={projectInfo}
                                 userInfo={userInfo}
                             />
+                            {/* <HighAccessChartControl
+                                projectInfo={projectInfo}
+                                userInfo={userInfo}
+                            /> */}
                         </>
                     )
                 }
