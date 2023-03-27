@@ -52,9 +52,6 @@ const useStyles = createStyles((theme) => ({
     userActive: {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
     },
-
-
-
 }));
 
 
@@ -63,6 +60,8 @@ const ProfileMenu = ({ userInfo }) => {
     const { classes, theme } = useStyles();
     const [userMenuOpened, setUserMenuOpened] = useState(false);
     const [user, setUser] = useState(userInfo);
+
+    // console.log('User from admin', userInfo);
 
 
     return (<>
@@ -83,15 +82,17 @@ const ProfileMenu = ({ userInfo }) => {
                 </UnstyledButton>
             </Menu.Target>
             <Menu.Dropdown>
-                <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
+                <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
+                    <Link to="/admin-portal">Admin Portal</Link>
+                </Menu.Item>
+                <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}><Link to="/admin-portal/logout">Log Out</Link></Menu.Item>
 
+                <Menu.Divider />
+
+                <Menu.Label>Danger zone</Menu.Label>
+                <Menu.Item color="red" icon={<IconTrash size={14} stroke={1.5} />}>
+                    Delete account
                 </Menu.Item>
-                <Menu.Label>Settings</Menu.Label>
-                <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}><Link to="/profile">Account Setting</Link></Menu.Item>
-                <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
-                    <Link to="/logout">Change Account</Link>
-                </Menu.Item>
-                <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}><Link to="/logout">Log Out</Link></Menu.Item>
             </Menu.Dropdown>
         </Menu>
     </>);

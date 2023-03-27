@@ -78,12 +78,13 @@ const ProjectInfoBar_v2 = ({
 }) => {
 
     const navigate = useNavigate();
-    // console.log(userInfo.favProjectIdList, 'userInfo from ProjectInfoBar_v2');
+    console.log(userInfo, 'user from ProjectInfoBar_v2');
+    console.log(userInfo.favProjectIdList, 'userInfo from ProjectInfoBar_v2');
 
+    // const isProjectFavorite = userInfo.favProjectIdList.map((project) => project._id).includes(projectInfo._id);
+    const isProjectFavorite = userInfo.favProjectIdList.includes(projectInfo._id);
 
-    const isProjectFavorite = userInfo?.favProjectIdList?.includes(projectInfo?._id);
-
-    // console.log(isProjectFavorite, 'isProjectFavorite from ProjectInfoBar_v2');
+    console.log(isProjectFavorite, 'isProjectFavorite from ProjectInfoBar_v2');
 
     const { classes, theme } = useStyles();
     const [isStarred, setIsStarred] = useState(isProjectFavorite);
