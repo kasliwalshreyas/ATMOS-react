@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from "react"
+import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
-const GetMessages = ({project})=>{
-    // const [chats , setChats] = useState(null);
-    console.log("chats ", project)
-    async function getUser() {
-        const res = await fetch(`http://localhost:4000/chat/getChats/project/${project._id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-  
-        const data = await res.json();
-        console.log(data);
-        if (data.success) {
-          console.log(data)
-          // setChats(data);
-        }
-      }
-    useEffect(() => {
-        getUser();
-      }, []);
-    //   console.log("gf",chats)
-    return(
-        <>
-        <h1>Messages</h1>
-        {/* {chats && <h1>{chats}</h1>} */}
-        </>
-    )
+const GetMessages = ({socket, user ,projectid })=>{
+  const [messages, setMessages] = useState(null);
+  useEffect(() => {
+    socket.on("receive_message", (data) =>{
+      console.log(data)
+      setMessages(data)
+    })
+  }, [socket]);
+  return (
+    <>
+    <Card shadow="sm" padding="lg" radius="md" withBorder>
+      <Group position="apart" mt="md" mb="xs">
+        <Text weight={500}>{messages && messages.senderid}</Text>
+      </Group>
+      <Text size="sm" color="dimmed">
+        {messages && messages.message}
+      </Text>
+    </Card>
+    </>
+  )
 }
-
 export default GetMessages;

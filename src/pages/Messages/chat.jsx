@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react"
 import ChatSidebar from "./ChatSidebar"
 import Navbar_v2 from "../../UI/Navbar_v2";
 import { Container, Flex, ScrollArea } from '@mantine/core';
+// import GetMessages from "./chats"
 import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
 import { TextInput } from '@mantine/core';
 import { Box } from '@mantine/core';
@@ -21,7 +22,7 @@ import { Group, Avatar, Accordion } from '@mantine/core';
 import { Badge } from '@mantine/core';
 import { Tabs } from '@mantine/core';
 import GetMessages from "./chats";
-import ChatEditor from "../ProjectDashboard/Board/ChatEditor";
+// import ChatEditor from "../ProjectDashboard/Board/ChatEditor";
 import ChatWriter from "./ChatWriter";
 
 // import "./styles.css"
@@ -58,7 +59,7 @@ const Chats = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -76,9 +77,13 @@ const Chats = () => {
   const projectChat = (project)=>{
     console.log(project)
     setProjects(project)
+    // loadChats(project)
+    socket.emit("load_project", project._id)
 
   }
- 
+  const loadChats = (project)=>{
+    socket.emit("load_project", project._id)
+  }
 
   return (
     <>
@@ -136,8 +141,8 @@ const Chats = () => {
           </Flex>
           <Flex direction={'column'} justify={'flex-end'}  w={'60%'} >
             
-          {projects &&  <GetMessages project={projects} />}
-          {projects && <ChatWriter />}
+          {projects &&  <GetMessages socket= {socket} user={user} projectid= {projects._id} />}
+          {projects && <ChatWriter socket= {socket} user={user} projectid= {projects._id} />}
 
           </Flex>
           <Flex w={'20%'} direction={'column'}> 

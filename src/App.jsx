@@ -13,7 +13,15 @@ import SignUp from "./pages/Sign-Up/Sign-Up";
 import Login from "./pages/Login/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Logout from "./pages/Logout/Logout";
-import Dashboard from "./pages/Admin/Dashboard";
+// import Dashboard from "./pages/Admin/Dashboard";
+import HomeAdmin from "./pages/Admin-portal/Home/Home-Admin";
+import UserList from "./pages/Admin-portal/Users/UserList";
+import UserSingle from "./pages/Admin-portal/Users/UserSingle";
+import ProjectList from "./pages/Admin-portal/Projects/ProjectList";
+import TaskList from "./pages/Admin-portal/Tasks/TaskList";
+import SectionList from "./pages/Admin-portal/Sections/SectionList";
+import LoginAdmin from "./pages/Admin-portal/Login/LoginAdmin";
+import LogoutAdmin from "./pages/Admin-portal/Login/LogoutAdmin";
 import AboutUS from "./pages/AboutUs/AboutUs";
 import Contact from "./pages/ContactUs/Contact";
 import Notes from "./pages/Notes/Notes";
@@ -86,8 +94,14 @@ const App = () => {
               path="/projects/:id/timeline"
               element={<ProjectMainView Timeline />}
             />
-            <Route path="/admin-portal/*" element={<Dashboard />} />
-
+            <Route path="/admin-portal" element={<HomeAdmin />} />
+            <Route exact path="/admin-portal/users" element={<UserList />} />
+            <Route exact path="/admin-portal/users/:id" element={<UserSingle />} />
+            <Route exact path="/admin-portal/projects" element={<ProjectList />} />
+            <Route exact path="/admin-portal/tasks" element={<TaskList />} />
+            <Route exact path="/admin-portal/sections" element={<SectionList />} />
+            <Route exact path="/admin-portal/login" element={<LoginAdmin />} />
+            <Route exact path="/admin-portal/logout" element={<LogoutAdmin />} />
             <Route exact path="/aboutUs" element={<AboutUS />} />
             <Route exact path="/contactUs" element={<Contact />} />
 
