@@ -241,7 +241,7 @@ const LowAcessChartControl = ({ projectInfo, userInfo }) => {
                     ]}
                 />
 
-                {memberList && memberList.length > 0 && <UserInfoTable data={memberList} />}
+                {/* {memberList && memberList.length > 0 && <UserInfoTable data={memberList} />} */}
                 {/* {taskList && taskList.length > 0 && <TaskInfoTable data={taskList} />} */}
 
 
