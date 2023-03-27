@@ -84,31 +84,14 @@ const ProfileMenu = ({ userInfo }) => {
             </Menu.Target>
             <Menu.Dropdown>
                 <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
-                    <Link to="/profile">Profile</Link>
-                </Menu.Item>
-                <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
-                    <Link to="/admin-portal">Admin Portal</Link>
-                </Menu.Item>
-                <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
-                    Comments
-                </Menu.Item>
 
+                </Menu.Item>
                 <Menu.Label>Settings</Menu.Label>
-                <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>Account settings</Menu.Item>
+                <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}><Link to="/profile">Account Setting</Link></Menu.Item>
                 <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
-                    Change account
+                    <Link to="/logout">Change Account</Link>
                 </Menu.Item>
                 <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}><Link to="/logout">Log Out</Link></Menu.Item>
-
-                <Menu.Divider />
-
-                <Menu.Label>Danger zone</Menu.Label>
-                <Menu.Item icon={<IconPlayerPause size={14} stroke={1.5} />}>
-                    Pause subscription
-                </Menu.Item>
-                <Menu.Item color="red" icon={<IconTrash size={14} stroke={1.5} />}>
-                    Delete account
-                </Menu.Item>
             </Menu.Dropdown>
         </Menu>
     </>);
