@@ -7,11 +7,12 @@ import TextAlign from '@tiptap/extension-text-align';
 import Superscript from '@tiptap/extension-superscript';
 import SubScript from '@tiptap/extension-subscript';
 import { Button, Flex, Group, Paper } from '@mantine/core';
-
+import {useState,useEffect} from "react"
 
 const content = ""
 
-const ChatWriter = ({ }) => {
+const ChatWriter = ({socket,user ,projectid }) => {
+    // const [message, setMessage] = useState(null);
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -24,12 +25,23 @@ const ChatWriter = ({ }) => {
         ],
         content,
     });
-
-
-    const saveDiscussion = async () => {
+    
+    // console.log(socket,user ,projectid)
+    const saveMessage = async () => {
         // console.log(editor.getHTML());
-    }
+        const message = editor.getHTML()
+        if(message !== ""){
+            const messageData = {
+                projectid: projectid,
+                senderid: user._id,
+                message: editor.getText(),
+                time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
+            }
+            // console.log(messageData)
+            await socket.emit("send_message", messageData);
+        }
 
+    }
 
     return (
         <>
@@ -38,6 +50,7 @@ const ChatWriter = ({ }) => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-end',
+                    
                 }}>
                 <RichTextEditor.Content
                     sx={{
@@ -48,6 +61,9 @@ const ChatWriter = ({ }) => {
                             display: 'none',
                         },
                     }}
+                    // onChange={(event)=>{
+                    //     setMessage(event.target.value)
+                    // }}
 
 
                 />
@@ -86,7 +102,7 @@ const ChatWriter = ({ }) => {
                     </Flex>
 
                     <RichTextEditor.ControlsGroup>
-                        <Button onClick={saveDiscussion}>Send</Button>
+                        <Button onClick={()=>{saveMessage()}}>Send</Button>
                     </RichTextEditor.ControlsGroup>
                 </RichTextEditor.Toolbar>
             </RichTextEditor>
