@@ -92,9 +92,10 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
     }
 
     useEffect(() => {
-        console.log("rec",receiveMessage)
+        // console.log("rec",receiveM essage)
         if (receiveMessage !== null && receiveMessage.chatId === chat._id) {
             console.log("latest receive message ", receiveMessage)
+            if(currentUserId !== receiveMessage.senderId)
             setMessages([...messages, receiveMessage])
         }
     }, [receiveMessage])

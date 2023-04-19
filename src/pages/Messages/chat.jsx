@@ -151,7 +151,7 @@ const Chats = () => {
             <Flex width={'20%'} wrap="wrap">
               <Navbar p={0} m={0} hidden={!opened} grow>
                 <Tabs defaultValue="gallery" m={0} p={0}>
-                  <Tabs.List grow>
+                  <Tabs.List>
                     <Tabs.Tab value="gallery" icon={<IconPhoto size="0.8rem" />}> Projects</Tabs.Tab>
                     <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" onClick={()=>{
                        getAllUsers();
@@ -172,7 +172,7 @@ const Chats = () => {
                     </Accordion>
                   </Tabs.Panel>
 
-                  <Tabs.Panel value="messages">
+                  <Tabs.Panel value="messages" style={{overflow:"scroll" , height:"80vh" , scrollbarWidth:"0"}}>
                     <Accordion defaultValue="customization" chevron>
                       {user && chats && chats.map((chat) => {
                         return (
