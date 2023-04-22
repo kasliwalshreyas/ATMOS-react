@@ -79,8 +79,13 @@ const HomeAdmin = () => {
           <Table />
         </div> */}
         </div>
+        }
+
+      </div>
     </div>
-      );
+
+
+  );
 };
 
-      export default HomeAdmin;
+export default HomeAdmin;
