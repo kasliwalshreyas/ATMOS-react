@@ -3,31 +3,31 @@ import Navbar from "../Components/Navbar/Navbar";
 import Chart from "../Components/Chart/Chart";
 import List from "../Components/Table/Table";
 import { useEffect, useState } from "react";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const UserSingle = () => {
-    const [user, setUser] = useState();
-    const [projects, setProjects] = useState();
+  const [user, setUser] = useState();
+  const [projects, setProjects] = useState();
 
-    const {id} = useParams();
+  const { id } = useParams();
 
-    useEffect(() => {
-        async function getUser() {
-            const res = await fetch(`http://localhost:4000/admin/users/${id}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            });
-            const data = await res.json();
-            setUser(data.user);
-            const pres = await fetch("http://localhost:4000/admin/projects", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                });
-            const pdata = await pres.json();
-            setProjects(pdata.projects);
-        }
-        getUser();
-    }, [user, projects]);
+  useEffect(() => {
+    async function getUser() {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/users/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      setUser(data.user);
+      const pres = await fetch(process.env.REACT_APP_BACKEND_URL + "/admin/projects", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const pdata = await pres.json();
+      setProjects(pdata.projects);
+    }
+    getUser();
+  }, [user, projects]);
 
 
   return (
@@ -73,8 +73,8 @@ const UserSingle = () => {
           </div>
         </div>
         <div className="bottom">
-        <h1 className="title">Recent Projects</h1>
-          <List/>
+          <h1 className="title">Recent Projects</h1>
+          <List />
         </div>
       </div>
     </div>

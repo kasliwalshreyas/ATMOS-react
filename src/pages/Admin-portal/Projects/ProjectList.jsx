@@ -4,27 +4,27 @@ import { useEffect, useState } from "react";
 
 
 const ProjectList = () => {
-    const [user, setUser] = useState();
-    const [projects, setProjects] = useState();
+  const [user, setUser] = useState();
+  const [projects, setProjects] = useState();
 
-    useEffect(() => {
-        async function getUser() {
-            const adminId = localStorage.getItem("adminId");
-            const res = await fetch(`http://localhost:4000/admin/users/${adminId}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            });
-            const data = await res.json();
-            setUser(data.user);
-            const pres = await fetch("http://localhost:4000/admin/projects", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-              });
-            const pdata = await pres.json();
-            setProjects(pdata.projects);
-        }
-        getUser();
-    }, [user, projects]);
+  useEffect(() => {
+    async function getUser() {
+      const adminId = localStorage.getItem("adminId");
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/users/${adminId}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      setUser(data.user);
+      const pres = await fetch(process.env.REACT_APP_BACKEND_URL + "/admin/projects", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const pdata = await pres.json();
+      setProjects(pdata.projects);
+    }
+    getUser();
+  }, [user, projects]);
 
   return (
     <div className="list">

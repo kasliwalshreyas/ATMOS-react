@@ -20,25 +20,25 @@ const HomeAdmin = () => {
   useEffect(() => {
     async function getLengths() {
       const adminId = localStorage.getItem("adminId");
-      const userRes2 = await fetch(`http://localhost:4000/admin/users/${adminId}`, {
+      const userRes2 = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/users/${adminId}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
       const userData2 = await userRes2.json();
       setUser(userData2.user);
-      const res = await fetch("http://localhost:4000/admin/projects", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/admin/projects", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
-      const userRes = await fetch("http://localhost:4000/admin/users", {
+      const userRes = await fetch(process.env.REACT_APP_BACKEND_URL + "/admin/users", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
-      const taskRes = await fetch("http://localhost:4000/admin/tasks", {
+      const taskRes = await fetch(process.env.REACT_APP_BACKEND_URL + "/admin/tasks", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
-      const sectionRes = await fetch("http://localhost:4000/admin/sections", {
+      const sectionRes = await fetch(process.env.REACT_APP_BACKEND_URL + "/admin/sections", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });

@@ -103,7 +103,7 @@ const ChatFormat = ({ postedAt, body, author, discussionThreadId, taskDiscussion
 
     const deleteDiscussionThread = async () => {
         console.log('delete comment');
-        const response = await fetch(`http://localhost:4000/task/deleteDiscussionThread/${taskDiscussionId}/${discussionThreadId}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/task/deleteDiscussionThread/${taskDiscussionId}/${discussionThreadId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

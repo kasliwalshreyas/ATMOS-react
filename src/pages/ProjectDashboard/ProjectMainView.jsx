@@ -33,7 +33,7 @@ const ProjectMainView = ({ Overview, Board, Charts, Timeline }) => {
 
   useEffect(() => {
     const user = async () => {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const ProjectMainView = ({ Overview, Board, Charts, Timeline }) => {
 
   useEffect(() => {
     const project = async () => {
-      const res = await fetch(`http://localhost:4000/project/getProjectDetails/${projectId}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getProjectDetails/${projectId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

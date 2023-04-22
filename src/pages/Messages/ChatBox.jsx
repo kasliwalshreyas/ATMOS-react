@@ -16,7 +16,7 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
         // userId && console.log(userId)
         const getUserData = async () => {
             try {
-                const res = await fetch(`http://localhost:4000/admin/users/${userId}`, {
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/users/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
         const chatId = chat._id;
         const getMessages = async () => {
             try {
-                const res = await fetch(`http://localhost:4000/message/${chatId}`, {
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/message/${chatId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
         }
         // send 
         try {
-            const res = await fetch("http://localhost:4000/message/sendmessage", {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/message/sendmessage", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -95,8 +95,8 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
         // console.log("rec",receiveM essage)
         if (receiveMessage !== null && receiveMessage.chatId === chat._id) {
             console.log("latest receive message ", receiveMessage)
-            if(currentUserId !== receiveMessage.senderId)
-            setMessages([...messages, receiveMessage])
+            if (currentUserId !== receiveMessage.senderId)
+                setMessages([...messages, receiveMessage])
         }
     }, [receiveMessage])
 

@@ -25,11 +25,11 @@ const Chats = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [allIds, setAllIds] = useState([]);
   const [existingIds, setExistingIds] = useState(null);
-  
+
 
   useEffect(() => {
     async function getUser() {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Chats = () => {
   useEffect(() => {
     async function getChats() {
       user && console.log("i sm", user)
-      const res = await fetch(`http://localhost:4000/chat/${user._id}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/chat/${user._id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -64,69 +64,69 @@ const Chats = () => {
   }, [user]);
 
 
-    const getAllUsers = async () => {
-      try {
-        const res = await fetch("http://localhost:4000/user/getUserList", {
-          method: "GET",
+  const getAllUsers = async () => {
+    try {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserList", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      console.log(data.userList)
+      setAllUsers(data.userList);
+      chats.forEach((ch) => {
+        const newUserChats = data.userList.filter(d => !ch.members.includes(d._id));
+        setExistingIds([...newUserChats])
+      })
+      existingIds && existingIds.map(async (ids) => {
+        const chat = {
+          senderId: user._id,
+          receiverId: ids._id,
+        }
+        // console.log("ch",chat)
+        const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/chat/send", {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
+          body: JSON.stringify(chat)
         });
-        const data = await res.json();
-        console.log(data.userList)
-        setAllUsers(data.userList);
-        chats.forEach((ch)=>{
-          const newUserChats = data.userList.filter(d => !ch.members.includes(d._id));
-            setExistingIds([...newUserChats])
-        })
-        existingIds && existingIds.map(async(ids)=>{
-          const chat = {
-            senderId: user._id,
-            receiverId: ids._id,
-          }
-          // console.log("ch",chat)
-          const res = await fetch("http://localhost:4000/chat/send", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify(chat)
-          });
-          
-          const data = await res.json();
-          console.log(data)
-        })
-        
-      } catch (e) {
-        console.log(e);
-      }
-    }
 
-    useEffect(() => {
-      socket.current = io('http://localhost:8800');
-      user && socket.current.emit("new-user-add", user._id)
-      socket.current.on('get-users', (users) => {
-        setOnlineUsers(users);
+        const data = await res.json();
+        console.log(data)
       })
-    }, [user])
-  
-    // send message to socket
-    useEffect(() => {
-      if (sendMessage !== null) {
-        socket.current.emit('send-message', sendMessage)
-      }
-    }, [sendMessage])
-  
-    // receive message from socket 
-    useEffect(() => {
-      // socket.current = io('http://localhost:8800');
-      socket.current.on('recieve-message', (data) => {
-        console.log("data Received here")
-        setReceiveMessage(data)
-      })
-    }, [])
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    socket.current = io('http://localhost:8800');
+    user && socket.current.emit("new-user-add", user._id)
+    socket.current.on('get-users', (users) => {
+      setOnlineUsers(users);
+    })
+  }, [user])
+
+  // send message to socket
+  useEffect(() => {
+    if (sendMessage !== null) {
+      socket.current.emit('send-message', sendMessage)
+    }
+  }, [sendMessage])
+
+  // receive message from socket 
+  useEffect(() => {
+    // socket.current = io('http://localhost:8800');
+    socket.current.on('recieve-message', (data) => {
+      console.log("data Received here")
+      setReceiveMessage(data)
+    })
+  }, [])
 
   //     // // send message with socket
   //     // const receiverId = chat.members.find((id) => id !== currentUserId)
@@ -153,9 +153,9 @@ const Chats = () => {
                 <Tabs defaultValue="gallery" m={0} p={0}>
                   <Tabs.List>
                     <Tabs.Tab value="gallery" icon={<IconPhoto size="0.8rem" />}> Projects</Tabs.Tab>
-                    <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" onClick={()=>{
-                       getAllUsers();
-                    }}/>}>Direct Messages</Tabs.Tab>
+                    <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" onClick={() => {
+                      getAllUsers();
+                    }} />}>Direct Messages</Tabs.Tab>
                   </Tabs.List>
                   <Tabs.Panel value="gallery">
                     <Accordion defaultValue="customization"
@@ -172,7 +172,7 @@ const Chats = () => {
                     </Accordion>
                   </Tabs.Panel>
 
-                  <Tabs.Panel value="messages" style={{overflow:"scroll" , height:"80vh" , scrollbarWidth:"0"}}>
+                  <Tabs.Panel value="messages" style={{ overflow: "scroll", height: "80vh", scrollbarWidth: "0" }}>
                     <Accordion defaultValue="customization" chevron>
                       {user && chats && chats.map((chat) => {
                         return (

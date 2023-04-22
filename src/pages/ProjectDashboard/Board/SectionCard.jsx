@@ -83,7 +83,7 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
 
     const saveSectionName = async (event) => {
         const sectionID = sectionInfo._id;
-        const response = await fetch(`http://localhost:4000/section/renameSection/${sectionID}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/section/renameSection/${sectionID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify({ sectionName: event.nativeEvent.target.value })
@@ -102,7 +102,7 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
         event.stopPropagation();
 
         const sectionID = sectionInfo._id;
-        const response = await fetch(`http://localhost:4000/section/deleteSection/${sectionID}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/section/deleteSection/${sectionID}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })

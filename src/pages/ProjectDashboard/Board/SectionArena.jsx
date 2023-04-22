@@ -24,7 +24,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
 
   useEffect(() => {
     const user = async () => {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
 
   useEffect(() => {
     const project = async () => {
-      const res = await fetch(`http://localhost:4000/project/getProjectDetails/${projectId}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getProjectDetails/${projectId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
   };
 
   const createSection = async () => {
-    const sec = await fetch("http://localhost:4000/section/create", {
+    const sec = await fetch(process.env.REACT_APP_BACKEND_URL + "/section/create", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("token")}` },
       body: JSON.stringify({

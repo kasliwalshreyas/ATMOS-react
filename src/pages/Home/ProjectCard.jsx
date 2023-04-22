@@ -65,7 +65,7 @@ const ProjectCard = ({ project, userId, colorCode }) => {
 
     const updateLastUsed = async (projectId) => {
         const res = await fetch(
-            `http://localhost:4000/project/updateLastUsed/${projectId}`,
+            `${process.env.REACT_APP_BACKEND_URL}/project/updateLastUsed/${projectId}`,
             {
                 method: "PUT",
                 headers: {

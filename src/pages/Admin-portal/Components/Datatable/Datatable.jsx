@@ -20,7 +20,7 @@ const Datatable = ({alldata, type}) => {
   const handleDelete = async (id,type) => {
     try {
         setData(data.filter((item) => item._id !== id));
-            const res = await fetch(`http://localhost:4000/admin/${type}/${id}`, {
+            const res = await fetch( `${process.env.REACT_APP_BACKEND_URL}/admin/${type}/${id}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
             });

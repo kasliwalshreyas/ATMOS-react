@@ -14,7 +14,7 @@ const OverdueTask = ({ user }) => {
 
   useEffect(() => {
     const getTaskLists = async () => {
-      const res = await fetch("http://localhost:4000/task/getTaskList", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/task/getTaskList", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -52,7 +52,7 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
     const deleteTask = async (event, taskID) => {
         event.stopPropagation();
 
-        const res = await fetch(`http://localhost:4000/task/deleteTask/${taskID}`, {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/task/deleteTask/${taskID}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
