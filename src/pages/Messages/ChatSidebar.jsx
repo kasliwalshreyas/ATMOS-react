@@ -30,7 +30,7 @@ const useStyles = createStyles((theme) => ({
 
 
 
-const ChatSidebar = ({ projects }) => {
+const ChatSidebar = ({ projects , user}) => {
     // console.log("sidebar",projects)
 
     const { classes } = useStyles();
@@ -47,12 +47,26 @@ const ChatSidebar = ({ projects }) => {
     console.log(collaborators)
     return (
         <>
+            <div style={{paddingLeft: '20px' }}>
+                                <Text size="sm" weight={500}>
+                                    Project Description: {projects.projectDescription}
+                                </Text>
+                            </div>
+                            <div style={{paddingLeft: '20px', marginTop:'10px' }}>
+                                <Text size="sm" weight={500}>
+                                    Collaborators: 
+                                </Text>
+                            </div>
             {collaborators && collaborators.map((collaborator, index) => {
+                if(user && collaborator && collaborator != user.userName){
                 return (
                     <Paper
                         sx={classes.user}
                         key={index}
                     >
+                        
+                
+                        
                         <Flex align={'center'} justify={'center'} sx={classes.membercard}>
                             <div style={{ display: 'flex' }}>
                                 <ThemeIcon color="teal" size={24} radius="xl">
@@ -67,6 +81,7 @@ const ChatSidebar = ({ projects }) => {
                         </Flex>
                     </Paper>
                 )
+                }
             })}
             {/* </Flex> */}
         </>

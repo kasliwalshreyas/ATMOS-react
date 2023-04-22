@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
-const GetMessages = ({socket, user ,projectid })=>{
+const GetProjectMessages = ({socket, user ,projectid })=>{
   const [messages, setMessages] = useState(null);
   useEffect(() => {
     socket.on("receive_message", (data) =>{
@@ -25,4 +25,4 @@ const GetMessages = ({socket, user ,projectid })=>{
     </>
   )
 }
-export default GetMessages;
+export default GetProjectMessages;
