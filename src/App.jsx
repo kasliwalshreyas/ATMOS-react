@@ -44,6 +44,7 @@ const App = () => {
     async function getUser() {
       const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
+        mode: 'cors',
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
