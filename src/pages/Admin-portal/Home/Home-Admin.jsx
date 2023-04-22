@@ -57,20 +57,20 @@ const HomeAdmin = () => {
     <div className="home">
       {/* <Sidebar /> */}
       <div className="homeContainer">
-        
+
         {user && <Navbar activeLink={"/admin-portal/"} user={user} />}
         {/* <Navbar2 /> */}
-        <div className="widgets">
+        {user && <div className="widgets">
           <Widget type="users" len={users} />
           <Widget type="projects" len={projects} />
           <Widget type="sections" len={sections} />
           <Widget type="tasks" len={tasks} />
 
-        </div>
-        <div className="charts">
+        </div>}
+        {user && <div className="charts">
           <Featured />
           <Chart title="Last 6 Months (Users)" aspect={2 / 1} />
-        </div>
+        </div>}
         {/* <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
           <Table />
