@@ -105,7 +105,7 @@ const Chats = () => {
   }
 
   useEffect(() => {
-    socket.current = io('http://localhost:8800');
+    socket.current = io('REACT_APP_SOCKET_URL');
     user && socket.current.emit("new-user-add", user._id)
     socket.current.on('get-users', (users) => {
       setOnlineUsers(users);
@@ -121,7 +121,7 @@ const Chats = () => {
 
   // receive message from socket 
   useEffect(() => {
-    // socket.current = io('http://localhost:8800');
+    // socket.current = io('REACT_APP_SOCKET_URL');
     socket.current.on('recieve-message', (data) => {
       console.log("data Received here")
       setReceiveMessage(data)
