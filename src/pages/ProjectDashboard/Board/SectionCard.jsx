@@ -173,7 +173,7 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
                                 onBlur={saveSectionName}
                             />
                             {
-                                (userAccessLevel === 'owner' || userAccessLevel === 'high' || userAccessLevel === 'medium') && hovered && (
+                                (userAccessLevel === 'owner' || userAccessLevel === 'high') && hovered && (
                                     <Menu
                                         transitionProps={{ transition: 'pop' }}
                                         offset={2}
