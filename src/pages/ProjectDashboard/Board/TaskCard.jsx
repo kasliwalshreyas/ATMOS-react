@@ -36,12 +36,12 @@ const useStyles = createStyles((theme) => ({
 
 }));
 
-const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
+const TaskCard = ({ task, section, expandModal, rerender, setRerender, userAccessLevel }) => {
 
     const { classes } = useStyles();
     const { hovered, ref } = useHover();
 
-    // console.log(task, 'task');
+    console.log(task, 'task');
     const dateFormater = (date) => {
         let newDate = new Date(date);
         const offset = newDate.getTimezoneOffset()
@@ -58,6 +58,7 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
         });
         console.log("deleted task", taskID);
         setRerender(!rerender);
+
     }
 
     const colorPickerPriority = (priority) => {
@@ -100,7 +101,7 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
                         truncate
                         sx={classes.taskName}
                     >{task.taskName}</Text>
-                    {hovered &&
+                    {(userAccessLevel === 'owner' || userAccessLevel === 'high' || userAccessLevel === 'medium') && hovered &&
                         <Menu
                             transitionProps={{ transition: 'pop' }}
                             offset={2}

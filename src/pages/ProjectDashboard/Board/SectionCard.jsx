@@ -5,6 +5,7 @@ import { ActionIcon, Button, Card, Container, createStyles, Group, Input, Menu }
 import { IconDots, IconMessages, IconNote, IconReportAnalytics, IconTrash } from "@tabler/icons-react";
 import { useHover, useListState } from "@mantine/hooks";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useEffect } from "react";
 
 
 
@@ -60,20 +61,24 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, expandModal, rerender, setRerender, sectionIndex, handleProvided }) => {
+const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, expandModal, rerender, setRerender, sectionIndex, userAccessLevel, handleProvided }) => {
 
     // console.log(sectionInfo, 'sectionInfo');
-    // console.log(taskList, 'taskList');
+    console.log(taskList, 'taskList');
 
     const { classes } = useStyles();
     const { hovered, ref } = useHover();
     let count = 0;
+
     const taskOrder = [];
-    // console.log(taskList, 'taskList from sectionCard');
-    for (let i = 0; i < taskList.length; i++) {
-        taskOrder.push(i);
-    }
-    const [state, handlers] = useListState(taskOrder);
+    const [state, handlers] = useListState([]);
+    useEffect(() => {
+        // console.log(taskList, 'taskList from sectionCard');
+        for (let i = 0; i < taskList.length; i++) {
+            taskOrder.push(i);
+        }
+        handlers.setState(taskOrder);
+    }, [rerender]);
 
     // console.log(state, 'state from section Card');
 
@@ -117,7 +122,7 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
         setIsSectionOptionClicked(false);
     }
 
-    const items = state.map((taskIndex, index) => (
+    const items = sectionInfo.taskIdList.length > 0 && state.length > 0 && state.map((taskIndex, index) => (
         <Draggable key={taskIndex} index={sectionIndex} draggableId={'' + taskIndex}>
             {(provided) => (
                 <div
@@ -126,12 +131,17 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
                     ref={provided.innerRef}
                     key={index}
                 >
+                    {console.log(state, 'state')}
+                    {console.log(taskIndex, sectionIndex, 'taskIndex', 'sectionIndex')}
+                    {console.log(sectionInfo.sectionName, 'sectionInfo.SectionName')}
+                    {console.log(sectionInfo.taskIdList, 'sectionTaskIDList')}
                     <TaskCard
                         task={taskList[taskIndex]}
                         section={sectionInfo}
                         expandModal={expandModal}
                         rerender={rerender}
                         setRerender={setRerender}
+                        userAccessLevel={userAccessLevel}
                     />
                 </div>
             )}
@@ -163,7 +173,7 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
                                 onBlur={saveSectionName}
                             />
                             {
-                                hovered && (
+                                (userAccessLevel === 'owner' || userAccessLevel === 'high' || userAccessLevel === 'medium') && hovered && (
                                     <Menu
                                         transitionProps={{ transition: 'pop' }}
                                         offset={2}
@@ -227,9 +237,13 @@ const SectionCard = ({ projectInfo, section: sectionInfo, taskList, createTask, 
                                 </div>
                             )}
                         </Droppable>
-                        <Button fullWidth onClick={() => createTask(sectionInfo)} >
-                            Add Task
-                        </Button>
+                        {
+                            (userAccessLevel === 'owner' || userAccessLevel === 'high' || userAccessLevel === 'medium') && (
+                                <Button fullWidth onClick={() => createTask(sectionInfo)} >
+                                    Add Task
+                                </Button>
+                            )
+                        }
 
                     </Container>
 

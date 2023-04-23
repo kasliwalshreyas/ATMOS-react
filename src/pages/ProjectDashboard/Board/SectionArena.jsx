@@ -16,6 +16,8 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
   const [sectionList, setSectionList] = useState(projectInfo.projectSectionIdList);
   const [rerender, setRerender] = useState(false);
   const [columnOrder, setColumnOrder] = useState([]);
+  const [userAccessLevel, setUserAccessLevel] = useState('no access');
+
 
   const [state, handlers] = useListState([columnOrder]);
 
@@ -50,7 +52,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
         },
       });
       const data = await res.json();
-      // console.log(data, 'projectInfo from main view');
+      console.log(data, 'projectInfo from main view');
       setProjectInfo(data.project);
       setSectionList(data.project.projectSectionIdList);
       //calulate the column order
@@ -61,12 +63,44 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
         i++;
       });
       setColumnOrder(columnOrderTemp);
+      // console.log(columnOrderTemp);
       // handlers.setState(columnOrderTemp);
       setTaskList(data.project.projectTaskIdList);
       return data;
     }
     project();
   }, [rerender]);
+
+  const setAccessLevelFunc = () => {
+    if (projectInfo && userInfo) {
+      // console.log('access Level setting');
+      // console.log(userInfo, projectInfo);
+      if (userInfo._id === projectInfo.projectOwner._id) {
+        // console.log('owner');
+        setUserAccessLevel('owner');
+      }
+      else if (projectInfo.projectHighAccessMembers.find((member) => member._id === userInfo._id)) {
+        // console.log('high');
+        setUserAccessLevel('high');
+      }
+      else if (projectInfo.projectMediumAccessMembers.find((member) => member._id === userInfo._id)) {
+        // console.log('medium');
+        setUserAccessLevel('medium');
+      }
+      else if (projectInfo.projectLowAccessMembers.find((member) => member._id === userInfo._id)) {
+        // console.log('low');
+        setUserAccessLevel('low');
+      }
+      else {
+        // console.log('no access');
+        setUserAccessLevel('no access');
+      }
+    }
+  }
+
+  useEffect(() => {
+    setAccessLevelFunc();
+  }, [projectInfo, userInfo]);
 
   const expandModal = (taskInfo, sectionInfo) => {
     setSelectedTask(taskInfo);
@@ -191,9 +225,11 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
 
                           setRerender={setRerender}
                           rerender={rerender}
+                          userAccessLevel={userAccessLevel}
 
                           //props for draggable
                           sectionIndex={index}
+
                         // handleProvided={provided}
                         />
 
@@ -206,9 +242,13 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
             )}
           </Droppable>
         </DragDropContext>
-        <div className="section-arena">
-          <Button w={315} color="blue" onClick={createSection}>Add Section</Button>
-        </div>
+        {
+          (userAccessLevel === 'owner' || userAccessLevel === 'high') && (
+            <div className="section-arena">
+              <Button w={315} color="blue" onClick={createSection}>Add Section</Button>
+            </div>
+          )
+        }
       </div>
       {
         selectedTask != null && (
@@ -222,6 +262,7 @@ const SectionArena = ({ projectId, projectInfo, setProjectInfo, userInfo, setUse
             projectInfo={projectInfo}
             AssigneeList={AssigneeList}
             userInfo={userInfo}
+            userAccessLevel={userAccessLevel}
           />
         )
       }

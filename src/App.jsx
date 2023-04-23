@@ -51,7 +51,7 @@ const App = () => {
         },
       });
       const data = await res.json();
-      console.log(data, "userInfo from appJS");
+      // console.log(data, "userInfo from appJS");
       data["token"] = token;
       dispatch(login(data));
     }

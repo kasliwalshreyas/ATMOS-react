@@ -9,7 +9,7 @@ import TaskModalForm from './TaskModalForm';
 
 
 
-const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList, userInfo }) => {
+const TaskModal_v2 = ({ taskInfo, sectionInfo, show, closeModal, rerender, setRerender, projectInfo, AssigneeList, userInfo, userAccessLevel }) => {
     // const [opened, { open, close }] = useDisclosure(show);
 
     // console.log(AssigneeList, "AssigneeList");
