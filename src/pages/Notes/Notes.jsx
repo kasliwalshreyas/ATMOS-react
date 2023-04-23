@@ -94,6 +94,14 @@ const Notes = () => {
     }
   };
 
+  let randomColor = new Array()
+  // for(let firstColor = 0; firstColor <= 1000; firstColor++) { 
+  //   randomColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+  // }
+
+  randomColor.push("#FF6666", "#FFB266", "#B2FF66", "#FFCCFF", "#33FF99", "#66B2FF", "#B266FF", "#FF3333", "#FF33FF","#FFFF00", "#33FFFF", "#FF9999", "#9999FF", "#6495ED", "#00FF80", "#80FF00")
+  let colorChoice = 0;
+
   return (
     <>
       {user && <Navbar_v2 activeLink={"/notes"} user={user} />}
@@ -103,8 +111,9 @@ const Notes = () => {
           <div>
             {notes &&
               notes.map((note) => (
+              
                 <div id="noteboxing" className={styles.wholenote}>
-                  <div className={styles.noteReal} key={note._id}>
+                  <div style={{ backgroundColor: randomColor[colorChoice++] }} className={styles.noteReal} key={note._id}>
                     <div
                       onClick={() => {
                         insidenote(note);
@@ -117,6 +126,13 @@ const Notes = () => {
                     </div>
 
                     <div className={styles.notelower}>
+
+                      <div className={styles.updateDate}>
+                        <p className={styles.exactdate}>
+                          {note.NoteUpdatedAt.toString().split("T")[0]}
+                        </p>
+                      </div>
+
                       <div className={styles.bin}>
                         <div
                           onClick={() => {
@@ -133,14 +149,15 @@ const Notes = () => {
                         </div>
                       </div>
 
-                      <div className={styles.updateDate}>
+                      {/* <div className={styles.updateDate}>
                         <p className={styles.exactdate}>
                           {note.NoteUpdatedAt.toString().split("T")[0]}
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
+              
               ))}
           </div>
 

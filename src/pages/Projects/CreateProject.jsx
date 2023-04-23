@@ -24,7 +24,7 @@ const CreateProject = () => {
   // }, [userID]);
 
   const history = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const CreateProject = () => {
 
   function backToHome() {
     setnextPage(1);
-    history("/projects");
+    history("/projects", {replace: true});
   }
 
   const handleSubmit = async (e) => {
@@ -96,7 +96,7 @@ const CreateProject = () => {
 
     setIsPending(false);
     setnextPage(1);
-    history("/projects");
+    history("/projects", {replace: true});
   };
 
   const checkProjectName = () => {
@@ -133,8 +133,9 @@ const CreateProject = () => {
             <div className={styles.projectLeftMiddlePart}>
               {nextPage === 1 && (
                 <form>
-                  <label>Project name</label>
+                  <label data-testid={`label-${nextPage}`}>Project name</label>
                   <input
+                    data-testid="nameOfProject"
                     id="projectNameInput"
                     placeholder="Name"
                     type="text"
@@ -142,21 +143,21 @@ const CreateProject = () => {
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
                   />
-                  <label>Project type</label>
+                  <label data-testid="label-2">Project type</label>
                   <select
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                   >
-                    <option value="Personal">Personal</option>
-                    <option value="Education">Education</option>
-                    <option value="Business">Business</option>
+                    <option value="Personal" data-testid="type-1">Personal</option>
+                    <option value="Education" data-testid="type-2">Education</option>
+                    <option value="Business" data-testid="type-3">Business</option>
                   </select>
                 </form>
               )}
 
               {nextPage === 2 && (
                 <form onSubmit={handleSubmit}>
-                  <label>Project Statement</label>
+                  <label data-testid={`label-${nextPage}`}>Project Statement</label>
                   <textarea
                     className={styles.textareaInput}
                     placeholder="Write about the purpose of the project."
@@ -169,7 +170,7 @@ const CreateProject = () => {
 
               {nextPage === 3 && (
                 <form onSubmit={handleSubmit}>
-                  <label>Project Mission</label>
+                  <label data-testid={`label-${nextPage}`}>Project Mission</label>
                   <textarea
                     placeholder="Write about the mission of the project."
                     className={styles.textareaInput}
@@ -182,7 +183,7 @@ const CreateProject = () => {
 
               {nextPage === 4 && (
                 <form>
-                  <label>Project Description</label>
+                  <label data-testid={`label-${nextPage}`}>Project Description</label>
                   <textarea
                     placeholder=" Give the Description about the project."
                     className={styles.textareaInput}
@@ -195,7 +196,7 @@ const CreateProject = () => {
 
               {nextPage === 5 && (
                 <form>
-                  <label>Project Guidlines</label>
+                  <label data-testid={`label-${nextPage}`}>Project Guidlines</label>
                   <textarea
                     placeholder=" Write about the guidelines of the project."
                     className={styles.textareaInput}
