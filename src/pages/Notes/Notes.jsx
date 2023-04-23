@@ -28,7 +28,7 @@ const Notes = () => {
   useEffect(() => {
     // console.log('use effect from home');
     const getUser = async () => {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Notes = () => {
 
   useEffect(() => {
     const noted = async () => {
-      const res = await fetch("http://localhost:4000/note/getNoteList", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/note/getNoteList", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const Notes = () => {
 
   const deleteNote = async (note) => {
     const res = await fetch(
-      `http://localhost:4000/note/deleteNote/${note._id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/note/deleteNote/${note._id}`,
       {
         method: "DELETE",
         headers: {

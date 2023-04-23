@@ -68,7 +68,7 @@ const ProjectList = ({ projects, userInfo }) => {
 
   const handleLinkClick = async (project) => {
     const res = await fetch(
-      `http://localhost:4000/project/updateLastUsed/${project._id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/project/updateLastUsed/${project._id}`,
       {
         method: "PUT",
         headers: {

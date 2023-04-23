@@ -60,7 +60,7 @@ const RecentProject = ({ user }) => {
 
   useEffect(() => {
     const getProjects = async () => {
-      const res = await fetch("http://localhost:4000/project/getUserProjects", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/project/getUserProjects", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const RecentProject = ({ user }) => {
 
   const handleLinkClick = async (projects, project) => {
     const res = await fetch(
-      `http://localhost:4000/project/updateLastUsed/${project._id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/project/updateLastUsed/${project._id}`,
       {
         method: "PUT",
         headers: {

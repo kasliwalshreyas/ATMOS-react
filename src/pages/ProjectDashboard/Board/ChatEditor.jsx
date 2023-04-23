@@ -28,7 +28,7 @@ const ChatEditor = ({ taskDiscussionId, setDiscussionThread }) => {
 
     const saveDiscussion = async () => {
         // console.log(editor.getHTML());
-        const res = await fetch(`http://localhost:4000/task/createDiscussionThread/${taskDiscussionId}`, {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/task/createDiscussionThread/${taskDiscussionId}`, {
             // mode: "no-cors",
             method: "POST",
             headers: {

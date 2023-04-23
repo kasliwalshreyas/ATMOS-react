@@ -30,7 +30,7 @@ const CreateProject = () => {
   useEffect(() => {
     // console.log('use effect from home');
     const getUser = async () => {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const CreateProject = () => {
 
     setIsPending(true);
 
-    const newProjectInfo = await fetch("http://localhost:4000/project/create", {
+    const newProjectInfo = await fetch(process.env.REACT_APP_BACKEND_URL + "/project/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

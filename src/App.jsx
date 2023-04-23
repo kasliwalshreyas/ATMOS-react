@@ -42,15 +42,16 @@ const App = () => {
 
   useEffect(() => {
     async function getUser() {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
+        mode: 'cors',
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
       });
       const data = await res.json();
-      console.log(data, "userInfo from appJS");
+      // console.log(data, "userInfo from appJS");
       data["token"] = token;
       dispatch(login(data));
     }

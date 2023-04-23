@@ -100,7 +100,7 @@ function SignUp() {
         console.log(handleValidation());
         if (handleValidation()) {
             console.log("Form submitted");
-            const res = await fetch("http://localhost:4000/user/register", {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: email, password: password, userName: name }),

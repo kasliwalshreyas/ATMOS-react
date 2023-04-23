@@ -144,7 +144,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
 
   useEffect(() => {
     const project = async () => {
-      const res = await fetch(`http://localhost:4000/project/getProjectDetails/${projectId}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getProjectDetails/${projectId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -196,7 +196,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
 
   useEffect(() => {
     const res = async () => {
-      const response = await fetch("http://localhost:4000/user/getUserList/", {
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserList/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -266,7 +266,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   const addTeamMember = async () => {
     // console.log(selectedTeamMember, selectedRole, "Add Team Member Data");
 
-    const response = await fetch(`http://localhost:4000/project/addTeamMember/${projectId}`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/addTeamMember/${projectId}`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
@@ -306,7 +306,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   }
 
   const handleDeleteProject = async () => {
-    const res = await fetch(`http://localhost:4000/project/deleteProject/${projectId}`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/deleteProject/${projectId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -322,7 +322,7 @@ const OverView = ({ projectId, projectInfo, setProjectInfo, userInfo }) => {
   }
   const handleTransfer = async () => {
     // console.log(selectedTransferMember, "newOwner");
-    const res = await fetch(`http://localhost:4000/project/transferOwnership/${projectId}`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/transferOwnership/${projectId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

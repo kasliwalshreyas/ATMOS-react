@@ -29,7 +29,7 @@ const TaskModalDiscussion = ({ taskDiscussionId }) => {
 
     useEffect(() => {
         const getDiscussion = async () => {
-            const response = await fetch(`http://localhost:4000/task/getDiscussionThread/${taskDiscussionId}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/task/getDiscussionThread/${taskDiscussionId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
