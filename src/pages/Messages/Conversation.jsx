@@ -30,7 +30,7 @@ const Conversation = ({ data, currentUserId, online }) => {
         });
         const data = await res.json();
         setUserData(data.user);
-        console.log("this is", data)
+        // console.log("this is", data)
       } catch (error) {
         console.log(error)
       }

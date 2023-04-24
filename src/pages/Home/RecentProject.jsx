@@ -60,7 +60,7 @@ const RecentProject = ({ user }) => {
 
   useEffect(() => {
     const getProjects = async () => {
-      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/project/getUserProjects", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getUserProjects`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

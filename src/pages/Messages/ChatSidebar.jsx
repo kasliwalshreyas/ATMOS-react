@@ -23,68 +23,72 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-
-
-
-
-
-
-
-const ChatSidebar = ({chat, currentUserId}) => {
+const ChatSidebar = ({ chat, currentUserId }) => {
     // console.log("sidebar",projects)
 
     const { classes } = useStyles();
     console.log(chat)
-    // const collaborators = []
-    // projects.projectHighAccessMembers.map(collaborator => {
-    //     collaborators.push(collaborator.userName)
-    // })
-    // projects.projectMediumAccessMembers.map(collaborator => {
-    //     collaborators.push(collaborator.userName)
-    // })
-    // projects.projectLowAccessMembers.map(collaborator => {
-    //     collaborators.push(collaborator.userName)
-    // })
-    // console.log(collaborators)
+    const [projectData, setProjectData] = useState(null)
+    const [collaborators, setCollaborators] = useState([])
+    useEffect(() => {
+        const projectId = chat.projectId;
+        const getProjectData = async () => {
+            try {
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getProjectDetails/${projectId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    },
+                });
+                const data = await res.json();
+                setProjectData(data.project);
+                // console.log("this is",data)
+                let collaborator = []
+                data.project.projectHighAccessMembers.map(collab => {
+                    if(collab._id === currentUserId){
+                        collaborator.push("You")
+                    }
+                    else{
+                        collaborator.push(collab.userName)
+                    }
+                })
+                data.project.projectMediumAccessMembers.map(collab => {
+                    collaborator.push(collab.userName)
+                })
+                data.project.projectLowAccessMembers.map(collab => {
+                    collaborator.push(collab.userName)
+                })
+                setCollaborators(collaborator)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getProjectData()
+    }, [])
+
     return (
         <>
-            <div style={{paddingLeft: '20px' }}>
-                                <Text size="sm" weight={500}>
-                                    Project Description:
-                                </Text>
-                            </div>
-                            <div style={{paddingLeft: '20px', marginTop:'10px' }}>
-                                <Text size="sm" weight={500}>
-                                    Collaborators: 
-                                </Text>
-                            </div>
-            {/* {collaborators && collaborators.map((collaborator, index) => {
-                if(user && collaborator && collaborator != user.userName){
-                return (
-                    <Paper
-                        sx={classes.user}
-                        key={index}
-                    >
-                        
-                
-                        
-                        <Flex align={'center'} justify={'center'} sx={classes.membercard}>
-                            <div style={{ display: 'flex' }}>
-                                <ThemeIcon color="teal" size={24} radius="xl">
-                                    <Avatar src="avatar.png" alt="it's me" />
-                                </ThemeIcon>
-                            </div>
-                            <div style={{ flex: 1, paddingLeft: '20px' }}>
-                                <Text size="sm" weight={500}>
-                                    {collaborator}
-                                </Text>
-                            </div>
-                        </Flex>
-                    </Paper>
-                )
-                }
-            })} */}
-            {/* </Flex> */}
+            <div style={{ paddingLeft: '20px' }}>
+                <Text size="sm" weight={500}>
+                    Project Description:
+                </Text>
+                <Text size="sm" weight={500}>
+                    {projectData && projectData.projectDescription}
+                </Text>
+            </div>
+            <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
+                <Text size="sm" weight={500}>
+                    Collaborators:
+                </Text>
+                {collaborators && collaborators.map((collaborator) => {
+                    return (
+                        <Text size="sm" weight={500}>
+                            {collaborator}
+                        </Text>
+                    )
+                })}
+            </div>
         </>
     )
 }

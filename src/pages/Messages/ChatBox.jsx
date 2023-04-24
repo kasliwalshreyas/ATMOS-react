@@ -25,7 +25,7 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
                 });
                 const data = await res.json();
                 setUserData(data.user);
-                console.log("this is", data)
+                // console.log("this is", data)
             } catch (error) {
                 console.log(error)
             }
@@ -48,7 +48,7 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
                 });
                 const data = await res.json();
                 setMessages(data);
-                console.log("this is", data)
+                // console.log("this is", data)
             } catch (error) {
                 console.log(error)
             }

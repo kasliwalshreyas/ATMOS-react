@@ -15,7 +15,8 @@ import { Group, Avatar, Accordion } from '@mantine/core';
 const Conversation = ({chat, currentUserId}) => {
     const [projectData, setProjectData] = useState(null)
     useEffect(()=>{
-        const projectId = chat.projectId;
+        if(chat){
+          const projectId = chat.projectId;
         const getProjectData = async()=>{
             try{
                 const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getProjectDetails/${projectId}`, {
@@ -27,12 +28,13 @@ const Conversation = ({chat, currentUserId}) => {
                 });
                 const data = await res.json();
                 setProjectData(data.project);
-                console.log("this is",data)
+                // console.log("this is",data)
             } catch(error){
                 console.log(error)
             }
         }
         getProjectData()
+      }
     },[])
 
   return (

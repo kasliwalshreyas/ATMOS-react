@@ -157,7 +157,7 @@ const Chats = () => {
         let projects = []
         // allProjects && console.log("all",allProjects)
         user && user.projectIdList.map(async(project)=>{
-          // console.log(project)
+          console.log(project)
           const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/chat/project/${project}`, {
             method: "GET",
             headers: {
@@ -236,7 +236,7 @@ const Chats = () => {
                               setCurrentChat(chat)
 
                             }}>
-                              {chat.projectId && <ProjectConversation chat={chat} currentUserId={user._id} />}
+                              {<ProjectConversation chat={chat} currentUserId={user._id} />}
                             </div>
                           )
                         })}
@@ -268,8 +268,8 @@ const Chats = () => {
 
                 {/* <MediaQuery smallerThan="sm" styles={{ display: 'none' }}> */}
                 {/* <Aside hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}> */}
-                {user && currentChat && <ChatSidebar chat={currentChat} currentUserId={user._id} />}
-
+                {/* {user && currentChat && !currentChat.projectId && <ChatSidebar chat={currentChat} currentUserId={user._id} />} */}
+                {user && currentChat && currentChat.projectId && <ChatSidebar chat={currentChat} currentUserId={user._id} />}
                 {/* </Aside> */}
                 {/* </MediaQuery> */}
               </Flex>
