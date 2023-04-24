@@ -36,12 +36,12 @@ const useStyles = createStyles((theme) => ({
 
 }));
 
-const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
+const TaskCard = ({ task, section, expandModal, rerender, setRerender, userAccessLevel }) => {
 
     const { classes } = useStyles();
     const { hovered, ref } = useHover();
 
-    // console.log(task, 'task');
+    console.log(task, 'task');
     const dateFormater = (date) => {
         let newDate = new Date(date);
         const offset = newDate.getTimezoneOffset()
@@ -52,12 +52,13 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
     const deleteTask = async (event, taskID) => {
         event.stopPropagation();
 
-        const res = await fetch(`http://localhost:4000/task/deleteTask/${taskID}`, {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/task/deleteTask/${taskID}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         console.log("deleted task", taskID);
         setRerender(!rerender);
+
     }
 
     const colorPickerPriority = (priority) => {
@@ -100,7 +101,7 @@ const TaskCard = ({ task, section, expandModal, rerender, setRerender }) => {
                         truncate
                         sx={classes.taskName}
                     >{task.taskName}</Text>
-                    {hovered &&
+                    {(userAccessLevel === 'owner' || userAccessLevel === 'high' || userAccessLevel === 'medium') && hovered &&
                         <Menu
                             transitionProps={{ transition: 'pop' }}
                             offset={2}

@@ -18,7 +18,7 @@ const Conversation = ({chat, currentUserId}) => {
         const projectId = chat.projectId;
         const getProjectData = async()=>{
             try{
-                const res = await fetch(`http://localhost:4000/project/getProjectDetails/${projectId}`, {
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getProjectDetails/${projectId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

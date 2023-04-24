@@ -33,7 +33,7 @@ const ProfileSection = ({ user, setUser }) => {
                 hashedPassword = bcrypt.hashSync(password, salt);
             }
             const updatedUser = { userName, email: emailId, password: hashedPassword };
-            const res = await fetch("http://localhost:4000/user/updateUser", {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/updateUser", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const ProfileSection = ({ user, setUser }) => {
             e.preventDefault();
             const formData = new FormData();
             formData.append("avatar", file);
-            const res = await fetch("http://localhost:4000/user/uploadAvatar", {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/uploadAvatar", {
                 method: "POST",
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
                 body: formData,

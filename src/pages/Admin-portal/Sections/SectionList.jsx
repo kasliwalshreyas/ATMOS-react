@@ -4,27 +4,27 @@ import { useEffect, useState } from "react";
 
 
 const SectionList = () => {
-    const [user, setUser] = useState();
-    const [sections, setSections] = useState();
+  const [user, setUser] = useState();
+  const [sections, setSections] = useState();
 
-    useEffect(() => {
-        async function getUser() {
-            const adminId = localStorage.getItem("adminId");
-            const res = await fetch(`http://localhost:4000/admin/users/${adminId}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            });
-            const data = await res.json();
-            setUser(data.user);
-            const pres = await fetch("http://localhost:4000/admin/sections", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-              });
-            const pdata = await pres.json();
-            setSections(pdata.sections);
-        }
-        getUser();
-    }, [user, sections]);
+  useEffect(() => {
+    async function getUser() {
+      const adminId = localStorage.getItem("adminId");
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/users/${adminId}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      setUser(data.user);
+      const pres = await fetch(process.env.REACT_APP_BACKEND_URL + "/admin/sections", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const pdata = await pres.json();
+      setSections(pdata.sections);
+    }
+    getUser();
+  }, [user, sections]);
 
   return (
     <div className="list">

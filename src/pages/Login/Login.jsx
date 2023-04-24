@@ -16,7 +16,7 @@ function Login() {
     const dispatch = useDispatch();
 
     // const handleLogin = async (user) => {
-    //     const res = fetch('http://localhost:4000/userList/' + user.id, {
+    //     const res = fetch(process.env.REACT_APP_BACKEND_URL + '/userList/' + user.id, {
     //         method: 'PUT',
     //         headers: {
     //             'Content-type': 'application/json'
@@ -54,8 +54,9 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:4000/user/login', {
+        const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/login', {
             method: 'POST',
+            mode: 'cors',
             headers: {
                 'Content-type': 'application/json',
             },

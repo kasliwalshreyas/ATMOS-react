@@ -3,7 +3,6 @@ import { useState } from "react";
 import Navbar_v2 from "../../UI/Navbar_v2";
 import ProfileSection from "./ProfileSection";
 // import ProfileSection2 from "../Profile/ProfileSection";
-import { useSelector } from 'react-redux';
 
 
 const UserProfile = () => {
@@ -15,7 +14,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     async function getUser() {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getUserInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

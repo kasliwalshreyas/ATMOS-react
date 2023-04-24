@@ -82,7 +82,7 @@ const TeamMemberCard = ({ name, email, role, id, projectOwnerId, projectId, user
     const handleAccessChange = async () => {
         try {
             console.log('Access Changed Data: ', id, memberRole);
-            const res = await fetch(`http://localhost:4000/project/${projectId}/changeUserAccessLevel`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}/changeUserAccessLevel`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -131,7 +131,7 @@ const TeamMemberCard = ({ name, email, role, id, projectOwnerId, projectId, user
     const handleRemoveMember = async () => {
         try {
             console.log('Member Removed Data: ', id);
-            const res = await fetch(`http://localhost:4000/project/${projectId}/removeTeamMember`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}/removeTeamMember`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

@@ -92,7 +92,7 @@ export function ContactComponent() {
             name,
             message,
         }
-        fetch('http://localhost:4000/user/contact', {
+        fetch(process.env.REACT_APP_BACKEND_URL + '/user/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

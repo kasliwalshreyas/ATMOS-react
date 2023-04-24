@@ -49,7 +49,7 @@ const NoteEditor = ({
   useEffect(() => {
     const notes = async () => {
       const res = await fetch(
-        `http://localhost:4000/note/getNote/${selectedNote}`,
+        `${process.env.REACT_APP_BACKEND_URL}/note/getNote/${selectedNote}`,
         {
           method: "GET",
           headers: {
@@ -73,7 +73,7 @@ const NoteEditor = ({
     const maintext = editor.getText().toString();
 
     const res = await fetch(
-      `http://localhost:4000/note/updateNote/${selectedNote}`,
+      `${process.env.REACT_APP_BACKEND_URL}/note/updateNote/${selectedNote}`,
       {
         method: "PUT",
         headers: {
@@ -106,7 +106,7 @@ const NoteEditor = ({
     const maincontent = editor.getHTML();
     const maintext = editor.getText().toString();
 
-    const res = await fetch(`http://localhost:4000/note/create/`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/note/create/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

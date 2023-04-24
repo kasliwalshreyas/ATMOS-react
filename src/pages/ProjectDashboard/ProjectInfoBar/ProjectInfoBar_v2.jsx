@@ -78,13 +78,13 @@ const ProjectInfoBar_v2 = ({
 }) => {
 
     const navigate = useNavigate();
-    console.log(userInfo, 'user from ProjectInfoBar_v2');
-    console.log(userInfo.favProjectIdList, 'userInfo from ProjectInfoBar_v2');
+    // console.log(userInfo, 'user from ProjectInfoBar_v2');
+    // console.log(userInfo.favProjectIdList, 'userInfo from ProjectInfoBar_v2');
 
     const isProjectFavorite = userInfo.favProjectIdList.map((project) => project._id).includes(projectInfo._id);
     // const isProjectFavorite = userInfo.favProjectIdList.includes(projectInfo._id);
 
-    console.log(isProjectFavorite, 'isProjectFavorite from ProjectInfoBar_v2');
+    // console.log(isProjectFavorite, 'isProjectFavorite from ProjectInfoBar_v2');
 
     const { classes, theme } = useStyles();
     const [isStarred, setIsStarred] = useState(isProjectFavorite);
@@ -144,7 +144,7 @@ const ProjectInfoBar_v2 = ({
             const newFavProjectIdList = userInfo.favProjectIdList.filter(id => id !== projectInfo._id);
 
 
-            const response = await fetch(`http://localhost:4000/user/removeProjectFromFavorite`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/removeProjectFromFavorite`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ const ProjectInfoBar_v2 = ({
             const newFavProjectIdList = [...userInfo.favProjectIdList, projectInfo._id];
             // setUserInfo({ ...userInfo, favProjectIdList: newFavProjectIdList });
 
-            const response = await fetch(`http://localhost:4000/user/addProjectToFavorite`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/addProjectToFavorite`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

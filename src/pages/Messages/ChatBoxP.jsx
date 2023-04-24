@@ -5,18 +5,17 @@ import { Text } from '@mantine/core';
 import { Button } from '@mantine/core';
 import { format } from "timeago.js"
 const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
-    const [userData, setUserData] = useState(null)
+    const [projectData, setProjectData] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
     const scroll = useRef()
 
 
-    useEffect(() => {
-        const userId = chat.members.find((id) => id !== currentUserId)
-        // userId && console.log(userId)
-        const getUserData = async () => {
-            try {
-                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/users/${userId}`, {
+    useEffect(()=>{
+        const projectId = chat.projectId;
+        const getProjectData = async()=>{
+            try{
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/project/getProjectDetails/${projectId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -24,16 +23,14 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
                     },
                 });
                 const data = await res.json();
-                setUserData(data.user);
-                console.log("this is", data)
-            } catch (error) {
+                setProjectData(data.project);
+                console.log("this is",data)
+            } catch(error){
                 console.log(error)
             }
         }
-        if (chat !== null) {
-            getUserData()
-        }
-    }, [chat, currentUserId])
+        getProjectData()
+    },[chat, currentUserId])
 
     useEffect(() => {
         const chatId = chat._id;
@@ -113,15 +110,9 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
                     <div className='chat-header'>
                         <div className="follower">
                             <div style={{ display: "flex", alignItems: "center" }}>
-                                <img
-                                    src={userData ? userData.avatar : 'avatar.png'}
-                                    alt="Profile"
-                                    className="followerImage"
-                                    style={{ width: "50px", height: "50px" }}
-                                />
                                 <div className="name" style={{ fontSize: "0.9rem" }}>
                                     <span>
-                                        {userData && <Text>{userData.userName}</Text>}
+                                        {projectData && <Text>{projectData.projectName}</Text>}
                                     </span>
                                 </div>
                             </div>
