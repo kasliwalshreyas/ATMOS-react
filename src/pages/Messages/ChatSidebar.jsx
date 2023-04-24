@@ -30,26 +30,27 @@ const useStyles = createStyles((theme) => ({
 
 
 
-const ChatSidebar = ({ projects , user}) => {
+const ChatSidebar = ({chat, currentUserId}) => {
     // console.log("sidebar",projects)
 
     const { classes } = useStyles();
-    const collaborators = []
-    projects.projectHighAccessMembers.map(collaborator => {
-        collaborators.push(collaborator.userName)
-    })
-    projects.projectMediumAccessMembers.map(collaborator => {
-        collaborators.push(collaborator.userName)
-    })
-    projects.projectLowAccessMembers.map(collaborator => {
-        collaborators.push(collaborator.userName)
-    })
-    console.log(collaborators)
+    console.log(chat)
+    // const collaborators = []
+    // projects.projectHighAccessMembers.map(collaborator => {
+    //     collaborators.push(collaborator.userName)
+    // })
+    // projects.projectMediumAccessMembers.map(collaborator => {
+    //     collaborators.push(collaborator.userName)
+    // })
+    // projects.projectLowAccessMembers.map(collaborator => {
+    //     collaborators.push(collaborator.userName)
+    // })
+    // console.log(collaborators)
     return (
         <>
             <div style={{paddingLeft: '20px' }}>
                                 <Text size="sm" weight={500}>
-                                    Project Description: {projects.projectDescription}
+                                    Project Description:
                                 </Text>
                             </div>
                             <div style={{paddingLeft: '20px', marginTop:'10px' }}>
@@ -57,7 +58,7 @@ const ChatSidebar = ({ projects , user}) => {
                                     Collaborators: 
                                 </Text>
                             </div>
-            {collaborators && collaborators.map((collaborator, index) => {
+            {/* {collaborators && collaborators.map((collaborator, index) => {
                 if(user && collaborator && collaborator != user.userName){
                 return (
                     <Paper
@@ -82,7 +83,7 @@ const ChatSidebar = ({ projects , user}) => {
                     </Paper>
                 )
                 }
-            })}
+            })} */}
             {/* </Flex> */}
         </>
     )

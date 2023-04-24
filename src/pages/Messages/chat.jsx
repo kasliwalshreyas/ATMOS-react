@@ -12,34 +12,42 @@ import { Accordion } from '@mantine/core';
 import { Badge } from '@mantine/core';
 import { Tabs } from '@mantine/core';
 import Conversation from "./Conversation";
+import ProjectConversation from "./ProjectConcersation"
 import ChatBox from "./ChatBox";
 
 const Chats = () => {
   const [user, setUser] = useState(null);
   const [chats, setChats] = useState([]);
+  const [projectChats, setProjectChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const socket = useRef()
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [receiveMessage, setReceiveMessage] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
+  const [allProjects, setAllProjects] = useState([]);
   const [allIds, setAllIds] = useState([]);
   const [existingIds, setExistingIds] = useState(null);
   
 
   useEffect(() => {
     async function getUser() {
-      const res = await fetch("http://localhost:4000/user/getUserInfo", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        setUser(data.user);
+      try{
+        const res = await fetch("http://localhost:4000/user/getUserInfo", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+  
+        const data = await res.json();
+        // console.log("data", data)
+        if (data.success) {
+          setUser(data.user);
+        }
+      } catch(e){
+        console.log(e)
       }
     }
     getUser();
@@ -47,18 +55,22 @@ const Chats = () => {
 
   useEffect(() => {
     async function getChats() {
-      user && console.log("i sm", user)
-      const res = await fetch(`http://localhost:4000/chat/${user._id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      const data = await res.json();
-      setChats(data);
-      console.log(data)
+      try{
+        user && console.log("i sm", user)
+        const res = await fetch(`http://localhost:4000/chat/${user._id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+  
+        const data = await res.json();
+        setChats(data);
+        // console.log("Chats",data)
+      } catch(e){
+        console.log(e);
+      }
     }
     getChats();
   }, [user]);
@@ -74,7 +86,7 @@ const Chats = () => {
           },
         });
         const data = await res.json();
-        console.log(data.userList)
+        // console.log(data.userList)
         setAllUsers(data.userList);
         chats.forEach((ch)=>{
           const newUserChats = data.userList.filter(d => !ch.members.includes(d._id));
@@ -96,13 +108,77 @@ const Chats = () => {
           });
           
           const data = await res.json();
-          console.log(data)
+          // console.log(data)
         })
         
       } catch (e) {
         console.log(e);
       }
     }
+    useEffect(() => {
+    const getAllProjects = async () => {
+      try {
+        const res = await fetch("http://localhost:4000/project//getUserProjects", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const data = await res.json();
+        // console.log(data.projects)
+        setAllProjects(data.projects);
+        allProjects && allProjects.map(async(project)=>{
+            const chat = {
+            projectId: project._id,
+          }
+          const res = await fetch("http://localhost:4000/chat/project/send", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(chat)
+          });
+          const data = await res.json();
+          // console.log("dataP",data)
+        })
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    getAllProjects();
+  },[user]);
+
+  useEffect(() => {
+      async function getProjectChats() {
+        try{
+          allProjects && allProjects.map(async(project)=>{
+            const res = await fetch(`http://localhost:4000/chat/project/${project._id}`, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+              },
+            });
+            const data = await res.json();
+            // console.log("data here",data)
+            setProjectChats([...data])
+          })
+        } catch(e){
+          console.log(e);
+        }
+      }
+      getProjectChats();
+    }, [allProjects]);
+  
+
+
+
+
+
+
+
 
     useEffect(() => {
       socket.current = io('http://localhost:8800');
@@ -121,18 +197,11 @@ const Chats = () => {
   
     // receive message from socket 
     useEffect(() => {
-      // socket.current = io('http://localhost:8800');
       socket.current.on('recieve-message', (data) => {
         console.log("data Received here")
         setReceiveMessage(data)
       })
     }, [])
-
-  //     // // send message with socket
-  //     // const receiverId = chat.members.find((id) => id !== currentUserId)
-  //     // setSendMessage({ ...message, receiverId })
-  //   }
-
 
   const checkOnlineStatus = (chat) => {
     const chatMember = chat.members.find((member) => member !== user._id)
@@ -144,6 +213,7 @@ const Chats = () => {
   const [opened, setOpened] = useState(false);
   return (
     <>
+    {user && 
       <Container fluid={true} p={0} m={0} h={'100vh'}>
         {user && <Navbar_v2 activeLink={'/message'} user={user} />}
         {
@@ -152,7 +222,7 @@ const Chats = () => {
               <Navbar p={0} m={0} hidden={!opened} grow>
                 <Tabs defaultValue="gallery" m={0} p={0}>
                   <Tabs.List>
-                    <Tabs.Tab value="gallery" icon={<IconPhoto size="0.8rem" />}> Projects</Tabs.Tab>
+                    <Tabs.Tab value="gallery" icon={<IconPhoto size="0.8rem"/>}> Projects</Tabs.Tab>
                     <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" onClick={()=>{
                        getAllUsers();
                     }}/>}>Direct Messages</Tabs.Tab>
@@ -160,13 +230,16 @@ const Chats = () => {
                   <Tabs.Panel value="gallery">
                     <Accordion defaultValue="customization"
                       chevron >
-                      {user && user.projectIdList.map((project, index) => {
+                        {console.log("cx",projectChats)}
+                      {user && projectChats!=[] && projectChats.map((chat, index) => {
+                        console.log("before print ", chat)
                         return (
-                          <Accordion.Item value={project._id} key={index}>
-                            <Accordion.Control>{project.projectName}<br />
-                              <Badge>{project.projectType}</Badge>
-                            </Accordion.Control>
-                          </Accordion.Item>
+                          <div key={index} onClick={() => {
+                            setCurrentChat(chat)
+                            
+                          }}>
+                            <ProjectConversation chat={chat} currentUserId={user._id}/>
+                          </div>
                         )
                       })}
                     </Accordion>
@@ -178,6 +251,7 @@ const Chats = () => {
                         return (
                           <div onClick={() => {
                             setCurrentChat(chat)
+                            
                           }}>
                             <Conversation data={chat} currentUserId={user._id} online={checkOnlineStatus(chat)} />
                           </div>
@@ -195,7 +269,7 @@ const Chats = () => {
 
               {/* <MediaQuery smallerThan="sm" styles={{ display: 'none' }}> */}
               {/* <Aside hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}> */}
-              {/* {user && projects && <ChatSidebar projects = {projects} user = {user} />} */}
+              {user && currentChat && <ChatSidebar chat = {currentChat} currentUserId = {user._id} />}
 
               {/* </Aside> */}
               {/* </MediaQuery> */}
@@ -204,6 +278,7 @@ const Chats = () => {
 
         }
       </Container>
+}
     </>
   );
 };

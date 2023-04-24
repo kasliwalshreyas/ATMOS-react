@@ -12,16 +12,13 @@ import {
     useMantineTheme,
   } from '@mantine/core';
 import { Group, Avatar, Accordion } from '@mantine/core';
-const Conversation = ({data, currentUserId, online}) => {
-    const [userData, setUserData] = useState(null)
+const Conversation = ({chat, currentUserId}) => {
+    const [projectData, setProjectData] = useState(null)
     useEffect(()=>{
-        const userId = data.members.find((id)=>id!==currentUserId)
-        // userId && console.log(userId)
-        const getUserData = async()=>{
+        const projectId = chat.projectId;
+        const getProjectData = async()=>{
             try{
-
-                // console.log("hhh")
-                const res = await fetch(`http://localhost:4000/admin/users/${userId}`, {
+                const res = await fetch(`http://localhost:4000/project/getProjectDetails/${projectId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -29,26 +26,23 @@ const Conversation = ({data, currentUserId, online}) => {
                     },
                 });
                 const data = await res.json();
-                setUserData(data.user);
-                // console.log("this is",data)
+                setProjectData(data.project);
+                console.log("this is",data)
             } catch(error){
                 console.log(error)
             }
         }
-        getUserData()
+        getProjectData()
     },[])
 
   return (
     <div>     
         <Accordion.Item value="customization">
           <Accordion.Control>
-            <Group noWrap>
-              <Avatar src={userData?userData.avatar:'avatar.png'} radius="xl" size="lg" alt="it's me" />
               <div>
-                {userData && <Text>{userData.userName}</Text>}
+                {projectData && <Text>{projectData.projectName}</Text>}
               </div>
-            </Group><br/>
-            {online?<Badge color='green'>Online</Badge>:<Badge color='red'>Offline</Badge>}
+            <Badge color='green'>{projectData && projectData.projectType}</Badge>
           </Accordion.Control>
         </Accordion.Item>           
     </div>
