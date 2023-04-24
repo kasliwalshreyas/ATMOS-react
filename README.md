@@ -32,6 +32,15 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 - To start the server, run `npm start` in the root directory.
 - Server will be running on port 4000 by default.
 
+### Setup Environment
+Add the following variable in .env file
+```
+PORT=4000
+MONGO_URI= -------
+TOKEN_SECRET= -------
+FRONTEND_URL=http://localhost:3000
+```
+
 
 ## Socket Server
 
