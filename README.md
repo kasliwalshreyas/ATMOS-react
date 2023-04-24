@@ -10,6 +10,14 @@
 - To start the app, run `npm start` in the root directory.
 - App will be running on port 3000 by default.
 
+### Setup Environment
+Add the following variable in .env file
+```
+REACT_APP_BACKEND_URL=http://localhost:4000
+REACT_APP_SOCKET_URL=http://localhost:8800
+```
+
+
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
