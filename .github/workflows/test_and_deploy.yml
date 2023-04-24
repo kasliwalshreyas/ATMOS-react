@@ -41,7 +41,7 @@ jobs:
 
     steps: 
       - name: Deploy to production
-        run: curl -X POST -d {} ${{ secrets.NETLIFY_API_KEY }}   
+        run: curl -X POST -d {} ${{ secrets.NETLIFY_API_KEY }}    #deployed to NETLIFY
 
       
       
