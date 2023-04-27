@@ -18,7 +18,7 @@ function LoginAdmin() {
             return;
         }
         if((email==="akash@gmail.com") && password==="akash123"){
-            localStorage.setItem('adminId', "644454ce15ededc8026e7bfa");
+            localStorage.setItem('adminId', "644a4fa403a61fa7629ae618");
             navigate('/admin-portal/');
         }
         else

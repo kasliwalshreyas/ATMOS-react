@@ -69,7 +69,8 @@ function Login() {
             alert(data.message);
         }
         else {
-            dispatch(login(data));
+            // dispatch(login(data));
+            localStorage.setItem('token', data.token);
             navigate('/home');
         }
     }
