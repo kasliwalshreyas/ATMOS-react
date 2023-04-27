@@ -17,8 +17,8 @@ function LoginAdmin() {
             alert("Please fill all the fields");
             return;
         }
-        if((email==="akash@gmail.in") && password==="akash123"){
-            localStorage.setItem('adminId', "641c7986a558e83a3c0ec945");
+        if((email==="akash@gmail.com") && password==="akash123"){
+            localStorage.setItem('adminId', "644a4fa403a61fa7629ae618");
             navigate('/admin-portal/');
         }
         else

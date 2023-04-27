@@ -24,7 +24,7 @@ const ProjectList = () => {
       setProjects(pdata.projects);
     }
     getUser();
-  }, [user, projects]);
+  }, [projects]);
 
   return (
     <div className="list">
