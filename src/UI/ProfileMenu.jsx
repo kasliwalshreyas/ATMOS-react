@@ -84,9 +84,7 @@ const ProfileMenu = ({ userInfo }) => {
             </Menu.Target>
             <Menu.Dropdown>
                 <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
-                    <Link to="/profile">
-                        Profile
-                    </Link>
+                    <Link to="/profile">Profile</Link>
                 </Menu.Item>
                 <Menu.Label>Settings</Menu.Label>
                 <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}><Link to="/profile">Account Setting</Link></Menu.Item>
