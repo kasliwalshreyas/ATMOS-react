@@ -65,7 +65,7 @@ const ChatSidebar = ({ chat, currentUserId }) => {
             }
         }
         getProjectData()
-    }, [])
+    }, [chat])
 
     return (
         <>
