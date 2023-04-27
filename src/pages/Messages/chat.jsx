@@ -78,6 +78,7 @@ const Chats = () => {
 
   const getAllUsers = async () => {
     try {
+      // console.log("i am here")
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/getUserList`, {
         method: "GET",
         headers: {
@@ -86,31 +87,32 @@ const Chats = () => {
         },
       });
       const data = await res.json();
-      // console.log(data.userList)
+      console.log(data.userList)
       setAllUsers(data.userList);
       chats.forEach((ch) => {
         const newUserChats = data.userList.filter(d => !ch.members.includes(d._id));
         setExistingIds([...newUserChats])
       })
-      existingIds && existingIds.map(async (ids) => {
-        const chat = {
-          senderId: user._id,
-          receiverId: ids._id,
+      data.userList && data.userList.map(async(users)=>{
+        if(users._id !== user.id){
+          const chat = {
+            senderId: user._id,
+            receiverId: users._id,
+          }
+          console.log("ch",chat)
+          const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/chat/send`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(chat)
+          });
+  
+          const data = await res.json();
+          console.log(data)
         }
-        // console.log("ch",chat)
-        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/chat/send`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(chat)
-        });
-
-        const data = await res.json();
-        // console.log(data)
       })
-
     } catch (e) {
       console.log(e);
     }
